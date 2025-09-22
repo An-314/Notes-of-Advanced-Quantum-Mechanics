@@ -17,15 +17,18 @@
   $
   show _explicitly_ that $hat(Q)$ effectively ‘‘acts to the left’’ as
   $
-    braket(q, hat(Q), phi) = q braket(q, phi)
+    braket(q, hat(Q), phi) = q braket(q, phi) "(这个对吗？)"
+  $
+  $
+    braket(q, hat(Q)^dagger, phi) = q^* braket(q, phi)
   $
   using _only_ the assumptions spelled out in this problem, along with the conjugation rule $braket(a, b) = braket(b, a)^*$ and the definition of the adjoint (Hermitian conjugate) of an operator.
 ]
 
 #proof[
-  考虑到$hat(Q)$的Hermite共轭为
+  Steck书上对$hat(Q)$的Hermite共轭的定义为
   $
-    bra(q) hat(Q)^dagger = q^* bra(q)
+    braket(psi, hat(Q) phi) = braket(hat(Q)^dagger psi, phi)
   $
   由于
   $
@@ -33,11 +36,11 @@
   $
   结合$braket(a, b) = braket(b, a)^*$和算符的Hermite共轭的定义，我们有
   $
-    braket(phi', hat(Q), phi) = braket(phi', hat(Q) phi) = braket(phi' hat(Q)^dagger, phi)^* = braket(phi', hat(Q)^dagger, phi)^*
+    braket(phi', hat(Q), phi) = braket(phi', hat(Q) phi) = braket(hat(Q)^dagger phi', phi) = braket(phi, hat(Q)^dagger phi')^* = braket(phi, hat(Q)^dagger, phi')^*
   $
   从而
   $
-    braket(q, hat(Q), phi) = braket(q, hat(Q) phi) = braket(q hat(Q)^dagger, phi)^* = (q^*braket(q, phi))^* = q braket(q, phi)
+    braket(q, hat(Q)^dagger, phi) = braket(phi, hat(Q), q)^* = braket(phi, hat(Q) q)^* = q^* braket(phi, hat(Q))^* = q^* braket(q, phi)
   $
 ]
 
