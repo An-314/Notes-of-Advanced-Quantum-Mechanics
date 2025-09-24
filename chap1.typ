@@ -193,7 +193,7 @@ $
 #newpara()
 若采用抽象的“原神”，则可表述为：
 #definition(subname: [量子力学的第二个基本假设（抽象形式）])[
-  *量子系统的可观测力学量*是定义在希尔伯特空间中的*线性Hermite变换*，即作用在态矢上的线性Hermite算符。
+  *量子系统的可观测力学量*是定义在Hilbert空间中的*线性Hermite变换*，即作用在态矢上的线性Hermite算符。
 
   在有经典对应的时候，遵循的基本规则是*正则量子化条件*：若经典系统存在一系列正则坐标${q_n}$和正则动量${p_n}$，则量子化后需要满足正则对易关系
   $
@@ -207,7 +207,7 @@ $
 
 === Hilbert空间中的算符
 
-希尔伯特空间中的算符是对其中矢量的一种变换。考虑定义在某右矢空间中的算符$hat(X)$，它作用在任意右矢$ket(alpha)$上的结果是将其变换为空间中的另一个右矢$ket(alpha')$，即
+Hilbert空间中的算符是对其中矢量的一种变换。考虑定义在某右矢空间中的算符$hat(X)$，它作用在任意右矢$ket(alpha)$上的结果是将其变换为空间中的另一个右矢$ket(alpha')$，即
 $
   hat(X) dot ket(alpha) ≡ hat(X) ket(alpha) = ket(alpha')
 $
@@ -529,3 +529,494 @@ $
 ]
 
 在这样的学说(Copenhagen诠释)中，测量及其伴随的塌缩不同于动力学演化(Schrödinger方程)，它是一种*非幺正演化*，这种演化是随机的、不可逆的、破坏相干性的。需要注意的是，波包塌缩假设对量子动力学演绎出的结果(“计算量子力学”)不产生任何影响，因此才有那句名言：*Shut up and calculate.*
+
+=== 量子系综
+
+由于波包*塌缩*，我们不可能对同一个量子系统进行反复测量，获得力学量的期望值。为了理解测量得到某个本征值的概率和力学量的期望值，可以引入量子系综的概念。所谓*量子系综*，就是假设存在*大量相同的系统，即都处于相同的状态*$ket(psi)$。
+
+对系综中的任何一个系统测量的时候，得到的结果都是随机的。对系综中的所有系统都进行测量后，将测量结果进行统计，那么就会发现，测量得到某个本征值$a_n$的概率就等于$P(a_n) = abs(braket(n, psi))^2 = abs(c_n)^2$。力学量$hat(A)$的平均值就是按照概率分布$P(a_n)$加权的本征值的期望值
+$
+  expval(hat(A))_psi = sum_n a_n abs(c_n)^2
+$
+
+#example(subname: [量子测量])[
+  对量子系统的三个力学量$hat(A), hat(B), hat(C)$分别进行如下两种测量。
+
+  *第一种：*先测$hat(A)$，再测$hat(B)$，最后测$hat(C)$。
+
+  设体系初态为$ket(psi)$，对$hat(A)$进行测量，将以$abs(braket(a, psi))^2$ 的概率得到$hat(A)$的某个本征值$a$（玻恩几率诠释），测量后体系塌缩为$ket(a)$（波包塌缩）。
+
+  然后体系处于状态$ket(a)$，对$hat(B)$进行测量，将以$abs(braket(b, a))^2$的概率得到$hat(B)$的某个本征值$b$，测量后体系塌缩为$ket(b)$。
+
+  之后体系处于状态$ket(b)$，对$hat(C)$进行测量，将以$abs(braket(c, b))^2$的概率得到$hat(C)$的某个本征值$c$，测量后体系塌缩为$ket(c)$。
+
+  因此，三次测量后，得到结果$c$的概率是
+  $
+    P(c) = sum_(a,b) abs(braket(c, b))^2 abs(braket(b, a))^2 abs(braket(a, psi))^2
+  $
+  由于前两次测量得到各种$a, b$的可能性都存在，因此需要对$a, b$求和。
+
+  *第二种：*直接测$hat(A)$以后直接测$hat(C)$。
+
+  解答：设体系初态为$ket(psi)$，对$hat(A)$进行测量，将以$abs(braket(a, psi))^2$ 的概率得到$hat(A)$的某个本征值$a$（玻恩几率诠释），测量后体系塌缩为$ket(a)$（波包塌缩）。然后体系处于状态$ket(a)$，对$hat(C)$进行测量，将以$abs(braket(c, a))^2$的概率得到$hat(C)$的某个本征值$c$，测量后体系塌缩为$ket(c)$。因此，两次测量后，得到结果$c$的概率是
+  $
+    P'(c) = sum_a abs(braket(c, a))^2 abs(braket(a, psi))^2
+  $
+  由于前一次测量得到各种$a$的可能性都存在，因此需要对$a$求和。
+
+  显然，这两种测量方案得到结果$c$的概率是不同的，即
+  $
+    P(c) != P'(c)
+  $
+  但是，如果$[hat(A), hat(B)] = 0$，那么$hat(A), hat(B)$具有完备的共同本征态
+  $
+    braket(a, b) = delta_(a b)
+  $
+  因此
+  $
+    P(c) & = sum_(a,b) abs(braket(c, b))^2 abs(braket(b, a))^2 abs(braket(a, psi))^2 \
+         & = sum_a abs(braket(c, a))^2 abs(braket(a, psi))^2 = P'(c)
+  $
+  即，当$hat(A), hat(B)$对易时，两种测量方案得到结果$c$的概率相同。
+
+  同样可以证明，如果$[hat(B), hat(C)] = 0$，两种测量方案结果也相同。
+]
+
+== 动力学演化
+
+*量子力学的第四个基本假设*是关于量子态的*动力学演化*。
+
+#definition(subname: [量子力学的第四个基本假设])[
+  一个微观粒子系统的状态波函数满足如下的*Schrödinger方程*
+  $
+    i hbar pdv(, t) psi(vb(r), t) = hat(H)(vb(r), hat(vb(p))) psi(vb(r), t) = hat(H)(vb(r), - i hbar grad) psi(vb(r), t)
+  $
+  这里$hat(H)$是系统的Hamilton算符，称为*Hamilton量*
+  $
+    hat(H) = hat(T) + hat(V)(vb(r)) = hat(vb(p))^2/2m + V(vb(r)) = - hbar^2/(2m) laplacian + V(vb(r))
+  $
+]
+这样表述显然有很大的局限性。
+- 第一，只适用于非相对论性单粒子系统，如果要考虑量子多体和量子场论等系统，则需要抽象的形式；
+- 第二，只适用于坐标空间 (位形空间)，不能体现量子系统的“原神”。
+
+#definition(subname: [量子力学的第四个基本假设])[
+  采用抽象的 Dirac 符号，将系统在 t 时刻的量子态写为 |ψ(t)⟩，则量子态的动力学演化遵守运动方程
+  $
+    i hbar pdv(, t) ket(psi(t)) = hat(H) ket(psi(t))
+  $
+  这个方程仍然称为*Schrödinger方程*，其中$hat(H)$是系统的Hamilton算符或Hamilton量。
+]
+
+Schrödinger方程是*关于时间的一阶微分方程*，这是因为我们假设量子态 $|ket(psi(t))$ 完全描述了系统的状态。Schrödinger方程是*线性*的，容易验证：若$ket(psi_1 (t))$和$ket(psi_2 (t))$都是方程的解，则复系数线性叠加 $c_1 ket(psi_1 (t)) + c_2 ket(psi_2 (t))$ 也是方程的解。只要Hamilton量是Hermite算符，那么量子态的模方$braket(psi(t))$将不随时间变化 (概率守恒)。
+
+需要注意的是，抽象的Schrödinger方程理论意义上更高。是一切量子理论都要遵循的时间演化方程，包括量子多体系统、量子场论等。不过，这些系统的自由度、Hilbert空间、相互作用和Hamilton量将会非常复杂。量子态的模方$braket(psi(t))$也不再解释为粒子出现的概率。
+
+大部分对于量子系统的研究，可以归结为两件事情：*造Hamilton量和解Hamilton量*，即造模型和解模型。如果Hamilton量$hat(H)$已知，且不显含时间，则Schrödinger方程的求解完全归结为求解*定态方程*
+$
+  hat(H) ket(psi) = E ket(psi)
+$
+也就是求解Hamilton量的本征值 (能谱) 和本征态。材料电子结构的计算和格点 QCD 计算等暴力运算，实际上就是在干这件事。理论上，如果Hamilton量的本征值能计算出来，那么统计物理问题也解决了$cal(Z) = sum_n e^(- beta E_n)$。
+
+如果系统的Hamilton量未知，则需要先构造出系统的Hamilton量。根据对应原理，如果系统有*经典对应*，则可以利用经典系统的Hamilton量得到量子的Hamilton量算符。如果不存在经典对应，则只能靠“猜”了。归根结底，量子系统的Hamilton量是什么形式，应该由实验来检验。即：理论上先“猜”出量子Hamilton量，然后将各种计算结果与实验结果对比，检验Hamilton量是否正确。
+
+#example(subname: [构造Hamilton量])[
+  如果经典Hamilton量的形式为
+  $
+    H(q,p) = T(p) + V(q)
+  $
+  即$q$和$p$是分离的 (分别出现的不同的项中)，则量子Hamilton量可以直接通过替换$q -> hat(q), p -> hat(p)$得到
+  $
+    hat(H) = T(hat(p)) + V(hat(q))
+  $
+]
+
+== 表象理论
+
+虽然量子理论可以写成抽象的形式，但是针对具体的系统，通常我们需要进入具体的表象进行计算。
+
+如何进入一个具体的*表象*？条件是Hilbert空间一组*基矢的完备性*。选取不同的基矢，即不同的表象，量子态和力学量将呈现出不同的形式。
+
+这组基矢${ket(n)}$通常选为某力学量(完备集)$hat(F)$的正交归一本征态，即
+$
+  hat(F) ket(n) = f_n ket(n)
+$
+如果指标$n$是离散的，完备性表达为
+$
+  sum_n ketbra(n) = hat(I)
+$
+如果指标$n$是连续的，则求和改为积分
+$
+  integral dd(xi) ketbra(xi) = hat(I)
+$
+如果指标$n$是离散的，正交归一性写为
+$
+  ketbra(n, n') = delta_(n,n')
+$
+如果指标$n$是连续的，归一到$δ$函数
+$
+  ketbra(xi, xi') = delta(xi - xi')
+$
+
+对于一个量子系统，这组完备的基矢就构成了一个*表象*，称为*$F$表象*(注意：$F$通常代表力学量完备集)。利用完备性，我们就可以很方便地进入任何一个表象。
+
+=== 量子态
+
+*量子态*如何进入表象？假设某个量子态为$ket(psi)$，那么在它前面作用一个单位算符，然后把单位算符用完备性关系带入。
+
+对于*离散表象*
+$
+  ket(psi) & = hat(I) ket(psi) = sum_n ketbra(n) ket(psi) \
+           & = sum_n ket(n) braket(n, psi) \
+           & = sum_n psi_n ket(n)
+$
+我们把$psi_n = braket(n, psi)$称为态矢$ket(psi)$在$F$表象下的*波函数*，或者简称为波函数。对于离散表象，这个波函数实际上可以写成一个*列向量*
+$
+  psi = mat(psi_1, psi_2, ..., psi_n, ...)^TT
+$
+对于*连续表象*，同样操作
+$
+  ket(psi) & = hat(I) ket(psi) = integral dd(xi) ketbra(xi) ket(psi) \
+           & = integral dd(xi) ket(xi) braket(xi, psi) \
+           & = integral dd(xi) psi(xi) ket(xi)
+$
+连续表象下的波函数是一个*连续函数*
+$
+  psi(xi) = braket(xi, psi)
+$
+例如我们常见的*坐标表象$(ξ → x)$和动量表象$(ξ → p)$*。
+
+如何计算*量子态的内积*？对于*离散表象*
+$
+  braket(phi, psi) & = braket(phi, hat(I), psi) = sum_n braket(phi, n) braket(n, psi) \
+                   & = sum_n phi_n^* psi_n = phi^dagger psi
+$
+对于*连续表象*
+$
+  braket(phi, psi) & = braket(phi, hat(I), psi) = integral dd(xi) braket(phi, xi) braket(xi, psi) \
+                   & = integral dd(xi) phi(xi)^* psi(xi)
+$
+
+=== 力学量
+
+*力学量*如何进入表象？考虑力学量$hat(A)$，它是Hilbert空间的一个算符，它作用在任意态$ket(psi)$上的结果是另一个态$ket(phi)$，即
+$
+  hat(A) ket(psi) = ket(phi)
+$
+#newpara()
+利用完备性口诀，灵活地在上式中合适的地方插入单位算符。对于*离散表象*，我们这么操作
+$
+  hat(A) ket(psi) & = hat(I) hat(A) hat(I) ket(psi) \
+                  & = (sum_m ketbra(m)) hat(A) (sum_n ketbra(n)) ket(psi) \
+                  & = sum_(m,n) ket(m) braket(m, hat(A), n) braket(n, psi) \
+                  & = sum_m (sum_n A_(m n) psi_n) ket(m)
+$
+其中$A_(m n) = braket(m, hat(A), n)$称为力学量$hat(A)$在$F$表象下的*矩阵元*
+
+另一方面，态$ket(phi)$可以用完备性口诀变为
+$
+  ket(phi) & = hat(I) ket(phi) = sum_m ketbra(m) ket(phi) \
+           & = sum_m ket(m) braket(m, phi) = sum_m phi_m ket(m)
+$
+利用正交性，即展开系数相等，得到
+$
+  sum_n A_(m n) psi_n = phi_m
+$
+这实际上是一个*矩阵方程*
+$
+  A psi = phi
+$
+即：方阵$A$乘以列向量$psi$等于列向量$phi$。因此，力学量在离散表象下的波函数和矩阵元分别是列向量和方阵。
+
+因此，在*离散表象下，力学量以矩阵的形式呈现*。若Hilbert空间是$N$维的，那么力学量就是$N × N$的方阵。任意力学量$hat(A)$在此表象下的矩阵$A$的矩阵元为
+$
+  A_(m n) = braket(m, hat(A), n)
+$
+上面推导矩阵形式的过程还可以简化为
+$
+  hat(A) & = hat(I) hat(A) hat(I) = sum_m ketbra(m) hat(A) sum_n ketbra(n) \
+         & = sum_(m,n) ket(m) braket(m, hat(A), n) bra(n) \
+         & = sum_(m,n) A_(m n) ketbra(m, n)
+$
+由于$hat(A)$是Hermite算符，容易证明对应矩阵$A$是Hermite矩阵，即$A_(m n) = A_(n m)^*$。
+
+对于*连续表象*，做类似操作
+$
+  hat(A) ket(psi) & = hat(I) hat(A) hat(I) ket(psi) \
+                  & = (integral dd(xi') ketbra(xi')) hat(A) (integral dd(xi) ketbra(xi)) ket(psi) \
+                  & = integral dd(xi') dd(xi) ket(xi') braket(xi', hat(A), xi) braket(xi, psi) \
+                  & = integral dd(xi') (integral dd(xi) braket(xi', hat(A) psi(xi)) ket(xi')
+$
+$
+  ket(phi) & = hat(I) ket(phi) = integral dd(xi') ketbra(xi') ket(phi) \
+           & = integral dd(xi') ket(xi') braket(xi', phi) = integral dd(xi) phi(xi) ket(xi)
+$
+利用基矢正交性得到
+$
+  integral dd(xi) braket(xi', hat(A), xi) psi(xi) = phi(xi')
+$
+这实际上是一个*积分方程*，其中
+$
+  A(xi', xi) = braket(xi', hat(A), xi)
+$
+称为力学量$hat(A)$在$F$表象下的*核函数*。由于基矢指标是连续的，此时算符$hat(A)$并不呈现为矩阵形式，而是呈现为*函数和微分算符*的形式。
+
+以常见的*坐标表象*为例，$ξ → x$。考虑动量算符$hat(A) = hat(p)$，我们需要计算“矩阵元” $braket(x, hat(p), x')$。再次利用口诀，做如下计算：
+$
+  braket(x, hat(p), x') & = braket(x, hat(I) hat(p) hat(I), x') \
+                        & = braket(x, integral dd(p) ketbra(p) hat(p) integral dd(p') ketbra(p'), x') \
+                        & = integral dd(p) integral dd(p') braket(x, p) braket(p, hat(p), p') braket(p', x') \
+$
+因为$braket(x, p)$就是*动量算符本征态在坐标表象的波函数*，所以
+$
+  braket(x, p) = 1/sqrt(2 pi hbar) e^(i p x / hbar)\
+  braket(p, x) = 1/sqrt(2 pi hbar) e^(- i p x / hbar)
+$
+并利用$braket(p, hat(p), p') = p' delta(p - p')$，得到
+$
+  braket(x, hat(p), x') & = integral dd(p) integral dd(p') 1/(2 pi hbar) e^(i p x / hbar) p' delta(p - p') e^(- i p' x' / hbar) \
+  & = integral dd(p) 1/(2 pi hbar) p e^(i p (x - x') / hbar) \
+  & = - i hbar pdv(, x) delta(x - x')
+$
+从而
+$
+  - i hbar pdv(, x) psi(x) = phi(x)
+$
+这就是方程$hat(p) ket(psi) = ket(phi)$在坐标表象的形式，表明动量算符$hat(p)$在坐标表象呈现为一个*微分算符*$- i hbar pdv(, x)$。
+
+同样，我们可以证明方程
+$
+  hat(x) ket(psi) = ket(phi)
+$
+在*动量表象*下的形式
+$
+  i hbar pdv(, p) psi(p) = phi(p)
+$
+因此，在动量表象，坐标算符$hat(x)$呈现为*微分算符*$i hbar pdv(, p)$。
+
+=== 算符的不确定性
+
+#note[
+  前面的推导有循环论证的嫌疑！前面说$braket(x, p)$就是动量算符本征态在坐标表象的波函数，这一点没错，但是要得出
+  $
+    braket(x, p) = 1/sqrt(2 pi hbar) e^(i p x / hbar)
+  $
+  实际上需要事先知道动量算符的形式是
+  $
+    hat(p) = - i hbar pdv(, x)
+  $
+  只有这样，本征方程
+  $
+    hat(p) psi_p (x) = p psi_p (x)
+  $
+  的解才是*平面波*
+  $
+    psi_p(x) = 1/sqrt(2 pi hbar) e^((i p x) / hbar)
+  $
+  所以，在推导动量算符形式的过程中，平面波是一种*假设*。事实上，动量算符的形式并不是唯一的，其本征态也不一定必须是平面波形式。
+
+  根据基本公设，正则坐标和正则动量满足正则对易关系
+  $
+    [hat(x), hat(p)] = i hbar
+  $
+  如果动量算符是如下形式
+  $
+    hat(p) = - i hbar pdv(, x) + f(x)
+  $<p-hat>
+  那么正则对易关系照样成立，其中$f(x)$可以为任意实函数。
+
+  如何理解这样一种不确定性呢？下面我们从物理上探讨一下这个问题。如果动量算符可以取成一般形式，那么动量算符的本征方程变为
+  $
+    (- i hbar pdv(, x) + f(x)) psi_p (x) = p psi_p (x)
+  $
+  首先遇到的问题是：*动量本征态$psi_p (x)$不再是平面波*！
+
+  不过，波函数不是直接观测量，我们需要去考察力学量的本征值和对力学量进行测量的概率分布是否发生变化。
+
+  实际上，本征方程 @p-hat 的解可以求出来，结果是
+  $
+    psi_p (x) = 1/sqrt(2 pi hbar) e^((i (p x - g(x))) / hbar), g(x) = integral_a^x dd(y) f(y)
+  $
+  我们看到，即使动量算符多出一个尾巴$f(x)$，*其本征值不发生变化，其本征函数与平面波相比仅仅多出了一个相位因子*。
+
+  因此，如果一个微观粒子处于某个量子态$Ψ(x)$，那么对其动量进行测量，得到的结果(包括观测值和概率分布)是不会发生变化的。对其他力学量的观测结果也不会产生影响。
+
+  如果动量算符形式发生变化，那么描述波函数时间演化的Schrödinger方程也发生了变化。如果采用动量算符的一般形式 @p-hat ，Schrödinger方程为
+  $
+    i hbar pdv(, t) psi(x, t) = ( 1/(2m) (- i hbar pdv(, x) + f(x))^2 + V(x) ) psi(x, t) \
+  $
+  受到动量本征态讨论的启发，我们可以猜测$f(x) != 0$和$f(x) = 0$时的波函数在任意时刻也只差一个整体相位因子。这样，两种情况在物理上完全没有区别。
+
+  事实上，如果我们定义
+  $
+    psi(x, t) = phi(x, t) e^((- i g(x)) / hbar), g(x) = integral_a^x dd(y) f(y)
+  $
+  那么经过简单计算就可以发现$phi(x, t)$满足标准形式的Schrödinger方程
+  $
+    i hbar pdv(, t) phi(x, t) = ( - hbar^2/(2m) pdv(, x)^2 + V(x) ) phi(x, t)
+  $
+  这实际上就是取$f(x)=0$时波函数满足的Schrödinger方程。
+
+  因此，*两种情况下的波函数在任意时刻也只差一个整体相位因子，在物理上完全等价*。
+]
+
+因此，在量子力学中存在这样的不确定性，但是不影响物理结果。我们事先进行*约定(convention)*即可。
+
+*动量算符本征态在坐标表象的波函数取为*
+$
+  braket(x, p) = 1/sqrt(2 pi hbar) e^((i p x) / hbar)
+$
+这实际上是将动量本征态的相位进行固定，即选取$g(x) = 0$。在一些教科书中干脆直接将*动量算符的矩阵元固定*，即约定
+$
+  braket(x, hat(x), x') = x delta(x - x')\
+  braket(x, hat(p), x') = - i hbar pdv(, x) delta(x - x')
+$
+#newpara()
+我们还可以更一般地理解这种不确定性。
+
+量子系统的Hilbert空间是*复数线性空间*。因此，用一组完备基矢构建一个表象时，每个基矢的相位可以随意选择而不影响物理的结果。*不同的相位选取就导致了力学量的矩阵元的不确定性*。
+
+假设力学量$hat(F)$的本征值是离散的，即
+$
+  hat(F) ket(n) = f_n ket(n)
+$
+这些正交归一本征态${|n⟩}$可以构建一个表象，称为$F$表象。在此表象下，力学量$hat(A)$呈现为矩阵形式，矩阵元为
+$
+  A_(m n) = braket(m, hat(A), n)
+$
+但是，如果$hat(n)$是$hat(F)$的本征态，那么它*乘上任意相位因子*
+$e^(i θ_n)$后也是$hat(F)$的本征态。
+
+这就意味着，我们既可以选择${ket(n)}$来构$F$表象，也可以选择${e^(i θ_n) ket(n)}$来构建$F$表象。后者，力学量$hat(A)$的矩阵元为
+$
+  A_(m n) & = braket(m, e^(- i θ_m), hat(A), e^(i θ_n) n) \
+          & = e^(- i (θ_m - θ_n)) braket(m, hat(A), n)
+$
+后者的矩阵元$A_(m n)$与前者相比，相差了一个相位因子
+$
+  e^(i (θ_n - θ_m))
+$
+由于这种不确定性不会改变物理结果，所以通常可以选取最简单的相位约定。
+
+#example(subname: [Pauli矩阵])[
+  一个熟悉的例子就是自旋 1/2 的 Pauli 矩阵。根据自旋角动量的性质得到，自旋算符在 $sigma_z$ 表象下的矩阵形式为
+  $
+    sigma_x = mat(0, e^(i alpha); e^(- i alpha), 0), sigma_y = mat(0, - i e^(i alpha); i e^(- i alpha), 0), sigma_z = mat(1, 0; 0, -1)
+  $
+  其中的相位$alpha$可以取任意实数。这个相位的不确定性可以理解为$sigma_z$表象的基矢$ket(arrow.t)$和$ket(arrow.b)$可以乘上任意的相位。由于这个不确定性不影响物理结果，通常我们选取$alpha = 0$，即常用的*Pauli矩阵*。
+]
+
+对于动量算符的不确定性，也可以认为是坐标表象的基矢$ket(x)$被乘上了任意的相位因子，即$ket(x) -> e^(i g(x))/hbar ket(x)$。相应的波函数$phi(x) = braket(x, psi)$作如下变换
+$
+  phi(x) -> e^(- (i g(x))/hbar) phi(x)
+$
+上述变换实际上是*幺正变换*，相应地，动量算符做如下变换
+$
+  - i hbar pdv(, x) -> e^(- (i g(x))/hbar) (- i hbar pdv(, x)) e^((i g(x))/hbar) = - i hbar pdv(, x) + f(x)
+$
+上式应在作用任意函数$phi(x)$的意义下理解。
+
+=== Schrödinger方程
+
+*Schrödinger方程*如何进入表象？考虑时间演化方程
+$
+  i hbar pdv(, t) ket(psi(t)) = hat(H) ket(psi(t))
+$
+#newpara()
+对于*离散表象*，我们这么操作：
+$
+  i hbar pdv(, t) ket(psi(t)) & = i hbar pdv(, t) hat(I) ket(psi(t)) \
+                              & = i hbar pdv(, t) sum_m ketbra(m) ket(psi(t)) \
+                              & = sum_m ket(m) i hbar pdv(, t) braket(m, psi(t)) \
+                              & = sum_m ket(m) i hbar pdv(, t) psi_m (t)
+$
+右边操作也是一样的：
+$
+  hat(H) ket(psi(t)) & = hat(I) hat(H) hat(I) ket(psi(t)) \
+                     & = sum_m ketbra(m) hat(H) sum_n ketbra(n) ket(psi(t)) \
+                     & = sum_(m,n) ket(m) braket(m, hat(H), n) braket(n, psi(t)) \
+                     & = sum_m ket(m) sum_n H_(m n) psi_n (t)
+$
+利用正交性得到
+$
+  i hbar pdv(, t) psi_m (t) = sum_n H_(m n) psi_n (t)
+$
+所以，在*离散表象*中，Schrödinger方程呈现为*矩阵形式*
+$
+  i hbar pdv(, t) psi(t) = H psi(t)\
+  i hbar pdv(, t) mat(psi_1(t); psi_2(t); ...) = mat(H_(11), H_(12), ...; H_(21), H_(22), ...; ..., ..., ...) mat(psi_1(t); psi_2(t); ...)
+$
+定态Schrödinger方程即为求解Hamilton量矩阵的本征值问题
+$
+  H phi = E phi\
+  mat(H_(11), H_(12), ...; H_(21), H_(22), ...; ..., ..., ...) mat(phi_1; phi_2; ...) = E mat(phi_1; phi_2; ...)
+$
+在实际问题中，Hamilton量矩阵通常是无穷维的。不过如果我们只对较低的能级感兴趣，通常可以对Hilbert空间做一个截断，只考虑其中某个有限维的子空间。
+
+
+对于*连续表象*，为了简单起见，考虑一维势阱中的粒子，Hamilton量为
+$
+  hat(H) = hat(p)^2/(2m) + V(hat(x))
+$
+要进入*坐标表象*，可如下操作：
+$
+  "RHS" & = hat(I) hat(H) hat(I) ket(psi(t)) \
+        & = integral dd(x) ketbra(x) (hat(p)^2/(2m) + V(hat(x))) integral dd(x') ketbra(x') ket(psi(t)) \
+        & = integral dd(x) dd(x') ket(x) braket(x, hat(H), x') braket(x', psi(t)) \
+        & = integral dd(x) dd(x') ket(x) braket(x, hat(H), x') psi(x', t)
+$
+我们需要计算“矩阵元”$braket(x, hat(H), x')$。利用口诀，做如下计算
+$
+  braket(x, V(hat(x)), x') = V(x) delta(x - x')\
+$
+$
+  braket(x, hat(p)^2/(2m), x') &= 1/(2m) braket(x, hat(p)^2, x') \
+  & = 1/(2m) braket(x, hat(I) hat(p)^2 hat(I), x') \
+  & = 1/(2m) braket(x, integral dd(p) ketbra(p) hat(p)^2 integral dd(p') ketbra(p'), x') \
+  & = 1/(2m) integral dd(p) integral dd(p') braket(x, p) braket(p, hat(p)^2, p') braket(p', x') \
+  & = 1/(2m) integral dd(p) integral dd(p') 1/(2 pi hbar) e^((i p x) / hbar) p'^2 delta(p - p') e^(- (i p' x') / hbar) \
+  & = - 1/(2m) pdv(, x, 2) integral dd(p) 1/(2 pi hbar) e^((i p (x - x')) / hbar) \
+  & = - hbar^2/(2m) pdv(, x, 2) delta(x - x')
+$
+Schrödinger方程左边为
+$
+  "LHS" & = i hbar pdv(, t) ket(psi(t)) = i hbar pdv(, t) integral dd(x) ketbra(x) ket(psi(t)) \
+        & = integral dd(x) ket(x) i hbar pdv(, t) braket(x, psi(t)) = integral dd(x) ket(x) i hbar pdv(, t) psi(x, t)
+$
+因此在坐标表象中的Schrödinger方程为
+$
+  i hbar pdv(, t) psi(x, t) = ( - hbar^2/(2m) pdv(, x, 2) + V(x) ) psi(x, t)
+$
+定态Schrödinger方程呈现为微分方程本征值问题
+$
+  ( - hbar^2/(2m) pdv(, x, 2) + V(x) ) phi(x) = E phi(x)
+$
+要进入*动量表象*，可如下操作：
+$
+  "RHS" & = hat(I) hat(H) hat(I) ket(psi(t)) \
+        & = integral dd(p) ketbra(p) (hat(p)^2/(2m) + V(hat(x))) integral dd(p') ketbra(p') ket(psi(t)) \
+        & = integral dd(p) dd(p') ket(p) braket(p, hat(H), p') braket(p', psi(t)) \
+        & = integral dd(p) dd(p') ket(p) braket(p, hat(H), p') psi(p', t)
+$
+我们需要计算“矩阵元”$braket(p, hat(H), p')$。利用口诀，做如下计算
+$
+  braket(p, hat(p)^2/(2m), p') = p^2/(2m) delta(p - p')\
+$
+$
+  braket(p, V(hat(x)), p') & = braket(p, hat(I) V(hat(x)) hat(I), p') \
+  & = braket(p, integral dd(x) ketbra(x) V(hat(x)) integral dd(x') ketbra(x'), p') \
+  & = integral dd(x) integral dd(x') braket(p, x) braket(x, V(hat(x)), x') braket(x', p') \
+  & = integral dd(x) integral dd(x') 1/(2 pi hbar) e^(- (i p x) / hbar) V(x) delta(x - x') e^((i p' x') / hbar) \
+  & = 1/(2 pi hbar) integral dd(x) V(x) e^(- (i (p - p') x) / hbar)\
+  &= V(i hbar pdv(, p)) integral dd(x) 1/(2 pi hbar) e^(- (i (p - p') x) / hbar) \
+  &= V(i hbar pdv(, p)) delta(p - p')
+$
+因此，在*动量表象*中的Schrödinger方程为
+$
+  i hbar pdv(, t) psi(p, t) = ( p^2/(2m) + V(i hbar pdv(, p)) ) psi(p, t)
+$
+定态Schrödinger方程呈现为微分方程本征值问题
+$
+  ( p^2/(2m) + V(i hbar pdv(, p)) ) phi(p) = E phi(p)
+$
+可见，对于势阱中的量子力学问题，如果势函数比较特殊，有时采用动量表象计算更为简单。例如：线性势、$δ$函数势。
