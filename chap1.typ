@@ -1,6 +1,4 @@
 #import "@preview/scripst:1.1.1": *
-#import "@preview/tablex:0.0.9": colspanx, gridx, hlinex, rowspanx, tablex, vlinex
-#import "@preview/fletcher:0.5.5" as fletcher: diagram, edge, node
 
 = 量子力学的抽象形式和表象理论
 
@@ -1020,3 +1018,121 @@ $
   ( p^2/(2m) + V(i hbar pdv(, p)) ) phi(p) = E phi(p)
 $
 可见，对于势阱中的量子力学问题，如果势函数比较特殊，有时采用动量表象计算更为简单。例如：线性势、$δ$函数势。
+
+=== 表象变换
+
+不同表象之间如何变换？
+
+考虑两个离散表象，其完备基矢分别用${ket(n)}$和${ket(alpha)}$表示，为方便起见，分别称为$A$表象和$B$表象。
+
+将$A$表象的任意基矢进入$B$表象，得到
+$
+  ket(n) = sum_alpha ket(alpha) braket(alpha, n) = sum_alpha S_(alpha n) ket(alpha)
+$
+这里定义了变换矩阵$S$，其矩阵元为
+$
+  S_(alpha n) = braket(alpha, n)
+$
+$S$的Hermite共轭矩阵$S^dagger$的矩阵元为
+$
+  S^dagger_(n alpha) = (S_(alpha n))^* = braket(n, alpha)
+$
+我们可以计算
+$
+  (S S^dagger)_(alpha beta) & = sum_n S_(alpha n) S^dagger_(n beta) = sum_n braket(alpha, n) braket(n, beta) \
+                            & = braket(alpha, beta) = delta_(alpha beta)
+$
+从而
+$
+  S S^dagger = hat(I)
+$
+同样地，可以证明$S^dagger S = hat(I)$，因此$S$是一个*幺正矩阵*。
+
+考虑不同表象的波函数之间的变换。对于任意态$ket(psi)$，$A$表象的波函数为$ψ_n = braket(n, ψ)$，$B$表象的波函数为$ϕ_α = braket(α, ψ)$。不同表象的波函数之间的变换可如下推导：
+$
+  phi_alpha & = braket(alpha, psi) = braket(alpha, hat(I), psi) = sum_n braket(alpha, n) braket(n, psi) \
+            & = sum_n braket(alpha, n) psi_n \
+            & = sum_n S_(alpha n) psi_n
+$
+因此两个表象的波函数通过一个幺正变换联系起来，
+$
+  phi = S psi\
+  psi = S^dagger phi = S^(-1) phi
+$
+#newpara()
+
+考虑力学量$F$的矩阵形式在不同表象之间的变换。推导如下：
+$
+  braket(alpha, hat(F), beta) & = braket(alpha, hat(I) hat(F) hat(I), beta) \
+                              & = sum_(m,n) braket(alpha, m) braket(m, hat(F), n) braket(n, beta) \
+                              & = sum_(m,n) S_(alpha m) braket(m, hat(F), n) S^dagger_(n beta)
+$
+所以力学量在不同表象的矩阵也通过这个幺正变换联系
+$
+  F_B = S F_A S^dagger\
+  F_A = S^dagger F_B S
+$
+
+#newpara()
+
+对于*连续表象*，我们来考虑坐标表象和动量表象的波函数之间的变换。从坐标表象的波函数$ψ(x)$出发，
+$
+  psi(x) & = braket(x, psi) = braket(x, hat(I), psi) \
+         & = integral dd(p) braket(x, p) braket(p, psi) \
+         & = integral dd(p) 1/sqrt(2 pi hbar) e^((i p x) / hbar) psi(p)
+$
+此即Fourier变换。逆变换是
+$
+  psi(p) & = braket(p, psi) = braket(p, hat(I), psi) \
+         & = integral dd(x) braket(p, x) braket(x, psi) \
+         & = integral dd(x) 1/sqrt(2 pi hbar) e^(- (i p x) / hbar) psi(x)
+$
+#newpara()
+
+表象变换有如下性质：
++ 表象变换不改变力学量的本征值。假设算符$hat(F)$在$A$表象中的本征方程为
+  $
+    F_A psi_A = f_n^A psi_A
+  $
+  则在$B$表象中有
+  $
+    F_B psi_B = S F_A S^dagger S psi_A = S F_A psi_A = f_n^A S psi_A = f_n^A psi_B
+  $
+  进一步，可以证明表象变换不改变力学量的平均值。
+
++ 表象变换不改变力学量的对易关系。假设在$A$表象中有对易关系
+  $
+    [F_A, G_A] = X_A
+  $
+  则在$B$表象中有
+  $
+    [F_B, G_B] & = S [F_A, G_A] S^dagger = S X_A S^dagger = X_B
+  $
++ 表象变换不改变力学量的迹。任意算符$hat(F)$的迹定义为它在某个表象中的对角矩阵元的求和，即
+  $
+    tr(hat(F)) = sum_n braket(n, hat(F), n)
+  $
+  假设在$A$表象中求迹为$tr F_A$，则在$B$表象中有
+  $
+    tr F_B = tr(S F_A S^dagger) = tr(F_A S^dagger S) = tr F_A
+  $
+  由于在任意表象求迹结果都一样，因此也可以在连续表象求迹，此时求和变为积分
+  $
+    tr(hat(F)) = integral dd(xi) braket(xi, hat(F), xi)
+  $
+
+  #example(subname: [平衡态量子统计物理])[
+    平衡态量子统计物理中，配分函数的基本公式是
+    $
+      cal(Z) = tr(e^(- beta hat(H))), beta = 1/(k_B T)
+    $
+    由于在任意表象求迹结果都一样，我们可以在任何表象中求出算符$e^(- beta hat(H))$的对角矩阵元，然后求和。以谐振子为例，要计算出结果，最简单的方法是采用能量表象或者粒子数表象
+    $
+      cal(Z) = sum_n braket(n, e^(- beta hat(H)), n) = sum_n e^(- beta E_n)
+    $
+    但是，对于相互作用多体系统，能量本征值一般无法全部解析求出，这个办法就抓瞎了。一个想法是直接在坐标表象中求迹，即
+    $
+      cal(Z) = integral dd(x) braket(x, e^(- beta hat(H)), x)
+    $
+    然后将“虚时”间隔$[0, β]$无限细分，继续采用口诀，就可以推出配分函数的虚时路径积分形式。这样就可以进入*有限温度量子场论*。
+  ]
