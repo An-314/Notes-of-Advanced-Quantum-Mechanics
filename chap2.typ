@@ -2,7 +2,9 @@
 
 = 量子动力学
 
-在经典力学中，动力学就是研究系统的*时间演化*，即在系统内部的*相互作用*以及系统与外界之间的相互作用的支配下，系统的状态如何随时间演化。在正统的量子力学中，时间演化分为两种，一是在相互作用支配下的动力学演化，二是量子测量过程。关于量子测量是否可以纳入动力学演化，仍然是一个 open 的问题。本章讨论量子系统的动力学演化，即“计算量子力学” 。
+在经典力学中，动力学就是研究系统的*时间演化*，即在系统内部的*相互作用*以及系统与外界之间的相互作用的支配下，系统的状态如何随时间演化。
+
+在正统的量子力学中，时间演化分为两种，一是在相互作用支配下的动力学演化，二是量子测量过程。关于量子测量是否可以纳入动力学演化，仍然是一个 open 的问题。本章讨论量子系统的动力学演化，即“计算量子力学” 。
 
 主要探讨如下内容：
 - Schrödinger绘景：时间演化算符和传播子
@@ -32,7 +34,7 @@ $
 $
   i hbar pdv(, t) (hat(U)^(dagger)(t, t_0) hat(U)(t, t_0)) = hat(U)^(dagger)(t, t_0) (hat(H) - hat(H)^dagger) hat(U)(t, t_0)
 $
-考虑到初始条件$hat(U)(t_0,t_0)=hat(I)$，只要Hamilton量是Hermite算符，就有
+考虑到初始条件$hat(U)(t_0,t_0)=hat(I)$，*只要Hamilton量是Hermite算符*，就有
 $
   hat(U)^(dagger)(t, t_0) hat(U)(t, t_0) = hat(I)
 $
@@ -55,15 +57,16 @@ $
 $
 那么就可以保证量子态的模方$braket(ψ(t))$不随时间变化。
 
-根据时间演化算符的定义，容易证明其满足初始条件
+根据时间演化算符的定义，容易证明其满足*初始条件*
 $
   hat(U)(t_0, t_0) = hat(I)
 $
-以及合成性质
+以及*合成性质*
 $
   hat(U)(t_2, t_0) = hat(U)(t_2, t_1) hat(U)(t_1, t_0), (t_2 > t_1 > t_0)
 $
-考虑无穷小时间演化：$t -> t + dd(t)$，即
+#newpara()
+考虑*无穷小时间演化*：$t -> t + dd(t)$，即
 $
   ket(psi(t + dd(t))) = hat(U)(t + dd(t), t) ket(psi(t))
 $
@@ -75,13 +78,13 @@ $
 $
   (1 + i hat(Omega)^(dagger) dd(t))(1 - i hat(Omega) dd(t)) = hat(I) + i (hat(Omega)^(dagger) - hat(Omega)) dd(t) + O(dd(t)^2) = hat(I)
 $
-所以*生成元*$hat(Omega)$是Hermite算符，即$hat(Omega) = hat(Omega)^(dagger)$。由于$hat(Omega)$具有频率的量纲，引入具有能量量纲的Hamilton算符$hat(H)$，使得
+所以*生成元*$hat(Omega)$是Hermite算符，即$hat(Omega) = hat(Omega)^(dagger)$。由于$hat(Omega)$具有频率的量纲，引入具有能量量纲的*Hamilton算符*$hat(H)$，使得
 $
   hat(Omega) = hat(H)/hbar
 $
-这与经典力学类似，Hamilton量亦是时间演化的生成元。无穷小时间演化算符可写为
+这与经典力学类似，*Hamilton量亦是时间演化的生成元*。无穷小时间演化算符可写为
 $
-  hat(U)(t + dd(t), t) = hat(I) - i/(hbar) hat(H) dd(t)
+  hat(U)(t + dd(t), t) = hat(I) - (i hat(H) dd(t))/(hbar)
 $
 其中$hbar$实际上就是约化Planck常数，这保证最终得到的时间演化
 方程就是Schrödinger方程。
@@ -99,7 +102,7 @@ $
   hat(U)(t + dd(t), t_0) = (hat(I) - i/(hbar) hat(H) dd(t)) hat(U)(t, t_0)\
   i hbar (hat(U)(t + dd(t), t_0) - hat(U)(t, t_0))/dd(t) = hat(H) hat(U)(t, t_0)
 $
-由于$dd(t)$是无穷小量，上式左边改写为求导，就得到了时间演化算符满足的运动方程
+由于$dd(t)$是无穷小量，上式左边改写为求导，就得到了*时间演化算符满足的运动方程*
 $
   i hbar pdv(, t) hat(U)(t, t_0) = hat(H) hat(U)(t, t_0)
 $
@@ -115,20 +118,21 @@ $
 $
   i hbar pdv(, t) hat(U)(t, t_0) = hat(H) hat(U)(t, t_0)
 $
-的解。这是关于时间的一阶微分方程，初始条件为$hat(U)(t_0, t_0) = hat(I)$。如果Hamilton量$hat(H)(t)$已知，则可求解出时间演化算符$hat(U)(t, t_0)$。
+的解。这是关于时间的*一阶微分方程*，初始条件为$hat(U)(t_0, t_0) = hat(I)$。如果Hamilton量$hat(H)(t)$已知，则可求解出时间演化算符$hat(U)(t, t_0)$。
 
-最简单的情形，哈密顿量不显含时间，易证
+最简单的情形，*Hamilton量不显含时间*，易证
 $
   hat(U)(t, t_0) = exp(- i/(hbar) hat(H) (t - t_0))
 $
-对于哈密顿量不含时的情形，体系的时间演化归结为求解哈密顿量的本征态，即定态薛定谔方程
+#newpara()
+对于*Hamilton量不含时*的情形，体系的时间演化归结为求解Hamilton量的本征态，即*定态Schrödinger方程*
 $
   hat(H) ket(psi_n) = E_n ket(psi_n)
 $
-一般情况下，哈密顿量的本征态可能存在简并，此时可引入*力学量完备集*${hat(H), hat(A), hat(B), ...}$，使得
+一般情况下，Hamilton量的本征态可能存在简并，此时可引入*力学量完备集*${hat(H), hat(A), hat(B), ...}$，使得
 $
-  [hat(H), hat(A)] = [hat(H), hat(B)] = [hat(A), hat(B)] = ... = 0\
-  [hat(A), hat(B)] = [hat(A), hat(B)] = ... = 0
+  [hat(H), hat(A)] = [hat(H), hat(B)] = [hat(H), hat(C)] = ... = 0\
+  [hat(A), hat(B)] = [hat(B), hat(C)] = [hat(C), hat(A)] = ... = 0\
 $
 这组力学量完备集存在完备的共同本征态，记为$ket(n)$（$n$代表一组完备的量子数），则时间演化算符可计算为（*能量表象*）
 $
@@ -141,11 +145,11 @@ $
               & = sum_n c_n e^(- (i E_n (t - t_0))/hbar) ket(n)
 $
 这是我们熟悉的结果。解析计算的难度在于：
-+ 哈密顿量的本征值和本征态是否存在解析解；
++ Hamilton量的本征值和本征态是否存在解析解；
 + 最后的级数求和是否能存在有限结果。
 满足这两个条件的量子系统是很少的（基本都在教科书上）。
 
-如果哈密顿量显含时间，但不同时刻的哈密顿量对易，即
+如果*Hamilton量显含时间，但不同时刻的Hamilton量对易*，即
 $
   [hat(H)(t_1), hat(H)(t_2)] = 0, (forall t_1 , t_2)
 $
@@ -153,55 +157,67 @@ $
 $
   hat(U)(t, t_0) = exp(- i/hbar integral_(t_0)^(t) hat(H)(t') dd(t'))
 $
-
-对于最一般的情形，即哈密顿量显含时间，且不同时刻的哈密顿量不对易，此时演化方程的形式解为
+#example(subname: [粒子自旋磁矩])[
+  粒子自旋磁矩与沿$z$方向的变化磁场相互作用，Hamilton量为
+  $
+    hat(H)(t) = - mu_0 B(t) sigma_z
+  $
+  时间演化算符为
+  $
+    hat(U)(t, t_0) = exp((i mu_0 sigma_z)/hbar integral_(t_0)^(t) B(t') dd(t'))
+  $
+]
+#newpara()
+对于最一般的情形，即*Hamilton量显含时间，且不同时刻的Hamilton量不对易*，此时演化方程的形式解为
 $
   hat(U)(t, t_0) = 1 + sum_(n=1)^(oo) (- i/hbar)^n integral_(t_0)^(t) dd(t_1) integral_(t_0)^(t_1) dd(t_2) ... integral_(t_0)^(t_(n-1)) dd(t_n) hat(H)(t_1) hat(H)(t_2) ... hat(H)(t_n)
 $
-此解称为Dyson 级数。式中各个积分中的时间变量满足
+此解称为*Dyson 级数*。式中各个积分中的时间变量满足
 $
   t >= t_1 >= t_2 >= ... >= t_n >= t_0
 $
 这个解可以用迭代方法证明。
 
-将演化方程
-$
-  i hbar pdv(, t) hat(U)(t, t_0) = hat(H)(t) hat(U)(t, t_0)
-$
-中的变量$t$改写为$t_1$，两边对$t_1$在区间$[t_0, t]$积分，得到
-$
-  i hbar eval((hat(U)(t_1, t_0)))_(t_0)^(t) = integral_(t_0)^(t) hat(H)(t_1) hat(U)(t_1, t_0) dd(t_1)
-$
-利用初始条件$hat(U)(t_0, t_0) = hat(I)$，得到
-$
-  hat(U)(t, t_0) = hat(I) - i/hbar integral_(t_0)^(t) hat(H)(t_1) hat(U)(t_1, t_0) dd(t_1)
-$
-这是一个*积分方程*，与微分方程 + 初始条件完全等价。 可以利用迭代法写出形式解。
-$
-  hat(U)(t_1, t_0) = hat(I) - i/hbar integral_(t_0)^(t_1) hat(H)(t_2) hat(U)(t_2, t_0) dd(t_2)
-$
-再次代入上式，得到
-$
-  hat(U)(t, t_0) &= hat(I) - i/hbar integral_(t_0)^(t) hat(H)(t_1) (hat(I) - i/hbar integral_(t_0)^(t_1) hat(H)(t_2) hat(U)(t_2, t_0) dd(t_2)) dd(t_1) \
-  &=hat(I) - i/hbar integral_(t_0)^(t) hat(H)(t_1) dd(t_1) + (- i/hbar)^2 integral_(t_0)^(t) dd(t_1) integral_(t_0)^(t_1) hat(H)(t_1) hat(H)(t_2) hat(U)(t_2, t_0) dd(t_2)
-$
-这样不断迭代下去，我们就得到 Dyson 级数解
-$
-  hat(U)(t, t_0) = hat(I) + sum_(n=1)^(oo) (- i/hbar)^n integral_(t_0)^(t) dd(t_1) integral_(t_0)^(t_1) dd(t_2) ... integral_(t_0)^(t_(n-1)) dd(t_n) hat(H)(t_1) hat(H)(t_2) ... hat(H)(t_n)
-$
-需要注意的是，每一项中的哈密顿量算符按照*时序*排列，一般不能交换顺序。但是，此表达式中每个积分上限与前一个积分变量互相依赖，处理起来很困难。最简单的想法是将积分上限都写为$t$，则得到
+#proof[
+  将演化方程
+  $
+    i hbar pdv(, t) hat(U)(t, t_0) = hat(H)(t) hat(U)(t, t_0)
+  $
+  中的变量$t$改写为$t_1$，两边对$t_1$在区间$[t_0, t]$积分，得到
+  $
+    i hbar eval((hat(U)(t_1, t_0)))_(t_0)^(t) = integral_(t_0)^(t) hat(H)(t_1) hat(U)(t_1, t_0) dd(t_1)
+  $
+  利用初始条件$hat(U)(t_0, t_0) = hat(I)$，得到
+  $
+    hat(U)(t, t_0) = hat(I) - i/hbar integral_(t_0)^(t) hat(H)(t_1) hat(U)(t_1, t_0) dd(t_1)
+  $
+  这是一个*积分方程*，与微分方程 + 初始条件完全等价。 可以利用迭代法写出形式解。
+  $
+    hat(U)(t_1, t_0) = hat(I) - i/hbar integral_(t_0)^(t_1) hat(H)(t_2) hat(U)(t_2, t_0) dd(t_2)
+  $
+  再次代入上式，得到
+  $
+    hat(U)(t, t_0) &= hat(I) - i/hbar integral_(t_0)^(t) hat(H)(t_1) (hat(I) - i/hbar integral_(t_0)^(t_1) hat(H)(t_2) hat(U)(t_2, t_0) dd(t_2)) dd(t_1) \
+    &=hat(I) - i/hbar integral_(t_0)^(t) hat(H)(t_1) dd(t_1) + (- i/hbar)^2 integral_(t_0)^(t) dd(t_1) integral_(t_0)^(t_1) hat(H)(t_1) hat(H)(t_2) hat(U)(t_2, t_0) dd(t_2)
+  $
+  这样不断迭代下去，我们就得到 Dyson 级数解
+  $
+    hat(U)(t, t_0) = hat(I) + sum_(n=1)^(oo) (- i/hbar)^n integral_(t_0)^(t) dd(t_1) integral_(t_0)^(t_1) dd(t_2) ... integral_(t_0)^(t_(n-1)) dd(t_n) hat(H)(t_1) hat(H)(t_2) ... hat(H)(t_n)
+  $
+]
+需要注意的是，每一项中的Hamilton量算符按照*时序*排列，一般不能交换顺序。但是，此表达式中每个积分上限与前一个积分变量互相依赖，处理起来很困难。最简单的想法是将积分上限都写为$t$，则得到
 $
   hat(I) + (- i/hbar) integral_(t_0)^(t) hat(H)(t_1) dd(t_1) + (- i/hbar)^2 (integral_(t_0)^(t) dd(t_1) hat(H)(t_1))^2 + ...
 $
-这个结果显然是不对的，只有在不同时刻的哈密顿量对易的情形才成立。例如二阶项的结果为
+这个结果显然是不对的，只有在不同时刻的Hamilton量对易的情形才成立。例如二阶项的结果为
 $
   (- i/hbar)^2 integral_(t_0)^(t) dd(t_1) integral_(t_0)^(t) dd(t_2) hat(H)(t_1) hat(H)(t_2)
 $
-其中要求 t1 > t2 。要将积分上限都扩展为$t$，我们需要引入时序乘积(又称为编时乘积) 的概念。时序乘积$T$使若干个含时算符的乘积从左到右按照时间的大小降序排列。最简单的例子是
+其中要求$t_1 > t_2$。要将积分上限都扩展为$t$，我们需要引入*时序乘积*(又称为*编时乘积*) 的概念。时序乘积$T$使若干个含时算符的乘积从左到右按照时间的大小降序排列。最简单的例子是
 $
   T[hat(H)(t_1) hat(H)(t_2)] = theta(t_1 - t_2) hat(H)(t_1) hat(H)(t_2) + theta(t_2 - t_1) hat(H)(t_2) hat(H)(t_1)
 $
-其中，$theta(x)$为阶越函数。利用时序乘积的定义，我们可以计算
+其中，$theta(x)$为*阶越函数*。利用时序乘积的定义，我们可以计算
 $
   T[integral_(t_0)^t hat(H)(t') dd(t')]^2 &= T integral_(t_0)^(t) dd(t_1) integral_(t_0)^(t) dd(t_2) hat(H)(t_1) hat(H)(t_2) \
   &= integral_(t_0)^t dd(t_1) integral_(t_0)^(t_1) dd(t_2) T[hat(H)(t_1) hat(H)(t_2)]\
@@ -229,13 +245,13 @@ $
 
 == 绘景理论
 
-我们一直都听说，海森堡、波恩和约当在几篇开创性论文中提出了*矩阵力学*。如果认为矩阵力学就是薛定谔方程在离散表象的具体形式，那么我们去阅读那几篇原始论文，必定会一头雾水。因为*表象*(representation) 只是量子力学的一个方面，它决定了量子态和力学量的具体表现形式。而量子力学还存在另一个重要方面，就是*绘景*(picture)，它决定了运动方程的具体表现形式。
+我们一直都听说，Heisenberg、Born和Jordan在几篇开创性论文中提出了*矩阵力学*。如果认为矩阵力学就是Schrödinger方程在离散表象的具体形式，那么我们去阅读那几篇原始论文，必定会一头雾水。因为*表象*(representation) 只是量子力学的一个方面，它决定了量子态和力学量的具体表现形式。而量子力学还存在另一个重要方面，就是*绘景*(picture)，它决定了运动方程的具体表现形式。
 
-假设量子系统的哈密顿量$hat(H)$不显含时间，其本征值和本征态已经求解出来，
+假设量子系统的Hamilton量$hat(H)$不显含时间，其本征值和本征态已经求解出来，
 $
   hat(H) ket(n) = E_n ket(n)
 $
-这些能量本征态${ket(n)}$是完备的，构成能量表象。我们来写出薛定谔方程在能量表象下的具体形式
+这些能量本征态${ket(n)}$是完备的，构成*能量表象*。我们来写出Schrödinger方程在能量表象下的具体形式
 $
   i hbar pdv(, t) ket(psi(t)) = hat(H) ket(psi(t))
 $
@@ -248,18 +264,20 @@ $
 右边计算为
 $
   hat(H) ket(psi(t)) & = sum_n hat(H) ket(n) hat(H) sum_m ketbra(m) ket(psi(t)) \
-                     & = sum_n ket(n) sum_m braket(n, hat(H), m) psi_m(t) \
-                     & = sum_n ket(n) E_n psi_n(t)
+                     & = sum_n ket(n) sum_m braket(n, hat(H), m) psi_m (t) \
+                     & = sum_n ket(n) E_n psi_n (t)
 $
 利用正交性得到
 $
-  i hbar pdv(, t) psi_n(t) = E_n psi_n(t)
+  i hbar pdv(, t) psi_n (t) = E_n psi_n (t)
 $
-是薛定谔方程在能量表象中的形式，假设初始条件为$ψ_n (t_0) = c_n$，其解很容易求出为
+*是Schrödinger方程在能量表象中的形式*，假设初始条件为$ψ_n (t_0) = c_n$，其解很容易求出为
 $
-  psi_n(t) = c_n e^(-(i E_n (t - t_0)) / hbar)
+  psi_n (t) = c_n e^(-(i E_n (t - t_0)) / hbar)
 $
-这是我们熟悉的结果。如果仔细检查一下计算过程，可以看到，我们假定基矢$ket(n)$是不随时间变化的。现在，我们考虑“随动”的基矢
+这是我们熟悉的结果。如果仔细检查一下计算过程，可以看到，*我们假定基矢$ket(n)$是不随时间变化的*。
+
+现在，我们考虑“随动”的基矢
 $
   ket(tilde(n)(t)) = e^(-(i E_n (t - t_0)) / hbar) ket(n)
 $
@@ -269,8 +287,43 @@ $
   braket(tilde(n)(t), tilde(m)(t)) = delta_(n,m)\
   sum_n ketbra(tilde(n)(t)) = hat(I)
 $
-利用这组“随动”的基矢，薛定谔方程的左边计算为
+利用这组“随动”的基矢，Schrödinger方程的左边计算为
 $
   i hbar pdv(, t) ket(psi(t)) & = i hbar pdv(, t) sum_n ketbra(tilde(n)(t)) ket(psi(t)) \
-  & = sum_n ((i hbar pdv(, t)) braket(tilde(n)(t), psi(t))) ket(tilde(n)(t)) + ketbra(tilde(n)(t)) (i hbar pdv(, t) ket(psi(t)))\
+  & = sum_n ((i hbar pdv(, t) ket(tilde(n)(t))) braket(tilde(n)(t), psi(t)) + ket(psi(t)) (i hbar pdv(, t) ketbra(tilde(n)(t))))\
+  &= sum_n ket(tilde(n)(t)) (E_n tilde(psi)_n (t) + i hbar pdv(, t) tilde(psi)_n (t))
 $
+其中$tilde(psi)_n (t)$定义为
+$
+  tilde(psi)_n (t) = braket(tilde(n)(t), psi(t)) = e^((i E_n (t - t_0)) / hbar) braket(n, psi(t)) = e^((i E_n (t - t_0)) / hbar) psi_n (t)
+$
+Schrödinger方程的右边计算为
+$
+  hat(H) ket(psi(t)) & = sum_n ketbra(tilde(n)(t)) hat(H) sum_m ketbra(tilde(m)(t)) ket(psi(t)) \
+                     & = sum_n ket(tilde(n)(t)) sum_m braket(tilde(n)(t), hat(H), tilde(m)(t)) tilde(psi)_m (t) \
+                     & = sum_n ket(tilde(n)(t)) E_n tilde(psi)_n (t)
+$
+将左边和右边计算的结果带入Schrödinger方程，得到
+$
+  i hbar pdv(, t) tilde(psi)_n (t) = 0
+$
+即：*波函数不随时间演化*！
+
+波函数不随时间演化，那么什么在随时间变化呢？我们来考虑力学量$hat(A)$的矩阵元，采用“随动”基矢表示为
+$
+  tilde(A)_(m n)(t) = braket(tilde(m)(t), hat(A), tilde(n)(t))
+$
+假设$hat(A)$不显含时间，计算其对时间的导数
+$
+  dv(, t) tilde(A)_(m n)& = dv(, t) braket(tilde(m)(t), hat(A), tilde(n)(t)) \
+  & = (dv(, t) bra(tilde(m)(t))) hat(A) ket(tilde(n)(t)) + bra(tilde(m)(t)) hat(A) (dv(, t) ket(tilde(n)(t)))\
+  & = (i E_m) / hbar braket(tilde(m)(t), hat(A), tilde(n)(t)) - (i E_n) / hbar braket(tilde(m)(t), hat(A), tilde(n)(t))\
+  & = 1/(i hbar) braket(tilde(m)(t), [hat(A), hat(H)], tilde(n)(t))
+$
+写成矩阵形式，就是Born和Jordan在1925年提出的*Heisenberg方程*
+$
+  dv(, t) tilde(A) = 1/(i hbar) [tilde(A), hat(H)]
+$
+这就是矩阵力学的基本方程。
+
+事实上这就是*Heisenberg绘景*下的量子力学。Heisenberg绘景下，量子态不随时间演化，力学量随时间演化。与之对应的Schrödinger绘景下，量子态随时间演化，力学量不随时间演化。
