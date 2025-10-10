@@ -326,4 +326,403 @@ $
 $
 这就是矩阵力学的基本方程。
 
-事实上这就是*Heisenberg绘景*下的量子力学。Heisenberg绘景下，量子态不随时间演化，力学量随时间演化。与之对应的Schrödinger绘景下，量子态随时间演化，力学量不随时间演化。
+仔细考察上面的计算过程，我们不难发现，选取“随动”基矢相当于对量子态和力学量做了如下变换：
+$
+  ket(psi(t)) & -> e^((i hat(H) (t - t_0)) / hbar) ket(psi(t)) = ket(tilde(psi)(t)) \
+       hat(A) & -> e^((i hat(H) (t - t_0)) / hbar) hat(A) e^(-(i hat(H) (t - t_0)) / hbar) = tilde(A)(t)
+$
+由于$ket(tilde(psi)(t))$满足时间演化
+$
+  ket(psi(t)) = e^(- (i hat(H) (t - t_0)) / hbar) ket(psi(t_0))
+$
+因此，在此变换下，$ket(psi(t)) -> ket(psi(t_0))$，即：*量子态不随时间演化*。也可以从用力学量的平均值来理解。在$t$时刻，力学量$hat(A)$的平均值为
+$
+  braket(psi(t), hat(A), psi(t)) = braket(psi(t_0), e^((i hat(H) (t - t_0)) / hbar) hat(A) e^(-(i hat(H) (t - t_0)) / hbar), psi(t_0)) = braket(tilde(psi)(t_0), tilde(A)(t), tilde(psi)(t_0))
+$
+平均值随着时间演化，按照左边，我们认为是由于量子态在演化，也可以按照右边，等效地认为是由于*力学量在演化*。
+
+在上述例子的基础上，我们考虑更一般的*含时幺正变换*$hat(Q)(t)$
+$
+  hat(Q)^dagger (t) hat(Q)(t) = hat(Q)(t) hat(Q)^dagger (t) = hat(I)
+$
+它将量子态$ket(psi(t))$和力学量$hat(A)$变换为
+$
+  ket(psi(t)) -> ket(psi^Q (t)) = hat(Q) ket(psi(t))\
+  hat(A) -> hat(A)^Q = hat(Q) hat(A) hat(Q)^dagger = hat(Q)hat(A) hat(Q)^(-1)
+$
+可以证明，在含时幺正变换下，量子系统的所有观测结果都是不变的，包括力学量的本征值、取值概率和平均值。
+- *力学量的平均值不变*
+  $
+    braket(psi(t), hat(A), psi(t)) = braket(psi(t), hat(Q)^dagger (t) hat(Q)(t) hat(A) hat(Q)^dagger (t) hat(Q)(t), psi(t)) = braket(psi^Q (t), hat(A)^Q, psi^Q (t))
+  $
+- *力学量之间的对易关系不变*
+
+  假设$[hat(A), hat(B)] = hat(C)$，则
+  $
+    [hat(A)^Q, hat(B)^Q] & = hat(Q)(t) [hat(A), hat(B)] hat(Q)^dagger (t) \
+                         & = hat(Q)(t) hat(C) hat(Q)^dagger (t) = hat(C)^Q
+  $
+  注意：两个时间必须相同才成立，即等时对易关系。
+- *力学量的本征值和取值概率不变*
+
+  假设$hat(A) ket(a) = a ket(a)$，则
+  $
+       & hat(Q)^dagger hat(A)^Q hat(Q) ket(a) = a ket(a) \
+    => & hat(A)^Q (hat(Q) ket(a)) = a (hat(Q) ket(a)) \
+    => & hat(A)^Q ket(a^Q) = a ket(a^Q)
+  $
+- *力学量的取值几率不变*
+
+  系统处于量子态$ket(psi(t))$时，对力学量$hat(A)$进行测量。将$ket(psi(t))$在$hat(A)$的本征态${ket(a)}$上展开
+  $
+    ket(psi(t)) = sum_a c_a (t) ket(a)
+  $
+  则得到结果$a$的几率为$abs(c_a (t))^2$。进行$Q$变换以后，将$ket(psi^Q (t))$用$hat(A)^Q$的本征值展开
+  $
+    ket(psi^Q (t)) = sum_a c_a^Q (t) ket(a^Q)
+  $
+  两边同时作用$hat(Q)^dagger (t)$，得到
+  $
+    c^Q_a (t) = braket(a^Q, psi^Q (t)) = braket(a, hat(Q)^dagger (t) hat(Q)(t), psi(t)) = braket(a, psi(t)) = c_a (t)
+  $
+
+对系统进行$Q$变换以后，*量子态$ket(psi^Q (t))$的演化方程*也将发生变化。直接计算得到
+$
+  i hbar pdv(, t) ket(psi^Q (t)) & = i hbar pdv(, t) (hat(Q) ket(psi(t))) \
+                                 & = hat(Q) i hbar pdv(, t) ket(psi(t)) + i hbar pdv(, t) hat(Q) ket(psi(t)) \
+                                 & = hat(Q) hat(H) ket(psi(t)) + i hbar pdv(hat(Q), t) ket(psi(t)) \
+                                 & = (hat(Q) hat(H) hat(Q)^dagger + i hbar pdv(hat(Q), t) hat(Q)^dagger) ket(psi^Q (t))
+$
+所以，量子态$ket(psi^Q (t))$满足的演化方程为
+$
+  i hbar pdv(, t) ket(psi^Q (t)) = (hat(H)^Q (t) + i hbar pdv(hat(Q), t) hat(Q)^dagger) ket(psi^Q (t))
+$
+进行$Q$变换以后，*力学量$A^Q$也将随时间演化*。直接计算得到
+$
+  dv(, t) hat(A)^Q & = dv(, t) (hat(Q) hat(A) hat(Q)^dagger) \
+  & = (dv(, t) hat(Q)) hat(A) hat(Q)^dagger + hat(Q) (pdv(, t) hat(A)) hat(Q)^dagger + hat(Q) hat(A) (dv(, t) hat(Q)^dagger) \
+  & = dv(hat(Q), t) hat(Q)^dagger hat(Q) hat(A) hat(Q)^dagger + hat(Q) hat(A) hat(Q)^dagger hat(Q) dv(hat(Q)^dagger, t) + hat(Q) pdv(hat(A), t) hat(Q)^dagger
+$
+以及
+$
+  dv(hat(Q), t) hat(Q)^dagger + hat(Q) pdv(hat(Q)^dagger, t) = dv(hat(Q) hat(Q)^dagger, t) = 0
+$
+所以，力学量$hat(A)^Q$满足的演化方程为
+$
+  dv(, t) hat(A)^Q = [dv(hat(Q), t) hat(Q)^dagger, hat(A)^Q] + hat(Q) pdv(hat(A), t) hat(Q)^dagger
+$
+根据以上一般性的讨论，我们发现，从Schrödinger方程
+$
+  i hbar pdv(, t) ket(psi(t)) = hat(H) ket(psi(t))
+$
+出发，通过含时幺正变换$hat(Q)(t)$，可以得到量子体系时间演化的其他等价形式。这个含时幺正变换 $hat(Q)(t)$ 被称为绘景变换，变换后的时间演化形式称为 $Q$ 绘景。
+
+我们将没有经过变换的时间演化形式，即原始的Schrödinger方程演化形式，称为Schrödinger绘景。在理论上，如果找到一个含时幺正变换$hat(Q)$，就可以创建一个新的绘景。除了Schrödinger绘景，常用的其他绘景实际上只有两种：Heisenberg绘景和相互作用绘景（又称为Dirac绘景）。
+
+#theorem(subname: [绘景变换])[
+  量子力学中，所有含时幺正变换$hat(Q)(t)$都定义了一种新的绘景。不同绘景下的量子态和力学量的取值概率、平均值和对易关系都是相同的。
+
+  力学量$hat(A)$和量子态$ket(psi(t))$在$Q$绘景下的变换为
+  $
+    ket(psi(t)) -> ket(psi^Q (t)) = hat(Q) ket(psi(t))\
+    hat(A) -> hat(A)^Q = hat(Q) hat(A) hat(Q)^dagger = hat(Q)hat(A) hat(Q)^(-1)
+  $
+  量子态$ket(psi^Q (t))$和力学量$hat(A)^Q$满足的演化方程为
+  $
+    i hbar pdv(, t) ket(psi^Q (t)) = (hat(H)^Q (t) + i hbar pdv(hat(Q), t) hat(Q)^dagger) ket(psi^Q (t))\
+    dv(, t) hat(A)^Q = [dv(hat(Q), t) hat(Q)^dagger, hat(A)^Q] + hat(Q) pdv(hat(A), t) hat(Q)^dagger
+  $
+]
+
+=== Heisenberg绘景
+
+在Schrödinger绘景中，力学量不随时间演化，量子态的演化为
+$
+  ket(psi(t)) = hat(U)(t, t_0) ket(psi(t_0)) <=> i hbar pdv(, t) ket(psi(t)) = hat(H) ket(psi(t))
+$
+其中$hat(U)(t, t_0)$ 就是前面研究过的时间演化算符。取含时幺正变换为
+$
+  hat(Q)(t) = hat(U)^dagger (t, t_0) = hat(U)^(-1) (t, t_0)
+$
+得到的绘景称为*Heisenberg绘景*。量子态和力学量变换为
+$
+  ket(psi^"H" (t)) = hat(U)^dagger (t, t_0) ket(psi(t)) = ket(psi(t_0))\
+  hat(A)^"H" (t) = hat(U)^dagger (t, t_0) hat(A) hat(U)(t, t_0)
+$
+通常用上标$"H"$表示Heisenberg绘景 (必要时，用上标$"S"$表示Schrödinger绘景)。
+
+*在Heisenberg绘景中，量子态不随时间演化，力学量随时间演化*。因此我们需要推导出力学量的演化方程。
+
+前面已经得出，对于任意含时幺正变换$hat(Q)$，力学量$hat(A)^Q$的演化方程为
+$
+  dv(, t) hat(A)^Q = [dv(hat(Q), t) hat(Q)^dagger, hat(A)^Q] + hat(Q) pdv(hat(A), t) hat(Q)^dagger
+$
+取$hat(Q)(t) = hat(U)^dagger (t, t_0)$，并利用演化方程
+$
+  dv(hat(Q), t) hat(Q)^dagger = - hat(Q) dv(hat(Q)^dagger, t) = - hat(U)^dagger dv(hat(U), t) = - 1/(i hbar) hat(U)^dagger hat(H) hat(U) = - 1/(i hbar) hat(H)^"H" (t)
+$
+带入前式得到力学量的演化方程，即*Heisenberg方程*
+$
+  dv(, t) hat(A)^"H" (t) = 1/(i hbar) [hat(A)^"H" (t), hat(H)^"H" (t)] + hat(U)^dagger pdv(hat(A), t) hat(U)
+$
+需要注意的是，在定义Heisenberg绘景时，我们并未限定Schrödinger绘景中的Hamilton量$hat(H)$不显含时间。如果$hat(H)$不显含时间，则
+$
+  hat(U)(t, t_0) = exp(- (i hat(H) (t - t_0)) / hbar) => hat(Q)(t) = exp((i hat(H) (t - t_0)) / hbar)
+$
+在Heisenberg绘景中，Hamilton量为
+$
+  hat(H)^"H" (t) = hat(U)^dagger (t, t_0) hat(H) hat(U)(t, t_0) = hat(H)
+$
+此时两种绘景中的Hamilton量一致
+$
+  hat(H)^"H" = hat(H)^"S" = hat(H)
+$
+
+==== 算力学量的时间演化
+
+考虑不显含时间的力学量$hat(A)$，在Heisenberg绘景中求解其时间演化，
+最一般的方法是求解Heisenberg方程
+$
+  dv(, t) hat(A)^"H" (t) = 1/(i hbar) [hat(A)^"H" (t), hat(H)^"H" (t)]
+$
+这是一阶微分方程，初始条件为$hat(A)^"H" (t_0) = hat(A)$。计算Heisenberg方程右边的对易关系，可以利用技巧
+$
+  [hat(A)^"H" (t), hat(H)^"H" (t)] & = hat(U)^dagger [hat(A), hat(H)] hat(U)
+$
+对于$hat(H)^"S" (t)$含时的系统，即使$hat(H)^"H" (t)$很难求出，Heisenberg方程仍然有可能写出并求解。
+
+对于Hamilton量$hat(H)^"S"$不含时的情形，也可以利用Baker-Hausdorff公式
+$
+  e^(hat(X)) hat(Y) e^(-hat(X)) = hat(Y) + [hat(X), hat(Y)] + 1/2! [hat(X), [hat(X), hat(Y)]] + 1/3! [hat(X), [hat(X), [hat(X), hat(Y)]]] + ...
+$
+#proof[
+  引入函数$f(lambda) = e^(lambda hat(X)) hat(Y) e^(- lambda hat(X))$，则
+  $
+    f(0) = hat(Y)\
+    f(1) = e^(hat(X)) hat(Y) e^(-hat(X))
+  $
+  对$lambda$求导得
+  $
+    dv(f, t) &= e^(lambda hat(X)) hat(X) hat(Y) e^(- lambda hat(X)) - e^(lambda hat(X)) hat(Y) hat(X) e^(- lambda hat(X)) \
+    &= e^(lambda hat(X)) [hat(X), hat(Y)] e^(- lambda hat(X))\
+    dv(f, lambda, 2) &= e^(lambda hat(X)) [hat(X), [hat(X), hat(Y)]] e^(- lambda hat(X))\
+  $
+  这样，我们可以写出Taylor展开
+  $
+    f(lambda) = f(0) + sum_(n=1)^(oo) lambda^n/n! eval(dv(f, lambda, n))_(lambda=0)
+  $
+  最后令$lambda=1$得到到Baker-Hausdorff公式。
+]
+应用于力学量$hat(A)$，根据$hat(A)^"H" (t) = hat(U)^dagger (t, t_0) hat(A) hat(U)(t, t_0)$，得到
+$
+  hat(A)^"H" (t) = hat(A) + (i t)/hbar [hat(H), hat(A)] + 1/2! ((i t)/hbar)^2 [hat(H), [hat(H), hat(A)]] + 1/3! ((i t)/hbar)^3 [hat(H), [hat(H), [hat(H), hat(A)]]] + ...
+$
+不失一般性，从这里开始，令$t_0 = 0$。一般来说，对于如下的情况上述方法可以奏效：
++ 上述级数中的对易子在某一阶等于零，从而只需要计算有限阶
++ 上述级数中的对易子出现周期性结果，从而可以写成级数形式并求和
+
+==== 谐振子
+
+谐振子是量子理论中非常基本且重要的一个模型。考虑一维谐振子，其Hamilton量为
+$
+  hat(H) = hat(p)^2/(2 m) + 1/2 m omega^2 hat(x)^2
+$
+其中$hat(q)$和$hat(p)$应该更一般地理解为系统的广义坐标和广义动量，满足对易关系
+$
+  [hat(q), hat(p)] = i hbar
+$
+在本科量子力学中已经用波动力学解法和代数解法求解了其能量本征值问题
+$
+  E_n = (n + 1/2) hbar omega, (n = 0, 1, 2, ... )\
+$
+由于Hamilton量不含时，Heisenberg绘景中的时间演化可以直接利用Baker-Hausdorff公式计算
+$
+  hat(q)^"H" (t) & = hat(q) + (i t)/hbar [hat(H), hat(q)] + 1/2! ((i t)/hbar)^2 [hat(H), [hat(H), hat(q)]] + 1/3! ((i t)/hbar)^3 [hat(H), [hat(H), [hat(H), hat(q)]]] + ...\
+$
+利用
+$
+  [hat(H), hat(q)] = - (i hbar)/m hat(p)\
+  [hat(H), hat(p)] = i hbar m omega^2 hat(q)
+$
+得到
+$
+  hat(q)^"H" (t) &= hat(q) (1 - 1/2! omega^2 t^2 + 1/4! omega^4 t^4 - ...) + hat(p)/(m omega) (omega t - 1/3! omega^3 t^3 + 1/5! omega^5 t^5 - ...)\
+$
+$
+  hat(q)^"H" (t) & = hat(q) cos(omega t) + hat(p)/(m omega) sin(omega t)
+$
+同样可以得到
+$
+  hat(p)^"H" (t) = hat(p) cos(omega t) - m omega hat(q) sin(omega t)
+$
+另一种方法是利用Heisenberg方程求解。得到
+$
+  dv(, t) hat(q)^"H" (t) &= 1/(i hbar) [hat(q)^"H" (t), hat(H)] = i/hbar hat(U)^dagger [hat(q), hat(H)] hat(U) = (hat(p)^"H" (t))/m\
+  dv(, t) hat(p)^"H" (t) &= 1/(i hbar) [hat(p)^"H" (t), hat(H)] = i/hbar hat(U)^dagger [hat(p), hat(H)] hat(U) = - m omega^2 hat(q)^"H" (t)
+$
+这是关于$hat(q)^"H" (t)$和$hat(p)^"H" (t)$的耦合一阶微分方程组。为了解耦合，将其改写成如下的形式
+$
+  dv(hat(q)^"H" (t), t) = - i omega ((i hat(p)^"H" (t))/(m omega))\
+  dv(, t)(i hat(p)^"H" (t))/(m omega) = i omega hat(q)^"H" (t)
+$
+将两个方程分别相加和相减，得到
+$
+  dv(, t)(hat(q)^"H" (t) + (i hat(p)^"H" (t))/(m omega)) = - i omega (hat(q)^"H" (t) + (i hat(p)^"H" (t))/(m omega))\
+  dv(, t)(hat(q)^"H" (t) - (i hat(p)^"H" (t))/(m omega)) = i omega (hat(q)^"H" (t) - (i hat(p)^"H" (t))/(m omega))
+$
+因此，可引入新算符
+$
+  hat(a)_"H" (t) = C (hat(q)^"H" (t) + (i hat(p)^"H" (t))/(m omega))\
+  hat(a)^dagger_"H" (t) = C (hat(q)^"H" (t) - (i hat(p)^"H" (t))/(m omega))\
+$
+其中$C$为任意实常数。算符$hat(a)_"H" (t)$和$hat(a)^dagger_"H" (t)$满足方程
+$
+  dv(, t) hat(a)_"H" (t) = - i omega hat(a)_"H" (t)\
+  dv(, t) hat(a)^dagger_"H" (t) = i omega hat(a)^dagger_"H" (t)
+$
+其解很容易求得为
+$
+  hat(a)_"H" (t) = hat(a) e^(- i omega t)\
+  hat(a)^dagger_"H" (t) = hat(a)^dagger e^(i omega t)
+$
+利用
+$
+  hat(q) = 1/(2 C) (hat(a)_"H" (t) + hat(a)^dagger_"H" (t))\
+  hat(p) = (m omega)/(2 i C) (hat(a)_"H" (t) - hat(a)^dagger_"H" (t))
+$
+即可求得$hat(q)^"H" (t)$和$hat(p)^"H" (t)$的解，与之前的结果一致。
+
+== 谐振子的相干态
+
+在前面的计算中，令
+$
+  C = sqrt((m omega)/(2 hbar))
+$
+得到
+$
+  hat(a) = sqrt((m omega)/(2 hbar)) (hat(q) + (i hat(p))/(m omega))\
+  hat(a)^dagger = sqrt((m omega)/(2 hbar)) (hat(q) - (i hat(p))/(m omega))
+$
+算符$hat(a)$和$hat(a)^dagger$*无量纲*，称为*下降算符和上升算符*，或者说*湮灭算符和产生算符*，满足对易关系
+$
+  [hat(a), hat(a)^dagger] = 1
+$
+谐振子的Hamilton量可表达为
+$
+  hat(H) = hbar omega (hat(a)^dagger hat(a) + 1/2)
+$
+#newpara()
+
+引入粒子数算符
+$
+  hat(N) = hat(a)^dagger hat(a)
+$
+可以证明 (本科量子力学)，$hat(N)$的本征值为非负整数，即
+$
+  hat(N) ket(n) = n ket(n), (n = 0, 1, 2, ... )
+$
+算符$hat(a)$和$hat(a)^dagger$的作用为
+$
+  hat(a) ket(n) = sqrt(n) ket(n - 1)\
+  hat(a)^dagger ket(n) = sqrt(n + 1) ket(n + 1)
+$
+尤其是（“湮灭真空”）
+$
+  hat(a) ket(0) = 0
+$
+显然，$hat(N)$的本征态就是能量本征态
+$
+  hat(H) ket(n) = E_n ket(n)\
+  E_n = (n + 1/2) hbar omega, (n = 0, 1, 2, ... )\
+$
+所有的激发态可以通过将产生算符$hat(a)^dagger$作用在基态$ket(0)$（“真空态”）不断作用得到。利用
+$
+  ket(n+1) = 1/sqrt(n + 1) hat(a)^dagger ket(n)
+$
+得到
+$
+  ket(n) = 1/sqrt(n!) (hat(a)^dagger)^n ket(0)
+$
+进一步地，进入坐标表象，可以求得各个能级的波函数$psi_n (q)= braket(q, n)$。对于基态，利用$hat(a) ket(0) = 0$的得到
+$
+  bra(q) (hat(q) + (i hat(p))/(m omega)) ket(0) = 0\
+  integral dd(q') bra(q) (hat(q) + (hbar)/(m omega) hat(p)) ketbra(q') ket(0) = 0\
+$
+利用
+$
+  braket(q, hat(q), q') = q delta(q - q')\
+  braket(q, hat(p), q') = - i hbar pdv(, q') delta(q - q')
+$
+得到
+$
+  (q + (hbar)/(m omega) dv(, q)) psi_0 (q) = 0
+$
+其归一化的解即为基态波函数
+$
+  psi_0 (q) = ((m omega)/(pi hbar))^(1/4) exp(- (m omega q^2)/(2 hbar))
+$
+对于任意激发态$ket(n)$，得到
+$
+  psi_n (q) & = 1/sqrt(n!) braket(q, (hat(a)^dagger)^n ket(0)) \
+            & = 1/sqrt(n!) (sqrt((m omega)/(2 hbar)))^n braket(q, (hat(q) - (i hat(p))/(m omega))^n, 0) \
+$
+插入$n$个$q$表象的完备性关系
+$
+  psi_n (x) = 1/sqrt(n!) (sqrt((m omega)/(2 hbar)))^n integral dd(q_1) dd(q_2) ... dd(q_n) \ braket(q, (hat(q) - (i hat(p))/(m omega)), q_1) braket(q_1, (hat(q) - (i hat(p))/(m omega)), q_2) ... braket(q_(n-1), (hat(q) - (i hat(p))/(m omega)), q_n) braket(q_n, 0) \
+$
+将基本矩阵元代入，积分后得到
+$
+  psi_n (q) = 1/sqrt(2^n n!) ((m omega)/(pi hbar))^n (q - (hbar)/(m omega) dv(, q))^n psi_0 (q)
+$
+
+#newpara()
+
+*相干态*的引出：在前面海森堡绘景的计算中，谐振子的坐标和动量算符的解为
+$
+  hat(q)^"H" (t) = hat(q) cos(omega t) + hat(p)/(m omega) sin(omega t)\
+  hat(p)^"H" (t) = hat(p) cos(omega t) - m omega hat(q) sin(omega t)
+$
+虽然在形式上与经典谐振子的解一致，但是若初态为能量本征态(定态)，则坐标和动量的平均值为
+$
+  braket(n, hat(q)^"H" (t), n) = 0\
+  braket(n, hat(p)^"H" (t), n) = 0
+$
+所以，在力学量平均值的意义上，量子谐振子与经典谐振子完全不一样 (基态$n = 0$是例外)。
+
+问：能不能找到一种初态$ket(z)$，力学量平均值的演化与经典谐振子一致？(考虑能量时须将零点能去除)
+
+这样一种初态真的存在，它就是湮灭算符$hat(a)$的本征态
+$
+  hat(a) ket(z) = z ket(z) <=> bra(z) hat(a)^dagger = z^* bra(z)
+$
+由于$hat(a)$不是厄米算符，所以$z$一般是复数。显然，$ket(z)$可以用能量本征态展开
+$
+  ket(z) = sum_(n=0)^(oo) ketbra(n, z) ket(n)
+$
+下面将会看到，除了特例$z=0$外，$ket(z)$是所有的能量本征态的相干叠加。利用能量本征态的表达式
+$
+  ket(n) = 1/sqrt(n!) (hat(a)^dagger)^n ket(0)\
+  bra(n) = 1/sqrt(n!) bra(0) (hat(a))^n
+$
+得到展开系数
+$
+  braket(n, z) = 1/sqrt(n!) bra(0) (hat(a))^n ket(z) = z^n/sqrt(n!) braket(0, z)
+$
+考虑态$ket(z)$的归一化条件 $braket(z)=1$，得到
+$
+  1 = braket(z) = sum_(n=0)^(oo) abs(braket(n, z))^2 = abs(braket(0, z))^2 sum_(n=0)^(oo) abs(z)^(2 n)/n! = abs(braket(0, z))^2 e^(abs(z)^2)
+$
+不失一般性，取
+$
+  braket(0, z) = e^(- abs(z)^2/2)
+$
+就有
+$
+  braket(n, z) = z^n/sqrt(n!) e^(- abs(z)^2/2)
+$
+所以$ket(z)$可以用能量本征态表达为
+$
+  ket(z) = e^(- abs(z)^2/2) sum_(n=0)^(oo) z^n/sqrt(n!) ket(n)
+$
+这样的态被称为*相干态*，本征值$z$可以取所有的复数。注意：只有$z = 0$的相干态才与基态$ket(0)$重合，$z = 1, 2, 3, dots$的那些态与能量本征态$ket(n)$是不同的。
+
