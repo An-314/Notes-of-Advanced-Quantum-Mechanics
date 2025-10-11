@@ -724,5 +724,246 @@ $
 $
   ket(z) = e^(- abs(z)^2/2) sum_(n=0)^(oo) z^n/sqrt(n!) ket(n)
 $
-这样的态被称为*相干态*，本征值$z$可以取所有的复数。注意：只有$z = 0$的相干态才与基态$ket(0)$重合，$z = 1, 2, 3, dots$的那些态与能量本征态$ket(n)$是不同的。
+这样的态被称为*相干态*，*本征值$z$可以取所有的复数*。注意：只有$z = 0$的相干态才与基态$ket(0)$重合，$z = 1, 2, 3, dots$的那些态与能量本征态$ket(n)$是不同的。
 
+定义算符 ($z$为任意复数)
+$
+  hat(D)(z) = exp(z hat(a)^dagger - z^* hat(a))
+$
+可以证明相干态可以表示为
+$
+  ket(z) = hat(D)(z) ket(0)
+$
+#proof[
+  利用恒等式
+  $
+    e^(hat(A) + hat(B)) = e^(hat(A)) e^(hat(B)) e^(- [hat(A), hat(B)]/2)
+  $
+  其中$[hat(A), hat(B)]$与$hat(A)$和$hat(B)$都对易，令$hat(A) = z hat(a)^dagger, hat(B) = - z^* hat(a)$，得到
+  $
+    hat(D)(z) = e^(- abs(z)^2/2) e^(z hat(a)^dagger) e^(- z^* hat(a))
+  $
+  直接计算可得
+  $
+    hat(D)(z) ket(0) & = e^(- abs(z)^2/2) e^(z hat(a)^dagger) e^(- z^* hat(a)) ket(0) \
+                     & = e^(- abs(z)^2/2) e^(z hat(a)^dagger) sum_(n=0)^(oo) (- z^*)^n/n! (hat(a))^n ket(0) \
+                     & = e^(- abs(z)^2/2) e^(z hat(a)^dagger) ket(0) \
+                     & = e^(- abs(z)^2/2) sum_(n=0)^(oo) z^n/sqrt(n!) ket(n) = ket(z)c
+  $
+  另外可以证明
+  $
+    hat(D)^(-1) (z) = hat(D)^dagger (z) = hat(D)(- z)\
+    hat(D)^dagger (z) hat(a) hat(D)(z) = hat(a) + z\
+  $
+]
+
+=== 时间演化
+
+设谐振子初态为相干态，$ket(ψ(0)) = ket(z)$，在薛定谔绘景中讨论其时间演化。利用时间演化算符，得到
+$
+  ket(psi(0)) &= e^(- (i hat(H) t)/hbar) ket(z) \
+  &= e^(- (i omega t)/2) e^(- abs(z)^2/2) sum_(n=0)^(oo) (z^n)/(sqrt(n!)) e^(- i n omega t) ket(n) \
+  &= e^(- (i omega t)/2) e^(- abs(z e^(-i omega t))^2/2) sum_(n=0)^(oo) ((z e^(- i omega t))^n)/(sqrt(n!)) ket(n) \
+  &= e^(- (i omega t)/2) ket(z e^(- i omega t))
+$
+即：初态为相干态$ket(z)$ 的时间演化，只需要将 $z$ 替换为 $z e^(-i omega t)$ ，再乘上零点能带来的相位因子 $e^(- (i omega t)/2)$ 。
+
+在任意时刻$t$，坐标和动量的平均值为
+$
+  braket(psi(t), hat(q), psi(t)) & = braket(z e^(- i omega t), hat(q), z e^(- i omega t)) = sqrt((hbar)/(2 m omega)) (z e^(- i omega t) + z^* e^(i omega t))\
+  braket(psi(t), hat(p), psi(t)) & = braket(z e^(- i omega t), hat(p), z e^(- i omega t)) = -i sqrt((hbar m omega)/2) (z e^(- i omega t) - z^* e^(i omega t))
+$
+都可以写成$A cos(ω t + φ)$的形式，即与经典谐振子的运动规律一致。
+
+进一步地，可以计算得到
+$
+  braket(psi(t), hat(q)^2, psi(t)) & = braket(z e^(- i omega t), hat(q)^2, z e^(- i omega t)) = (hbar)/(2 m omega) (1 + (z e^(- i omega t) + z^* e^(i omega t))^2) \
+  braket(psi(t), hat(p)^2, psi(t)) & = braket(z e^(- i omega t), hat(p)^2, z e^(- i omega t)) = (hbar m omega)/2 (1 - (z e^(- i omega t) - z^* e^(i omega t))^2)
+$
+从而计算出
+$
+  expval((Delta hat(q))^2) & = braket(psi(t), hat(q)^2, psi(t)) - (braket(psi(t), hat(q), psi(t)))^2 = hbar/(2 m omega) \
+  expval((Delta hat(p))^2) & = braket(psi(t), hat(p)^2, psi(t)) - (braket(psi(t), hat(p), psi(t)))^2 = hbar m omega/2
+$
+因此，*相干态在时间演化中始终保持最小不确定度关系*
+$
+  expval((Delta hat(q))^2) expval((Delta hat(p))^2) = hbar^2/4\
+  Delta hat(q) Delta hat(p) = hbar/2
+$
+
+#newpara()
+
+=== 坐标空间
+
+根据上面的计算，相干态在时间演化中坐标和动量的不确定度均保存不变。实际上，在坐标空间或动量空间，相干态波包的形状均保持不变，其中心随着时间简谐变化，符合经典谐振子的运动规律。以坐标空间为例说明。进入坐标表象，对于初态$ket(z)$，求得波函数为
+$
+  braket(q, z) & = psi_z (q) \
+               & = e^(- abs(z)^2/2) sum_(n=0)^(oo) z^n/sqrt(n!) braket(q, n) \
+               & = e^(- abs(z)^2/2) sum_(n=0)^(oo) z^n/sqrt(n!) psi_n (q) \
+               & = ((m omega)/(pi hbar))^(1/4) e^(-1/2(abs(z)^2 - z^2)) e^(-1/2(xi - sqrt(2) z)^2)
+$
+其中$xi = sqrt((m omega)/hbar) q$。任意$t$时刻的波函数，只需要将$z$替换为$z e^(-i omega t)$，再乘上零点能带来的相位因子 $e^(- (i omega t)/2)$ 最终得到
+$
+  psi (q, t) = braket(q, z e^(- i omega t)) e^(- (i omega t)/2) = ((m omega)/(pi hbar))^(1/4) e^(-1/2(abs(z)^2 - z^2 e^(- 2 i omega t))) e^(- (i omega t)/2) e^(-1/2(xi - sqrt(2) z e^(- i omega t))^2)
+$
+波函数的模方为
+$
+  abs(psi (q, t))^2 = ((m omega)/(pi hbar))^(1/2) e^(- (xi - sqrt(2) abs(z) cos(omega t + phi))^2)
+$
+这是一个高斯波包，在时间演化中，其形状不变，中心的运动与经典谐振子相同。
+
+=== 相干态表
+
+不同的相干态之间是不正交的。考虑本征值为$z_1$和$z_2$的两个相干态，利用相干态的表达式得到
+$
+  braket(z_1, z_2) & = e^(- (abs(z_1)^2 + abs(z_2)^2)/2) sum_(n=0)^(oo) sum_(m=0)^(oo) ((z_1^*)^n z_2^m)/sqrt(n! m!) braket(n, m) \
+  & = e^(- (abs(z_1)^2 + abs(z_2)^2)/2) sum_(n=0)^(oo) ((z_1^*)^n z_2^n)/n! \
+  & = e^(- (abs(z_1)^2 + abs(z_2)^2)/2 + z_1^* z_2)
+$
+这是否意味着所有的相干态不能构成一组完备的基矢呢？实际上，正交性并不是构成完备基矢的必要条件，只是为了方便而已。对于力学量来说，其本征态总可以取成互相正交的，所以我们以前遇到的表象，基矢总是互相正交的。
+
+下面证明，所有的相干态满足完备性条件
+$
+  1/pi integral dd(z, 2) ketbra(z) = hat(I)
+$
+#proof[
+  利用相干态的表达式
+  $
+    1/pi integral dd(z, 2) ketbra(z) & = 1/pi integral dd(z, 2) e^(- abs(z)^2) sum_(n=0)^(oo) sum_(m=0)^(oo) (z^n (z^*)^m)/sqrt(n! m!) ketbra(n, m) \
+  $
+  积分测度的定义是
+  $
+    dd(z, 2) = dd(Re(z)) dd(Im(z))
+  $
+  令$z = r e^(i theta)$，则
+  $
+    dd(z, 2) = r dd(r) dd(theta)
+  $
+  并利用积分
+  $
+    integral_0^(2 pi) dd(theta) e^(i (n - m) theta) = 2 pi delta_(n, m)\
+  $
+  得到
+  $
+    1/pi integral dd(z, 2) ketbra(z) & = sum_(n=0)^(oo) sum_(m=0)^(oo) ketbra(n, m) integral_0^oo r dd(r) integral_0^(2 pi) dd(theta) e^(- r^2) (r^(n+m) e^(i(n- m) theta))/sqrt(n! m!) \
+    & = 1/pi 2 pi sum_(n=0)^(oo) ketbra(n) integral_0^oo r dd(r) e^(- r^2) (r^(2 n))/n! \
+    & = sum_(n=0)^(oo) ketbra(n)integral_0^oo dd(r^2) e^(- r^2) (r^(2 n))/(n!) \
+    & = sum_(n=0)^(oo) ketbra(n) = hat(I)
+  $
+]
+因此，所有的相干态构成一个表象，称为相干态表象，任意态都可以用相干态展开
+$
+  ket(psi) & = 1/pi integral dd(z, 2) braket(z, psi) ket(z) \
+           & = 1/pi integral dd(z, 2) psi(z) ket(z)
+$
+可以证明，全体相干态 (无穷多个) 是线性相关的。实际上，可以计算 (对任意正整数$m$)
+$
+  integral dd(z, 2) z^m ket(z) & = integral dd(z, 2) z^m e^(- abs(z)^2/2) sum_(n=0)^(oo) z^n/sqrt(n!) ket(n) \
+  & = sum_(n=0)^(oo) ket(n)/sqrt(n!) integral_0^oo r^(m+n+1) e^(- r^2/2) dd(r) integral_0^(2 pi) e^(i (m - n) theta) dd(theta) \
+  &=0
+$
+与普通正交基矢不同，任意一个相干态都可以用全体相干态展开
+$
+  ket(z') & = 1/pi integral dd(z, 2) braket(z, z') ket(z) \
+          & = 1/pi integral dd(z, 2) e^(- (abs(z)^2 + abs(z')^2)/2 + z^* z') ket(z)
+$
+所以，称全体相干态是*超完备*的。这意味着，全体相干态的一个子集就可能构成一组完备基矢。例如，$z$取实数的那些相干态就构成一组完备基矢。令$z = r e^(i theta)$，模$r$取固定值的那些态也构成一组完备基矢。
+
+相干态表象在理论上有很多用处，例如：量子统计物理的配分函数$Z = Tr e^(-beta hat(H))$，如果$hat(H)$含有产生算符和湮灭算符的线性项，用相干态表象就比较方便。在量子场论中，可以采用相干态将路径积分严格化。
+
+#example(subname: [相干态应用举例：超辐射相变 [Physical Review A 7, 831 (1973)]])[
+  考虑$N$个二能级原子与谐振腔中的单模光场相互作用$(N ≫ 1)$， 在旋转波近似下，系统哈密顿量 (Dicke 模型) 可写为
+  $
+    hat(H) = hbar nu hat(a)^dagger hat(a) + sum_(j=1)^N (1/2 hbar omega sigma_j^z + lambda/(2 sqrt(N)) (sigma_j^+ hat(a) + sigma_j^- hat(a)^dagger))
+  $
+  其中$nu$是光子频率，$hbar omega$是二能级能量差，$sigma_j^(plus.minus) = sigma_j^x ± i sigma_j^y$，$lambda$是耦合常数。要研究系统的热力学性质，需要计算正则配分函数
+  $
+    Z = Tr e^(-beta hat(H)), beta = 1/(k_B T)
+  $
+  要计算算符$e^(- β hat(H))$的迹，需要选择一个表象。
+
+  显然，由于哈密顿量的本征值不易解析求出，能量表象是行不通的。考虑到哈密顿量中具有产生算符和湮灭算符的一次项，可采用相干态表象。另外，每个原子的二能级已经映射到了自旋$1/2$系统，很自然地采用自旋的 Pauli 表象。我们得到
+  $
+    Tr e^(- beta hat(H)) = sum_(s_1 = ±1) ... sum_(s_N = ±1) 1/pi integral dd(z, 2) braket(s_1 s_2 ... s_N, braket(z, e^(-beta hat(H)), z), s_1 s_2 ... s_N)
+  $
+  利用相干态的定义，得到 (自旋部分求和从略)
+  $
+    braket(z, e^(- beta hat(H)), z) = exp(-beta (hbar nu z^* z + sum_(j=1)^N (1/2 hbar omega sigma_j^z + lambda/(2 sqrt(N)) (sigma_j^+ z + sigma_j^- z^*))))
+  $
+]
+
+== 相互作用绘景
+
+除了海森堡绘景，另一个在理论上常用的绘景是相互作用绘景，也称为狄拉克绘景。假设系统的哈密顿量可以写为
+$
+  hat(H) = hat(H)_0 + hat(H)_"int"
+$
+其中$hat(H)_0$不显含时间，而且其本征值$E_n$和本征态$ket(n)$可以严格求解出来，即
+$
+  hat(H)_0 ket(n) = E_n ket(n)
+$
+“相互作用”部分$hat(H)_"int"$可以是含时的，也可以不含时。加上$hat(H)_"int"$后，系统往往很难严格求解。此时，可以采用相互作用绘景，绘景变换算符为$(t_0 = 0)$
+$
+  hat(Q)(t) = e^(i/hbar hat(H)_0 t)
+$
+相互作用绘景中的量子态和力学量定义为
+$
+  ket(psi^"I" (t)) & = e^(i/hbar hat(H)_0 t) ket(psi^"S" (t)) \
+    hat(A)^"I" (t) & = e^(i/hbar hat(H)_0 t) hat(A)^"S" (t) e^(- i/hbar hat(H)_0 t)
+$
+通常用上标$"I"$表示相互作用绘景。显然
+$
+  hat(H)^"I"_0 = hat(H)_0
+$
+下面推导出相互作用绘景中的演化方程。量子态的演化方程为
+$
+  i hbar pdv(, t) ket(psi^Q (t)) & = (hat(H)^Q + i hbar dv(hat(Q), t) hat(Q)^dagger) ket(psi^Q (t)) \
+$
+直接计算得到
+$
+  hat(H)^Q + i hbar dv(hat(Q), t) hat(Q)^dagger & = e^(i/hbar hat(H)_0 t) (hat(H)_0 + hat(H)_"int") e^(- i/hbar hat(H)_0 t) + i hbar (i/hbar hat(H)_0 e^(i/hbar hat(H)_0 t)) e^(- i/hbar hat(H)_0 t) \
+  &= e^(i/hbar hat(H)_0 t) hat(H)_"int" e^(- i/hbar hat(H)_0 t) = hat(H)^"I"_"int"
+$
+#newpara()
+定义相互作用绘景中的时间演化算符$hat(U)^"I"(t,t_0)$，即
+$
+  ket(psi^"I" (t)) = hat(U)^"I"(t, t_0) ket(psi^"I" (t_0))
+$
+则$hat(U)^"I" (t,t_0)$满足演化方程
+$
+  i hbar pdv(, t) hat(U)^"I" (t, t_0) = hat(H)^"I"_"int" (t) hat(U)^"I" (t, t_0)
+$
+初始条件为
+$
+  hat(U)^"I" (t_0, t_0) = 1
+$
+将此方程两边对时间积分，并利用初始条件得到
+$
+  hat(U)^"I" (t, t_0) = 1 - i/hbar integral_(t_0)^(t) dd(t_1) hat(H)^"I"_"int" (t_1) hat(U)^"I" (t_1, t_0)
+$
+这是一个积分方程，与微分方程 + 初始条件等价。将右边的演化算符$hat(U) (t_1, t_0)$ 写为
+$
+  hat(U)^"I" (t_1, t_0) = 1 - i/hbar integral_(t_0)^(t_1) dd(t_2) hat(H)^"I"_"int" (t_2) hat(U)^"I" (t_2, t_0)
+$
+带入得到
+$
+  hat(U)^"I" (t, t_0) = 1 - i/hbar integral_(t_0)^(t) dd(t_1) hat(H)^"I"_"int" (t_1) + (- i/hbar)^2 integral_(t_0)^(t) dd(t_1) integral_(t_0)^(t_1) dd(t_2) hat(H)^"I"_"int" (t_1) hat(H)^"I"_"int" (t_2) hat(U)^"I" (t_2, t_0)
+$
+继续不断地迭代下去，就得到类似的Dyson 级数解
+$
+  hat(U)^"I" (t, t_0) = 1 + sum_(n=1)^(oo) (- i/hbar)^n integral_(t_0)^(t) dd(t_1) integral_(t_0)^(t_1) dd(t_2) ... integral_(t_0)^(t_(n-1)) dd(t_n) \ hat(H)^"I"_"int" (t_1) hat(H)^"I"_"int" (t_2) ... hat(H)^"I"_"int" (t_n)
+$
+式中各个积分中的时间变量满足
+$
+  t>= t_1 >= t_2 >= ... >= t_n >= t_0
+$
+同样，引入时序乘积$"T"$，Dyson 级数解可以写为
+$
+  hat(U)^"I" (t, t_0) = "T" exp(- i/hbar integral_(t_0)^(t) dd(t') hat(H)^"I"_"int" (t'))
+$
+#newpara()
+可以看到，当$hat(H)_"int"$可以看成微扰时，Dyson 级数解自然地提供了时间演化算符的微扰展开。为方便起见，令
+$
+  hat(H)_"int" = hat(V)(t)
+$
+通常研究的一个问题是：如果体系在初始时刻处于$hat(H)_0$的某个本征态$ket(n)$，微扰$hat(V)(t)$将使得体系发生跃迁，体系的状态将变成一系列$hat(H)_0$本征态的叠加态。
