@@ -8,7 +8,7 @@ CHAPS := $(wildcard chap*.typ)
 
 # HW 部分
 HW_SRC := $(wildcard HW/*.typ)
-HW_PDF := $(patsubst HW/%/main.typ,$(BUILD_DIR)/HW/%.pdf,$(HW_SRC))
+HW_PDF := $(patsubst HW/%.typ,$(BUILD_DIR)/HW/%.pdf,$(HW_SRC))
 
 .PHONY: all clean
 
