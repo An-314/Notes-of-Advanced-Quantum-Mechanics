@@ -1,9 +1,9 @@
 #import "@preview/scripst:1.1.1": *
 
 #show: scripst.with(
-  title: [高等量子力学第一周作业],
+  title: [高等量子力学第1次作业],
   author: "AnZrew",
-  time: "2025/9/20",
+  time: "2025年9月",
 )
 
 #exercise(subname: [Steck 1.3])[
