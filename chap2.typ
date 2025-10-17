@@ -894,6 +894,8 @@ $
 
 == 相互作用绘景
 
+=== 相互作用绘景
+
 除了Heisenberg绘景，另一个在理论上常用的绘景是相互作用绘景，也称为Dirac绘景。假设系统的Hamilton量可以写为
 $
   hat(H) = hat(H)_0 + hat(H)_"int"
@@ -1299,3 +1301,223 @@ $
   Im Delta_i = - pi sum_(k!=i) abs(V_"ik")^2 delta(E_i - E_k)
 $
 与直接计算常微扰得到的结果一致：实部对应能量移动，虚部对应能级展宽或者衰变宽度。
+
+=== 线性响应
+
+我们经常研究的一个问题是：给系统施加一个微扰，系统对微扰产生怎样的的响应？如果只考虑到微扰的*最低阶*，就是所谓的*线性响应*。这里研究量子力学系统的线性响应，其思想与量子多体系统中的线性响应完全是一样的。假设系统受到的微扰为
+$
+  hat(V)(t) = hat(A) J(t)
+$
+其中 $hat(A)$ 是厄米算符，通常是系统的某个力学量，$J(t)$是时间的实函数。当$t < t_0$ 时， $J(t) = 0$。考虑力学量 $hat(Omega)$ 的平均值
+$
+  expval(hat(Omega)) (t) = braket(psi(t), hat(Omega), psi(t))
+$
+在$t > t_0$时刻平均值的变化为
+$
+  delta expval(hat(Omega)) (t) = braket(psi(t), hat(Omega), psi(t)) - braket(psi(t_0), hat(Omega), psi(t_0))
+$
+假设微扰很弱，平均值的变化可以按照微扰强度$J(t)$进行展开。在相互作用绘景中计算是很方便的。不失一般性，令$t_0 = 0$。利用绘景变换和时间演化算符得到
+$
+  hat(Q) = e^(i/hbar hat(H)_0 t)
+$
+$
+  braket(psi(t), hat(Omega), psi(t)) & = braket(psi(t), hat(Q)^dagger hat(Q) hat(Omega) hat(Q)^dagger hat(Q), psi(t)) \
+                                     & = braket(psi^"I" (t), hat(Omega)^"I" (t), psi^"I" (t)) \
+                                     & = braket(psi(0), (U^"I" (0, t))^dagger hat(Omega)^"I" (t) U^"I" (t, 0), psi(0))
+$
+所以，在$t > 0$时刻平均值的变化可以写为
+$
+  delta expval(hat(Omega)) (t) = braket(psi(0), delta hat(Omega)^"I" (t), psi(0))
+$
+其中
+$
+  delta hat(Omega)^"I" (t) = (U^"I" (0, t))^dagger hat(Omega)^"I" (t) U^"I" (t, 0) - hat(Omega)
+$
+利用相互作用绘景中时间演化算符的 Dyson 级数展开
+$
+  U^"I" (t, t_0) = 1 - i/hbar integral_(t_0)^t dd(t_1) hat(V)^"I" (t_1) + ...
+$
+带入计算，结果保留到微扰的一阶项
+$
+  (hat(U)^"I" (t, 0))^dagger hat(Omega)^"I" (t) hat(U)^"I" (t, 0) & = (1 + i/hbar integral_0^t dd(t_1) hat(V)^"I" (t_1)) hat(Omega)^"I" (t) (1 - i/hbar integral_0^t dd(t_1) hat(V)^"I" (t_1))\
+  & = hat(Omega)^"I" (t) + i/hbar integral_0^t dd(t_1) [hat(V)^"I" (t_1), hat(Omega)^"I" (t)]
+$
+所以，在一阶近似下，平均值的变化为
+$
+  delta expval(hat(Omega)) (t) = braket(psi(0), hat(Omega)^"I" (t) - hat(Omega), psi(0)) - i/hbar integral_0^t dd(t_1) braket(psi(0), [ hat(Omega)^"I" (t),hat(V)^"I" (t_1)], psi(0))
+$
+这里利用了绘景关系
+$
+  ket(psi^"I" (0)) = ket(psi(0)), hat(Omega)^"I" (0) = hat(Omega)
+$
+假设系统在$t < 0$时处于$hat(H)_0$的本征态(类似多体系统的热平衡态)，则第一行结果为零，我们得到
+$
+  delta expval(hat(Omega)) (t) = - i/hbar integral_0^t dd(t_1) expval([ hat(Omega)^"I" (t),hat(V)^"I" (t_1)])_0 = - i/hbar integral_0^t dd(t_1) expval([ hat(Omega)^"I" (t),hat(A)^"I" (t_1)])_0 J(t_1)
+$
+这里$expval(dot)_0$表示在初始状态下求平均。
+
+定义*推迟关联函数* (推迟Green函数、响应函数)
+$
+  G(t,t') = i/hbar expval([hat(Omega)^"I" (t), hat(A)^"I" (t')])_0 Theta(t - t')
+$
+它只与$hat(H)_0$有关，所以只是$t - t'$的函数，$G(t,t') = G(t-t')$。考虑到$t < 0$时$J(t) = 0$，我们得到
+$
+  delta expval(hat(Omega)) (t) = - integral_(-oo)^oo dd(t') G(t-t') J(t')
+$
+这就是线性响应理论的基本公式，在多体系统中，只需要将$expval(dot)_0$理解为*平衡态下的统计平均值*。它表明，在外扰动的一阶近似下，系统物理量的平均值的变化只取决于初始状态下定义的推迟关联函数 (多体系统则为平衡态下的关联函数)。
+
+上式具有卷积的形式，变换到频率空间形式会更简单。定义Fourier变换
+$
+  chi(omega) = integral_(-oo)^oo dd(t) e^(i omega t) G(t)\
+  Delta(omega) = integral_(-oo)^oo dd(t) e^(i omega t) delta(t) expval(hat(Omega))\
+  J(omega) = integral_(-oo)^oo dd(t) e^(i omega t) J(t)
+$
+带入得到
+$
+  Delta(omega) = - chi(omega) J(omega)
+$
+$χ(ω)$完全刻画了系统对外扰动的线性响应，称为“*推广的磁化率*”或者“*动态磁化率*”。
+
+== 绝热演化
+
+如果系统突然发生改变，即其初始状态来不及改变，但是Hamilton量突然发生变化，系统的演化是平凡的。但是如果Hamilton量是缓慢变化的，该过程就称为绝热过程。
+
+考虑这样的量子系统，其Hamilton量是若干个参数$λ_1; λ_2; ...$的连续函数，即
+$
+  hat(H) = hat(H)(λ_1, λ_2, ...)
+$
+为方便起见，将这组参数简写为$λ$。对于给定的参数$λ$，我们可以求解Hamilton量的本征值和本征态
+$
+  hat(H)(λ) ket(psi_n (λ)) = E_n (λ) ket(psi_n (λ))
+$
+假设系统的能级是分立的。现在，假设这些参数是随时间变化的，$lambda_i = lambda_i (t)$。除此之外，Hamilton量不显含时间。
+
+*量子绝热定理*说：如果这些参数随时间变化*足够缓慢*，且系统在初始时刻处于本征态$ket(psi_n (lambda(0)))$，则系统将演化为相应的本征态$ket(psi_n (lambda(t)))$，即系统不会发生跃迁。
+
+问题是：何谓足够缓慢？演化出的相位因子如何？
+
+考虑最简单的情形，哈密顿量只依赖于一个参数$λ$。我们假设：
+- $0 ≤ λ ≤ 1$， $hat(H)(λ)$ 对 $λ$ 的依赖足够光滑
+- $lambda = lambda(t)$是随着时间单调递增的连续函数，$abs(dv(lambda, t))$有界
+- $0 ≤ t ≤ T$，$λ(t)$满足边界条件$λ(0) = 0$和$λ(T) = 1$
+- 对于任意$λ in [0, 1]$， $hat(H)(λ)$ 的本征值是分立的，且不存在简并
+不失一般性，进一步假设
+$
+  lambda(t) = t/T
+$
+对于更一般的参数化$tilde(lambda)(t)$，哈密顿量总可以写为
+$
+  hat(H)(lambda) = hat(H)'(tilde(lambda)), tilde(lambda)(t) = tilde(lambda)(T lambda(t))
+$
+从而我们可以做上面的假设。
+
+我们想要证明：当$T -> oo$时，$t = 0$时的一个本征态$ket(psi_n (lambda = 0))$将演化为 $t = T$ 时的相应的本征态 $ket(psi_n (lambda = 1))$。
+
+第一种方法是将任意时刻的状态用本征态进行展开$(λ_t ≡ λ(t))$
+$
+  ket(psi(t)) = sum_m c_m (t) ket(psi_m (λ_t))
+$
+带入Schrödinger方程
+$
+  pdv(, t) ket(psi(t)) = - i/hbar hat(H) ket(psi(t))
+$
+得到$pdv(, t) = T^(-1) pdv(, lambda_t)$
+$
+  sum_m (dot(c)_m (t) ket(psi_m (lambda_t)) + (c_m (t))/T pdv(, lambda_t) ket(psi_m (lambda_t)) = - i/hbar sum_m c_m (t) E_m (lambda_t) ket(psi_m (lambda_t))
+$
+两边用左矢$bra(psi_n (lambda_t))$作用，利用本征态的正交归一性
+$
+  dot(c)_n (t) = - 1/T sum_m c_m (t) braket(psi_n (lambda), pdv(, lambda), psi_m (lambda)) - i/hbar c_n (t) E_n (lambda_t)
+$
+如果$λ$不随时间变化，右边第一项消失，第二项则对应动力学相位因子$e^(- i/hbar E_n t)$。为了将动力学相位因子分离出来，定义
+$
+  a_n (t) & = c_n (t) exp(i/hbar integral_0^t dd(t') E_n (lambda_t')) \
+          & = c_n (t) exp(i/hbar integral_0^(lambda_t) dd(t') E_n (lambda)) \
+$
+两边对时间$t$求导得到
+$
+  dot(a)_n (t) = (dot(c)_n (t) + i/hbar E_n (lambda_t) c_n (t)) exp(i/hbar integral_0^t dd(t') E_n (lambda_t'))
+$
+利用$dot(c)_n (t)$的表达式有
+$
+  dot(a)_n (t) = - 1/T sum_m c_m (t) braket(psi_n (lambda_t), pdv(, lambda_t), psi_m (lambda_t)) exp(i/hbar integral_0^t dd(t') E_n (lambda_t'))
+$
+再利用$c_m (t)$和$a_m (t)$的关系得到
+$
+  dot(a)_n (t) = - 1/T sum_m a_m (t) braket(psi_n (lambda), pdv(, lambda), psi_m (lambda)) exp(i/hbar integral_0^t dd(t') E_n (lambda_t'))
+$
+为简化书写，定义
+$
+  E_(m n) (lambda) = E_m (lambda) - E_n (lambda)\
+  Phi_(m n) (lambda_t) = T/hbar integral_0^(lambda_t) dd(lambda) E_(m n) (lambda)
+$
+得
+$
+  dot(a)_n (t) = - 1/T sum_m a_m (t) braket(psi_n (lambda), pdv(, lambda), psi_m (lambda)) e^(- i Phi_(m n) (lambda_t))
+$
+两边对时间积分，得到(积分变量$t -> λ$)
+$
+  a_n (t) = a_n (0) - sum_m integral_0^lambda_t dd(lambda) a_m (lambda T) braket(psi_n (lambda), pdv(, lambda), psi_m (lambda)) e^(- i Phi_(m n) (lambda))
+$
+现在来计算矩阵元$braket(psi_n (lambda), pdv(, lambda), psi_m (lambda))$，利用本征方程
+$
+  hat(H)(lambda) ket(psi_m (lambda)) = E_m (lambda) ket(psi_m (lambda))
+$
+两边对$λ$求导得到
+$
+  pdv(hat(H)(lambda), lambda) ket(psi_m (lambda)) + hat(H)(lambda) ket(psi_m (lambda)) = pdv(E_m (lambda), lambda) ket(psi_m (lambda)) + E_m (lambda) pdv(, lambda)ket(psi_m (lambda))
+$
+两边用左矢$bra(psi_n (lambda))$做内积得到
+$
+  braket(psi_n (lambda), pdv(hat(H)(lambda), lambda), psi_m (lambda)) - pdv(E_m (lambda), lambda) delta_(m n) = (E_m (lambda) - E_n (lambda)) braket(psi_n (lambda), pdv(, lambda), psi_m (lambda))
+$
+当$m != n$时有
+$
+  braket(psi_n (lambda), pdv(, lambda), psi_m (lambda)) = braket(psi_n (lambda), pdv(hat(H)(lambda), lambda), psi_m (lambda))/(E_m (lambda) - E_n (lambda)) := (W_(m n) (lambda))/(E_(m n) (lambda))
+$
+其中采用记号
+$
+  W_(m n) (lambda) = braket(psi_n (lambda), pdv(hat(H)(lambda), lambda), psi_m (lambda))
+$
+最后，我们得到
+$
+  a_n (t) = a_n (0) - integral_0^lambda_t dd(lambda) a_n (lambda T) braket(psi_n (lambda), pdv(, lambda), psi_n (lambda)) - sum_(m!=n) a_m (t) (W_(m n) (lambda))/(E_(m n) (lambda)) e^(- i Phi_(m n) (lambda))
+$
+如果$m != n$的求和项可以忽略，则
+$
+  a_n (t) = a_n (0) - integral_0^lambda_t dd(lambda) a_n (lambda T) braket(psi_n (lambda), pdv(, lambda), psi_n (lambda))
+$
+这是关于$a_n (t)$的积分方程，易求得其解为
+$
+  a_n (t) = a_n (0) exp(- integral_0^lambda_t dd(lambda) braket(psi_n (lambda), pdv(, lambda), psi_n (lambda)))
+$
+对归一化条件
+$
+  braket(psi_n (lambda)) = 1
+$
+求导得到
+$
+  braket(psi_n (lambda), pdv(, lambda) psi_n (lambda)) + braket(pdv(, lambda) psi_n (lambda), psi_n (lambda)) = 0
+$
+因此$braket(psi_n (lambda), pdv(, lambda), psi_n (lambda))$为纯虚数，可令
+$
+  braket(psi_n (lambda), pdv(, lambda), psi_n (lambda)) = i A_n (lambda)
+$
+则可写出
+$
+  a_n (t) = a_n (0) exp(- i integral_0^lambda_t dd(lambda) A_n (lambda))
+$
+注意下标$n$是任意的，则得到展开系数$c_m (t)$的解为
+$
+  c_m (t) = a_m (0) exp(- i/hbar integral_0^t dd(t') E_m (lambda_t')) exp(i/hbar integral_0^lambda_t dd(lambda) A_m (lambda))
+$
+若初始时刻系统处于本征态$ket(psi_n (lambda = 0))$，初始条件为$c_m (0) = δ_(m n)$，则在时间演化中，除了仍然保持 $c_m (t) prop δ_(m n)$ (*不发生跃迁*)，还会演化出两个相位因子，一个是*动力学相位*，另一个就是著名的*Berry 相位*。
+
+最后还需要解决的问题是：$m != n$的项
+$
+  sum_(m!=n) integral_0^lambda_t dd(lambda) a_m (lambda T) (W_(m n) (lambda))/(E_(m n) (lambda)) e^(- i Phi_(m n) (lambda))
+$
+在什么条件下可以忽略？这其实是一个极为复杂的问题。简单地说，对于一个时间积分，
+$
+  I = integral_(t_1)^(t_2) dd(t) f(t) e^(- i omega t)
+$
