@@ -1396,128 +1396,309 @@ $
 
 问题是：何谓足够缓慢？演化出的相位因子如何？
 
-考虑最简单的情形，哈密顿量只依赖于一个参数$λ$。我们假设：
-- $0 ≤ λ ≤ 1$， $hat(H)(λ)$ 对 $λ$ 的依赖足够光滑
-- $lambda = lambda(t)$是随着时间单调递增的连续函数，$abs(dv(lambda, t))$有界
-- $0 ≤ t ≤ T$，$λ(t)$满足边界条件$λ(0) = 0$和$λ(T) = 1$
-- 对于任意$λ in [0, 1]$， $hat(H)(λ)$ 的本征值是分立的，且不存在简并
-不失一般性，进一步假设
+将任意时刻的状态用本征态进行展开$(vb(λ)_t ≡ vb(λ)(t))$
 $
-  lambda(t) = t/T
-$
-对于更一般的参数化$tilde(lambda)(t)$，哈密顿量总可以写为
-$
-  hat(H)(lambda) = hat(H)'(tilde(lambda)), tilde(lambda)(t) = tilde(lambda)(T lambda(t))
-$
-从而我们可以做上面的假设。
-
-我们想要证明：当$T -> oo$时，$t = 0$时的一个本征态$ket(psi_n (lambda = 0))$将演化为 $t = T$ 时的相应的本征态 $ket(psi_n (lambda = 1))$。
-
-第一种方法是将任意时刻的状态用本征态进行展开$(λ_t ≡ λ(t))$
-$
-  ket(psi(t)) = sum_m c_m (t) ket(psi_m (λ_t))
+  ket(psi(t)) = sum_m c_m (t) ket(psi_m (vb(λ)_t))
 $
 带入Schrödinger方程
 $
   pdv(, t) ket(psi(t)) = - i/hbar hat(H) ket(psi(t))
 $
-得到$pdv(, t) = T^(-1) pdv(, lambda_t)$
+得到
 $
-  sum_m (dot(c)_m (t) ket(psi_m (lambda_t)) + (c_m (t))/T pdv(, lambda_t) ket(psi_m (lambda_t)) = - i/hbar sum_m c_m (t) E_m (lambda_t) ket(psi_m (lambda_t))
+  sum_m (dot(c)_m (t) ket(psi_m (vb(lambda)_t)) + c_m (t) pdv(, t) ket(psi_m (vb(lambda)_t))) = - i/hbar sum_m c_m (t) E_m (vb(lambda)_t) ket(psi_m (vb(lambda)_t))
 $
-两边用左矢$bra(psi_n (lambda_t))$作用，利用本征态的正交归一性
+两边用左矢$bra(psi_n (vb(lambda)_t))$作用，利用本征态的正交归一性
 $
-  dot(c)_n (t) = - 1/T sum_m c_m (t) braket(psi_n (lambda), pdv(, lambda), psi_m (lambda)) - i/hbar c_n (t) E_n (lambda_t)
+  dot(c)_n (t) = - sum_m c_m (t) braket(psi_n (vb(lambda)_t), pdv(, t), psi_m (vb(lambda)_t)) - i/hbar c_n (t) E_n (vb(lambda)_t)
 $
-如果$λ$不随时间变化，右边第一项消失，第二项则对应动力学相位因子$e^(- i/hbar E_n t)$。为了将动力学相位因子分离出来，定义
+如果$vb(λ)$不随时间变化，右边第一项消失，第二项则对应动力学相位因子$e^(- i/hbar E_n t)$。为了将动力学相位因子分离出来，定义
 $
-  a_n (t) & = c_n (t) exp(i/hbar integral_0^t dd(t') E_n (lambda_t')) \
-          & = c_n (t) exp(i/hbar integral_0^(lambda_t) dd(t') E_n (lambda)) \
+  a_n (t) & = c_n (t) exp(i/hbar integral_0^t dd(t') E_n (vb(lambda)_t')) \
 $
 两边对时间$t$求导得到
 $
-  dot(a)_n (t) = (dot(c)_n (t) + i/hbar E_n (lambda_t) c_n (t)) exp(i/hbar integral_0^t dd(t') E_n (lambda_t'))
+  dot(a)_n (t) = (dot(c)_n (t) + i/hbar E_n (vb(lambda)_t) c_n (t)) exp(i/hbar integral_0^t dd(t') E_n (vb(lambda)_t'))
 $
 利用$dot(c)_n (t)$的表达式有
 $
-  dot(a)_n (t) = - 1/T sum_m c_m (t) braket(psi_n (lambda_t), pdv(, lambda_t), psi_m (lambda_t)) exp(i/hbar integral_0^t dd(t') E_n (lambda_t'))
+  dot(a)_n (t) = - sum_m c_m (t) braket(psi_n (vb(lambda)_t), pdv(, t), psi_m (vb(lambda)_t)) exp(i/hbar integral_0^t dd(t') E_n (vb(lambda)_t'))
 $
 再利用$c_m (t)$和$a_m (t)$的关系得到
 $
-  dot(a)_n (t) = - 1/T sum_m a_m (t) braket(psi_n (lambda), pdv(, lambda), psi_m (lambda)) exp(i/hbar integral_0^t dd(t') E_n (lambda_t'))
+  dot(a)_n (t) = - sum_m a_m (t) braket(psi_n (vb(lambda)_t), pdv(, t), psi_m (vb(lambda)_t)) e^(i Phi_(n m)(t))
 $
 为简化书写，定义
 $
-  E_(m n) (lambda) = E_m (lambda) - E_n (lambda)\
-  Phi_(m n) (lambda_t) = T/hbar integral_0^(lambda_t) dd(lambda) E_(m n) (lambda)
+  E_(m n) (vb(lambda)) = E_m (vb(lambda)) - E_n (vb(lambda))
+  Phi_(m n) (vb(lambda)_t) = 1/hbar integral_0^(t) dd(t') E_(m n) (vb(lambda)_t')
 $
-得
+由于$Phi_(n n) = 0$，可以将$m!=n$和$m=n$的情况分开讨论
 $
-  dot(a)_n (t) = - 1/T sum_m a_m (t) braket(psi_n (lambda), pdv(, lambda), psi_m (lambda)) e^(- i Phi_(m n) (lambda_t))
+  dot(a)_n (t) + a_n (t) braket(psi_n (vb(lambda)_t), pdv(, t), psi_n (vb(lambda)_t)) = - sum_(m!=n) a_m (t) braket(psi_n (vb(lambda)_t), pdv(, t), psi_m (vb(lambda)_t)) e^(i Phi_(n m)(t))
 $
-两边对时间积分，得到(积分变量$t -> λ$)
+如果$m != n$的项可以忽略 (*绝热近似*)，我们得到
 $
-  a_n (t) = a_n (0) - sum_m integral_0^lambda_t dd(lambda) a_m (lambda T) braket(psi_n (lambda), pdv(, lambda), psi_m (lambda)) e^(- i Phi_(m n) (lambda))
+  dot(a)_n (t) + a_n (t) braket(psi_n (vb(lambda)_t), pdv(, t), psi_n (vb(lambda)_t)) = 0
 $
-现在来计算矩阵元$braket(psi_n (lambda), pdv(, lambda), psi_m (lambda))$，利用本征方程
+忽略$m != n$的求和项则
 $
-  hat(H)(lambda) ket(psi_m (lambda)) = E_m (lambda) ket(psi_m (lambda))
-$
-两边对$λ$求导得到
-$
-  pdv(hat(H)(lambda), lambda) ket(psi_m (lambda)) + hat(H)(lambda) ket(psi_m (lambda)) = pdv(E_m (lambda), lambda) ket(psi_m (lambda)) + E_m (lambda) pdv(, lambda)ket(psi_m (lambda))
-$
-两边用左矢$bra(psi_n (lambda))$做内积得到
-$
-  braket(psi_n (lambda), pdv(hat(H)(lambda), lambda), psi_m (lambda)) - pdv(E_m (lambda), lambda) delta_(m n) = (E_m (lambda) - E_n (lambda)) braket(psi_n (lambda), pdv(, lambda), psi_m (lambda))
-$
-当$m != n$时有
-$
-  braket(psi_n (lambda), pdv(, lambda), psi_m (lambda)) = braket(psi_n (lambda), pdv(hat(H)(lambda), lambda), psi_m (lambda))/(E_m (lambda) - E_n (lambda)) := (W_(m n) (lambda))/(E_(m n) (lambda))
-$
-其中采用记号
-$
-  W_(m n) (lambda) = braket(psi_n (lambda), pdv(hat(H)(lambda), lambda), psi_m (lambda))
-$
-最后，我们得到
-$
-  a_n (t) = a_n (0) - integral_0^lambda_t dd(lambda) a_n (lambda T) braket(psi_n (lambda), pdv(, lambda), psi_n (lambda)) - sum_(m!=n) a_m (t) (W_(m n) (lambda))/(E_(m n) (lambda)) e^(- i Phi_(m n) (lambda))
-$
-如果$m != n$的求和项可以忽略，则
-$
-  a_n (t) = a_n (0) - integral_0^lambda_t dd(lambda) a_n (lambda T) braket(psi_n (lambda), pdv(, lambda), psi_n (lambda))
+  a_n (t) = a_n (0) - integral_0^t dd(t') a_n (t') braket(psi_n (vb(lambda)_t'), pdv(, t'), psi_n (vb(lambda)_t'))
 $
 这是关于$a_n (t)$的积分方程，易求得其解为
 $
-  a_n (t) = a_n (0) exp(- integral_0^lambda_t dd(lambda) braket(psi_n (lambda), pdv(, lambda), psi_n (lambda)))
+  a_n (t) = a_n (0) exp(- integral_0^t dd(t') braket(psi_n (t'), pdv(, t'), psi_n (t')))
 $
+两边对时间积分，得到
+$
+  a_n (t) &= a_n (0) exp(- integral_0^t dd(t') braket(psi_n (vb(lambda)_t'), pdv(, t'), psi_n (vb(lambda)_t')))\
+  &= a_n (0) exp(-sum_(k=1)^s integral_(lambda_k (0))^(lambda_k (t)) dd(lambda_k) braket(psi_n (vb(lambda)), pdv(, lambda_k), psi_n (vb(lambda))))
+$
+#newpara()
+
+现在的问题是：$m != n$的项在什么条件下可以忽略？为此，我们两边对时间积分，转化为积分方程
+$
+  a_n (t) - a_n (0) + integral_0^t dd(t') a_n (t') braket(psi_n (vb(lambda)_t'), pdv(, t'), psi_n (vb(lambda)_t')) \ = - sum_(m!=n) integral_0^t dd(t') a_m (t') braket(psi_n (vb(lambda)_t'), pdv(, t'), psi_m (vb(lambda)_t')) e^(i Phi_(n m)(t'))
+$
+对于时间积分
+$
+  integral_(t_1)^(t_2) dd(t) f(t) e^(i omega t) = integral_(t_1)^(t_2) dd(t) f(t) cos(omega t) + i integral_(t_1)^(t_2) dd(t) f(t) sin(omega t)
+$
+若$f(t)$在$[t_1, t_2]$上连续有界，则由于相位因子$e^(i omega t)$的振荡作用，当频率$omega -> oo$时，积分趋于零。同理，当相位因子$e^(i Omega_(n m) (t))$是一个快速
+振荡的函数时，积分将趋于零。
+
+定义
+$
+  W_(m n) (lambda) = braket(psi_n (lambda), pdv(hat(H)(lambda), lambda), psi_m (lambda))
+$
+利用分部积分，得到
+$
+  integral_0^t dd(t') e^(i Phi_(n m) (t')) W_(n m) (t') a_m (t') &= integral_0^t dd(t') (dv(, t') e^(i Phi_(n m) (t'))) (i dv(Phi_(n m) (t'), t'))^(-1) W_(n m) (t') a_m (t')\
+  &= eval((- i hbar W_(n m) (t'))/(E_n (vb(lambda)_t) - E_m (vb(lambda)_t)) e^(i Phi_(n m) (t')) a_m (t'))_0^t - integral_0^t dd(t') e^(i Phi_(n m) (t')) dv(, t') ((- i hbar W_(n m) (t'))/(E_n (vb(lambda)_t) - E_m (vb(lambda)_t)) a_m (t'))
+$
+当如下条件 (*绝热近似条件*)
+$
+  abs((hbar W_(n m) (t'))/(E_n (vb(lambda)_t) - E_m (vb(lambda)_t))) << 1
+$
+满足时，最后一行之第一项可忽略，第二项则是更高阶的项。这与相位因子$e^(i Phi_(n m) (t'))$快速振荡的预期一致。这要求瞬时频率
+$
+  dv(Phi_(n m) (t'), t') = (E_n (vb(lambda_t')) - E_m (vb(lambda_t')))/hbar
+$
+远远大于系统的“特征频率”。根据分部积分的计算，这实际上是
+$
+  abs(dv(Phi_(n m) (t'), t')) >> abs(W_(n m) (t'))
+$
+需要注意的是，绝热近似条件需在时间演化的任意时刻都成立。
+
+$W_(n m) (t)$可以写成
+$
+  W_(n m) (t) = sum_(k=1)^s dot(lambda)_k braket(psi_n (vb(lambda)_t), pdv(hat(H)(vb(lambda)_t), lambda_k), psi_m (vb(lambda)_t))
+$
+现在来计算矩阵元$braket(psi_n (vb(lambda)_t), pdv(hat(H)(vb(lambda)_t), lambda_k), psi_m (vb(lambda)_t))$，利用本征方程
+$
+  hat(H)(vb(lambda)) ket(psi_m (vb(lambda))) = E_m (vb(lambda)) ket(psi_m (vb(lambda)))
+$
+两边对$λ_k$求导得到
+$
+  pdv(hat(H)(vb(lambda)), lambda_k) ket(psi_m (vb(lambda))) + hat(H)(vb(lambda)) ket(psi_m (vb(lambda))) = pdv(E_m (vb(lambda)), lambda_k) ket(psi_m (vb(lambda))) + E_m (vb(lambda)) pdv(, lambda_k)ket(psi_m (vb(lambda)))
+$
+两边用左矢$bra(psi_n (vb(lambda)))$做内积得
+$
+  braket(psi_n (vb(lambda)), pdv(hat(H)(vb(lambda)), lambda_k), psi_m (vb(lambda))) - pdv(E_m (vb(lambda)), lambda_k) delta_(m n) = (E_m (vb(lambda)) - E_n (vb(lambda))) braket(psi_n (vb(lambda)), pdv(, lambda_k), psi_m (vb(lambda)))
+$
+当$m != n$时有
+$
+  braket(psi_n (vb(lambda)), pdv(, lambda_k), psi_m (vb(lambda))) = braket(psi_n (vb(lambda)), pdv(hat(H)(vb(lambda)), lambda_k), psi_m (vb(lambda)))/(E_m (vb(lambda)) - E_n (vb(lambda)))
+$
+绝热近似条件可以进一步写为
+$
+  (hbar abs(sum_(k=1)^s dot(lambda)_k dot(lambda)_k braket(psi_n (vb(lambda)), pdv(hat(H)(vb(lambda)), lambda_k), psi_m (vb(lambda)))))/(E_m (vb(lambda)) - E_n (vb(lambda)))^2 << 1
+$
+
+最后，绝热近似条件成立时，我们得到
+$
+  a_n (t) = a_n (0) exp(- sum_(k=1)^s integral_0^vb(lambda)_t dd(lambda) braket(psi_n (vb(lambda)), pdv(, lambda_k), psi_n (vb(lambda))))
+$
+
 对归一化条件
 $
-  braket(psi_n (lambda)) = 1
+  braket(psi_n (vb(lambda))) = 1
 $
 求导得到
 $
-  braket(psi_n (lambda), pdv(, lambda) psi_n (lambda)) + braket(pdv(, lambda) psi_n (lambda), psi_n (lambda)) = 0
+  braket(psi_n (vb(lambda)), pdv(, lambda_k), psi_n (vb(lambda))) + braket(pdv(, lambda_k) psi_n (vb(lambda)), psi_n (vb(lambda))) = 0
 $
-因此$braket(psi_n (lambda), pdv(, lambda), psi_n (lambda))$为纯虚数，可令
+因此$braket(psi_n (vb(lambda)), pdv(, lambda_k), psi_n (vb(lambda)))$为纯虚数，可令
 $
-  braket(psi_n (lambda), pdv(, lambda), psi_n (lambda)) = i A_n (lambda)
+  braket(psi_n (vb(lambda)), pdv(, lambda_k), psi_n (vb(lambda))) = i A^k_n (vb(lambda))
 $
 则可写出
 $
-  a_n (t) = a_n (0) exp(- i integral_0^lambda_t dd(lambda) A_n (lambda))
+  a_n (t) = a_n (0) exp(- i sum_(k=1)^s integral_(lambda_k (0))^(lambda_k (t)) dd(lambda_k) A^k_n (vb(lambda)))
+$
+一开始我们将任意时刻的状态展开为
+$
+  ket(psi(t)) = sum_m c_m (t) ket(psi_m (vb(lambda)_t))
 $
 注意下标$n$是任意的，则得到展开系数$c_m (t)$的解为
 $
-  c_m (t) = a_m (0) exp(- i/hbar integral_0^t dd(t') E_m (lambda_t')) exp(i/hbar integral_0^lambda_t dd(lambda) A_m (lambda))
+  c_m (t) = a_m (0) exp(- i/hbar integral_0^t dd(t') E_m (vb(lambda)_t')) exp(- i sum_(k=1)^s integral_(lambda_k (0))^(lambda_k (t)) dd(lambda_k) A^k_m (vb(lambda)))
 $
-若初始时刻系统处于本征态$ket(psi_n (lambda = 0))$，初始条件为$c_m (0) = δ_(m n)$，则在时间演化中，除了仍然保持 $c_m (t) prop δ_(m n)$ (*不发生跃迁*)，还会演化出两个相位因子，一个是*动力学相位*，另一个就是著名的*Berry 相位*。
+这个结果表明：若初始时刻系统处于本征态$ket(psi_n (vb(lambda)_0))$，初始条件为$c_m (0) = δ_(m n)$，则在时间演化中，除了仍然保持 $c_m (t) prop δ_(m n)$ (*不发生跃迁*)，还会演化出两个相位因子，一个是*动力学相位*，另一个就是著名的*Berry 相位*。
 
-最后还需要解决的问题是：$m != n$的项
+进一步的问题是：能否将这些相位因子吸收到能量本征态中从而加以消除？实际上这是做不到的。 Berry 相位可以写为
 $
-  sum_(m!=n) integral_0^lambda_t dd(lambda) a_m (lambda T) (W_(m n) (lambda))/(E_(m n) (lambda)) e^(- i Phi_(m n) (lambda))
+  gamma_n = integral_"P" vb(A)_n (vb(lambda)) dot dd(vb(lambda))
 $
-在什么条件下可以忽略？这其实是一个极为复杂的问题。简单地说，对于一个时间积分，
+其中$vb(A)_n = - i braket(psi_n (vb(lambda)), grad_λ, psi_n (vb(lambda)))$可以看成是定义在参数空间上的$"U"(1)$矢量势。上述形式表明，*Berry 相位依赖于参数空间的积分路径 P*。假设绝热演化$(0 ≤ t ≤ T)$经历参数空间中的闭合回路C，$vb(λ)(0) = vb(λ)(T)$，则 Berry 相位为
 $
-  I = integral_(t_1)^(t_2) dd(t) f(t) e^(- i omega t)
+  gamma_n = integral.cont_"C" vb(A)_n (vb(lambda)) dot dd(vb(lambda)) = integral_"S" dd(vb(S)) dot (curl vb(A)_n)
 $
+这个结果与 Aharonov–Bohm 相位相似，是一种*几何相位*，或者说*不可积相因子*。
+
+== 混合态和密度矩阵
+
+到目前为止，我们所讨论的量子系统的状态，都可以用Hilbert空间的一个态矢来描写，这种状态称为*纯态* (pure state)。
+
+例如一个自旋 1/2 系统，$ket(arrow.t)$ 和$ket(arrow.b)$都是纯态，任意自旋量子态是它们的*相干叠加*
+$
+  ket(alpha) = c_(arrow.t) ket(arrow.t) + c_(arrow.b) ket(arrow.b)
+$
+也是纯态。在$ket(alpha)$态下测量自旋$hat(S)_z$，量子力学只给出了统计性的预言：得到结果$hbar/2$和$-hbar/2$的概率分别是
+$
+  abs(c_(arrow.t))^2, abs(c_(arrow.b))^2
+$
+但是，如果只有一个这样的系统，那么测量以后体系就随机塌缩到了$ket(arrow.t)$或者 $ket(arrow.b)$，*无法通过测量获知概率分布*。
+
+所以，需要引入*统计系综*(ensemble)：考虑大量的量子系统的集合(例如大量的电子、原子等)，集合中所有的系统都处于同一个量子态$ket(alpha)$。这样的系综称为*纯系综*(pure ensemble)。如果对所有系统都进行测量，虽然每个系统塌缩到$ket(arrow.t)$还是$ket(arrow.b)$是随机的，但是整个系综就呈现出概率分布：
+
+*测量得到$hbar/2$和$- hbar/2$的比例分别是$P_(arrow.t)$ 和 $P_(arrow.b)$。测量结束后，系综里的系统将有 $P_(arrow.t)$ 的比例处于 $ket(arrow.t)$ 态，$P_(arrow.b)$的比例处于$ket(arrow.b)$态。*
+
+测量结束以后，系综将不能用Hilbert空间的一个态矢来描写，而只能给出*经典的概率描述*：*系统处于$ket(arrow.t)$的概率是$P_(arrow.t)$，处于$ket(arrow.b)$的概率是$P_(arrow.b)$。*
+
+这样的状态不能用Hilbert空间的一个态矢来描写，是不同纯态的*非相干混合 (incoherent mixture)*，称为*混合态 (mixed state)*。由混合态描写的系综称为*混合系综 (mixed ensemble)*。
+
+上述例子只是为了引入混合态的概念，并不是产生混合态的唯一方式。混合态可以在*多粒子系统和统计物理系统*等体系中存在。
+
+例如： Stern-Gerlach 实验中，从高温炉子中制备出来的银原子，其自旋取向是完全随机的，即银原子处于$ket(arrow.t)$态的概率为 50%，处于$ket(arrow.b)$态的概率为 50%。
+
+描述混合态，可以引入*密度算符和密度矩阵*。
+
+=== 纯态的密度算符
+
+首先以*纯态*为例，假设体系处于量子态$ket(psi)$（注意：已归一化），力学量$hat(A)$的平均值为
+$
+  expval(hat(A)) = braket(psi, hat(A), psi)
+$
+采用任意一组正交完备基矢${ket(n)}$，利用完备性关系得到
+$
+  expval(hat(A)) = sum_n braket(psi, hat(A), n) braket(n, psi) = sum_n braket(n, psi) braket(n, hat(A), psi)
+$
+定义*密度算符*
+$
+  hat(rho) = ketbra(psi)
+$
+则平均值可以表示为
+$
+  expval(hat(A)) = sum_n braket(n, hat(rho) hat(A), n) = Tr(hat(rho) hat(A)) = Tr(hat(A) hat(rho))
+$
+其中$Tr$代表求迹，与具体的表象无关。对力学量$hat(A)$进行测量，得到本征值$a_k$的概率为
+$
+  P_k = abs(braket(a_k, psi))^2 = braket(a_k, psi) braket(psi, a_k) = braket(a_k, hat(rho), a_k)
+$
+下面将看到，以上得到的形式对于混合态也成立，只是密度算符要改为混合态的密度算符。
+
+=== 混合态的密度算符
+
+考虑最一般的混合态：系综中的系统处于一系列纯态$ket(psi_i)$的概率为 $w_i$，满足$sum_i w_i = 1$。在混合态中，力学量$hat(A)$的*系综平均值*为
+$
+  expval(expval(hat(A))) = sum_i w_i braket(psi_i, hat(A), psi_i) = sum_i w_i expval(hat(A))_i
+$
+假设力学量$hat(A)$的一系列本征值为$a_k$，则上式可写为
+$
+  expval(expval(hat(A))) = sum_i sum_k w_i abs(braket(a_k, psi_i))^2 a_k
+$
+以上系综平均的含义是：*在混合态中求平均值，经过两次求平均操作，第一次是量子力学平均，第二次是普通的统计平均*。
+
+同样，采用任意一组正交完备基矢${ket(n)}$，利用完备性关系得到
+$
+  expval(expval(hat(A))) & = sum_n sum_i w_i braket(psi_i, hat(A), n) braket(n, psi_i) \
+                         & = sum_n sum_i braket(n, psi_i) w_i braket(psi_i, hat(A), n)
+$
+因此，将*混合态的密度算符*定义为
+$
+  hat(rho) = sum_i w_i ketbra(psi_i)
+$
+则系综平均可以写为
+$
+  expval(expval(hat(A))) = sum_n braket(n, hat(rho) hat(A), n) = Tr(hat(rho) hat(A)) = Tr(hat(A) hat(rho))
+$
+
+在混合态中，对力学量$hat(A)$进行测量，得到本征值$a_k$的概率为
+$
+  P_k = sum_i w_i abs(braket(a_k, psi_i))^2 = sum_i w_i braket(a_k, psi_i) braket(psi_i, a_k) = braket(a_k, hat(rho), a_k)
+$
+如果混合态中的各参与态$ket(psi_i)$两两正交，那么可以计算
+$
+  hat(rho) ket(psi_i) = sum_j w_j ket(psi_j) braket(psi_j, psi_i) = w_i ket(psi_i)
+$
+即：这些参与态正好是密度算符的本征态，本征值为就是概率$w_i$。
+
+=== 密度算符的性质
+
+#proposition(subname: [密度算符的性质])[
+  $
+    Tr(hat(rho)) = 1
+  $
+]
+#proof[
+  采用任意一组正交完备基矢${ket(n)}$，利用完备性关系得到
+  $
+    Tr(hat(rho)) & = sum_n braket(n, hat(rho), n) = sum_n sum_i w_i braket(n, psi_i) braket(psi_i, n) \
+                 & = sum_i w_i sum_n braket(psi_i, n) braket(n, psi_i) = sum_i w_i = 1
+  $
+]
+
+#proposition(subname: [密度算符的性质])[
+  $
+    Tr(hat(rho)^2) <= 1
+  $
+]
+
+#proof[
+  采用任意一组正交完备基矢${ket(n)}$，利用完备性关系得到
+  $
+    Tr(hat(rho)^2) & = sum_(i j) sum_n braket(n, psi_i) w_i braket(psi_i, psi_j) w_j braket(psi_j, n) \
+                   & = sum_(i j) w_i w_j braket(psi_i, psi_j) sum_n braket(psi_j, n) braket(n, psi_i) \
+                   & = sum_(i j) w_i w_j abs(braket(psi_i, psi_j))^2 \
+                   & <= sum_i w_i = 1
+  $
+  等号只有在*纯态*时成立。
+]
+
+=== 密度算符的演化方程
+
+由于密度算符由各个参与态构造，因此它是一个含时算符
+$
+  hat(rho) (t) = sum_i w_i ketbra(psi_i(t))
+$
+其中概率$w_i$不随时间变化。下面在薛定谔绘景中推导出密度算符的时间演化方程。将密度算符对时间求导得到
+$
+  i hbar pdv(, t) hat(rho)(t) &= sum_i w_i (i hbar pdv(, t) ket(psi_i (t)) bra(psi_i (t)) + ket(psi_i (t)) i hbar pdv(, t)bra(psi_i (t)) )\
+  &= sum_i w_i (hat(H) ket(psi_i (t)) bra(psi_i (t)) - ket(psi_i (t)) bra(psi_i (t)) hat(H)) \
+$
+最终得到运动方程
+#theorem(subname: [von Neumann方程，量子Liouville方程])[
+  $
+    i hbar pdv(, t) hat(rho)(t) = [hat(H), hat(rho)(t)]
+  $
+]
+它与经典统计力学中的Liouville方程
+$
+  pdv(, t) rho(p, q, t) = {H, rho}
+$
+对应，其中$rho(p, q, t)$代表相空间中的概率密度。假设哈密顿量$hat(H)$对应的时间演化算符为$hat(U)(t, t_0)$，则有
+$
+  hat(rho)(t) = hat(U)(t, t_0) hat(rho)(t_0) hat(U)^dagger (t, t_0)
+$
+如果哈密顿量可以写为$hat(H) = hat(H)^0 + hat(V)(t)$，则通常采用相互作用绘景更为方便。此时式中的哈密顿量$hat(H)$替换为$hat(V)(t)$，可进一步进行微扰展开。
