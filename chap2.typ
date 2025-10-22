@@ -14,6 +14,8 @@
 
 == 时间演化算符
 
+=== 时间演化算符的定义与性质
+
 量子系统的状态$ket(ψ(t))$的动力学演化满足Schrödinger方程
 $
   i hbar pdv(, t) ket(psi(t)) = hat(H) ket(psi(t))
@@ -86,8 +88,7 @@ $
 $
   hat(U)(t + dd(t), t) = hat(I) - (i hat(H) dd(t))/(hbar)
 $
-其中$hbar$实际上就是约化Planck常数，这保证最终得到的时间演化
-方程就是Schrödinger方程。
+其中$hbar$实际上就是约化Planck常数，这保证最终得到的时间演化方程就是Schrödinger方程。
 
 根据时间演化算符的合成性质
 $
@@ -114,11 +115,15 @@ $
 1. 时间演化算符是幺正算符；
 2. 时间演化算符的生成元就是系统的Hamilton量。
 
+=== 时间演化方程的解
+
 只要求出了时间演化算符，就在形式上求出了量子态的时间演化。下面讨论演化方程
 $
   i hbar pdv(, t) hat(U)(t, t_0) = hat(H) hat(U)(t, t_0)
 $
 的解。这是关于时间的*一阶微分方程*，初始条件为$hat(U)(t_0, t_0) = hat(I)$。如果Hamilton量$hat(H)(t)$已知，则可求解出时间演化算符$hat(U)(t, t_0)$。
+
+==== Hamilton量不显含时间
 
 最简单的情形，*Hamilton量不显含时间*，易证
 $
@@ -138,7 +143,7 @@ $
 $
   e^(- (i hat(H) (t - t_0))/hbar) = sum_n sum_n' ket(n) braket(n, e^(- (i hat(H) (t - t_0))/hbar), n') bra(n') = sum_n e^(- (i E_n (t - t_0))/hbar) ketbra(n)
 $
-将初态用这组完备本征态${ket(n)}$展开，$ket(ψ(t_0))) = sum_n c_n ket(n)$，得到
+将初态用这组完备本征态${ket(n)}$展开，$ket(ψ(t_0)) = sum_n c_n ket(n)$，得到
 $
   ket(psi(t)) & = hat(U)(t, t_0) ket(psi(t_0)) \
               & = sum_n e^(- (i E_n (t - t_0))/hbar) sum_n c_n ket(n) \
@@ -148,6 +153,8 @@ $
 + Hamilton量的本征值和本征态是否存在解析解；
 + 最后的级数求和是否能存在有限结果。
 满足这两个条件的量子系统是很少的（基本都在教科书上）。
+
+==== Hamilton量显含时间，但不同时刻的Hamilton量对易
 
 如果*Hamilton量显含时间，但不同时刻的Hamilton量对易*，即
 $
@@ -168,6 +175,9 @@ $
   $
 ]
 #newpara()
+
+==== Hamilton量显含时间，且不同时刻的Hamilton量不对易
+
 对于最一般的情形，即*Hamilton量显含时间，且不同时刻的Hamilton量不对易*，此时演化方程的形式解为
 $
   hat(U)(t, t_0) = 1 + sum_(n=1)^(oo) (- i/hbar)^n integral_(t_0)^(t) dd(t_1) integral_(t_0)^(t_1) dd(t_2) ... integral_(t_0)^(t_(n-1)) dd(t_n) hat(H)(t_1) hat(H)(t_2) ... hat(H)(t_n)
@@ -215,37 +225,39 @@ $
 $
 其中要求$t_1 > t_2$。要将积分上限都扩展为$t$，我们需要引入*时序乘积*(又称为*编时乘积*) 的概念。时序乘积$T$使若干个含时算符的乘积从左到右按照时间的大小降序排列。最简单的例子是
 $
-  T[hat(H)(t_1) hat(H)(t_2)] = theta(t_1 - t_2) hat(H)(t_1) hat(H)(t_2) + theta(t_2 - t_1) hat(H)(t_2) hat(H)(t_1)
+  "T"[hat(H)(t_1) hat(H)(t_2)] = theta(t_1 - t_2) hat(H)(t_1) hat(H)(t_2) + theta(t_2 - t_1) hat(H)(t_2) hat(H)(t_1)
 $
 其中，$theta(x)$为*阶越函数*。利用时序乘积的定义，我们可以计算
 $
-  T[integral_(t_0)^t hat(H)(t') dd(t')]^2 &= T integral_(t_0)^(t) dd(t_1) integral_(t_0)^(t) dd(t_2) hat(H)(t_1) hat(H)(t_2) \
-  &= integral_(t_0)^t dd(t_1) integral_(t_0)^(t_1) dd(t_2) T[hat(H)(t_1) hat(H)(t_2)]\
+  "T"[integral_(t_0)^t hat(H)(t') dd(t')]^2 &= "T" integral_(t_0)^(t) dd(t_1) integral_(t_0)^(t) dd(t_2) hat(H)(t_1) hat(H)(t_2) \
+  &= integral_(t_0)^t dd(t_1) integral_(t_0)^(t_1) dd(t_2) "T"[hat(H)(t_1) hat(H)(t_2)]\
   &= integral_(t_0)^t dd(t_1) integral_(t_0)^(t_1) dd(t_2) (theta(t_1 - t_2) hat(H)(t_1) hat(H)(t_2) + theta(t_2 - t_1) hat(H)(t_2) hat(H)(t_1))\
   &= integral_(t_0)^(t) dd(t_1) integral_(t_0)^(t_1) dd(t_2) hat(H)(t_1) hat(H)(t_2) + integral_(t_0)^(t) dd(t_2) integral_(t_0)^(t_2) dd(t_1) hat(H)(t_2) hat(H)(t_1)\
   &= 2 integral_(t_0)^(t) dd(t_1) integral_(t_0)^(t_1) dd(t_2) hat(H)(t_1) hat(H)(t_2)
 $
 对于更一般的情形，时序乘积定义为
 $
-  T[hat(H)(t_1) hat(H)(t_2) ... hat(H)(t_n)] = sum theta(tau_1 - tau_2) theta(tau_2 - tau_3) ... theta(tau_(n-1) - tau_n) hat(H)(tau_1) hat(H)(tau_2) ... hat(H)(tau_n)
+  "T"[hat(H)(t_1) hat(H)(t_2) ... hat(H)(t_n)] = sum theta(tau_1 - tau_2) theta(tau_2 - tau_3) ... theta(tau_(n-1) - tau_n) hat(H)(tau_1) hat(H)(tau_2) ... hat(H)(tau_n)
 $
 其中$τ_1 , τ_2 , ... , τ_n$是$t_1 , t_2 , ... , t_n$的任意排列，上述求和共包含$n!$项。类似地，我们可以计算
 $
-  T [integral_(t_0)^(t) hat(H)(t') dd(t')]^n = n! integral_(t_0)^(t) dd(t_1) integral_(t_0)^(t_1) dd(t_2) ... integral_(t_0)^(t_(n-1)) dd(t_n) hat(H)(t_1) hat(H)(t_2) ... hat(H)(t_n)
+  "T"[integral_(t_0)^(t) hat(H)(t') dd(t')]^n = n! integral_(t_0)^(t) dd(t_1) integral_(t_0)^(t_1) dd(t_2) ... integral_(t_0)^(t_(n-1)) dd(t_n) hat(H)(t_1) hat(H)(t_2) ... hat(H)(t_n)
 $
 所以，Dyson 级数解中的第$n$阶项可以写为
 $
-  (- i/hbar)^n integral_(t_0)^(t) dd(t_1) integral_(t_0)^(t_1) dd(t_2) ... integral_(t_0)^(t_(n-1)) dd(t_n) hat(H)(t_1) hat(H)(t_2) ... hat(H)(t_n) = 1/n! (- i/hbar)^n T [integral_(t_0)^(t) hat(H)(t') dd(t')]^n
+  (- i/hbar)^n integral_(t_0)^(t) dd(t_1) integral_(t_0)^(t_1) dd(t_2) ... integral_(t_0)^(t_(n-1)) dd(t_n) hat(H)(t_1) hat(H)(t_2) ... hat(H)(t_n) = 1/n! (- i/hbar)^n "T" [integral_(t_0)^(t) hat(H)(t') dd(t')]^n
 $
 利用这个结果，我们可以将 Dyson 级数解写成简洁的形式
 $
-  hat(U)(t, t_0) & = T{1 + sum_(n=1)^(oo) 1/n! (- i/hbar)^n [integral_(t_0)^(t) hat(H)(t') dd(t')]^n} \
-                 & =T exp(- i/hbar integral_(t_0)^(t) hat(H)(t') dd(t'))
+  hat(U)(t, t_0) & = "T"(1 + sum_(n=1)^(oo) 1/n! (- i/hbar)^n (integral_(t_0)^(t) hat(H)(t') dd(t'))^n) \
+                 & = "T" exp(- i/hbar integral_(t_0)^(t) hat(H)(t') dd(t'))
 $
 
 == 绘景理论
 
 我们一直都听说，Heisenberg、Born和Jordan在几篇开创性论文中提出了*矩阵力学*。如果认为矩阵力学就是Schrödinger方程在离散表象的具体形式，那么我们去阅读那几篇原始论文，必定会一头雾水。因为*表象*(representation) 只是量子力学的一个方面，它决定了量子态和力学量的具体表现形式。而量子力学还存在另一个重要方面，就是*绘景*(picture)，它决定了运动方程的具体表现形式。
+
+=== Heisenberg方程
 
 假设量子系统的Hamilton量$hat(H)$不显含时间，其本征值和本征态已经求解出来，
 $
@@ -325,6 +337,8 @@ $
   dv(, t) tilde(A) = 1/(i hbar) [tilde(A), hat(H)]
 $
 这就是矩阵力学的基本方程。
+
+=== 绘景变换
 
 仔细考察上面的计算过程，我们不难发现，选取“随动”基矢相当于对量子态和力学量做了如下变换：
 $
@@ -407,7 +421,7 @@ $
 $
   dv(hat(Q), t) hat(Q)^dagger + hat(Q) pdv(hat(Q)^dagger, t) = dv(hat(Q) hat(Q)^dagger, t) = 0
 $
-所以，力学量$hat(A)^Q$满足的演化方程为
+所以，*力学量$hat(A)^Q$满足的演化方程为*
 $
   dv(, t) hat(A)^Q = [dv(hat(Q), t) hat(Q)^dagger, hat(A)^Q] + hat(Q) pdv(hat(A), t) hat(Q)^dagger
 $
@@ -491,7 +505,7 @@ $
 $
 对于$hat(H)^"S" (t)$含时的系统，即使$hat(H)^"H" (t)$很难求出，Heisenberg方程仍然有可能写出并求解。
 
-对于Hamilton量$hat(H)^"S"$不含时的情形，也可以利用Baker-Hausdorff公式
+对于Hamilton量$hat(H)^"S"$不含时的情形，也可以利用*Baker-Hausdorff公式*
 $
   e^(hat(X)) hat(Y) e^(-hat(X)) = hat(Y) + [hat(X), hat(Y)] + 1/2! [hat(X), [hat(X), hat(Y)]] + 1/3! [hat(X), [hat(X), [hat(X), hat(Y)]]] + ...
 $
@@ -523,7 +537,7 @@ $
 
 ==== 谐振子
 
-谐振子是量子理论中非常基本且重要的一个模型。考虑一维谐振子，其Hamilton量为
+谐振子是量子理论中非常基本且重要的一个模型。考虑*一维谐振子*，其Hamilton量为
 $
   hat(H) = hat(p)^2/(2 m) + 1/2 m omega^2 hat(x)^2
 $
@@ -555,6 +569,7 @@ $
 $
   hat(p)^"H" (t) = hat(p) cos(omega t) - m omega hat(q) sin(omega t)
 $
+#newpara()
 另一种方法是利用Heisenberg方程求解。得到
 $
   dv(, t) hat(q)^"H" (t) &= 1/(i hbar) [hat(q)^"H" (t), hat(H)] = i/hbar hat(U)^dagger [hat(q), hat(H)] hat(U) = (hat(p)^"H" (t))/m\
@@ -570,7 +585,7 @@ $
   dv(, t)(hat(q)^"H" (t) + (i hat(p)^"H" (t))/(m omega)) = - i omega (hat(q)^"H" (t) + (i hat(p)^"H" (t))/(m omega))\
   dv(, t)(hat(q)^"H" (t) - (i hat(p)^"H" (t))/(m omega)) = i omega (hat(q)^"H" (t) - (i hat(p)^"H" (t))/(m omega))
 $
-因此，可引入新算符
+因此，可引入*新算符*
 $
   hat(a)_"H" (t) = C (hat(q)^"H" (t) + (i hat(p)^"H" (t))/(m omega))\
   hat(a)^dagger_"H" (t) = C (hat(q)^"H" (t) - (i hat(p)^"H" (t))/(m omega))\
@@ -676,6 +691,8 @@ $
 $
 
 #newpara()
+
+=== 相干态
 
 *相干态*的引出：在前面Heisenberg绘景的计算中，谐振子的坐标和动量算符的解为
 $
