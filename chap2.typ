@@ -176,7 +176,7 @@ $
 ]
 #newpara()
 
-==== Hamilton量显含时间，且不同时刻的Hamilton量不对易
+==== Hamilton量显含时间，且不同时刻的Hamilton量不对易<2.1.2.3>
 
 对于最一般的情形，即*Hamilton量显含时间，且不同时刻的Hamilton量不对易*，此时演化方程的形式解为
 $
@@ -947,7 +947,7 @@ $
 $
   hat(H)_0 ket(n) = E_n ket(n)
 $
-“相互作用”部分$hat(H)_"int"$可以是含时的，也可以不含时。加上$hat(H)_"int"$后，系统往往很难严格求解。此时，可以采用相互作用绘景，绘景变换算符为$(t_0 = 0)$
+“相互作用”部分$hat(H)_"int"$可以是含时的，也可以不含时。加上$hat(H)_"int"$后，系统往往很难严格求解。此时，可以采用相互作用绘景，*绘景变换算符*为$(t_0 = 0)$
 $
   hat(Q)(t) = e^(i/hbar hat(H)_0 t)
 $
@@ -960,7 +960,9 @@ $
 $
   hat(H)^"I"_0 = hat(H)_0
 $
-下面推导出相互作用绘景中的演化方程。量子态的演化方程为
+下面推导出相互作用绘景中的演化方程。
+
+*量子态的演化方程为*
 $
   i hbar pdv(, t) ket(psi^Q (t)) & = (hat(H)^Q + i hbar dv(hat(Q), t) hat(Q)^dagger) ket(psi^Q (t)) \
 $
@@ -969,7 +971,39 @@ $
   hat(H)^Q + i hbar dv(hat(Q), t) hat(Q)^dagger & = e^(i/hbar hat(H)_0 t) (hat(H)_0 + hat(H)_"int") e^(- i/hbar hat(H)_0 t) + i hbar (i/hbar hat(H)_0 e^(i/hbar hat(H)_0 t)) e^(- i/hbar hat(H)_0 t) \
   &= e^(i/hbar hat(H)_0 t) hat(H)_"int" e^(- i/hbar hat(H)_0 t) = hat(H)^"I"_"int"
 $
+最终得到*相互作用绘景中量子态的演化方程*
+$
+  i hbar pdv(, t) ket(psi^"I" (t)) = hat(H)^"I"_"int" (t) ket(psi^"I" (t))
+$
+可以看到，量子态的演化完全由相互作用部分$hat(H)_"int"$ 支配。
+
+*力学量的演化方程为*
+$
+  dv(, t) hat(A)^Q = [dv(hat(Q), t) hat(Q)^dagger, hat(A)^Q] + hat(Q) dv(hat(A)^"S", t) hat(Q)^dagger
+$
+将$hat(Q) = e^(i/hbar hat(H)_0 t)$代入，得到
+$
+  dv(, t) hat(A)^"I" = 1/(i hbar) [hat(A)^"I", hat(H)_0] + e^(i/hbar hat(H)_0 t) dv(hat(A)^"S", t) e^(- i/hbar hat(H)_0 t)
+$
+因此，力学量的演化完全由$hat(H)_0$支配。
+
+#proposition(subname: [相互作用绘景的演化方程])[
+  相互作用绘景中，Hamilton量、量子态和力学量分别为
+  $
+          hat(H)^"I" & = hat(H)_0 + hat(H)^"I"_"int" (t) \
+    ket(psi^"I" (t)) & = e^(i/hbar hat(H)_0 t) ket(psi^"S" (t)) \
+      hat(A)^"I" (t) & = e^(i/hbar hat(H)_0 t) hat(A)^"S" (t) e^(- i/hbar hat(H)_0 t)
+  $
+  相互作用绘景中量子态和力学量的演化方程分别为
+  $
+    i hbar pdv(, t) ket(psi^"I" (t)) = hat(H)^"I"_"int" (t) ket(psi^"I" (t))\
+    dv(, t) hat(A)^"I" (t) = 1/(i hbar) [hat(A)^"I" (t), hat(H)_0] + e^(i/hbar hat(H)_0 t) dv(hat(A)^"S", t) e^(- i/hbar hat(H)_0 t)
+  $
+  量子态演化完全由相互作用部分$hat(H)_"int"$支配，力学量演化完全由$hat(H)_0$支配。
+]
+
 #newpara()
+
 定义*相互作用绘景中的时间演化算符*$hat(U)^"I" (t,t_0)$，即
 $
   ket(psi^"I" (t)) = hat(U)^"I" (t, t_0) ket(psi^"I" (t_0))
@@ -994,7 +1028,7 @@ $
 $
   hat(U)^"I" (t, t_0) = 1 - i/hbar integral_(t_0)^(t) dd(t_1) hat(H)^"I"_"int" (t_1) + (- i/hbar)^2 integral_(t_0)^(t) dd(t_1) integral_(t_0)^(t_1) dd(t_2) hat(H)^"I"_"int" (t_1) hat(H)^"I"_"int" (t_2) hat(U)^"I" (t_2, t_0)
 $
-继续不断地迭代下去，就得到类似的Dyson 级数解
+继续不断地迭代下去，就得到类似的*Dyson级数解*
 $
   hat(U)^"I" (t, t_0) = 1 + sum_(n=1)^(oo) (- i/hbar)^n integral_(t_0)^(t) dd(t_1) integral_(t_0)^(t_1) dd(t_2) ... integral_(t_0)^(t_(n-1)) dd(t_n) \ hat(H)^"I"_"int" (t_1) hat(H)^"I"_"int" (t_2) ... hat(H)^"I"_"int" (t_n)
 $
@@ -1002,10 +1036,29 @@ $
 $
   t>= t_1 >= t_2 >= ... >= t_n >= t_0
 $
-同样，引入时序乘积$"T"$，Dyson 级数解可以写为
+同样，引入*时序乘积*$"T"$，Dyson 级数解可以写为
 $
   hat(U)^"I" (t, t_0) = "T" exp(- i/hbar integral_(t_0)^(t) dd(t') hat(H)^"I"_"int" (t'))
 $
+#proposition(subname: [相互作用绘景的时间演化算符])[
+  相互作用绘景中的时间演化算符$hat(U)^"I" (t, t_0)$满足演化方程
+  $
+    i hbar pdv(, t) hat(U)^"I" (t, t_0) = hat(H)^"I"_"int" (t) hat(U)^"I" (t, t_0)
+  $
+  初始条件为
+  $
+    hat(U)^"I" (t_0, t_0) = 1
+  $
+  Dyson 级数解为
+  $
+    hat(U)^"I" (t, t_0) = 1 + sum_(n=1)^(oo) (- i/hbar)^n integral_(t_0)^(t) dd(t_1) integral_(t_0)^(t_1) dd(t_2) ... integral_(t_0)^(t_(n-1)) dd(t_n) \ hat(H)^"I"_"int" (t_1) hat(H)^"I"_"int" (t_2) ... hat(H)^"I"_"int" (t_n)
+  $
+  或写成时序乘积形式
+  $
+    hat(U)^"I" (t, t_0) = "T" exp(- i/hbar integral_(t_0)^(t) dd(t') hat(H)^"I"_"int" (t'))
+  $
+]
+
 #newpara()
 可以看到，当$hat(H)_"int"$可以看成*微扰*时，Dyson 级数解自然地提供了时间演化算符的*微扰展开*。为方便起见，令
 $
@@ -1042,7 +1095,7 @@ $
   braket(n, hat(V)^"I" (t), m) & = braket(n, e^(i/hbar hat(H)_0 t) hat(V)(t) e^(-i/hbar hat(H)_0 t), m) \
                                & = e^(i/hbar (E_n - E_m) t) braket(n, hat(V)(t), m)
 $
-而$c_n (t) = braket(n, psi^"I" (t))$
+而$c_n (t) = braket(n, psi^"I" (t))$，得到*时间演化方程*
 $
   i hbar dv(, t) c_n (t) = sum_m V_(n m) e^(i omega_(n m) t) c_m (t)\
   omega_(n m) = (E_n - E_m)/hbar = - omega_(m n)
@@ -1051,6 +1104,18 @@ $
 $
   i hbar mat(c_1; c_2; ...) = mat(V_(1 1), V_(1 2) e^(i omega_(1 2) t), ...; V_(2 1) e^(i omega_(2 1) t), V_(2 2), ...; ...) mat(c_1; c_2; ...)
 $
+
+#proposition(subname: [$hat(H)_0$表象中的时间演化方程])[
+  在$hat(H)_0$表象中，时间演化方程为
+  $
+    i hbar dv(, t) c_n (t) = sum_m V_(n m) e^(i omega_(n m) t) c_m (t)
+  $
+  矩阵形式为
+  $
+    i hbar mat(c_1; c_2; ...) = mat(V_(1 1), V_(1 2) e^(i omega_(1 2) t), ...; V_(2 1) e^(i omega_(2 1) t), V_(2 2), ...; ...) mat(c_1; c_2; ...)
+  $
+  其中$V_(n m) = braket(n, hat(V)(t), m)$，$omega_(n m) = (E_n - E_m)/hbar$。
+]
 
 #example(subname: [双态系统中的 Rabi 振荡])[
   考虑双态系统，Hamilton量为
@@ -1088,26 +1153,28 @@ $
 $
   K_"fi" = braket(f, hat(U)(t, 0), i)
 $
-其中$hat(U)(t, t_0)$是2.1中定义的时间演化算符。2.1中给出的Dyson级数解无法进行微扰展开。第一种方法是将$hat(U)(t, t_0)$的运动方程
+其中$hat(U)(t, t_0)$是 @2.1.2.3 中定义的时间演化算符。@2.1.2.3 中给出的Dyson级数解无法进行微扰展开。
+
+第一种方法是将$hat(U)(t, t_0)$的运动方程
 $
   i hbar pdv(, t) hat(U)(t, t_0) = (hat(H)_0 + hat(V)(t)) hat(U)(t, t_0)
 $
 写为另一种积分方程的形式
 $
-  hat(U)(t, t_0) = hat(U)_0 (t, t_0) - (i/hbar) integral_(t_0)^t dd(t_1) hat(U)_0 (t, t_1) hat(V)(t_1) hat(U)(t_1, t_0)
+  hat(U)(t, t_0) = hat(U)_0 (t, t_0) - i/hbar integral_(t_0)^t dd(t_1) hat(U)_0 (t, t_1) hat(V)(t_1) hat(U)(t_1, t_0)
 $
 其中$hat(U)_0 (t, t_0)$是$hat(H)_0$对应的演化算符
 $
   hat(U)_0 (t, t_0) = exp(-i/hbar hat(H)_0 (t-t_0))
 $
-采用迭代的方法，可以求得另一种形式的级数解
+采用迭代的方法，可以求得*另一种形式的级数解*
 $
   hat(U)(t, t_0) = hat(U)_0 (t, t_0) + (-i/hbar) integral_(t_0)^t dd(t_1) hat(U)_0 (t, t_1) hat(V)(t_1) hat(U)_0 (t_1, t_0) \
   + (-i/hbar)^2 integral_(t_0)^t dd(t_1) integral_(t_0)^(t_1) dd(t_2) hat(U)_0 (t, t_1) hat(V)(t_1) hat(U)_0 (t_1, t_2) hat(V)(t_2) hat(U)_0 (t_2, t_0) + ...
 $
-这样，我们就可以将跃迁振幅按照微扰强度进行展开。
+这样，我们就可以*将跃迁振幅按照微扰强度进行展开*。
 
-第二种方法是在相互作用绘景中计算。利用
+第二种方法是在*相互作用绘景*中计算。利用
 $
   ket(psi^"I" (t)) & = e^(i/hbar hat(H)_0 t) ket(psi(t)) \
                    & = e^(i/hbar hat(H)_0 t) hat(U)(t, t_0) ket(psi(t_0)) \
@@ -1152,11 +1219,11 @@ $
   $
   插入$hat(H)_0$表象的完备性关系最终得到
   $
-    cal(A)_"fi"^(2) = 1 /hbar^2 sum_k integral_0^t dd(t_1) integral_0^(t_1) dd(t_2) e^(i/hbar E_"fk" t_1) e^(i/hbar E_"ki" t_2) V_"fk" (t_1) V_"ki" (t_2)
+    cal(A)_"fi"^(2) = - 1 /hbar^2 sum_k integral_0^t dd(t_1) integral_0^(t_1) dd(t_2) e^(i/hbar E_"fk" t_1) e^(i/hbar E_"ki" t_2) V_"fk" (t_1) V_"ki" (t_2)
   $
 - 三阶计算：
   $
-    cal(A)_"fi"^(3) = (-i/hbar)^3 sum_(j k) integral_0^t dd(t_1) integral_0^(t_1) dd(t_2) integral_0^(t_2) dd(t_3) \ e^(i/hbar E_"fj" t_1) e^(i/hbar E_"jk" t_2) e^(i/hbar E_"ki" t_3) V_"fj" (t_1) V_"jk" (t_2) V_"ki" (t_3)
+    cal(A)_"fi"^(3) = i/hbar^3 sum_(j k) integral_0^t dd(t_1) integral_0^(t_1) dd(t_2) integral_0^(t_2) dd(t_3) \ e^(i/hbar E_"fj" t_1) e^(i/hbar E_"jk" t_2) e^(i/hbar E_"ki" t_3) V_"fj" (t_1) V_"jk" (t_2) V_"ki" (t_3)
   $
 
 #example(subname: [常数微扰])[
@@ -1185,7 +1252,7 @@ $
   $
     1/(2pi i) integral_(-oo)^oo dd(E) (e^(-i/hbar E (t_1 - t_2)))/(E + i epsilon - E_k) = - e^(-i/hbar E_k (t_1 - t_2)) Theta(t_1 - t_2)
   $
-  其中$epsilon = 0^+$。可以利用留数定理证明这个积分。无穷小量$epsilon$的作用是将积分路径取为向上偏离实轴$epsilon$的直线。根据约当引理，分$t_1 - t_2 > 0$ 和 $t_1 - t_2 < 0$两种情况计算。
+  其中$epsilon = 0^+$。可以利用留数定理证明这个积分。无穷小量$epsilon$的作用是将积分路径取为向上偏离实轴$epsilon$的直线。根据Jordan引理，分$t_1 - t_2 > 0$ 和 $t_1 - t_2 < 0$两种情况计算。
   #note(subname: [一个简证])[
     分两种情形讨论闭合路径的位置，使无穷远半圆上的积分衰减为零
     - $Delta t>0$：闭合于下半平面
@@ -1233,16 +1300,16 @@ $
   $
     integral_(-oo)^oo dd(E) delta_t (E_f - E) delta_t (E - E_i) e^(i/(2 hbar) E_"fi" t) &= 1/(2 pi hbar)^2 integral_(-oo)^oo dd(E) integral_(-t/2)^(t/2) dd(t') integral_(-t/2)^(t/2) dd(t'') e^(i/hbar (E_f - E) t') e^(i/hbar (E - E_i) t'')\
     &= 1/(2 pi hbar)^2 integral_(-t/2)^(t/2) dd(t') integral_(-t/2)^(t/2) dd(t'') e^(i/hbar (E_f t' - E_i t'')) delta(t' - t'')\
-    &= 1/(2 pi hbar)^2 integral_(-t/2)^(t/2) dd(t') e^(i/hbar (E_f - E_i) t')\
+    &= 1/(2 pi hbar) integral_(-t/2)^(t/2) dd(t') e^(i/hbar (E_f - E_i) t')\
     &= delta_t (E_f - E_i)
   $
   最终得到二阶项的近似结果
   $
-    cal(A)_"fi"^(2) = - 1/hbar^2 sum_k (V_"fk" V_"ki")/(E_i - E_k + i epsilon) e^(i/(2hbar) (E_f - E_i) t) delta_t (E_f - E_i)
+    cal(A)_"fi"^(2) approx - 2 pi i sum_k (V_"fk" V_"ki")/(E_i - E_k + i epsilon) e^(i/(2hbar) (E_f - E_i) t) delta_t (E_f - E_i)
   $
   同样可以得到三阶项的近似结果
   $
-    cal(A)_"fi"^(3) = (-i/hbar)^3 sum_(j k) (V_"fj" V_"jk" V_"ki")/((E_i - E_j + i epsilon)(E_i - E_k + i epsilon)) e^(i/(2hbar) (E_f - E_i) t) delta_t (E_f - E_i)
+    cal(A)_"fi"^(3) approx - 2 pi i sum_(j k) (V_"fj" V_"jk" V_"ki")/((E_i - E_j + i epsilon)(E_i - E_k + i epsilon)) e^(i/(2hbar) (E_f - E_i) t) delta_t (E_f - E_i)
   $
   上述各阶计算的结果可以用一个图来表示：
   #figure(
@@ -1253,31 +1320,31 @@ $
 
 === 能级移动和展宽
 
-刚才讨论的是从初态$hat(i)$到末态$hat(j)$的跃迁振幅，认为初末态不同。现在研究初末态相同的情形，以考虑衰变的结果。系统仍然处于$hat(j)$态的概率振幅
+刚才讨论的是从初态$ket(i)$到末态$ket(j)$的跃迁振幅，认为初末态不同。现在研究初末态相同的情形，以考虑衰变的结果。系统*仍然处于$ket(i)$态的概率振幅*
 $
-  cal(A)_"ii" = braket(i, hat(U)^"I"(t), i)
+  cal(A)_"ii" = braket(i, hat(U)^"I" (t, 0), i)
 $
 利用刚才的计算结果，取二阶近似得到
 $
   cal(A)_"ii" &= 1 - 2 pi i lim_(f->i) (V_"fi" + sum_k (V_"fk" V_"ki") / (E_i - E_k + i epsilon)) e^(i/(2hbar) (E_f - E_i) t) delta_t (E_f - E_i)\
   &= 1 - (i t)/hbar (V_"ii" + sum_k abs(V_"ik")^2 / (E_i - E_k + i epsilon))
 $
-可以看到，方括号里面 (的实部) 实际上就是定态微扰论给出的能量移动的二阶结果。由于其是微扰展开的结果，我们猜测它可以改写为
+可以看到，方括号里面 (的实部) 实际上就是*定态微扰论*给出的能量移动的二阶结果。由于其是*微扰展开*的结果，我们猜测它可以改写为
 $
   cal(A)_"ii" approx e^(- i/hbar Delta_i t), Delta = V_"ii" + sum_k abs(V_"ik")^2 / (E_i - E_k + i epsilon)
 $
-实际上，如果$k$求和中包含连续谱 (积分)，那么$∆_i$将具有虚部。利用狄拉克公式
+实际上，如果$k$求和中包含连续谱 (积分)，那么$∆_i$将具有虚部。利用Dirac公式
 $
   1/(x + i epsilon) = "P" 1/x - i pi delta(x)
 $
 得到
 $
-  Re Delta_i = V_"ii" + "P" sum_k (abs(V_"ik")^2 / (E_i - E_k))\
+  Re Delta_i = V_"ii" + "P" sum_k abs(V_"ik")^2 / (E_i - E_k)\
   Im Delta_i = - pi sum_k abs(V_"ik")^2 delta(E_i - E_k)
 $
-考虑到现在是在相互作用绘景中计算，如果回到Schrödinger绘景，则概率振幅为
+考虑到现在是在相互作用绘景中计算，如果回到Schrödinger绘景，则*概率振幅*为
 $
-  cal(A)_"ii" e^(- i/hbar E_i t) &approx e^(-i(E_i +Delta_i) t)/hbar
+  cal(A)_"ii" e^(- i/hbar E_i t) &approx e^(-i/hbar (E_i +Delta_i) t)
   &= exp(- i /hbar (E_i + Re Delta_i) t) exp(1/hbar Im Delta_i t)
 $
 微扰使得能量发生移动，$E_i -> E_i + Re ∆_i$。同时跃迁使得$ket(i)$态的概率振幅发生衰减。$∆_i$的虚部对应*能级展宽或衰变宽度*$Γ_i$，定义
@@ -1306,7 +1373,7 @@ $
 $
   lim_(eta -> 0) eta / (x^2 + eta^2) = pi delta(x)
 $
-得到跃迁速率
+得到*跃迁速率*
 $
   omega_(i->f) = (2pi)/hbar abs(V_"fi")^2 delta(E_"fi")
 $
@@ -1328,7 +1395,7 @@ $
   dot(cal(A))_"ii"/cal(A)_"ii" &= (- (i V_"ii")/hbar - abs(V_"ii")^2 / (eta hbar^2) - i / hbar sum_(k!=i) abs(V_"ik")^2/(E_i - E_k + i eta hbar))/(1 - (i V_"ii")/(eta hbar))\
   &= - i/hbar (V_"ii" + sum_(k!=i) abs(V_"ik")^2/(E_i - E_k + i eta hbar))
 $
-二阶近似下的结果与时间无关。因此，$A_"ii"(t)$的解可写为
+二阶近似下的结果与时间无关。因此，$cal(A)_"ii"(t)$的解可写为
 $
   cal(A)_"ii" (t) = e^(- i/hbar Delta_i t)
 $
@@ -1340,10 +1407,34 @@ $
 $
 计算其实部和虚部得到
 $
-  Re Delta_i = V_"ii" + "P" sum_(k!=i) (abs(V_"ik")^2 / (E_i - E_k))\
+  Re Delta_i = V_"ii" + "P" sum_(k!=i) abs(V_"ik")^2 / (E_i - E_k)\
   Im Delta_i = - pi sum_(k!=i) abs(V_"ik")^2 delta(E_i - E_k)
 $
-与直接计算常微扰得到的结果一致：实部对应能量移动，虚部对应能级展宽或者衰变宽度。
+与直接计算常微扰得到的结果一致：*实部对应能量移动，虚部对应能级展宽或者衰变宽度*。
+
+#proposition(subname: [能级移动和展宽])[
+  跃迁振幅为
+  $
+    K_"fi" = braket(f, hat(U)(t, 0), i)
+  $
+  有关系$cal(A)_"fi" = braket(f, hat(U)^"I" (t, 0), i)$
+  $
+    cal(A)_"fi" = e^(i/hbar E_f t) K_"fi"
+  $
+  对于初末态相同的情形，系统仍然处于$ket(i)$态的概率振幅为
+  $
+    cal(A)_"ii" (t) = e^(- i/hbar Delta_i t)
+  $
+  其中
+  $
+    Delta_i = V_"ii" + sum_(k!=i) abs(V_"ik")^2/(E_i - E_k + i eta hbar)
+  $
+  其*实部对应能量移动*，*虚部对应能级展宽或者衰变宽度*：
+  $
+    Re Delta_i = V_"ii" + "P" sum_(k!=i) abs(V_"ik")^2 / (E_i - E_k)\
+    Im Delta_i = - pi sum_(k!=i) abs(V_"ik")^2 delta(E_i - E_k)
+  $
+]
 
 === 线性响应
 
@@ -1351,7 +1442,7 @@ $
 $
   hat(V)(t) = hat(A) J(t)
 $
-其中 $hat(A)$ 是厄米算符，通常是系统的某个力学量，$J(t)$是时间的实函数。当$t < t_0$ 时， $J(t) = 0$。考虑力学量 $hat(Omega)$ 的平均值
+其中 $hat(A)$ 是Hermite算符，通常是系统的某个力学量，$J(t)$是时间的实函数。当$t < t_0$ 时，$J(t) = 0$。考虑力学量$hat(Omega)$的平均值
 $
   expval(hat(Omega)) (t) = braket(psi(t), hat(Omega), psi(t))
 $
@@ -1374,7 +1465,7 @@ $
 $
 其中
 $
-  delta hat(Omega)^"I" (t) = (U^"I" (0, t))^dagger hat(Omega)^"I" (t) U^"I" (t, 0) - hat(Omega)
+  delta hat(Omega)^"I" (t) = (U^"I" (0, t))^dagger hat(Omega)^"I" (t) U^"I" (t, 0) - hat(Omega)^"I" (0)
 $
 利用相互作用绘景中时间演化算符的 Dyson 级数展开
 $
