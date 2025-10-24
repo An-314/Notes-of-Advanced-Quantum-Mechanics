@@ -1514,7 +1514,7 @@ $χ(ω)$完全刻画了系统对外扰动的线性响应，称为“*推广的�
 
 == 绝热演化
 
-如果系统突然发生改变，即其初始状态来不及改变，但是Hamilton量突然发生变化，系统的演化是平凡的。但是如果Hamilton量是缓慢变化的，该过程就称为绝热过程。
+如果系统突然发生改变，即其初始状态来不及改变，但是Hamilton量突然发生变化，系统的演化是平凡的。但是如果*Hamilton量是缓慢变化*的，该过程就称为绝热过程。
 
 考虑这样的量子系统，其Hamilton量是若干个参数$λ_1; λ_2; ...$的连续函数，即
 $
@@ -1522,15 +1522,15 @@ $
 $
 为方便起见，将这组参数简写为$λ$。对于给定的参数$λ$，我们可以求解Hamilton量的本征值和本征态
 $
-  hat(H)(λ) ket(psi_n (λ)) = E_n (λ) ket(psi_n (λ))
+  hat(H)(vb(λ)) ket(psi_n (vb(λ))) = E_n (vb(λ)) ket(psi_n (vb(λ)))
 $
 假设系统的能级是分立的。现在，假设这些参数是随时间变化的，$lambda_i = lambda_i (t)$。除此之外，Hamilton量不显含时间。
 
-*量子绝热定理*说：如果这些参数随时间变化*足够缓慢*，且系统在初始时刻处于本征态$ket(psi_n (lambda(0)))$，则系统将演化为相应的本征态$ket(psi_n (lambda(t)))$，即系统不会发生跃迁。
+*量子绝热定理*说：如果这些参数随时间变化*足够缓慢*，且系统在初始时刻处于本征态$ket(psi_n (vb(lambda)(0)))$，则系统将演化为相应的本征态$ket(psi_n (vb(lambda)(t)))$，即系统不会发生跃迁。
 
 问题是：何谓足够缓慢？演化出的相位因子如何？
 
-将任意时刻的状态用本征态进行展开$(vb(λ)_t ≡ vb(λ)(t))$
+对于给定的参数$vb(λ)$，能量本征态${ket(psi_n (vb(λ)))}$是完备的。所以可将任意时刻的状态展开为$(vb(λ)_t ≡ vb(λ)(t))$
 $
   ket(psi(t)) = sum_m c_m (t) ket(psi_m (vb(λ)_t))
 $
@@ -1556,13 +1556,10 @@ $
 $
 利用$dot(c)_n (t)$的表达式有
 $
-  dot(a)_n (t) = - sum_m c_m (t) braket(psi_n (vb(lambda)_t), pdv(, t), psi_m (vb(lambda)_t)) exp(i/hbar integral_0^t dd(t') E_n (vb(lambda)_t'))
+  dot(a)_n (t) &= - sum_m c_m (t) braket(psi_n (vb(lambda)_t), pdv(, t), psi_m (vb(lambda)_t)) exp(i/hbar integral_0^t dd(t') E_n (vb(lambda)_t'))\
+  &= - sum_m a_m (t) braket(psi_n (vb(lambda)_t), pdv(, t), psi_m (vb(lambda)_t)) e^(i Phi_(n m)(t))
 $
-再利用$c_m (t)$和$a_m (t)$的关系得到
-$
-  dot(a)_n (t) = - sum_m a_m (t) braket(psi_n (vb(lambda)_t), pdv(, t), psi_m (vb(lambda)_t)) e^(i Phi_(n m)(t))
-$
-为简化书写，定义
+其中为简化书写，定义
 $
   E_(m n) (vb(lambda)) = E_m (vb(lambda)) - E_n (vb(lambda))
   Phi_(m n) (vb(lambda)_t) = 1/hbar integral_0^(t) dd(t') E_(m n) (vb(lambda)_t')
@@ -1603,7 +1600,7 @@ $
 
 定义
 $
-  W_(m n) (lambda) = braket(psi_n (lambda), pdv(hat(H)(lambda), lambda), psi_m (lambda))
+  W_(m n) (t) = braket(psi_n (vb(lambda)_t), pdv(, t), psi_m (vb(lambda)_t))
 $
 利用分部积分，得到
 $
@@ -1626,9 +1623,9 @@ $
 
 $W_(n m) (t)$可以写成
 $
-  W_(n m) (t) = sum_(k=1)^s dot(lambda)_k braket(psi_n (vb(lambda)_t), pdv(hat(H)(vb(lambda)_t), lambda_k), psi_m (vb(lambda)_t))
+  W_(n m) (t) = sum_(k=1)^s dot(lambda)_k braket(psi_n (vb(lambda)_t), pdv(, lambda_k), psi_m (vb(lambda)_t))
 $
-现在来计算矩阵元$braket(psi_n (vb(lambda)_t), pdv(hat(H)(vb(lambda)_t), lambda_k), psi_m (vb(lambda)_t))$，利用本征方程
+现在来计算矩阵元$braket(psi_n (vb(lambda)_t), pdv(, t), psi_m (vb(lambda)_t))$，利用本征方程
 $
   hat(H)(vb(lambda)) ket(psi_m (vb(lambda))) = E_m (vb(lambda)) ket(psi_m (vb(lambda)))
 $
@@ -1644,14 +1641,13 @@ $
 $
   braket(psi_n (vb(lambda)), pdv(, lambda_k), psi_m (vb(lambda))) = braket(psi_n (vb(lambda)), pdv(hat(H)(vb(lambda)), lambda_k), psi_m (vb(lambda)))/(E_m (vb(lambda)) - E_n (vb(lambda)))
 $
-绝热近似条件可以进一步写为
+*绝热近似条件*可以进一步写为
 $
-  (hbar abs(sum_(k=1)^s dot(lambda)_k dot(lambda)_k braket(psi_n (vb(lambda)), pdv(hat(H)(vb(lambda)), lambda_k), psi_m (vb(lambda)))))/(E_m (vb(lambda)) - E_n (vb(lambda)))^2 << 1
+  (hbar abs(sum_(k=1)^s dot(lambda)_k braket(psi_n (vb(lambda)), pdv(hat(H)(vb(lambda)), lambda_k), psi_m (vb(lambda)))))/(E_m (vb(lambda)) - E_n (vb(lambda)))^2 << 1
 $
-
 最后，绝热近似条件成立时，我们得到
 $
-  a_n (t) = a_n (0) exp(- sum_(k=1)^s integral_0^vb(lambda)_t dd(lambda) braket(psi_n (vb(lambda)), pdv(, lambda_k), psi_n (vb(lambda))))
+  a_n (t) = a_n (0) exp(- sum_(k=1)^s integral_(lambda_k (0))^(lambda_k (t)) dd(lambda_k) braket(psi_n (vb(lambda)), pdv(, lambda_k), psi_n (vb(lambda))))
 $
 
 对归一化条件

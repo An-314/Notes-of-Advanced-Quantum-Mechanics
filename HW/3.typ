@@ -88,34 +88,34 @@
 
 #solution[
   + 相互作用绘景一阶跃迁振幅为
-  $
-    cal(A)_"21"^((1)) (t) = - i/hbar integral_0^t dd(t_1) e^(i/hbar (E_2^0 - E_1^0) t_1) braket(2, hat(V)(t_1), 1)\
-  $
-  计算矩阵元
-  $
-    braket(2, hat(V)(t_1), 1) = lambda cos(omega t) \
-  $
-  因此
-  $
-    cal(A)_"21"^((1)) (t) &= - (i lambda)/hbar integral_0^t dd(t_1) e^(i/hbar (E_2^0 - E_1^0) t_1) cos(omega t_1) \
-    &= - (i lambda)/(2 hbar) integral_0^t dd(t_1) (e^(i/(hbar) (E_2^0 - E_1^0 + hbar omega) t_1) + e^(i/(hbar) (E_2^0 - E_1^0 - hbar omega) t_1)) \
-    &= (lambda)/(2 hbar) [(e^(i(omega_(21) + omega) t) - 1)/(omega_(21) + omega) + (e^(i(omega_(21) - omega) t) - 1)/(omega_(21) - omega)]\
-    &= lambda/(2 hbar) ((2i e^(i (omega_(21) + omega) t/2) sin((omega_(21) + omega) t/2))/(omega_(21) + omega) + (2i e^(i (omega_(21) - omega) t/2) sin((omega_(21) - omega) t/2))/(omega_(21) - omega))\
-  $
-  其中
-  $
-    omega_(21) = (E_2^0 - E_1^0)/hbar
-  $
-  由此得到跃迁概率
-  $
-    P_(1->2)^((1)) (t) &= abs(cal(A)_"21"^((1)) (t))^2 \
-    &= (lambda^2)/(4 hbar^2) abs((2i e^(i (omega_(21) + omega) t/2) sin((omega_(21) + omega) t/2))/(omega_(21) + omega) + (2i e^(i (omega_(21) - omega) t/2) sin((omega_(21) - omega) t/2))/(omega_(21) - omega))^2\
-    &= (lambda^2)/(hbar^2) ((sin^2((omega_(21) + omega) t)/2)/(omega_(21) + omega)^2 + (sin^2((omega_(21) - omega) t)/2)/(omega_(21) - omega)^2 + (2 sin ((omega_(21) + omega) t)/2 sin ((omega_(21) - omega) t)/2 cos omega t)/((omega_(21) + omega)(omega_(21) - omega)))\
-  $
+    $
+      cal(A)_"21"^((1)) (t) = - i/hbar integral_0^t dd(t_1) e^(i/hbar (E_2^0 - E_1^0) t_1) braket(2, hat(V)(t_1), 1)\
+    $
+    计算矩阵元
+    $
+      braket(2, hat(V)(t_1), 1) = lambda cos(omega t) \
+    $
+    因此
+    $
+      cal(A)_"21"^((1)) (t) &= - (i lambda)/hbar integral_0^t dd(t_1) e^(i/hbar (E_2^0 - E_1^0) t_1) cos(omega t_1) \
+      &= - (i lambda)/(2 hbar) integral_0^t dd(t_1) (e^(i/(hbar) (E_2^0 - E_1^0 + hbar omega) t_1) + e^(i/(hbar) (E_2^0 - E_1^0 - hbar omega) t_1)) \
+      &= (lambda)/(2 hbar) [(e^(i(omega_(21) + omega) t) - 1)/(omega_(21) + omega) + (e^(i(omega_(21) - omega) t) - 1)/(omega_(21) - omega)]\
+      &= lambda/(2 hbar) ((2i e^(i (omega_(21) + omega) t/2) sin((omega_(21) + omega) t/2))/(omega_(21) + omega) + (2i e^(i (omega_(21) - omega) t/2) sin((omega_(21) - omega) t/2))/(omega_(21) - omega))\
+    $
+    其中
+    $
+      omega_(21) = (E_2^0 - E_1^0)/hbar
+    $
+    由此得到跃迁概率
+    $
+      P_(1->2)^((1)) (t) &= abs(cal(A)_"21"^((1)) (t))^2 \
+      &= (lambda^2)/(4 hbar^2) abs((2i e^(i (omega_(21) + omega) t/2) sin((omega_(21) + omega) t/2))/(omega_(21) + omega) + (2i e^(i (omega_(21) - omega) t/2) sin((omega_(21) - omega) t/2))/(omega_(21) - omega))^2\
+      &= (lambda^2)/(hbar^2) ((sin^2((omega_(21) + omega) t)/2)/(omega_(21) + omega)^2 + (sin^2((omega_(21) - omega) t)/2)/(omega_(21) - omega)^2 + (2 sin ((omega_(21) + omega) t)/2 sin ((omega_(21) - omega) t)/2 cos omega t)/((omega_(21) + omega)(omega_(21) - omega)))\
+    $
   + 在$E_1^0 - E_2^0$ 接近 $±hbar omega$ 时，分母 $omega_(21) ± omega$ 接近零，导致跃迁概率发散，说明微扰论失效。
 ]
 
-#exercise(subname: [])[
+#exercise[
   The delta function well @hw3.1 supports a single bound state @hw3.2. Calculate the geometric phase change when $alpha$ gradually increases from $alpha_1$ to $alpha_2$. If the increase occurs at a constant rate $(dv(alpha, t)=c)$, what is the dynamic phase change for this process?
   $
     V(x) = - alpha delta(x)
@@ -123,4 +123,41 @@
   $
     psi(x) = sqrt(m alpha)/hbar exp(-(m alpha abs(x))/hbar^2), E = - (m alpha^2)/(2 hbar^2)
   $<hw3.2>
+]
+
+#solution[
+  势阱
+  $
+    hat(H)(alpha) = hat(p)^2/(2m) - alpha delta(x)
+  $
+  的唯一束缚态为
+  $
+    psi (x; alpha) = sqrt(m alpha)/hbar exp(-(m alpha abs(x))/hbar^2) = sqrt(kappa) exp(-kappa abs(x)), kappa = (m alpha)/hbar^2
+  $
+  其Hamiltonian的参数为$alpha$，考虑
+  $
+    W(t) & = braket(psi (alpha_t), pdv(, t), psi (alpha_t)) \
+         & = dot(alpha) braket(psi (alpha), pdv(, alpha), psi (alpha)) \
+  $
+  而其中
+  $
+    pdv(, alpha) psi = m/hbar^2 pdv(, kappa) psi = m/hbar^2 e^(-kappa abs(x)) (1/(2 sqrt(kappa)) - sqrt(kappa) abs(x))\
+  $
+  因此有
+  $
+    W(t) & = dot(alpha) m/hbar^2 braket(psi, pdv(, kappa), psi) \
+         & = dot(alpha) m/hbar^2 integral_(-oo)^(oo) dd(x) e^(-2kappa abs(x)) (1/2 - kappa abs(x)) \
+         & = 2 dot(alpha) m/hbar^2 integral_0^(oo) dd(x) e^(- 2kappa x) (1/2 - kappa x) = 0
+  $
+  故Berry相位
+  $
+    gamma_"Berry" = - i integral_(alpha_1)^(alpha_2) dd(alpha) braket(psi (alpha), pdv(, alpha), psi (alpha)) = 0
+  $
+  #newpara()
+  而动力学相位为
+  $
+    gamma_"dyn" &= - i/hbar integral_0^T dd(t) E (alpha_t) = - i/hbar integral_0^T dd(t) (- (m alpha_t^2)/(2 hbar^2)) = i m/(2 hbar^3) integral_0^T dd(t) (alpha_0 + c t)^2 \
+    &= i m/(2 hbar^3) [alpha_0^2 T + alpha_0 c T^2 + (1/3) c^2 T^3] , T= (alpha_2 - alpha_1)/c \
+    &= i m/(6 hbar^3 c) (alpha_2^3 - alpha_1^3)
+  $
 ]
