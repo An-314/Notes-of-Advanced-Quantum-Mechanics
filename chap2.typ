@@ -1708,13 +1708,21 @@ $
 
 这样的状态不能用Hilbert空间的一个态矢来描写，是不同纯态的*非相干混合 (incoherent mixture)*，称为*混合态 (mixed state)*。由混合态描写的系综称为*混合系综 (mixed ensemble)*。
 
+#definition(subname: [统计系综])[
+  统计系综是大量量子系统的集合，这些系统可以处于同一个量子态(纯系综)，也可以处于不同的量子态(混合系综)。
+  - 纯系综可以用Hilbert空间的一个态矢来描写
+  - 混合系综则不能，只能用经典概率描述各个纯态的贡献
+]
+
 上述例子只是为了引入混合态的概念，并不是产生混合态的唯一方式。混合态可以在*多粒子系统和统计物理系统*等体系中存在。
 
 例如： Stern-Gerlach 实验中，从高温炉子中制备出来的银原子，其自旋取向是完全随机的，即银原子处于$ket(arrow.t)$态的概率为 50%，处于$ket(arrow.b)$态的概率为 50%。
 
 描述混合态，可以引入*密度算符和密度矩阵*。
 
-=== 纯态的密度算符
+=== 密度算符
+
+==== 纯态的密度算符
 
 首先以*纯态*为例，假设体系处于量子态$ket(psi)$（注意：已归一化），力学量$hat(A)$的平均值为
 $
@@ -1736,9 +1744,24 @@ $
 $
   P_k = abs(braket(a_k, psi))^2 = braket(a_k, psi) braket(psi, a_k) = braket(a_k, hat(rho), a_k)
 $
+#definition(subname: [密度算符和密度矩阵])[
+  纯态$ket(psi)$的*密度算符*定义为
+  $
+    hat(rho) = ketbra(psi)
+  $
+  力学量$hat(A)$的平均值可以写为
+  $
+    expval(hat(A)) = Tr(hat(rho) hat(A)) = Tr(hat(A) hat(rho))
+  $
+  测量得到本征值$a_k$的概率为
+  $
+    P_k = braket(a_k, hat(rho), a_k)
+  $
+]
+
 下面将看到，以上得到的形式对于混合态也成立，只是密度算符要改为混合态的密度算符。
 
-=== 混合态的密度算符
+==== 混合态的密度算符
 
 考虑最一般的混合态：系综中的系统处于一系列纯态$ket(psi_i)$的概率为 $w_i$，满足$sum_i w_i = 1$。在混合态中，力学量$hat(A)$的*系综平均值*为
 $
@@ -1774,7 +1797,22 @@ $
 $
 即：这些参与态正好是密度算符的本征态，本征值为就是概率$w_i$。
 
-=== 密度算符的性质
+#definition(subname: [密度算符和密度矩阵])[
+  混合态的*密度算符*定义为
+  $
+    hat(rho) = sum_i w_i ketbra(psi_i)
+  $
+  力学量$hat(A)$的系综平均值可以写为
+  $
+    expval(expval(hat(A))) = Tr(hat(rho) hat(A)) = Tr(hat(A) hat(rho))
+  $
+  测量得到本征值$a_k$的概率为
+  $
+    P_k = braket(a_k, hat(rho), a_k)
+  $
+]
+
+==== 密度算符的性质
 
 #proposition(subname: [密度算符的性质])[
   $
@@ -1806,13 +1844,13 @@ $
   等号只有在*纯态*时成立。
 ]
 
-=== 密度算符的演化方程
+==== 密度算符的演化方程
 
 由于密度算符由各个参与态构造，因此它是一个含时算符
 $
-  hat(rho) (t) = sum_i w_i ketbra(psi_i(t))
+  hat(rho) (t) = sum_i w_i ketbra(psi_i (t))
 $
-其中概率$w_i$不随时间变化。下面在薛定谔绘景中推导出密度算符的时间演化方程。将密度算符对时间求导得到
+其中概率$w_i$不随时间变化。下面在*Schrödinger绘景*中推导出密度算符的时间演化方程。将密度算符对时间求导得到
 $
   i hbar pdv(, t) hat(rho)(t) &= sum_i w_i (i hbar pdv(, t) ket(psi_i (t)) bra(psi_i (t)) + ket(psi_i (t)) i hbar pdv(, t)bra(psi_i (t)) )\
   &= sum_i w_i (hat(H) ket(psi_i (t)) bra(psi_i (t)) - ket(psi_i (t)) bra(psi_i (t)) hat(H)) \
@@ -1827,8 +1865,138 @@ $
 $
   pdv(, t) rho(p, q, t) = {H, rho}
 $
-对应，其中$rho(p, q, t)$代表相空间中的概率密度。假设哈密顿量$hat(H)$对应的时间演化算符为$hat(U)(t, t_0)$，则有
+对应，其中$rho(p, q, t)$代表相空间中的概率密度。假设Hamilton量$hat(H)$对应的时间演化算符为$hat(U)(t, t_0)$，则有
 $
   hat(rho)(t) = hat(U)(t, t_0) hat(rho)(t_0) hat(U)^dagger (t, t_0)
 $
-如果哈密顿量可以写为$hat(H) = hat(H)^0 + hat(V)(t)$，则通常采用相互作用绘景更为方便。此时式中的哈密顿量$hat(H)$替换为$hat(V)(t)$，可进一步进行微扰展开。
+如果Hamilton量可以写为$hat(H) = hat(H)_0 + hat(V)(t)$，则通常采用相互作用绘景更为方便。此时式中的Hamilton量$hat(H)$替换为$hat(V)(t)$，可进一步进行微扰展开。
+
+=== 密度矩阵
+
+*密度矩阵*: 密度算符在某个具体表象中的矩阵形式称为密度矩阵。
+
+显然，密度矩阵的具体形式与表象的选取有关。考虑由一组正交完备基矢$ket(n)$构成的表象，密度矩阵的矩阵元为
+$
+  rho_(m n) = braket(m, hat(rho), n) = sum_i w_i braket(m, psi_i) braket(psi_i, n)
+$
+
+#newpara()
+
+考虑最简单的二能级系统(双态系统)，它等价于一个自旋 1/2 系统。系统的Hilbert空间是二维的，正交完备的基矢为$ket(arrow.t) = ket(0)$和$ket(arrow.b) = ket(1)$。
+
+对于纯态$ket(psi) = alpha ket(0) + beta ket(1)$，其密度算符为
+$
+  hat(rho) = ketbra(psi) = abs(alpha)^2 ketbra(0) + alpha beta^* ketbra(0, 1) + alpha^* beta ketbra(1, 0) + abs(beta)^2 ketbra(1)
+$
+选取基矢$ket(0)$和$ket(1)$作为表象，密度矩阵为
+$
+  rho = mat(abs(alpha)^2, alpha beta^*; alpha^* beta, abs(beta)^2)
+$
+#newpara()
+对于完全无量子相干性的混合态，密度算符为
+$
+  hat(rho) = w_0 ketbra(0) + w_1 ketbra(1)
+$
+选取基矢$ket(0)$和$ket(1)$作为表象，密度矩阵为
+$
+  rho = mat(w_0, 0; 0, w_1)
+$
+可见，若选取参与态选取为系统的正交完备基矢，则在此表象下，密度矩阵的*非对角元代表了系统状态的量子相干性程度*。
+
+例如测量会导致系统的退相干。采用这样的特定基矢，量子退相干对应的就是密度矩阵非对角元消失的过程。
+
+在数学上，量子退相干可以用测量引起的随机相位差来描述$expval(e^(i theta))=0$
+$
+  ket(psi) = alpha ket(0) + beta e^(i theta) ket(1)
+$
+
+#newpara()
+
+由于任意$2 times 2$矩阵都可以表示为三个 Pauli 矩阵和单位矩阵的线性叠加，所以二能级系统的密度矩阵总可以表示为
+$
+  rho = a_0 vb(I) + vb(a) dot vb(sigma)
+$
+求迹得到
+$
+  Tr rho = 2 a_0 = 1
+$
+所以
+$
+  a_0 = 1/2
+$
+密度矩阵乘以$sigma_i(i = x; y; z)$并求迹得到
+$
+  Tr(rho sigma_i) = expval(expval(sigma_i)) = 2 a_i => vb(a) = 1/2 expval(expval(vb(sigma)))
+$
+定义*极化矢量*或者*Bloch矢量*
+$
+  vb(P) = expval(expval(vb(sigma))) = Tr(rho vb(sigma))
+$
+则密度矩阵可以写为
+$
+  rho = 1/2 (vb(I) + vb(P) dot vb(sigma))
+$
+对于纯态$ket(psi) = alpha ket(0) + beta ket(1)$，计算得到
+$
+  P_x = alpha beta^* + alpha^* beta\
+  P_y = i (alpha beta^* - alpha^* beta)\
+  P_z = abs(alpha)^2 - abs(beta)^2
+$
+所以
+$
+  abs(vb(P))^2 = P_x^2 + P_y^2 + P_z^2 = (abs(alpha)^2 + abs(beta)^2)^2 = 1
+$
+对于混合态
+$
+  hat(rho) = 1/2 ketbra(0) + 1/2 ketbra(1)
+$
+(自旋完全非极化)，则
+$
+  vb(P) = 0
+$
+密度矩阵为
+$
+  rho = 1/2 vb(I)
+$
+一般情况下，$abs(vb(P)) <= 1$，则
+$
+  rho = 1/2 (vb(I) + vb(P) dot vb(sigma)) = 1/2 mat(1 + P_z, P_x - i P_y; P_x + i P_y, 1 - P_z)
+$
+$abs(vb(P))=1$的球面围成的球称为*Bloch 球*，球面和球内每一点$vb(P)$的都代表了二能级系统状态的一个状态。直接计算得到
+$
+  rho^2 = 1/4 abs(vb(P))^2 + 1/2 mat(1/2 + P_z, P_x - i P_y; P_x + i P_y, 1/2 - P_z)
+$
+从而
+$
+  Tr(rho^2) = 1/2 (1 + abs(vb(P))^2)
+$
+- 纯态：由于$ρ^2 = ρ$，所以$Tr(ρ^2) = Tr(ρ) = 1$，要求 $abs(vb(P)) = 1$，即 Bloch 球表面上的点代表纯态。
+- 混合态：由于$Tr(ρ^2) < 1$，所以$abs(vb(P)) < 1$，即 Bloch 球内部的点代表混合态。
+
+=== 量子统计力学
+
+考虑量子多体系统，其哈密顿量$hat(H)$的本征方程为
+$
+  hat(H) ket(psi_n) = E_n ket(psi_n)
+$
+系统处于温度$T$时的平衡态是一个混合态，称为*正则系综*，其中处于态 $ket(psi_n)$ 的概率为
+$
+  w_n = 1/Z exp(- E_n/(k_B T))
+$
+$1/Z$为归一化常数。密度算符为$beta = 1/(k_B T)$
+$
+  hat(rho) = 1/Z sum_n exp(- beta E_n) ketbra(psi_n)
+$
+由于$ket(psi_n)$是哈密顿量$hat(H)$的本征态，所以
+$
+  hat(rho) = 1 / Z sum_n exp(- beta E_n) ketbra(psi_n) = 1 / Z exp(- beta hat(H))
+$
+利用$Tr(hat(rho)) = 1$得到
+$
+  Z = Tr(exp(- beta hat(H)))
+$
+$Z$实际上就是统计物理中的*配分函数*。物理量$hat(A)$的平均值为
+$
+  expval(expval(hat(A))) = Tr(hat(rho) hat(A)) = 1 / Z Tr(exp(- beta hat(H)) hat(A)) = - pdv(ln Z, beta) 1/beta
+$
+以上两式是量子统计物理的基本公式。若体系存在*相加性守恒荷*(例如粒子数)，则采用*巨正则系综*，其密度算符和配分函数中只需要做如下替换$hat(H) -> hat(H) - mu hat(N)$，其中 $mu$是*化学势*。
