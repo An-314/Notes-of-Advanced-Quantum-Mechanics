@@ -41,7 +41,7 @@
   $
     abs(braket(u, v))^2 = abs(braket(u', v'))^2
   $
-  为什么可以将上面任意力学量$hat(Ω)$的本征态推广到*任意状态*？实际上，系统的任意状态$ket(psi)$都可以是某个Hermite算符的本征态。当系统处于$ket(v)$态时，测量该厄米算符对应的力学量，得到$ket(v)$对应的本征值的概率为$abs(braket(v, psi))^2$。
+  为什么可以将上面任意力学量$hat(Ω)$的本征态推广到*任意状态*？实际上，系统的任意状态$ket(psi)$都可以是某个Hermite算符的本征态。当系统处于$ket(v)$态时，测量该Hermite算符对应的力学量，得到$ket(v)$对应的本征值的概率为$abs(braket(v, psi))^2$。
 
   最简单的例子是投影算符$hat(P)_u = ketbra(u)$，变换后为$hat(P)_u' = ketbra(u')$，变换前后$hat(P)_u$的平均值不变，得到
   $
@@ -269,7 +269,7 @@ $
   bra(phi_m) (hat(L) ket(phi_n)) = (bra(phi_m) hat(L)) ket(phi_n)
 $
 #proof[
-  由于$hat(Q)$是线性算符，其厄米共轭算符$hat(Q)^dagger$亦为线性算符，所以
+  由于$hat(Q)$是线性算符，其Hermite共轭算符$hat(Q)^dagger$亦为线性算符，所以
   $
     braket(psi'_1, psi'_2) &= (bra(psi_1) hat(Q)^dagger) (hat(Q) ket(psi_2)) = bra(psi_1) (hat(Q)^dagger hat(Q) ket(psi_2))\
     &= braket(psi_1, hat(Q)^dagger hat(Q), psi_2)\
@@ -328,7 +328,7 @@ $
 约定$bra(phi_m)(hat(A) ket(phi_n)) = ((bra(phi_m) hat(A)) ket(phi_n))^*$，我们就自洽地得到上面两个式子相等。
 
 #proof[
-  由于$hat(Q)$是反线性算符，其厄米共轭算符$hat(Q)^dagger$亦为反线性算符，但是$hat(Q)^dagger hat(Q)$则为线性算符。所以
+  由于$hat(Q)$是反线性算符，其Hermite共轭算符$hat(Q)^dagger$亦为反线性算符，但是$hat(Q)^dagger hat(Q)$则为线性算符。所以
   $
     braket(psi'_1, psi'_2) & = ((bra(psi_1) hat(Q)^dagger) (hat(Q) ket(psi_2))) = (bra(psi_1) (hat(Q)^dagger hat(Q) ket(psi_2)))^*\
     & = braket(psi_1, hat(Q)^dagger hat(Q), psi_2)^*\
@@ -339,4 +339,224 @@ $
     hat(Q)^dagger hat(Q) = 1
   $
   由于$hat(Q)$变换是可逆的(定理的条件设定)，所以$hat(Q)^(-1) = hat(Q)^dagger$，即 $hat(Q)$是幺正算符(同时也得到 $hat(Q) hat(Q)^dagger = 1$)。
+]
+
+接下来要解决的问题是：*在对称性变换下，任意力学量$hat(Ω)$如何变换？*根据物理观测结果不变的要求，力学量在变换前后本征值和取值几率都不变，所以其平均值必然是不变的，即
+$
+  braket(psi, hat(Omega), psi) = braket(psi', hat(Omega)', psi')
+$
+根据态矢的变换关系得到
+$
+  (bra(psi) hat(Q)^dagger) hat(Omega)' (hat(Q) ket(psi)) = braket(psi, hat(Omega), psi)
+$
++ $hat(Q)$是线性算符。此时可将上式写为
+  $
+    bra(psi) (hat(Q)^dagger hat(Omega)' hat(Q)) ket(psi) = braket(psi, hat(Omega), psi)
+  $
+  由于态矢$ket(psi)$是任意的，所以
+  $
+    hat(Q)^dagger hat(Omega)' hat(Q) = hat(Omega) => hat(Omega)' = hat(Q) hat(Omega) hat(Q)^dagger
+  $
++ $hat(Q)$是反线性算符。此时上式写为
+  $
+    (bra(psi) hat(Q)^dagger) hat(Omega)' (hat(Q) ket(psi)) = (bra(u) (hat(Q)^dagger hat(Omega)' hat(Q) ket(psi)))^*
+  $
+  由于$hat(Q)^dagger hat(Omega)' hat(Q)$是线性算符且是Hermite算符，所以得到
+  $
+    (bra(u) hat(Q)^dagger) hat(Omega)' (hat(Q) ket(u)) = braket(u, (hat(Q)^dagger hat(Omega)' hat(Q)), u)^* = braket(u, (hat(Q)^dagger hat(Omega)' hat(Q)), u)
+  $
+  最后一个等号成立是由于前后的态矢都是$ket(u)$，即Hermite算符的平均值必为实数。由于态矢$ket(u)$是任意的，所以仍然得到
+  $
+    hat(Q)^dagger hat(Omega)' hat(Q) = hat(Omega) => hat(Omega)' = hat(Q) hat(Omega) hat(Q)^dagger
+  $
+
+#newpara()
+
+*总结：量子系统的对称性变换包含了对态矢和力学量的变换。*
+
+#proposition(subname: [量子系统的对称性变换])[
+  对态矢$ket(psi)$的变换为
+  $
+    ket(psi) ->^(cal(Q)) ket(psi') = hat(Q) ket(psi)
+  $
+  对力学量$hat(Omega)$的变换为
+  $
+    hat(Omega) ->^(cal(Q)) hat(Omega)' = hat(Q) hat(Omega) hat(Q)^dagger = hat(Q) hat(Omega) hat(Q)^(-1)
+  $
+  有
+  $
+    hat(Omega) ket(psi) ->^(cal(Q)) hat(Omega)' ket(psi') = hat(Q) hat(Omega) hat(Q)^dagger (hat(Q) ket(psi)) = hat(Q) (hat(Omega) ket(psi))
+  $
+]
+
+#newpara()
+注意：*目前仅从物理观测结果不变出发，得到了量子系统可能的对称性变换的性质。这并不意味着量子系统一定具有该变换下的对称性。*
+
+例如，任意系统都可以进行空间平移变换，这并不表明该系统具有空间平移不变性。
+
+== 对称性群
+
+现在来解决第二个大问题：*什么叫做量子系统具有某种对称性？*或者具体一点，如何定义量子系统在某种对称性变换下的不变性。
+
+=== 量子系统的不变性
+
+量子系统的运动方程是Schrödinger方程。量子系统具有某种对称性，可以定义为*Schrödinger方程在此对称性变换下是不变的*，即变换前后的态矢遵循同样的演化方程。变换前的态矢$ket(psi)$遵守Schrödinger方程
+$
+  i hbar pdv(, t) ket(psi(t)) = hat(H) ket(psi(t))
+$
+考虑对称性变换$hat(Q)$，在最一般的情形下，它可能是含时的。很容易推导出变换后的态矢$ket(psi') = hat(Q) ket(psi)$满足的运动方程为
+$
+  i hbar pdv(, t) ket(psi'(t)) & = i hbar pdv(, t) (hat(Q) ket(psi(t))) \
+                               & = i hbar (pdv(hat(Q), t) ket(psi(t)) + hat(Q) pdv(, t) ket(psi(t))) \
+                               & = i hbar pdv(hat(Q), t) ket(psi(t)) + hat(Q) hat(H) ket(psi(t)) \
+                               & = (hat(Q) hat(H) hat(Q)^dagger + i hbar pdv(hat(Q), t) hat(Q)^dagger) ket(psi'(t))
+$
+因此，如果
+$
+  hat(H)' = hat(Q) hat(H) hat(Q)^dagger + i hbar pdv(hat(Q), t) hat(Q)^dagger = hat(H)\
+  <=> i hbar pdv(hat(Q), t) = [hat(H), hat(Q)]
+$
+则变换后的态$ket(psi') = hat(Q) ket(psi)$也满足同样的Schrödinger方程
+$
+  i hbar pdv(, t) ket(psi'(t)) = hat(H) ket(psi'(t))
+$
+此时我们称系统具有$hat(Q)$变换下的不变性。可见，*是否具有这种对称性取决于系统的Hamilton量*。
+
+在绝大部分情况下，我们所研究的对称性变换是不含时的，此时退化为
+$
+  [hat(H), hat(Q)] = 0
+$
+即：系统的Hamilton量和$hat(Q)$对易，则系统具有该变换下的*不变性*。
+
+=== 对称性变换群
+
+在数学上，某一类对称性变换的集合${hat(Q)_i}$可以构成一个*变换群*，群元的乘法很自然地定义为算符的乘法。设$ket(j)$为任意态矢，则
+$
+  (hat(Q)_i hat(Q)_j) ket(j) ≡ hat(Q)_i (hat(Q)_j ket(j))
+$
+根据群论，这类变换需要满足如下条件：
+- *封闭性*：对于任意两个变换$hat(Q)_i$和$hat(Q)_j$，它们的乘积$hat(Q)_i hat(Q)_j$仍然是该类变换中的一个变换。
+- *结合律*：对于任意三个变换$hat(Q)_i$、$hat(Q)_j$和$hat(Q)_k$，有
+  $
+    (hat(Q)_i hat(Q)_j) hat(Q)_k = hat(Q)_i (hat(Q)_j hat(Q)_k)
+  $
+- *单位元*：存在单位变换$hat(I)$，使得对于任意变换$hat(Q)_i$，有
+  $
+    hat(I) hat(Q)_i = hat(Q)_i hat(I) = hat(Q)_i
+  $
+  这个单位元就是单位算符 (恒等变换)。
+- *逆元*：对于任意变换$hat(Q)_i$，存在唯一逆变换$hat(Q)_i^(-1)$，使得
+  $
+    hat(Q)_i hat(Q)_i^(-1) = hat(Q)_i^(-1) hat(Q)_i = hat(I)
+  $
+
+
+*连续对称性变换*：连续对称性变换$hat(U)$总可以从恒等变换出发，连续作用无穷小变换得到，所以必然是*幺正变换*。考虑无穷小变换
+$
+  hat(U) = 1 - (i epsilon)/hbar hat(G) + O(epsilon^2)
+$
+有限变换可以通过无穷小变换连续作用得到$(alpha in RR)$
+$
+  hat(U)(alpha) = lim_(N -> oo) [1 - (i alpha)/(N hbar) hat(G)]^N = e^(- i/hbar alpha hat(G))
+$
+根据幺正性要求$hat(U)^dagger hat(U) = 1$得到
+$
+  hat(G)^dagger = hat(G)
+$
+所以$hat(G)$是*Hermite算符*，对应系统的某个力学量。我们将$hat(G)$称为对称性变换$hat(U)$的*生成元*。
+
+可以验证，当$alpha$取遍所有实数时，所有的$hat(U)(alpha)$变换构成的集合${hat(U){(alpha)}}$构成一个群 (连续群)。群元之间的乘法是可交换的，因此是一个Abel群。如果$hat(U)$是不含时的，系统具有$hat(U)$变换下的不变性意味着
+$
+  [hat(H), hat(U)] = 0 <=> hat(U) hat(H) hat(U)^dagger = hat(H) <=> [hat(H), hat(G)] = 0
+$
+这意味着生成元$hat(G)$是守恒量。
+
+在$hat(U)$变换下，任意力学量$hat(Omega)$变为$hat(Omega)' = hat(U) hat(Omega) hat(U)^dagger$，利用无穷小变换或者Baker-Campbell-Hausdorff公式，我们得到
+$
+  hat(Omega)' - hat(Omega) = i/ hbar alpha [hat(G), hat(Omega)] + O(alpha^2)
+$
+如果对基本力学量的变换做出要求，则可以得到基本对易关系(见空间平移变换)。
+
+上述讨论的是单参数连续对称性变换，可以很自然地推广到多个参数的情形，此时有限变换可以用一组参数${alpha_a in RR}$一组生成元${hat(G)_a}$表达为(默认对$a = 1, 2,..., n$求和，即Einstein求和约定)
+$
+  hat(U)(alpha_a) = e^(- i/hbar alpha_a hat(G)_a)
+$
+无穷小变换为
+$
+  hat(U)(epsilon_a) = 1 - (i epsilon_a)/hbar hat(G)_a + O(epsilon_a^2)
+$
+根据幺正性要求得到
+$
+  hat(U)^dagger hat(U) = 1 + 1/hbar epsilon_a (hat(G)_a^dagger - hat(G)_a) + O(epsilon_a^2) <=> hat(G)_a^dagger = hat(G)_a
+$
+所以每个生成元$hat(G)_a$都是Hermite算符
+$
+  hat(G)_a^dagger = hat(G)_a
+$
+当$alpha_a$取遍所有实数时，所有的$hat(U)(alpha_a)$变换构成的集合${hat(U)(alpha_a)}$也可能构成一个群。如果生成元$hat(G)_a$之间是两两对易的，则为$n$个单参数群的直积，群元之间的乘法是可交换的。
+
+如果生成元$hat(G)_a$之间并不两两对易，则群元之间的乘法一般不可交换，即非Abel群。
+
+要构成非Abel群，生成元$hat(G)_a$之间的对易关系要满足一定的条件。考虑任意群元$hat(U)(alpha_a)$和$hat(U)(beta_a)$，其一阶无穷小形式为
+$
+  hat(U)(alpha_a) = 1 - (i alpha_a)/hbar hat(G)_a + O(alpha_a^2)\
+  hat(U)(beta_a) = 1 - (i beta_a)/hbar hat(G)_a + O(beta_a^2)
+$
+很显然，精确到一阶无穷小，$hat(U)(alpha_a)$和$hat(U)(beta_a)$是可交换的。因此，要研究非Abel效应，必须考虑二阶无穷小项。将群元$hat(U)(alpha_a)$展开到二阶无穷小
+$
+  hat(U)(alpha_a) = 1 - (i alpha_a)/hbar hat(G)_a - 1/(2 hbar^2) alpha_a alpha_b hat(G)_a hat(G)_b + ...\
+  hat(U)^(-1)(alpha_a) = 1 + (i alpha_a)/hbar hat(G)_a - 1/(2 hbar^2) alpha_a alpha_b hat(G)_a hat(G)_b + ...
+$
+则可以计算 (到二阶项)
+$
+  hat(U)^(-1)(alpha_a) hat(U)^(-1)(beta_a) hat(U)(alpha_a) hat(U)(beta_a) & = 1 - 1/(hbar^2) alpha_a beta_b [hat(G)_a, hat(G)_b] + ...
+$
+这是四个群元相乘，仍然是某个群元，所以(注意要对$c$求和)
+$
+  [hat(G)_a, hat(G)_b] = i hbar c_(a b c) hat(G)_c
+$
+即生成元之间的对易关系(*代数*)必须是封闭的。
+
+#example(subname: [空间平移变换])[
+  先考虑最简单的一维情形，沿$x$方向的平移。此时，生成元$hat(G)$即为$hat(p)_x$。沿$x$方向平移$a$，对应的变换算符为
+  $
+    hat(U)(a) = e^(- i/hbar a hat(p)_x)
+  $
+  在此变换下，坐标算符$hat(x)$变换为
+  $
+    hat(x)' = hat(U)^dagger(a) hat(x) hat(U)(a) = e^(-i/hbar a hat(p)_x) hat(x) e^(i/hbar a hat(p)_x) = hat(x) - a
+  $
+  计算中利用了Baker-Campbell-Hausdorff公式和基本对易关系$[hat(x), hat(p)_x] = i hbar$。
+
+  反过来，若要求$hat(U)(a)$为平移算符，使得$hat(x)' = hat(x) - a$，则得到基本对易关系$[hat(x), hat(p)_x] = i hbar$。
+
+  三维空间的变换则为多参数连续变换，对应的变换算符为
+  $
+    hat(U)(vb(a)) = e^(- i/hbar sum_(i = x, y, z) a_i p_i) = e^(- i/hbar vb(a) dot vb(hat(p)) )
+  $
+  由于$[hat(p)_i, hat(p)_j] = 0$，这实际上是三个方向的平移群的直积。可以计算出 $hat(U)(vb(a))$ 对坐标表象基矢的作用为
+  $
+    hat(U)(vb(a)) ket(vb(x)) & = integral dd(vb(p)) hat(U)(vb(a)) ket(vb(p)) braket(vb(p), vb(x)) \
+                             & = integral dd(vb(p)) e^(- i/hbar vb(a) dot vb(p)) ket(vb(p)) e^(- i/hbar vb(p) dot vb(x)) \
+                             & = ket(vb(x) + vb(a))
+  $
+  系统状态的变换为$ket(psi) -> hat(U)(vb(a)) ket(psi)$，所以波函数的变换为
+  $
+    psi(vb(x)) = braket(vb(x), psi) -> psi'(vb(x)) = braket(vb(x), hat(U)(vb(a)), psi) = braket(vb(x) + vb(a), psi) = psi(vb(x) + vb(a))
+  $
+]
+
+#example(subname: [空间转动变换])[
+  空间转动变换的生成元为系统的角动量。对于绕$z$轴转动角度$phi$的操作，转动变换算符为
+  $
+    hat(U)_3 (phi) = e^(- i/hbar phi hat(J)_3)
+  $
+  对于一般的转动变换，变换算符可写为
+  $
+    hat(U)(phi_1, phi_2, phi_3) = e^(- i/hbar sum_(i = 1)^3 phi_i hat(J)_i)
+  $
+  这些变换构成$"SO"(3)$群，生成元的对易关系即为群的代数
+  $
+    [hat(J)_i, hat(J)_j] = i hbar epsilon_(i j k) hat(J)_k
+  $
 ]
