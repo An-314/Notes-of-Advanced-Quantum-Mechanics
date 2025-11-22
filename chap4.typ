@@ -832,3 +832,204 @@ $
 $
   vb(M) dot vb(r) = 1/m (vb(p) times vb(L)) dot vb(r) - alpha r = vb(L)^2/m - alpha r
 $
+令$vb(M)$与$vb(r)$的夹角为$theta$，上式即为轨道方程
+$
+  1/r = (m alpha)/(vb(L)^2) (1 + abs(vb(M))/alpha cos theta)
+$
+其中$vb(M)$和$vb(L)$是守恒量，由初始条件决定。
+
+在量子力学中，上面定义的定义的Runge-Lenz矢量并不是Hermite算符。采用*对称化排序*，将Runge-Lenz矢量定义为
+$
+  hat(vb(M)) = 1/(2m) (vb(hat(p)) times vb(hat(L)) - vb(hat(L)) times vb(hat(p))) - alpha hat(vb(r))/r
+$
+可以证明：
+- 它仍是一个守恒量，即
+  $
+    [hat(H), hat(vb(M))] = 0
+  $
+- 它与角动量$vb(L)$之间仍然满足
+  $
+    hat(vb(M)) dot vb(hat(L)) = vb(hat(L)) dot hat(vb(M)) = 0
+  $
+- 直接计算可以得到
+  $
+    hat(vb(M))^2 = 2/m hat(H) (vb(hat(L))^2 + hbar^2) + alpha^2
+  $
+系统态矢的转动变换算符可以写为(沿$vu(e)_n$转动$phi$角)
+$
+  hat(D)_n (phi) = e^(- i/hbar phi vu(e)_n dot vb(hat(L))) = e^(- i/hbar sum_(i=1)^3 phi_i L_i)
+$
+这些变换构成三维空间正当转动群$"SO"(3)$，等价于$"SU"(2)$。角动量$hat(L)$的三个分量为群的*生成元*，满足*对易关系(代数)*
+$
+  [hat(L)_i, hat(L)_j] = i hbar epsilon_(i j k) hat(L)_k
+$
+引入Runge-Lenz矢量$hat(vb(M))$。直接计算或利用任意矢量算符与角动量之间的对易关系，得到
+$
+  [hat(M)_i, hat(L)_j] = i hbar epsilon_(i j k) hat(M)_k
+$
+此外，可以计算出
+$
+  [hat(M)_i, hat(M)_j] = - (2 i hbar)/(m) epsilon_(i j k) hat(H) hat(L)_k
+$
+由于出现Hamilton量算符$hat(H)$
+$
+  [hat(L)_i, hat(L)_j], [hat(M)_i, hat(L)_j], [hat(M)_i, hat(M)_j]
+$
+并不构成封闭的代数，所以无法将$hat(L)$和$hat(M)$与更大的连续对称变换的生成元对应起来。因此，我们退而求其次，只考虑能量为$E<0$ 的束缚态，即*在能量本征值为$E < 0$的不变子空间中讨论*。这样，可将Hamilton量$hat(H)$用能量本征值$E$代替。定义
+$
+  hat(vb(N)) = (- m/(2 E))^(1/2) hat(vb(M))
+$
+这样定义的$hat(vb(N))$矢量与角动量有相同的量纲。
+
+利用$hat(vb(N))$矢量，可将对易关系写为
+$
+  [hat(L)_i, hat(L)_j] & = i hbar epsilon_(i j k) hat(L)_k \
+  [hat(N)_i, hat(L)_j] & = i hbar epsilon_(i j k) hat(N)_k \
+  [hat(N)_i, hat(N)_j] & = i hbar epsilon_(i j k) hat(L)_k
+$
+以上对易关系形成一个封闭的代数，对应的是四维空间正当转动群$"SO"(4)$。
+
+由于$"SO"(n)$的生成元数目为$n(n − 1)/2$，因此$"SO"(4)$生成元为6个，即$hat(vb(L))$和$hat(vb(N))$的共6个分量。引入第四维坐标$x_4$和动量$p_4$，定义
+$
+  tilde(L)_(i j) = hat(x)_i hat(p)_j - hat(x)_j hat(p)_i
+$
+则6个生成元为
+$
+  tilde(L)_(2 3) = hat(L)_1, tilde(L)_(3 1) = hat(L)_2, tilde(L)_(1 2) = hat(L)_3\
+  tilde(L)_(1 4) = hat(N)_1, tilde(L)_(2 4) = hat(N)_2, tilde(L)_(3 4) = hat(N)_3
+$
+更为简便的做法是将$hat(vb(L))$和$hat(vb(N))$线性组合，拆解为两组独立的$"SU"(2)$生成元。定义
+$
+  hat(vb(J))_1 = 1/2 (hat(vb(L)) + hat(vb(N)))\
+  hat(vb(J))_2 = 1/2 (hat(vb(L)) - hat(vb(N)))
+$
+则
+$
+  [hat(J)_(1 i), hat(J)_(1 j)] & = i hbar epsilon_(i j k) hat(J)_(1 k), [hat(vb(J))^2_1, hat(J)_(1 i)] = 0 \
+  [hat(J)_(2 i), hat(J)_(2 j)] & = i hbar epsilon_(i j k) hat(J)_(2 k), [hat(vb(J))^2_2, hat(J)_(2 i)] = 0 \
+  [hat(J)_(1 i), hat(J)_(2 j)] & = 0
+$
+这说明$hat(vb(J))_1$ 和 $hat(vb(J))_2$ 分别独立地生成两个$"SU"(2)$群，它们都是守恒
+量，即
+$
+  [hat(H), hat(vb(J))_1] = 0, [hat(H), hat(vb(J))_2] = 0
+$
+所以，体系的对称性群是两个$"SU"(2)$群的直积群$"SU"(2) times.o "SU"(2)$，与$"SO"(4)$同构。利用$hat(vb(M)) dot hat(vb(L)) = 0$
+$
+  hat(J)_1^2 - hat(J)_2^2 = hat(vb(L)) dot hat(vb(M)) = 0
+$
+同时可以计算出
+$
+  hat(J)_1^2 + hat(J)_2^2 = 1/2 (hat(vb(L))^2 + hat(vb(N))^2) = 1/2 (hat(vb(L))^2 - m/(2 E) hat(vb(M))^2)
+$
+从而
+$
+  hat(J)_1^2 = hat(J)_2^2 = 1/4 (hat(vb(L))^2 - m/(2 E) hat(vb(M))^2)
+$
+所以$hat(vb(J))_1^2$和$hat(vb(J))_2^2$必然有相同的本征值，记为$j(j + 1)hbar^2$，其中$j = 0, 1/2, 1, 3/2, ...$。
+
+求解$hat(H), hat(vb(J))_1^2, hat(J)_(1 z), hat(vb(J))_2^2, hat(J)_(2 z)$的共同完备本征态。在能量为$E < 0$的简并子空间中，得到
+$
+          hat(H) ket(psi) & = E ket(psi) \
+  hat(vb(J))_1^2 ket(psi) & = hat(vb(J))_2^2 ket(psi) = j(j + 1) hbar^2 ket(psi) \
+    hat(J)_(1 z) ket(psi) & = m_1 hbar ket(psi) \
+    hat(J)_(2 z) ket(psi) & = m_2 hbar ket(psi) \
+                 m_1, m_2 & = -j, -j + 1, ... , j - 1, j
+$
+考虑到
+$
+  hat(vb(M))^2 = 2/m hat(H) (vb(hat(L))^2 + hbar^2) + alpha^2
+$
+带入
+$
+  hat(J)_1^2 = hat(J)_2^2 = 1/4 (hat(vb(L))^2 - hat(H)/E (vb(hat(L))^2 + hbar^2) - alpha^2 m/(2 E))
+$
+带入本征方程
+$
+  hat(vb(J))_1^2 ket(psi) = j(j + 1) hbar^2 ket(psi)
+$
+得到
+$
+  1/4 (hat(vb(L))^2 - hat(H)/E (vb(hat(L))^2 + hbar^2) - (alpha^2 m)/(2 E)) ket(psi) = j(j + 1) hbar^2 ket(psi)
+$
+注意到$hat(H) ket(psi) = E ket(psi)$，最终得到
+$
+  1/4 (- hbar^2 - (alpha^2 m)/(2 E)) ket(psi) = j(j + 1) hbar^2 ket(psi)
+$
+由此解出
+$
+  E = - (m alpha^2)/(2 hbar^2 (2 j + 1)^2)
+$
+令$n = 2j + 1$，则有
+$
+  E_n = - (m alpha^2)/(2 hbar^2 n^2), n = 1, 2, 3, ...
+$
+由于$j = 0, 1/2, 1, 3/2, ...$，所以$n$为正整数，所以结果与类氢原子能级公式一致。
+
+*能级简并度*：若$hat(vb(J))_1^2$和 $hat(vb(J))_2^2$的本征值为$j_1(j_1 + 1)hbar^2$和$j_2(j_2 + 1)hbar^2$，则能级简并度为
+$
+  (2 j_1 + 1)(2 j_2 + 1)
+$
+另一方面，系统的对称性群$"SU"(2) times.o "SU"(2)$的不可约表示的维数亦为$(2j_1 + 1)(2j_2 + 1)$。这实际上就是两个角动量的合成。最终，由于$hat(vb(J))_1^2 = hat(vb(J))_2^2$导致$j_1 = j_2 = j$，因此能级简并度为$(2j+ 1)^2 = n^2$。
+
+== 空间反演
+
+=== 空间反演算符的定义与性质
+
+在经典力学中，单粒子系统的空间反演变换定义为
+$
+  vb(r) -> vb(r)' = - vb(r) \
+  vb(p) -> vb(p)' = - vb(p)
+$
+在量子力学中，我们需要定义态矢$ket(psi)$的空间反演变换
+$
+  ket(psi) -> ket(psi)' = hat(P) ket(psi)
+$
+很自然地，我们要求这个变换保持量子态的内积的模方不变。根据 Wigner 定理，$hat(P)^(-1) = hat(P)^dagger$。同时，我们要求力学量的平均值不变，即
+$
+  braket(psi', vb(hat(r))', psi') & = braket(psi, vb(hat(r)), psi) \
+  braket(psi', vb(hat(p))', psi') & = braket(psi, vb(hat(p)), psi)
+$
+得到力学量的变换为
+$
+  hat(vb(r)) -> hat(vb(r))' = hat(P) hat(vb(r)) hat(P)^dagger\
+  hat(vb(p)) -> hat(vb(p))' = hat(P) hat(vb(p)) hat(P)^dagger
+$
+但是我们实际上还在原地踏步，还不知道$hat(P)$的定义，更不知道它是线性的还是反线性的。
+#note[
+  连续变换都可以从恒等变换连续地变化而来，因此它们必然是线性的算符。而离散变换则不一定是线性的，例如空间反演和时间反演在量子力学中通常被定义为反线性算符。
+]
+很自然地，我们要求经典力学中的空间反演变换在平均值的意义上仍然成立，即
+$
+  braket(psi', hat(vb(r)), psi') & = - braket(psi, hat(vb(r)), psi) \
+  braket(psi', hat(vb(p)), psi') & = - braket(psi, hat(vb(p)), psi)
+$
+由此得到
+$
+  hat(P) hat(vb(r)) hat(P)^dagger & = - hat(vb(r)) \
+  hat(P) hat(vb(p)) hat(P)^dagger & = - hat(vb(p))
+$
+所以可以计算
+$
+  hat(P) [hat(x)_i, hat(p)_j] hat(P)^dagger & = [hat(P) hat(x)_i hat(P)^dagger, hat(P) hat(p)_j hat(P)^dagger] \
+                                            & = [- hat(x)_i, - hat(p)_j] \
+                                            & = [hat(x)_i, hat(p)_j]
+$
+利用$[hat(x)_i, hat(p)_j] = i hbar delta_(i j)$，得到
+$
+  hat(P) i hat(P)^dagger = i => hat(P) i = i hat(P)
+$
+$hat(P)$ 和虚数单位$i$可交换，因此$hat(P)$必为线性算符。对$hat(P) hat(vb(r)) hat(P)^dagger & = - hat(vb(r)), hat(P) hat(vb(p)) hat(P)^dagger & = - hat(vb(p))$式再做一次$hat(P)$变换，得到$hat(P)^2$与$hat(vb(r)), hat(vb(p))$都对易。总可以吸收相位因子适当定义$hat(P)$，使得 $hat(P)^2 = 1$。这样就得到
+$
+  hat(P)^dagger = hat(P) = hat(P)^(-1)
+$
+由此得到如下结论：
+- $hat(P)$是Hermite算符，可以作为一个力学量， *无经典对应*。
+- $hat(P)$的本征值为$±1$，对应本征态分别称为偶宇称态和奇宇称态。任意态矢必然可以展开为偶宇称态和奇宇称态的叠加
+  $
+    ket(psi) = 1/2 (ket(psi) + hat(P) ket(psi)) + 1/2 (ket(psi) - hat(P) ket(psi))
+  $
+
+=== 空间反演算符对基矢的作用
+
+*空间反演算符$hat(P)$对基矢的作用如何？*
