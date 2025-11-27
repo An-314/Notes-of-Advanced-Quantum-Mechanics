@@ -1582,3 +1582,126 @@ $
 $
   hat(U) = - i hat(sigma)_y, hat(T) = - i hat(sigma)_y hat(K)
 $
+
+=== 自旋1/2角动量
+
+==== 自旋角动量的基本性质($s = 1/2$)
+
+自旋就是“内禀角动量”。对自旋$s = 1/2$的粒子（电子、质子等），角动量算符满足和轨道角动量一样的对易关系：
+$
+  [hat(S)_i, hat(S)_j] = i hbar epsilon_(i j k) hat(S)_k
+$
+总自旋的平方算符为
+$
+  hat(vb(S))^2 = hat(S)_x^2 + hat(S)_y^2 + hat(S)_z^2
+$
+自旋量子数$s=1/2$时，$hat(vb(S))^2$的本征值是
+$
+  hat(vb(S))^2 ket(s\,m) = hbar^2 s(s+1) ket(s\, m) = 3/4 hbar^2 ket(s\, m)
+$
+而$hat(S)_z$的本征值为
+$
+  hat(S)_z ket(s\, m) = hbar m ket(s\, m), m = plus.minus 1/2
+$
+对于自旋 (1/2)，我们通常把两个本征态记作：
+- 上自旋态：$ket(arrow.t) eq.triple ket(1/2\, 1/2)$
+- 下自旋态：$ket(arrow.b) eq.triple ket(1/2\, - 1/2)$
+也会写成$ket(+z)$和$ket(-z)$，表示是$hat(S)_z$的本征态。
+
+==== Lie代数$frak(s u)(2)$
+
+角动量源自三维空间的旋转对称性，而三维旋转群唯一对应的Lie群是$"SO"(3)$，它的双覆盖是 $"SU"(2)$，量子态必须使用其双覆盖表示，因此角动量用$"SU"(2)$的表示来描述。
+
+$"SO"(3)$的Lie代数是$frak(s o)(3)$，其无限小旋转：
+$
+  R(theta) = I - i vb(theta) dot hat(vb(J))
+$
+其中生成元
+$
+  hat(J)_i, i = x, y, z
+$
+就是角动量代数，满足对易关系
+$
+  [hat(J)_i, hat(J)_j] = i epsilon_(i j k) hat(J)_k
+$
+自旋1/2的角动量代数是$frak(s u)(2)$的一个二维不可约表示，而所有二维不可约表示的生成元都与 Pauli 矩阵完全等价。
+
+量子态的变换是线性酉表示：量子态不是点，而是“向量的方向”；变换必须是复数线性并保持内积 ，也就是必须是酉矩阵（U(n)）。$"SO"(3)$的双覆盖是$"SU"(2)$，$"SU"(2)$有$"SO"(3)$没有的表示（如2维表示）
+$
+  "SU"(2)\/{plus.minus I} tilde.equiv "SO"(3)
+$
+自旋$1,2,3$都可以用$"SO"(3)$的表示来描述，而自旋$1/2, 3/2, 5/2$等则必须用$"SU"(2)$的表示来描述。
+
+$frak(s u)(2)$的不可约表示：由$s$唯一确定，维数为$2 s + 1$。对于$s = 1/2$，维数为2。
+#three-line-table[
+  | 自旋量子数   | 代数表示维度 | 物理对象       |
+  | ------- | ------ | ---------- |
+  | (s=0)   | 1      | 标量         |
+  | (s=1/2) | 2      | 电子自旋、费米子   |
+  | (s=1)   | 3      | 光子的偏振态（矢量） |
+  | (s=3/2) | 4      | Λ 粒子等      |
+]
+自旋1/2是SU(2)的二维不可约表示。而任何满足$frak(s u)(2)$代数的二维不可约Hermitian生成元，都通过一个酉变换与Pauli矩阵成比。
+
+==== Pauli 矩阵
+
+在二维的自旋空间里，我们常选 ${ket(arrow.t), ket(arrow.b)}$作为一组正交归一基矢。
+
+这时角动量算符可以写成$2 times 2$矩阵的形式。它们可以写成
+$
+  hat(S)_i = hbar/2 hat(sigma)_i, i = x, y, z
+$
+其中的$hat(sigma)_i$为Pauli矩阵，具体形式为
+$
+  hat(sigma)_x = mat(0, 1; 1, 0), hat(sigma)_y = mat(0, - i; i, 0), hat(sigma)_z = mat(1, 0; 0, -1)
+$
+因此自旋算符向量可以写成
+$
+  hat(vb(S)) = hbar/2 vb(hat(sigma))
+$
+这是因为，Pauli矩阵满足和角动量算符一样的对易关系：
+$
+  [hat(sigma)_i, hat(sigma)_j] = 2 i epsilon_(i j k) hat(sigma)_k
+$
+$hat(S)_z$的本征态满足
+$
+  hat(sigma)_z ket(arrow.t) = ket(arrow.t), hat(sigma)_z ket(arrow.b) = - ket(arrow.b)
+$
+在矩阵表示中，基矢可以写成
+$
+  ket(arrow.t) = mat(1; 0), ket(arrow.b) = mat(0; 1)
+$
+
+=== 自旋在其它方向的本征态
+
+沿$x,y$的方向的自旋算符分别为
+$
+  hat(S)_x = hbar/2 hat(sigma)_x, hat(S)_y = hbar/2 hat(sigma)_y
+$
+也有本征态，我们通常记作
+$
+  hat(S)_x ket(plus.minus \, x) = plus.minus hbar/2 ket(plus.minus \, x) \
+  hat(S)_y ket(plus.minus \, y) = plus.minus hbar/2 ket(plus.minus \, y)
+$
+可以计算其用$hat(S)_z$的本征态表示为
+$
+  ket(+ \, x) & = 1/sqrt(2) (ket(arrow.t) + ket(arrow.b)) ,
+                ket(- \, x) &   = 1/sqrt(2) (ket(arrow.t) - ket(arrow.b)) \
+  ket(+ \, y) & = 1/sqrt(2) (ket(arrow.t) + i ket(arrow.b)) ,
+                ket(- \, y) & = 1/sqrt(2) (ket(arrow.t) - i ket(arrow.b)) \
+$
+这是因为
+$
+  hat(sigma)_x ket(arrow.t) = ket(arrow.b), hat(sigma)_x ket(arrow.b) = ket(arrow.t) \
+  hat(sigma)_y ket(arrow.t) = i ket(arrow.b), hat(sigma)_y ket(arrow.b) = - i ket(arrow.t) \
+$
+#newpara()
+而在一般方向$vu(n)$上的自旋态$ket(plus.minus \, vu(n))$，沿这个方向的自旋算符定义为$hat(S)_vu(n)$
+$
+  hat(S)_vu(n) = vb(hat(S)) dot vu(n) = hbar/2 (hat(sigma)_x sin theta cos phi + hat(sigma)_y sin theta sin phi + hat(sigma)_z cos theta) = hbar/2 hat(sigma)_vu(n)
+$
+两个本征值为$plus.minus hbar/2$的本征态分别记为$ket(plus.minus \, vu(n))$，可以计算其用$hat(S)_z$的本征态表示为
+$
+  ket(+ \, vu(n)) & = cos(theta/2) ket(arrow.t) + sin(theta/2) e^(i phi) ket(arrow.b) \
+  ket(- \, vu(n)) & = - sin(theta/2) e^(- i phi) ket(arrow.t) + cos(theta/2) ket(arrow.b) \
+$
