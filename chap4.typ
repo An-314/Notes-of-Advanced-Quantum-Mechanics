@@ -1,4 +1,5 @@
 #import "@preview/scripst:1.1.1": *
+#import "@preview/physica:0.9.7": *
 
 = 对称性理论
 
@@ -997,7 +998,7 @@ $
 $
 但是我们实际上还在原地踏步，还不知道$hat(P)$的定义，更不知道它是线性的还是反线性的。
 #note[
-  连续变换都可以从恒等变换连续地变化而来，因此它们必然是线性的算符。而离散变换则不一定是线性的，例如空间反演和时间反演在量子力学中通常被定义为反线性算符。
+  连续变换都可以从恒等变换连续地变化而来，因此它们必然是线性的算符。而离散变换则不一定是线性的，例如时间反演在量子力学中通常被定义为反线性算符。
 ]
 很自然地，我们要求经典力学中的空间反演变换在平均值的意义上仍然成立，即
 $
@@ -1019,7 +1020,7 @@ $
 $
   hat(P) i hat(P)^dagger = i => hat(P) i = i hat(P)
 $
-$hat(P)$ 和虚数单位$i$可交换，因此$hat(P)$必为线性算符。对$hat(P) hat(vb(r)) hat(P)^dagger & = - hat(vb(r)), hat(P) hat(vb(p)) hat(P)^dagger & = - hat(vb(p))$式再做一次$hat(P)$变换，得到$hat(P)^2$与$hat(vb(r)), hat(vb(p))$都对易。总可以吸收相位因子适当定义$hat(P)$，使得 $hat(P)^2 = 1$。这样就得到
+$hat(P)$ 和虚数单位$i$可交换，因此*$hat(P)$必为线性算符*。对$hat(P) hat(vb(r)) hat(P)^dagger & = - hat(vb(r)), hat(P) hat(vb(p)) hat(P)^dagger & = - hat(vb(p))$式再做一次$hat(P)$变换，得到$hat(P)^2$与$hat(vb(r)), hat(vb(p))$都对易。总可以吸收相位因子适当定义$hat(P)$，使得 $hat(P)^2 = 1$。这样就得到
 $
   hat(P)^dagger = hat(P) = hat(P)^(-1)
 $
@@ -1030,6 +1031,554 @@ $
     ket(psi) = 1/2 (ket(psi) + hat(P) ket(psi)) + 1/2 (ket(psi) - hat(P) ket(psi))
   $
 
-=== 空间反演算符对基矢的作用
+=== 空间反演算符的作用
 
 *空间反演算符$hat(P)$对基矢的作用如何？*
+
+*坐标表象：*根据$hat(P) hat(vb(r)) hat(P)^dagger = - hat(vb(r))$得到$hat(vb(r)) hat(P) = - hat(P) hat(vb(r))$，因此有
+$
+  hat(vb(r)) hat(P) ket(vb(r)) & = - hat(P) hat(vb(r)) ket(vb(r)) = (- vb(r)) hat(P) ket(vb(r)) \
+$
+即：$hat(P) ket(vb(r))$ 也是 $hat(vb(r))$ 的本征态，本征值为 $- vb(r)$。所以必然有
+$
+  hat(P) ket(vb(r)) = e^(i delta) ket(- vb(r))\
+  hat(P)^2 ket(vb(r)) = e^(i delta) hat(P) ket(- vb(r)) = e^(2 i delta) ket(vb(r))
+$
+由于$hat(P)^2 = 1$，所以$e^(2 i delta) = 1$，即$e^(i delta) = ±1$。不失一般性，可取$e^(i delta) = 1$，因此
+$
+  hat(P) ket(vb(r)) = ket(- vb(r))
+$
+
+#newpara()
+
+*动量表象*：同样可以证明
+$
+  hat(P) ket(vb(p)) = plus.minus ket(- vb(p))
+$
+
+#newpara()
+
+需要注意的是别的教科书上对空间反演的定义可能存在另一种方式，即认为$hat(P)$是空间反演操作$cal(R): vb(r) -> vb(r)' = - vb(r)$所*诱导*出的量子态的变换，由于${cal(R), 1}$构成$Z_2$群，因此要求 ${hat(P), hat(I)}$ 也构成$Z_2$群，故 $hat(P)^2 = 1$。结合 Wigner 定理的要求$hat(P)^(-1) = hat(P)^dagger$，得到$hat(P)$是Hermite算符，从而必为线性算符。
+
+既然是线性算符，那么只要规定了$hat(P)$作用在Hilbert空间中任意一组基矢上的结果，就给出了$hat(P)$的定义。对于*无自旋单粒子系统*，选取坐标表象的基矢$ket(vb(r))$，则$hat(P)$可以定义为
+$
+  hat(P) ket(vb(r)) = ket(- vb(r))
+$
+其他所有的结果都可以由此出发推导出来。另外一种方式是规定$hat(P) hat(vb(r)) hat(P)^dagger = - hat(vb(r))$，并要求$hat(P)$和空间平移算符$hat(U)(vb(a))$满足关系
+$
+  hat(P) hat(U)(vb(a)) = hat(U)(- vb(a)) hat(P)
+$
+
+#newpara()
+
+*波函数的空间反演*：考虑坐标表象的波函数
+$
+  psi(vb(x)) = braket(vb(x), psi)
+$
+在空间反演下，波函数变为
+$
+  psi(vb(x)) -> braket(vb(x), hat(P), psi) = - braket(- vb(x), psi) = psi(- vb(x))
+$
+假设$ket(psi)$是宇称本征态，即
+$
+  hat(P) ket(psi) = plus.minus ket(psi)
+$
+则宇称本征态的波函数满足
+$
+  psi(- vb(x)) = plus.minus psi(vb(x))
+$
+其中取正号的为偶宇称态，取负号的为奇宇称态。
+
+以上只考虑了无自旋的系统。*自旋算符和自旋态在空间反演下如何变换？*为此，我们先考虑轨道角动量算符$hat(vb(L)) = hat(vb(r)) times hat(vb(p))$，由于$hat(vb(r))$和$hat(vb(p))$都是奇宇称算符，所以
+$
+  hat(P) hat(vb(L)) hat(P)^dagger = hat(vb(L)) <=> hat(P) hat(vb(L)) = hat(vb(L)) hat(P)
+$
+很自然地，我们要求自旋角动量$hat(vb(S))$也满足同样的性质，即
+$
+  hat(P) hat(vb(S)) hat(P)^dagger = hat(vb(S)) <=> hat(P) hat(vb(S)) = hat(vb(S)) hat(P)
+$
+考虑$hat(vb(S))^2, S_z$的共同本征态$ket(S M)$作为自旋空间的基矢。由于$hat(vb(S))^2, S_z$和$hat(P)$都对易，所以必然有
+$
+  hat(P) ket(S M) = e^(i gamma) ket(S M)
+$
+由于$hat(P)^2 = 1$，从而$e^(i gamma) = ±1$。不失一般性，可取$e^(i gamma) = 1$，约定
+$
+  hat(P) ket(S M) = ket(S M)
+$
+
+#newpara()
+
+在经典力学中，空间反演和转动操作是可交换(对易)的。在量子力学中，我们也很自然地假设空间反演变换$hat(P)$和转动变换$hat(D)_n (phi)$对易
+$
+  hat(P) hat(D)_n (phi) = hat(D)_n (phi) hat(P)
+$
+转动变换的生成元为总角动量$hat(vb(J))$的三个分量，即
+$
+  hat(D)_n (phi) = e^(- i/hbar phi vu(e)_n dot vb(hat(J))) = e^(- i/hbar sum_(i=1)^3 alpha_i hat(J)_i)
+$
+利用无穷小变换即可得到
+$
+  hat(P) hat(J) hat(P)^dagger = hat(J) <=> hat(P) hat(J) = hat(J) hat(P)
+$
+当然，这个结果也可从假设$hat(P) hat(vb(S)) hat(P)^dagger = hat(vb(S))$得到。
+
+#example(subname: [中心势场波函数的空间反演])[
+  考虑无自旋粒子在中心势场中的能量本征态$ket(n l m)$。由于轨道角动量$hat(vb(L))$和$hat(P)$对易，则$ket(n l m)$亦是宇称本征态。波函数为
+  $
+    braket(vb(r), n l m) = R_(n l)(r) Y_(l m)(theta, phi)
+  $
+  在球坐标系下，空间反演
+  $
+    mat(r; theta; phi) -> mat(r; pi - theta; phi + pi)
+  $
+  利用球谐函数的表达式
+  $
+    Y_(l m) (theta, phi) = (-1)^l/(2^l l!) sqrt((2 l + 1)/(4 pi) (l - m)!/(l + m)!) e^(i m phi) 1/(sin^m theta) dv(, cos theta, l-m) (sin theta)^(2l)
+  $
+  可知在空间反演下
+  $
+    Y_(l m) (theta, phi) -> Y_(l m)(pi - theta, phi + pi) = (-1)^l Y_(l m)(theta, phi)
+  $
+  所以我们得到
+  $
+    braket(vb(r), hat(P), n l m) = braket(- vb(r), n l m) = (-1)^l braket(vb(r), n l m)
+  $
+  即
+  $
+    hat(P) ket(n l m) = (-1)^l ket(n l m)
+  $
+]
+
+#example(subname: [一维谐振子])[
+  如果$hat(P)$与Hamilton量$hat(H)$对易，则非简并的能量本征态是宇称本征态。一维谐振子的能量本征态$ket(n)$的宇称为$(-1)^n$。
+]
+
+#example(subname: [一维自由粒子])[
+  一维自由粒子，$hat(P)$和动量都是守恒量，但是不对易，因此存在简并。
+]
+
+=== 宇称选择定则与宇称守恒
+
+*宇称选择定则*：假设$ket(alpha)$和$ket(beta)$都是具有确定宇称的量子态，即宇称本征态
+$
+  hat(P) ket(alpha) = epsilon_alpha ket(alpha) ,
+  hat(P) ket(beta) = epsilon_beta ket(beta), epsilon_(alpha, beta) = plus.minus 1
+$
+考虑算符$hat(Omega)$在$ket(alpha)$和$ket(beta)$之间的矩阵元，有
+$
+  braket(alpha, hat(Omega), beta) = braket(alpha, hat(P)^dagger hat(P) hat(Omega) hat(P)^dagger hat(P), beta) = epsilon_alpha epsilon_beta braket(alpha, hat(P) hat(Omega) hat(P)^dagger, beta)
+$
+如果算符$hat(Omega)$具有确定的宇称，即
+$
+  hat(P) hat(Omega) hat(P)^dagger = s hat(Omega), s = plus.minus 1
+$
+那么
+$
+  braket(alpha, hat(Omega), beta) = s epsilon_alpha epsilon_beta braket(alpha, hat(Omega), beta)
+$
+因此，当$s epsilon_alpha epsilon_beta = -1$时，矩阵元必然为零。
+
+例如：对于具有确定宇称的态，电偶极矩(平均值)为零。
+
+*宇称守恒*：$hat(P)$是Hermite算符，本身就可以作为力学量，取值为$±1$。在时间演化方程
+$
+  i hbar pdv(, t) ket(psi(t)) = hat(H) ket(psi(t))
+$
+两边作用算符$hat(P)$得到
+$
+  i hbar pdv(, t) (hat(P) ket(psi(t))) = hat(P) hat(H) hat(P)^dagger (hat(P) ket(psi(t)))
+$
+因此，若$hat(P) hat(H) hat(P)^dagger = hat(H)$，则宇称变换态$ket(psi'(t)) = hat(P) ket(psi(t))$遵守相同的运动方程。即：*空间反演不变性导致宇称守恒*。反之，若哈密顿量不具有空间反演不变性，$hat(P) hat(H) hat(P)^dagger != hat(H)$，则宇称不守恒。例如：弱相互作用中宇称不守恒。
+
+== 时间反演
+
+在经典力学中，粒子在$t$时刻的状态由其坐标$vb(r)$和动量$vb(p)$来描述。其时间反演状态为：粒子在$-t$时刻的坐标为$vb(r)$，动量为$-vb(p)$。这意味着，若粒子在$t$时刻的角动量为$vb(L) = vb(r) times vb(p)$，则在时间反演状态下，在$-t$时刻粒子角动量为$-vb(L)$。
+
+*时间反演并不是发生了时间倒流，而只是“运动的倒转”*(Wigner)。
+
+=== 时间反演算符的定义与性质
+
+在量子力学中，我们希望定义态矢$ket(psi)$的时间反演态
+$
+  ket(psi) -> ket(psi)' = hat(T) ket(psi)
+$
+其中$hat(T)$为时间反演算符。如果$hat(T)$保持任意态矢间的内积的模方不变，根据Wigner定理，$hat(T)$ 只能是幺正算符或者反幺正算符，都有$hat(T)^(-1) = hat(T)^dagger$。
+
+很自然地，我们要求经典力学中的时间反演*在平均值的意义上仍然成立*，即要求在时间反演态$ket(psi')$下，粒子的坐标和动量的平均值满足
+$
+  braket(psi', vb(hat(r)), psi') & = braket(psi, vb(hat(r)), psi) \
+  braket(psi', vb(hat(p)), psi') & = - braket(psi, vb(hat(p)), psi)
+$
+需要注意的是，现在我们并不知道$hat(T)$是线性算符还是反线性算符。接下来我们需要从中推导出$hat(vb(r))$和$hat(vb(p))$的变换关系。对于任意Hermite算符$hat(Omega)$，我们得到
+$
+  braket(psi', hat(Omega), psi') = (bra(psi) hat(T)^dagger) hat(Omega) (hat(T) ket(psi))
+$
+由于前后都是同一个态，而且$hat(T)^dagger hat(Omega) hat(T)$必为厄米算符，所以不论 $hat(T)$是线性还是反线性，都有
+$
+  braket(psi', hat(Omega), psi') = braket(psi, hat(T)^dagger hat(Omega) hat(T), psi)
+$
+因此我们得到
+$
+  braket(psi, hat(T)^dagger vb(hat(r)) hat(T), psi) & = braket(psi, vb(hat(r)), psi) \
+  braket(psi, hat(T)^dagger vb(hat(p)) hat(T), psi) & = - braket(psi, vb(hat(p)), psi)
+$
+由于$ket(psi)$是任意态，所以有
+$
+  hat(T) vb(hat(r))^dagger hat(T) & = vb(hat(r)) \
+  hat(T) vb(hat(p))^dagger hat(T) & = - vb(hat(p))
+$
+所以可以计算
+$
+  hat(T) [hat(x)_i, hat(p)_j] hat(T)^dagger & = [hat(T) hat(x)_i^dagger hat(T)^dagger, hat(T) hat(p)_j^dagger hat(T)^dagger] \
+  & = [hat(x)_i, - hat(p)_j] \
+  & = - [hat(x)_i, hat(p)_j]
+$
+利用$[hat(x)_i, hat(p)_j] = i hbar delta_(i j)$得到
+$
+  hat(T) i hat(T)^dagger = - i => hat(T) i = - i hat(T)
+$
+$hat(T)$和虚数单位$i$交换时出一个负号，因此对于任意复数$c$，有
+$
+  hat(T) c = c^* hat(T)
+$
+所以$hat(T)$是我们期盼已久的那个*反线性算符*。对于反线性算符，不能定义其矩阵元，从而在任意表象中*不存在矩阵表示*(矩阵必然是线性变换)，它的厄米共轭$hat(T)^dagger$也不能理解为转置加复共轭(可以认为它就是个记号)。所以，我们对待它必须如履薄冰。
+
+这里更为严谨的做法是利用如下的定理：设$ket(alpha)$和$ket(beta)$为任意态矢，其时间反演态为
+$
+  ket(alpha') = hat(T) ket(alpha), ket(beta') = hat(T) ket(beta)
+$
+则对于任意线性算符$hat(Omega)$有如下等式
+$
+  braket(beta, hat(Omega), alpha) = braket(alpha', hat(T) hat(Omega)^dagger hat(T)^(-1), beta')
+$
+#proof[
+  令$ket(gamma) eq.triple hat(Omega)^dagger ket(beta)$，利用反幺正算符的性质可得
+  $
+    braket(beta, hat(Omega), alpha) & = braket(gamma, alpha) = braket(alpha', gamma')\
+    &= braket(alpha', hat(T) hat(Omega)^dagger, beta) = braket(alpha', hat(T) hat(Omega)^dagger hat(T)^(-1), beta')
+  $
+  若$hat(Ω)$为Hermite算符，且$ket(alpha) = ket(beta) = ket(psi)$，则
+  $
+    braket(psi, hat(Omega), psi) = braket(psi', hat(T) hat(Omega) hat(T)^(-1), psi')
+  $
+]
+接下来研究*$hat(T)$对坐标算符本征态的作用*。利用$hat(vb(r))hat(T) = hat(T) hat(vb(r))$得到
+$
+  hat(vb(r)) hat(T) ket(vb(r)) & = hat(T) hat(vb(r)) ket(vb(r)) = vb(r) hat(T) ket(vb(r)) \
+$
+注意，最后一步利用了$vb(r)$是实数。所以必然有
+$
+  hat(T) ket(vb(r)) = e^(i xi) ket(vb(r))
+$
+约定$xi = 0$，即
+$
+  hat(T) ket(vb(r)) = ket(vb(r))
+$
+$hat(T)$对动量算符本征态的作用：利用$hat(vb(p)) hat(T) = - hat(T) hat(vb(p))$得到
+$
+  hat(vb(p)) hat(T) ket(vb(p)) & = - hat(T) hat(vb(p)) ket(vb(p)) = - vb(p) hat(T) ket(vb(p)) \
+$
+所以必然有
+$
+  hat(T) ket(vb(p)) = e^(i zeta) ket(- vb(p))
+$
+约定$zeta = 0$，即
+$
+  hat(T) ket(vb(p)) = ket(- vb(p))
+$
+之所以可以约定$xi = zeta = 0$，是因为对于无自旋系统，$hat(T)^2 = 1$。
+
+*波函数的时间反演*
+
+考虑无自旋单粒子系统的任意状态$ket(psi)$，进入坐标表象得到
+$
+  ket(psi) = integral dd(vb(r), 3) ket(vb(r)) braket(vb(r), psi) = integral dd(vb(r), 3) psi(vb(r)) ket(vb(r))
+$
+其中波函数为$psi(vb(r)) = braket(vb(r), psi)$。作用时间反演算符得到
+$
+  hat(T) ket(psi) & = hat(T) integral dd(vb(r), 3) psi(vb(r))ket(vb(r)) \
+                  & = integral dd(vb(r), 3) psi^*(vb(r)) hat(T) ket(vb(r)) \
+                  & = integral dd(vb(r), 3) psi^*(vb(r)) ket(vb(r))
+$
+注意第一步利用了$hat(T)$的反线性性质，$hat(T) c = c^* hat(T)$。同样，也可以进入动量表象，得到
+$
+  ket(psi) = integral dd(vb(p), 3) phi(vb(p)) ket(vb(p)) \
+$
+其中波函数为$phi(p) = braket(vb(p), psi)$。作用时间反演算符得到
+$
+  hat(T) ket(psi) & = hat(T) integral dd(vb(p), 3) phi(vb(p)) ket(vb(p)) \
+                  & = integral dd(vb(p), 3) phi^*(vb(p)) hat(T) ket(vb(p)) \
+                  & = integral dd(vb(p), 3) phi^*(vb(p)) ket(- vb(p))
+$
+所以，坐标表象：
+$
+  psi(vb(r)) -> psi'(vb(r)) = braket(vb(r), hat(T), psi) = psi^*(vb(r))
+$
+动量表象：
+$
+  phi(vb(p)) -> phi'(vb(p)) = braket(vb(p), hat(T), psi) = phi^*(- vb(p))
+$
+#newpara()
+
+接下来研究有自旋的系统。利用$hat(vb(r))$和$hat(vb(p))$的变换关系，可以证明对于轨道角动量$hat(vb(L))$有
+$
+  braket(psi', hat(vb(L)), psi') & = - braket(psi, hat(vb(L)), psi) \
+$
+与经典力学的结果在平均值意义上一致。如果认为自旋角动量与轨道角动量平权，那么我们很自然地将这个关系推广到自旋角动量，即：对于有自旋的系统，自旋角动量$hat(vb(S))$满足
+$
+  braket(psi', hat(vb(S)), psi') & = - braket(psi, hat(vb(S)), psi) \
+$
+由此得到
+$
+  hat(T) hat(vb(S))^dagger hat(T) & = - hat(vb(S)) \
+$
+此式与$hat(T) hat(vb(r))^dagger hat(T) & = hat(vb(r)), hat(T) hat(vb(p))^dagger hat(T) & = - hat(vb(p))$一起给出了时间反演算符$vb(T)$的定义。$vb(T)$是反线性算符，不能通过作用于一组基矢的结果来给出它的定义。
+
+接下来我们考虑有自旋的系统。首先证明一个定理：
+#theorem[
+  一个反幺正算符总可以分解为一个幺正算符$hat(U)$和一个复共轭运算$hat(K)$的乘积，
+  $
+    hat(T) = hat(U) hat(K)
+  $
+  $hat(K)$的运算规则是：对于任意复数，
+  $
+    hat(K) c = c^* hat(K)
+  $
+]
+#proof[
+  对于任意态$ket(alpha), ket(beta)$，有
+  $
+    braket(hat(T)alpha, hat(T)beta) = braket(alpha, beta)^*
+  $
+  所以进一步计算
+  $
+    braket(hat(T) hat(K) alpha, hat(T) hat(K) beta) & = braket(hat(K) alpha, hat(K) beta)^* = braket(beta, alpha) \
+  $
+  所以$hat(T) hat(K)$是幺正算符，记为$hat(U)$，利用$hat(T)^2 = 1$，有$hat(T) = hat(U) hat(K)$
+]
+
+考虑自旋1/2系统，将$hat(T) = hat(U) hat(K)$带入
+$
+  hat(T) hat(vb(S))^dagger hat(T) & = - hat(vb(S))
+$
+并利用
+$
+  hat(S) = hbar/2 hat(vb(sigma))
+$
+得到
+$
+  hat(U) hat(K) hat(vb(sigma)) hat(K)^dagger hat(U)^dagger & = - hat(vb(sigma)) => hat(U) hat(vb(sigma))^* hat(U)^dagger = - hat(vb(sigma))
+$
+取$sigma_z$表象，则$sigma_x, sigma_z$的矩阵元为实数，$sigma_y$的矩阵元为纯虚数，这
+样就得到
+$
+  hat(U) sigma_x hat(U)^dagger & = - sigma_x \
+  hat(U) sigma_y hat(U)^dagger & = sigma_y \
+  hat(U) sigma_z hat(U)^dagger & = - sigma_z
+$
+即
+$
+  U sigma_x = - sigma_x U, U sigma_y = sigma_y U, U sigma_z = - sigma_z U
+$
+根据 Pauli 矩阵的性质，满足这个条件的$U$显然可以写为
+$
+  U = e^(i alpha) sigma_y
+$
+若取$e^(i alpha) = - i$，则$U$可以写为
+$
+  hat(U) = e^(-i / hbar pi hat(S)_y)
+$
+这实际上是自旋态绕$y$轴转动$pi$的转动算符。也可以利用转动的方法推导出自旋1/2系统的时间反演算符。对于自旋1/2系统，可以计算
+$
+  hat(T)^2 = hat(U) hat(K) hat(U) hat(K) = e^(i alpha) sigma_y hat(K) e^(i alpha) sigma_y hat(K) =e^(i alpha) sigma_y e^(- i alpha) sigma^*_y hat(K) hat(K) = sigma_y sigma^*_y = - 1
+$
+也可以作用任意自旋态得到这个结果。利用
+$
+  hat(sigma)_y ket(arrow.t) = i ket(arrow.b) , hat(sigma)_y ket(arrow.b) = - i ket(arrow.t)
+$
+对于任意自旋态可以计算
+$
+  hat(T) (c_arrow.t ket(arrow.t) + c_arrow.b ket(arrow.b)) & = - i e^(- i alpha) (c_arrow.t^* ket(arrow.b) - c_arrow.b^* ket(arrow.t)) \
+  => hat(T)^2 (c_arrow.t ket(arrow.t) + c_arrow.b ket(arrow.b)) & = - (c_arrow.t ket(arrow.t) + c_arrow.b ket(arrow.b))
+$
+因此，对自旋 1/2 系统，有
+$
+  hat(T)^2 = - 1
+$
+而对于无自旋系统，$hat(U) = 1, hat(T) = hat(K)$，所以
+$
+  hat(T)^2 = 1
+$
+
+#newpara()
+
+一般性地，可以证明：$hat(T)^2$的取值只能为$+1$或$-1$。
+
+#proof[
+  对于任意归一化态矢$ket(j)$，根据时间反演的物理意义，可知$hat(T)^2 ket(j)$和$ket(j)$实际上是同一个态，即
+  $
+    hat(T)^2 ket(j) = c ket(j)
+  $
+  所以$hat(T)^2 = c$。利用
+  $
+    [hat(T)^2, hat(T)] = 0
+  $
+  得到
+  $
+    c hat(T) = hat(T) c = c^* hat(T)
+  $
+  从而$c = c^*$，即$c$为实数。再利用
+  $
+    1 = braket(hat(T)^2 psi) = abs(c)^2 braket(psi) = abs(c)^2
+  $
+  得到$c = ±1$
+]
+
+#example(subname: [${hat(vb(J))^2, hat(J)_z}$共同本征态的时间反演算符])[
+  对于角动量${hat(vb(J))^2, hat(J)_z}$的共同本征态，可以证明
+  $
+    hat(T) ket(j\, m) = (-1)^(j - m) ket(j\, - m) => hat(T)^2 ket(j\, m) = (-1)^(2 j) ket(j\, m)
+  $
+  所以，$j$为整数时，$hat(T)^2 = 1$；$j$为半整数时，$hat(T)^2 = - 1$。
+]
+
+#example(subname: [$N$个自旋 1/2 的粒子组成的系统])[
+  对于$N$个自旋 1/2 的粒子组成的系统
+  $
+    hat(T) = exp(- i pi/hbar sum_(n=1)^N hat(S)_(y)^((n))) hat(K) = (product_(n=1)^N (- i sigma_(y)^((n)))) hat(K)\
+    => hat(T)^2 = (-1)^N
+  $
+  #newpara()
+  一般性地，对于Bosen子系统，$hat(T)^2 = 1$；对于$N$个Fermion子系统，$hat(T)^2 = (-1)^N$。
+]
+
+=== 时间反演不变性
+
+*时间反演不变性*：考虑体系的时间演化方程，即Schrödinger方程
+$
+  i hbar pdv(, t) ket(psi(t)) = hat(H) ket(psi(t))
+$
+两边作用时间反演算符$hat(T)$得到
+$
+         hat(T) i hbar pdv(, t) ket(psi(t)) & = hat(T) hat(H) hat(T)^(-1) (hat(T) ket(psi(t))) \
+  => - i hbar pdv(, t) (hat(T) ket(psi(t))) & = hat(T) hat(H) hat(T)^(-1) (hat(T) ket(psi(t))) \
+$
+定义$ket(psi'(t)) = hat(T) ket(psi(t))$，并作代换$t -> - t$，得到
+$
+  i hbar pdv(, t) ket(psi'(- t)) = hat(T) hat(H) hat(T)^(-1) ket(psi'(- t))
+$
+若体系的Hamilton量$hat(H)$在时间反演变换下不变，即
+$
+  hat(T) hat(H) hat(T)^(-1) = hat(H) <=> hat(T) hat(H) = hat(H) hat(T)
+$
+则体系具有*时间反演不变性*。此时，若$ket(psi(t))$是Schrödinger方程的解，则其时间反演态$ket(psi'(- t)) = hat(T) ket(psi(-t))$也是Schrödinger方程的解。由
+$
+  ket(psi'(- t)) = hat(T) ket(psi(-t))
+$
+可知时间反演算符$hat(T)$并未使“时间倒流” 。由$hat(T) = hat(U) hat(K)$，得到
+$
+  hat(T) hat(H) hat(T)^(-1) = hat(U) hat(K) hat(H) hat(K)^(-1) hat(U)^dagger = hat(U) hat(H)^* hat(U)^dagger = hat(H)\
+  => hat(U) hat(H)^* hat(U)^dagger = hat(H)
+$
+对于无自旋粒子，$hat(U) = 1$，时间反演不变性要求
+$
+  hat(H)^* = hat(H)
+$
+
+#example(subname: [势场中运动的无自旋粒子])[
+  势场中运动的无自旋粒子，Schrödinger方程在坐标表象的形式为
+  $
+    i hbar pdv(, t) psi(vb(x), t) = (- hbar^2/(2 m) nabla^2 + V(vb(x))) psi(vb(x), t)
+  $
+  若$V(vb(x))$是实数势，取复共轭得到
+  $
+    - i hbar pdv(, t) psi^*(vb(x), t) = (- hbar^2/(2 m) nabla^2 + V(vb(x))) psi^*(vb(x), t)
+  $
+  做代换$t -> -t$，得到
+  $
+    i hbar pdv(, t) psi^*(vb(x), - t) = (- hbar^2/(2 m) nabla^2 + V(vb(x))) psi^*(vb(x), - t)
+  $
+  因此，若$psi(vb(x), t)$是Schrödinger方程的解，则其时间反演态$psi^*(vb(x), - t)$也是Schrödinger方程的解。也就是说，势场中运动的无自旋粒子具有时间反演不变性。
+]
+
+#proposition[
+  若量子系统具有时间反演不变性，则其非简并的能量本征态在坐标表象的波函数可以取为实函数。
+]
+#proof[
+  设$ket(psi)$是系统的某个非简并能量本征态，本征值为$E_n$。由时间反演不变性得到
+  $
+    hat(H) hat(T) ket(psi) = hat(T) hat(H) ket(psi) = E_n (hat(T) ket(psi))
+  $
+  所以$hat(T) ket(psi)$也是能量本征态，本征值也为$E_n$。而已知此能级无简并，所以$ket(psi)$和$hat(T) ket(psi)$必是同一个态。前面已经证明，两者的波函数分别为$braket(vb(r), psi)$和$braket(vb(r), hat(T), psi) = braket(vb(r), psi)^*$，因此
+  $
+    braket(vb(r), psi)^* = e^(i delta) braket(vb(r), psi)
+  $
+  不失一般性，可取$e^(i delta) = 1$，所以波函数可以取为实函数。
+]
+
+#proposition(subname: [Kramers简并])[
+  对于$hat(T)^2 = -1$的时间反演不变的系统，若$ket(n)$是能量本征态，则$hat(T) ket(n)$ 也是具有同样能量本征值的简并态。
+]
+
+#proof[
+  $ket(n)$是系统的能量本征态，本征值为$E_n$。由时间反演不变性得到性得到
+  $
+    hat(H) hat(T) ket(n) = hat(T) hat(H) ket(n) = E_n (hat(T) ket(n))
+  $
+  所以$hat(T) ket(n)$也是能量本征态，本征值也为$E_n$。考虑 $ket(n)$ 和 $hat(T) ket(n)$ 的内积
+  $
+    braket(n, hat(T) n) = braket(n, n') = braket(hat(T) n, hat(T) n')^* = braket(hat(T) n', hat(T) n) = braket(hat(T)^2 n, hat(T)n) = - braket(n, hat(T) n)
+  $
+  所以$ket(n)$和$hat(T) ket(n)$正交，不是同一个态，因此是属于同一个能量本征值$E_n$的两个简并态。
+
+  例如：$j$为半奇数的系统，奇数个Fermion构成的系统等。
+]
+
+=== 转动方法推导自旋 1/2 粒子的时间反演算符
+
+考虑自旋角动量沿任意$vu(e)_n$方向的分量$hat(S)_n ≡ hat(vb(S)) · vu(e)_n$的本征态
+$
+  hat(S)_n ket(plus.minus \, n) = plus.minus hbar/2 ket(plus.minus \, n)
+$
+由于$hat(T) hat(vb(S)) hat(T)^(-1) = - hat(vb(S))$，所以
+$
+  hat(S)_n hat(T) = - hat(T) hat(S)_n\
+  hat(S)_n hat(T) ket(+ \, n) = - hat(T) hat(S)_n ket(+ \, n) = - hbar/2 (hat(T) ket(+\, n))\
+$
+因此$hat(T) ket(+ \, n)$是$hat(S)_n$的本征值为$- hbar/2$的本征态，即
+$
+  hat(T) ket(+ \, n) = e^(i delta) ket(- \, n)
+$
+$ket(+ \, n)$可以通过$hat(S)_z$的本征态$ket(arrow.t)$旋转得到
+$
+  ket(+ \, n) = e^(- i / hbar theta hat(S)_y) e^(- i / hbar phi hat(S)_z) ket(arrow.t)
+$
+$theta$和$phi$分别为极角和方位角。利用$hat(T) hat(S)_i hat(T)^(-1) = - hat(S)_i$，可以计算
+$
+  hat(T) ket(+ \, n) & = hat(T) e^(- i / hbar theta hat(S)_y) e^(- i / hbar phi hat(S)_z) ket(arrow.t) \
+  & = e^(i / hbar theta hat(S)_y) e^(i / hbar phi hat(S)_z) (hat(T) ket(arrow.t)) = e^(i delta) ket(- \, n)
+$
+另一方面，对$ket(- \, n)$，有
+$
+  ket(- \, n) & = e^(- i / hbar (theta + pi) hat(S)_y) e^(- i / hbar phi hat(S)_z) ket(arrow.t) \
+$
+从而有
+$
+  hat(T) ket(arrow.t) & = e^(i delta) e^(- i / hbar pi hat(S)_y) ket(arrow.t) \
+$
+同样，通过对$ket(arrow.b)$做转动，可以证明
+$
+  hat(T) ket(arrow.b) & = e^(i delta) e^(- i / hbar pi hat(S)_y) ket(arrow.b) \
+$
+由于$hat(T) = hat(U) hat(K), hat(K) ket(arrow.t) = ket(arrow.t), hat(K) ket(arrow.b) = ket(arrow.b)$，所以
+$
+  hat(U) = e^(i delta) e^(- i / hbar pi hat(S)_y)
+$
+相位$δ$的取值是一个约定，通常取$δ = 0$。再利用
+$
+  e^(-i / hbar pi hat(S)_y) = cos theta/2 - 2 i hat(S)_y/hbar sin theta/2
+$
+得到
+$
+  hat(U) = - i hat(sigma)_y, hat(T) = - i hat(sigma)_y hat(K)
+$
