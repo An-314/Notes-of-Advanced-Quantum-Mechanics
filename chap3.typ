@@ -1,4 +1,5 @@
 #import "@preview/scripst:1.1.1": *
+#import "@preview/physica:0.9.7": *
 
 = 量子测量与量子力学的诠释问题
 

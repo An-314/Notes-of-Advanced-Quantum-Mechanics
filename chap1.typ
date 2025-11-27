@@ -1,4 +1,5 @@
 #import "@preview/scripst:1.1.1": *
+#import "@preview/physica:0.9.7": *
 
 = 量子力学的抽象形式和表象理论
 
