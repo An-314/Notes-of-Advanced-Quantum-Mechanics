@@ -14,6 +14,28 @@
   $
 ]
 
+#proof[
+  $j=1/2$，利用$hat(J)_y$的矩阵形式
+  $
+    hat(J)_y = hbar/2 mat(0, - i; i, 0)
+  $
+  得到
+  $
+    hat(J)_y^2 = (1/4) hbar^2 mat(1, 0; 0, 1)
+  $
+  利用Taylor展开，可以证明
+  $
+    e^(- i/hbar beta hat(J)_y) & = sum_(n=0)^oo (- i/hbar beta hat(J)_y)^n/n! \
+    & = sum_(n=0)^oo (- i beta/(2))^(2n)/(2n)! mat(1, 0; 0, 1) + sum_(n=0)^oo (- i beta/(2))^(2n+1)/(2n+1)! mat(0, -1; 1, 0) \
+    & = mat(cos(beta/2), -sin(beta/2); sin(beta/2), cos(beta/2))\
+    &= cos (beta/2) I_2 - 2 i sin (beta/2) hat(J)_y/hbar
+  $
+  基矢排列顺序取为$ket(1/2\, 1/2)$和$ket(1/2\, -1/2)$，得到
+  $
+    d^((1/2)) (beta) = mat(cos(beta/2), -sin(beta/2); sin(beta/2), cos(beta/2))
+  $
+]
+
 #exercise(subname: [讲义例题2])[
   $j=1$，利用$hat(J)_y$的矩阵形式，证明：
   $
