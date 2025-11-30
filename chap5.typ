@@ -518,11 +518,13 @@ $
 
 == 量子态的转动
 
-对系统进行转动操作：将系统沿任意方向$vu(n)$转动角度$phi$，对应的转动矩阵为
+=== 转动算符
+
+对系统进行*转动操作*：将系统沿任意方向$vu(n)$转动角度$phi$，对应的转动矩阵为
 $
   R_vu(n) ( phi) = e^(- i phi vb(G) dot vu(n)) = e^(- i phi (G_1 n_1 + G_2 n_2 + G_3 n_3))
 $
-它只作用在空间矢量上。对应的量子态的转动算符为
+它只作用在空间矢量上。对应的*量子态的转动算符为*
 $
   hat(D)(R) = hat(D)(R_vu(n) ( phi)) = e^(- i/hbar phi hat(J) dot vu(n)) = e^(- i/hbar phi hat(J)_n)
 $
@@ -545,6 +547,259 @@ $
 $
 这说明，在$(2j + 1)$维的不变子空间中，有*完备性关系*
 $
-  hat(D)(R) = sum_(m'-j)^j ketbra(j\, m')
+  sum_(m'-j)^j ketbra(j\, m') = 1
 $
-叠加系数$cal(D)_(m' m)^((j)) (R)$ (又称为 Wigner 函数) 构成的矩阵$cal(D)^((j))(R)$ 称为量子态的转动矩阵。以上讨论说明，研究量子态的转动，归结为计算转动矩阵$cal(D)^((j))(R)$。
+叠加系数$cal(D)_(m' m)^((j)) (R)$(又称为 *Wigner 函数*) 构成的矩阵$cal(D)^((j))(R)$ 称为量子态的转动矩阵。以上讨论说明，研究量子态的转动，归结为计算转动矩阵$cal(D)^((j))(R)$。
+
+所有三维正当转动$R$对应的转动算符${hat(D)(R)}$构成$"SU"(2)$群，即$R_1 R_2 -> hat(D)(R_1) hat(D)(R_2)$。容易证明
+$
+  hat(D)(R_1) hat(D)(R_2) ket(j\,m) & = sum_(m'=-j)^j cal(D)_(m' m)^((j)) (R_2) hat(D)(R_1) ket(j\, m') \
+  &= sum_(m'=-j)^j cal(D)_(m' m)^((j)) (R_2) sum_(m''=-j)^j cal(D)_(m'' m')^((j)) (R_1) ket(j\, m'') \
+  & = sum_(m'=-j)^j (cal(D)^((j)) (R_1) cal(D)^((j)) (R_2))_(m' m) ket(j\, m')
+$
+即
+$
+  hat(D)(R_1) hat(D)(R_2) -> cal(D)^((j)) (R_1) cal(D)^((j)) (R_2)
+$
+所以，所有*转动矩阵$cal(D)^((j))(R)$构成一个矩阵群*，与$"SU"(2)$群同构，即它是*$"SU"(2)$群的$2j + 1$维矩阵表示*。可以证明，这个表示是不可约的。即：所有转动矩阵$cal(D)^((j))(R)$不能通过任何相似变换化为分块对角的形式，$2j + 1$个正交归一基矢$ket(j\, m)$张成的不变子空间也不能进一步分解为更小的不变子空间的直和。
+
+=== 转动矩阵$hat(D)^((j))(R)$的计算
+
+考虑沿任意方向$vu(n)$的转动，转动矩阵$R_n(phi)$可以表示为
+$
+  R_n (phi) = e^(- i phi vb(G) dot vu(n)) = e^(- i phi (G_1 n_1 + G_2 n_2 + G_3 n_3))
+$
+其明显形式可计算出为$(c ≡ cos ϕ; s ≡ sin ϕ)$
+$
+    & R_n (phi) = R(phi; n_1,n_2,n_3) \
+  = & sum_(n=0)^oo phi^n/n! mat(0, -n_3, n_2; n_3, 0, -n_1; -n_2, n_1, 0)^n \
+  = & mat(
+        c + (1 - c) n_1^2, (1 - c) n_1 n_2 - s n_3, (1 - c) n_1 n_3 + s n_2;
+        (1 - c) n_2 n_1 + s n_3, c + (1 - c) n_2^2, (1 - c) n_2 n_3 - s n_1;
+        (1 - c) n_3 n_1 - s n_2, (1 - c) n_3 n_2 + s n_1, c + (1 - c) n_3^2
+      )
+$
+对应的量子态的转动矩阵$cal(D)^((j))(R_n (phi))$的矩阵元为
+$
+  cal(D)_(m_1 m_2)^((j)) (R) & = braket(j\, m_1, e^(- i/hbar phi hat(J) dot vu(n)), j\, m_2) \
+                             & = braket(j\, m_1, e^(- i/hbar phi (hat(J)_x n_1 + hat(J)_y n_2 + hat(J)_z n_3)), j\, m_2) \
+$
+最直接的思路就是暴力运算
+$
+  cal(D)_(m_1 m_2)^((j)) (R) & = cal(D)_(m_1 m_2)^((j)) (phi; n_1, n_2, n_3) \
+  & = sum_(n=0)^oo phi^n/n! (- i/hbar)^n braket(j\, m_1, (hat(J)_x n_1 + hat(J)_y n_2 + hat(J)_z n_3)^n, j\, m_2)
+$
+虽然$hat(J)_x, hat(J)_y, hat(J)_z$不对易，但是它们作用于$ket(j\, m)$上的结果都已经知道，所以上述级数展开的每一项原则上都可以计算出来。不幸的是，与$R_n(phi)$不同，这个级数无法求和得到一个有限的表达式。
+
+解决问题的办法就是把计算级数求和的难题扔给Euler角。根据Euler定理，三维Euclidean空间中的任意正当转动都可以表示为沿三个不同方向的转动的叠加。一种常用的方案是
+$
+  R(alpha,beta,gamma) = R_z'' (gamma) R_y' (beta) R_z (alpha) = R_z (gamma) R_y (beta) R_z (alpha)
+$
+其中$alpha,beta,gamma$称为Euler角。对于具体的转动$R_n (ϕ)$，三个Euler角可以通过$R(alpha, beta, gamma) = R_n (phi)$计算得到(没有解析结果)。
+
+根据转动操作群${R}$与转动算符群${hat(D)(R)}$之间的同态关系，我们立刻得到
+$
+  hat(D)(R) & = hat(D)(R_z (alpha)) hat(D)(R_y (beta)) hat(D)(R_z (gamma)) \
+            & = e^(- i/hbar alpha hat(J)_z) e^(- i/hbar beta hat(J)_y) e^(- i/hbar gamma hat(J)_z)
+$
+这样，利用Euler角，我们就把转动算符因子化为三个方向的转动算符的乘积，尤其是前后两个都是沿$z$方向。所以，转动矩阵的矩阵元可计算为
+$
+  cal(D)_(m_1 m_2)^((j)) (alpha, beta, gamma) & = braket(j\, m_1, e^(- i/hbar alpha hat(J)_z) e^(- i/hbar beta hat(J)_y) e^(- i/hbar gamma hat(J)_z), j\, m_2) \
+  & = e^(- i/hbar alpha m_1 hbar + gamma m_2 hbar) braket(j\, m_1, e^(- i/hbar beta hat(J)_y), j\, m_2) e^(- i/hbar ) \
+  & = e^(- i (alpha m_1 + gamma m_2)) d_(m_1 m_2)^((j)) (beta)
+$
+其中矩阵元
+$
+  d_(m_1 m_2)^((j)) (beta) = braket(j\, m_1, e^(- i/hbar beta hat(J)_y), j\, m_2)
+$
+
+#newpara()
+
+#example(subname: [$j=1/2$])[
+  $j=1/2$，利用$hat(J)_y$的矩阵形式，得到
+  $
+    hat(J)_y^2 = (1/4) hbar^2 mat(1, 0; 0, 1)
+  $
+  利用Taylor展开，可以证明
+  $
+    e^(- i/hbar beta hat(J)_y) & = sum_(n=0)^oo (- i/hbar beta hat(J)_y)^n/n! \
+    & = sum_(n=0)^oo (- i beta/(2))^(2n)/(2n)! mat(1, 0; 0, 1) + sum_(n=0)^oo (- i beta/(2))^(2n+1)/(2n+1)! mat(0, -1; 1, 0) \
+    & = mat(cos(beta/2), -sin(beta/2); sin(beta/2), cos(beta/2))\
+    &= cos (beta/2) I_2 - 2 i sin (beta/2) hat(J)_y/hbar
+  $
+  这个式子事实上是
+  $
+    e^(- i theta/2 vu(n) dot sigma) = cos (theta/2) I_2 - i sin (theta/2) vu(n) dot sigma
+  $
+  利用$hat(J)_y$的矩阵元公式，基矢排列顺序取为$ket(1/2\, 1/2)$和$ket(1/2\, -1/2)$，得到
+  $
+    d^((1/2)) (beta) = mat(cos(beta/2), -sin(beta/2); sin(beta/2), cos(beta/2))
+  $
+]
+
+#example(subname: [$j=1$])[
+  $j=1$，利用$hat(J)_y$的矩阵形式，得到
+  $
+    (hat(J)_y/hbar)^3 = hat(J)_y/hbar
+  $
+  利用Taylor展开，可以证明
+  $
+    e^(- i/hbar beta hat(J)_y) & = sum_(n=0)^oo (- i/hbar beta hat(J)_y)^n/n! \
+    & = sum_(n=0)^oo (- i beta)^(2n)/(2n)! (hat(J)_y/hbar)^(2n) + sum_(n=0)^oo (- i beta)^(2n+1)/(2n+1)! (hat(J)_y/hbar)^(2n+1) \
+    & = sum_(n=0)^oo (- i beta)^(2n)/(2n)! (hat(J)_y^2/hbar^2) + sum_(n=0)^oo (- i beta)^(2n+1)/(2n+1)! (hat(J)_y/hbar) \
+    & = I_3 - i (hat(J)_y/hbar) sin beta - (hat(J)_y/hbar)^2 (1 - cos beta)
+  $
+  利用$hat(J)_y$的矩阵元公式，基矢排列顺序取为$ket(1\, 1), ket(1\, 0)$和$ket(1\, -1)$计算结果为
+  $
+    d^((1)) (beta) = mat(
+      1/2(1 + cos beta), -1/(sqrt(2)) sin beta, 1/2 (1 - cos beta);
+      1/(sqrt(2)) sin beta, cos beta, -1/(sqrt(2)) sin beta;
+      1/2 (1 - cos beta), 1/(sqrt(2)) sin beta, 1/2 (1 + cos beta)
+    )
+  $
+]
+
+=== 电子自旋态的转动
+
+电子具有$j = 1/2$的内禀角动量，即自旋角动量，通常用$hat(S)$来表示。本征方程为示。本征方程为
+$
+    hat(S)^2 ket(s\, m) & = s(s + 1) hbar^2 ket(s\, m_s) &         s = 1/2 \
+  hat(S)_z ket(s\, m_s) & = m_s hbar ket(s\, m_s)        & m_s = -1/2, 1/2
+$
+将$m = 1/2$的态$ket(1/2\, 1/2)$记为$ket(arrow.t)$，$m = -1/2$的态$ket(1/2\, -1/2)$记为$ket(arrow.b)$。同时，引入*Pauli算符*$hat(vb(sigma))$
+$
+  hat(vb(S)) = (hbar)/(2) hat(vb(sigma))
+$
+满足$hat(sigma)_i^2 = I$，以及对易关系
+$
+  [hat(sigma)_i, hat(sigma)_j] = 2 i epsilon_(i j k) hat(sigma)_k
+$
+在$ket(arrow.t)$和$ket(arrow.b)$构成的Pauli表象中，Pauli算符的三个分量的矩阵形式即为熟知的*Pauli矩阵*。任意自旋态$ket(alpha)$可以表示为$ket(arrow.t)$和$ket(arrow.b)$的线性叠加，即
+$
+  ket(alpha) = ket(arrow.t) braket(arrow.t, alpha) + ket(arrow.b) braket(arrow.b, alpha)
+$
+考虑这个自旋态绕$z$轴的有限转动。自旋态转动为
+$
+  e^(- i/hbar phi hat(S)_z) ket(alpha) &= e^(- i/2 phi hat(sigma)_z) ket(arrow.t) braket(arrow.t, alpha) + e^(- i/2 phi hat(sigma)_z) ket(arrow.b) braket(arrow.b, alpha) \
+  &= e^(- i/2 phi) ket(arrow.t) braket(arrow.t, alpha) + e^( i/2 phi) ket(arrow.b) braket(arrow.b, alpha)
+$
+令转角$ϕ$的值为$2π$和$4π$，则得到
+$
+  e^(- i/hbar 2 pi hat(S)_z) ket(alpha) = - ket(alpha),\
+  e^(- i/hbar 4 pi hat(S)_z) ket(alpha) = ket(alpha)
+$
+这说明自旋态转动$2π$不还原，而是产生一个负号，即与原状态相比有一个$π$的相位差，只有转动$4π$才还原。
+
+转动$2π$产生的负号能否被观测到？考虑电子自旋在磁场中的进动，系统Hamiltonian为
+$
+  hat(H) = - (e B)/(m c) hat(S)_z = omega hat(S)_z,\
+  omega = (abs(e) B)/(m c)
+$
+时间演化算符为
+$
+  hat(U)(t, 0) = e^(- i/hbar hat(H) t) = e^(- i/hbar omega t hat(S)_z)
+$
+它与绕$z$轴的转动算符有着直接的关系
+$
+  hat(D)_z (omega t) = e^(- i/hbar omega t hat(S)_z) = hat(U)(t, 0)
+$
+即：时间演化算符等价于绕$z$轴转动$ϕ = omega t$对应的转动算符。假设初态为$ket(alpha)$，经过$t$时间后，体系的状态演化为
+$
+  e^(- i /hbar hat(S)_z omega t) ket(alpha) = e^(- i/2 omega t) ket(arrow.t) braket(arrow.t, alpha) + e^( i/2 omega t) ket(arrow.b) braket(arrow.b, alpha)
+$
+自旋角动量的平均值演化为
+$
+  mat(expval(S_x)(t); expval(S_y)(t); expval(S_z)(t)) & = mat(cos omega t, -sin omega t, 0; sin omega t, cos omega t, 0; 0, 0, 1) mat(expval(S_x)(0); expval(S_y)(0); expval(S_z)(0)) \
+$
+因此，平均值变化的周期即自旋进动的周期与自旋态变化的周期不同，分别为
+$
+  T_"procession" = 2 pi/omega,\
+  T_"state" = 4 pi/omega
+$
+#newpara()
+在电子的自旋进动中，无法观测到转动$2π$带来的负号，因为它是量子态的整体相位。要在实验上观测到这个负号，需要通过*量子干涉效应*。将几乎单色的中子束分为两束，分别通过路径$A$和$B$，最后在干涉区域汇合。在路径$B$上有部分区域存在恒定匀强磁场$B$。
+#figure(
+  image("pic/2025-11-30-23-15-06.png", width: 80%),
+  numbering: none,
+)
+假设$B$路径上的中子经过磁场区域的时间为$tau$，设进入磁场区域时中子自旋初态为$ket(alpha)$，出磁场后变为
+$
+  e^(- i/hbar hat(S)_z omega tau) ket(alpha) = e^(- i/2 omega tau) ket(arrow.t) braket(arrow.t, alpha) + e^( i/2 omega tau) ket(arrow.b) braket(arrow.b, alpha)
+$
+其中$omega$为中子的自旋进动频率
+$
+  omega = (g_n abs(e) B)/(m_n c), g_n tilde.eq - 1.91
+$
+这样，与没有磁场相比，中子产生了相位变化$e^(plus.minus i/2 omega tau)$。在汇合区域，从路径$A$和$B$通过的中子将发生干涉，强度呈现如下变化
+$
+  cos (plus.minus (omega tau)/2 + delta)
+$
+改变磁场强度，观测干涉信号还原时的改变$∆B$，与理论值比较。
+
+=== 电子自旋态沿任意方向的转动
+
+考虑电子自旋态绕任意方向$vu(n)$的转动算符为
+$
+  hat(D)_n (phi) = e^(- i/hbar phi hat(S) dot vu(n)) = e^(- i/2 phi hat(sigma) dot vu(n))
+$
+利用Taylor展开，以及$hat(sigma)_i^2 = I$，可以证明
+$
+  e^(- i/2 phi hat(sigma) dot vu(n)) = cos (phi/2) I_2 - i sin (phi/2) hat(sigma)_n
+$
+可以看到，对于任意方向，也有
+$
+  hat(D)_n (2 pi) ket(alpha) = - ket(alpha), hat(D)_n (4 pi) ket(alpha) = ket(alpha)
+$
+求解$hat(S)_n$或者$hat(sigma)_n$的本征值问题。将单位矢量$vu(n)$用方位角$phi$和极角$θ$表示为
+$
+  vu(n) = mat(sin theta cos phi; sin theta sin phi; cos theta)
+$
+则$hat(sigma)_n$在Pauli表象中的矩阵形式为
+$
+  hat(sigma)_n = mat(cos theta, sin theta e^(- i phi); sin theta e^( i phi), - cos theta)
+$
+易求得其本征值为$±1$，本征方程
+$
+  hat(sigma)_n ket(plus.minus\, n) = plus.minus ket(plus.minus\, n)\
+  hat(S)_n ket(plus.minus\, n) = plus.minus (hbar)/(2) ket(plus.minus\, n)
+$
+两个本征态可以表示为(*Bloch球面*)
+$
+  ket(+\, n) = mat(e^(- i phi/2) cos (theta/2); e^( i phi/2) sin (theta/2)),\
+  ket(-\, n) = mat(- e^(- i phi/2) sin (theta/2); e^( i phi/2) cos (theta/2))
+$
+可以证明，这两个态可以通过$ket(arrow.t)$和$ket(arrow.b)$通过适当的转动得到。例如$ket(+\, n)$可以通过对$ket(arrow.t)$做如下转动得到。
+#figure(
+  image("pic/2025-11-30-23-28-16.png", width: 80%),
+  numbering: none,
+)
+证明：根据图中两次转动操作，转动后的自旋态为
+$
+  hat(D)_z (alpha) hat(D)_y (beta) ket(arrow.t) & = e^(- i/2 alpha hat(sigma)_z) e^(- i/2 beta hat(sigma)_y) ket(arrow.t) \
+  & = e^(- i/2 alpha hat(sigma)_z) (cos (beta/2) ket(arrow.t) - i sin (beta/2) hat(sigma)_y ket(arrow.t)) \
+  & = (cos alpha/2 - i hat(sigma)_z sin alpha/2) (cos beta/2 ket(arrow.t) + sin beta/2 ket(arrow.b)) \
+  & = cos beta/2 e^(- i/2 alpha) ket(arrow.t) + sin beta/2 e^( i/2 alpha) ket(arrow.b)\
+  & = mat(e^(- i/2 alpha) cos beta/2; e^( i/2 alpha) sin beta/2)
+$
+若两个转角$α$和$β$正好是$vu(n)$的方位角和极角，则此态正好是$hat(S)_n$的本征值为$+hbar/2$的本征态$ket(+\, n)$。
+
+== 角动量的合成
+
+在具体的量子系统中经常存在两个或者多个独立的角动量，因此我们需要研究角动量的合成，即相加。假设所研究的系统具有两个独立的角动量$hat(J)_1$和$hat(J)_2$，分别定义在两个独立的Hilbert空间中，因此有如下关系
+$
+  [hat(J)_(1 i), hat(J)_(1 j)] = i hbar epsilon_(i j k) hat(J)_(1 k),\
+  [hat(J)_(2 i), hat(J)_(2 j)] = i hbar epsilon_(i j k) hat(J)_(2 k),\
+  [hat(J)_(1 i), hat(J)_(2 j)] = 0
+$
+最后一个关系表明两个角动量的独立性。在经典力学中，两个角动量相加就是矢量的加法
+$
+  vb(J) = vb(J)_1 + vb(J)_2
+$
+在量子力学中，角动量是定义在相应Hilbert空间中的算符。因此，总角动量应定义为
+$
+  hat(vb(J)) = hat(vb(J))_1 times.o hat(I)_2 + hat(I)_1 times.o hat(vb(J))_2
+$
+在不引起混淆的情况下，仍可简写为
+$
+  hat(vb(J)) = hat(vb(J))_1 + hat(vb(J))_2
+$
