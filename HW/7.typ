@@ -30,9 +30,9 @@
     & = mat(cos(beta/2), -sin(beta/2); sin(beta/2), cos(beta/2))\
     &= cos (beta/2) I_2 - 2 i sin (beta/2) hat(J)_y/hbar
   $
-  基矢排列顺序取为$ket(1/2\, 1/2)$和$ket(1/2\, -1/2)$，得到
+  这就是$d^((1/2))_(m'm)(phi) = braket(j m', e^(- i/hbar phi hat(J)_y), j m)$的矩阵形式。
   $
-    d^((1/2)) (beta) = mat(cos(beta/2), -sin(beta/2); sin(beta/2), cos(beta/2))
+    d^((1/2)) (phi) = mat(cos(phi/2), - sin(phi/2); sin(phi/2), cos(phi/2))
   $
 ]
 
@@ -45,6 +45,42 @@
       1/2 (1 - cos phi), 1/(sqrt(2)) sin phi, 1/2 (1 + cos phi)
     )
   $
+]
+
+#proof[
+  $j=1$，利用$hat(J)_y$的矩阵形式
+  $
+    hat(J)_y/hbar = 1/sqrt(2) mat(0, - i, 0; i, 0, - i; 0, i, 0)
+  $
+  得到
+  $
+    (hat(J)_y/ hbar)^2 = 1/2 mat(1, 0, - i; 0, 2, 0; i, 0, 1)
+  $
+  和
+  $
+    (hat(J)_y/ hbar)^3 = 1/sqrt(2) mat(0, - i, 0; i, 0, - i; 0, i, 0) = hat(J)_y/ hbar
+  $
+  利用Taylor展开，可以证明
+  $
+    e^(- i/hbar beta hat(J)_y) & = sum_(n=0)^oo (- i/hbar beta hat(J)_y)^n/n! \
+    & = sum_(n=0)^oo (- i beta)^(2n)/(2n)! (hat(J)_y/ hbar)^(2n) + sum_(n=0)^oo (- i beta)^(2n+1)/(2n+1)! (hat(J)_y/ hbar)^(2n+1) \
+    & = sum_(n=0)^oo (- i beta)^(2n)/(2n)! (hat(J)_y^2/hbar^2) + sum_(n=0)^oo (- i beta)^(2n+1)/(2n+1)! (hat(J)_y/hbar) \
+    & = cos(beta) I_3 - i sin(beta) hat(J)_y/hbar + (1 - cos(beta)) hat(J)_y^2/hbar^2\
+    & = mat(
+      1/2(1 + cos beta), -1/(sqrt(2)) sin beta, 1/2 (1 - cos beta);
+      1/(sqrt(2)) sin beta, cos beta, -1/(sqrt(2)) sin beta;
+      1/2 (1 - cos beta), 1/(sqrt(2)) sin beta, 1/2 (1 + cos beta)
+    )
+  $
+  这就是$d^((1))_(m'm)(phi) = braket(j m', e^(- i/hbar phi hat(J)_y), j m)$的矩阵形式。
+  $
+    d^((1)) (phi) = mat(
+      1/2(1 + cos phi), -1/(sqrt(2)) sin phi, 1/2 (1 - cos phi);
+      1/(sqrt(2)) sin phi, cos phi, -1/(sqrt(2)) sin phi;
+      1/2 (1 - cos phi), 1/(sqrt(2)) sin phi, 1/2 (1 + cos phi)
+    )
+  $
+
 ]
 
 #exercise(subname: [Sakurai 3.17])[
