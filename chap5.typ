@@ -785,7 +785,7 @@ $
 
 == 角动量的合成
 
-在具体的量子系统中经常存在两个或者多个独立的角动量，因此我们需要研究角动量的合成，即相加。假设所研究的系统具有两个独立的角动量$hat(J)_1$和$hat(J)_2$，分别定义在两个独立的Hilbert空间中，因此有如下关系
+在具体的量子系统中经常存在两个或者多个独立的角动量，因此我们需要研究角动量的合成，即相加。假设所研究的系统具有两个独立的角动量$hat(J)_1$和$hat(J)_2$，分别*定义在两个独立的Hilbert空间中*，因此有如下关系
 $
   [hat(J)_(1 i), hat(J)_(1 j)] = i hbar epsilon_(i j k) hat(J)_(1 k),\
   [hat(J)_(2 i), hat(J)_(2 j)] = i hbar epsilon_(i j k) hat(J)_(2 k),\
@@ -803,3 +803,138 @@ $
 $
   hat(vb(J)) = hat(vb(J))_1 + hat(vb(J))_2
 $
+#example(subname: [角动量的合成])[
+  - 轨道角动量和自旋角动量的合成
+    $
+      hat(vb(J)) = hat(vb(L)) + hat(vb(S)) = hat(vb(L)) times.o hat(I)_S + hat(I)_L times.o hat(vb(S))
+    $
+  - 两个 1/2 自旋角动量的合成
+    $
+      hat(vb(J)) = hat(vb(S))_1 + hat(vb(S))_2 = hat(vb(S))_1 times.o hat(I)_2 + hat(I)_1 times.o hat(vb(S))_2
+    $
+]
+若对系统施加转动操作$R$，对应的转动算符为
+$
+  hat(D)(R) = hat(D)_1(R) times.o hat(D)_2 (R) = e^(- i/hbar phi hat(J)_1 dot vu(n)) times.o e^(- i/hbar phi hat(J)_2 dot vu(n))
+$
+由于$hat(vb(J))_1$和$hat(vb(J))_2$是独立的(对易)，所以
+$
+  hat(D)(R) = e^(- i/hbar phi hat(J) dot vu(n)) = e^(- i/hbar phi (hat(J)_1 + hat(J)_2) dot vu(n))
+$
+
+#newpara()
+
+对于角动量$hat(vb(J))_1$，其本征值问题已经知晓，$hat(J)^2_1$和$hat(J)_(1z)$共同本征态为$ket(j_1\, m_1)$。在具体体系中，通常只需考虑$j_1$为确定值的子空间，维数为$2j_1 + 1$。对于角动量$hat(vb(J))_2$，$hat(vb(J))^1_2$和$hat(J)_(1z)$共同本征态为$ket(j_2\, m_2)$。同理，考虑$j_2$为确定值的子空间，维数为$2j_2 + 1$。两个子空间合起来构成的直积空间，维数为$(2j_1 + 1)(2j_2 + 1)$。
+
+*问题：直积空间的基矢如何选取？*
+
+方案 1: 最简单最朴素的想法就是将第一个空间的$2j_1 + 1$个基矢${ket(j_1\, m_1)}$和第二个空间的$2j_2 + 1$个基矢${ket(j_2\, m_2)}$两两直积起来，构成$(2j_1 + 1)(2j_2 + 1)$个基矢。即
+$
+  ket(j_1 j_2 \; m_1 m_2) = ket(j_1\, m_1) times.o ket(j_2\, m_2)
+$
+这相当于选取$hat(vb(J))_1^2, hat(J)_(1z), hat(vb(J))_2^2, hat(J)_(2z)$的共同本征态,称为*非耦合表象*。
+
+方案 2: 利用
+$
+  hat(vb(J))^2 = (hat(vb(J))_1 + hat(vb(J))_2)^2 = hat(vb(J))_1^2 + hat(vb(J))_2^2 + 2 hat(J)_(1 z) hat(J)_(2 z) + hat(J)_(1 +) hat(J)_(2 -) + hat(J)_(1 -) hat(J)_(2 +)
+$
+可以证明$hat(vb(J))_1^2, hat(vb(J))_2^2, hat(vb(J))^2, hat(J)_(z)$是两两对易的。因此存在共同本征态，记为
+$
+  ket(j_1 j_2\; j m)
+$
+本征方程为
+$
+    hat(vb(J))^2 ket(j_1 j_2\; j m) & = j(j + 1) hbar^2 ket(j_1 j_2\; j m) \
+  hat(vb(J))_1^2 ket(j_1 j_2\; j m) & = j_1(j_1 + 1) hbar^2 ket(j_1 j_2\; j m) \
+  hat(vb(J))_2^2 ket(j_1 j_2\; j m) & = j_2(j_2 + 1) hbar^2 ket(j_1 j_2\; j m) \
+        hat(J)_z ket(j_1 j_2\; j m) & = m hbar ket(j_1 j_2\; j m)
+$
+因此，也可以用${ket(j_1 j_2\; j m)}$做为基矢，其个数仍为$(2j_1+1)(2j_2+1)$个，称为*耦合表象*。两种不同的基矢选取实际上是一种*表象变换*。
+
+*表象变换*：利用完备性关系
+$
+  sum_(m_1) ketbra(j_1 \, m_1) = hat(I)_1,\
+  sum_(m_2) ketbra(j_2 \, m_2) = hat(I)_2,\
+  sum_(m_1, m_2) ketbra(j_1 j_2 \; m_1 m_2) = hat(I)_1 times.o hat(I)_2 = hat(I)
+$
+得到
+$
+  ket(j_! j_2 \; j m) & = sum_(m_1, m_2) ket(j_1 j_2 \; m_1 m_2) braket(j_1 j_2 \; m_1 m_2, j_1 j_2 \; j m) \
+$
+这就是两个表象的基矢之间的变换关系，其中叠加系数
+$
+  braket(j_1 j_2 \; m_1 m_2, j_1 j_2 \; j m)
+$
+即为表象变换的矩阵元，称为*Clebsch-Gordan系数*(CG 系数)。
+
+问题：$j$和$m$的取值几何？即$j$和$m$取何值时CG系数不为零？
+
+首先，$m$的取值为
+$
+  m = m_1 + m_2
+$
+欲证明之，考虑
+$
+  (hat(J)_z - hat(J)_(1 z) - hat(J)_(2 z)) ket(j_1 j_2 \; m_1 m_2) & = 0
+$
+左乘$bra(j_1 j_2 \; m_1 m_2)$，得到
+$
+  (m - m_1 - m_2) braket(j_1 j_2 \; m_1 m_2, j_1 j_2 \; j m) = 0
+$
+若 CG 系数不为零，则必有
+$
+  m = m_1 + m_2
+$
+其次，$j$的取值为
+$
+  j = abs(j_1 - j_2), abs(j_1 - j_2) + 1, ..., (j_1 + j_2) - 1, j_1 + j_2
+$
+欲证明之，首先易证$m$的最大值为$j_1 + j_2$，所以$j$的最大值亦为$j_1 + j_2$。对于$j$的最小值$j_min$，可利用空间维数不变求之。对于每一个$j$值，$m$有$2j + 1$个可能取值，所以
+$
+     & sum_(j_min)^(j_1 + j_2) (2j + 1) = (2j_1 + 1)(2j_2 + 1) \
+  => & (j_1 + j_2 + 1)^2 - j_min^2 = (2j_1 + 1)(2j_2 + 1) \
+  => & j_min = abs(j_1 - j_2)
+$
+所以$j$的最小值为$abs(j_1 - j_2)$。
+
+系统的转动算符为
+$
+  hat(D)(R) = hat(D)_1(R) times.o hat(D)_2 (R) = e^(- i/hbar phi hat(J)_1 dot vu(n)) times.o e^(- i/hbar phi hat(J)_2 dot vu(n))
+$
+在非耦合表象下，转动矩阵的矩阵元为
+$
+  braket(j_1 j_2 \; m_1 m_2, hat(D)(R), j_1 j_2 \; m'_1 m'_2) & = braket(j_1 \, m_1, hat(D)_1(R), j_1 \, m'_1) braket(j_2 \, m_2, hat(D)_2(R), j_2 \, m'_2) \
+$
+这实际上就是两个矩阵的直积：
+$
+  cal(D)(R) = cal(D)^((j_1)) (R) times.o cal(D)^((j_2)) (R)
+$
+这是直积群$"SU"(2) times.o "SU"(2)$的$(2j_1 + 1)(2j_2 + 1)$维表示，它是可约的，可以分解为若干个不可约表示的直和：
+$
+  cal(D)^((j_1))(R) times.o cal(D)^((j_2))(R) = sum_(j=abs(j_1 - j_2))^(j_1 + j_2) plus.o cal(D)^((j))(R)
+$
+
+#example(subname: [两个$1/2$自旋角动量的合成])[
+  *非耦合表象*：$hat(vb(S))_1^2, hat(S)_(1z), hat(vb(S))_2^2, hat(S)_(2z)$的共同本征态为
+  $
+    ket(1/2 1/2 \; m_1 m_2) = ket(1/2\, m_1) times.o ket(1/2\, m_2)
+  $
+  明确写出来就是
+  $
+      ket(1/2 1/2 \; 1/2 1/2) & = ket(arrow.t arrow.t) = ket(arrow.t) times.o ket(arrow.t), \
+     ket(1/2 1/2 \; 1/2 -1/2) & = ket(arrow.t arrow.b) = ket(arrow.t) times.o ket(arrow.b), \
+     ket(1/2 1/2 \; -1/2 1/2) & = ket(arrow.b arrow.t) = ket(arrow.b) times.o ket(arrow.t), \
+    ket(1/2 1/2 \; -1/2 -1/2) & = ket(arrow.b arrow.b) = ket(arrow.b) times.o ket(arrow.b)
+  $
+  *耦合表象*：$hat(vb(S))_1^2, hat(vb(S))_2^2, hat(vb(S))^2, hat(S)_(z)$的共同本征态为
+  $
+    ket(1/2 1/2\; j m) = sum_(m_1 m_2) ket(1/2 1/2 \; m_1 m_2) braket(1/2 1/2 \; m_1 m_2, 1/2 1/2\; j m)
+  $
+  $j$可取$0, 1$。利用 CG 系数的结果，明确写出来就是
+  $
+     ket(1/2 1/2\; 0 0) & = (1)/(sqrt(2)) (ket(arrow.t arrow.b) - ket(arrow.b arrow.t)) \
+     ket(1/2 1/2\; 1 1) & = ket(arrow.t arrow.t) \
+     ket(1/2 1/2\; 1 0) & = (1)/(sqrt(2)) (ket(arrow.t arrow.b) + ket(arrow.b arrow.t)) \
+    ket(1/2 1/2\; 1 -1) & = ket(arrow.b arrow.b) \
+  $
+]
