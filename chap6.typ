@@ -408,3 +408,578 @@ $
   hat(T) = hat(V) + hat(V) hat(G)^(plus) (E_vb(k)) hat(V)
 $
 利用 Dyson-Schwinger 方程进行迭代，就得到同样的 Born 级数。
+
+=== 光学定理
+
+总散射截面$sigma_t$与向前散射振幅的虚部存在如下关系
+$
+  sigma_t = (4 pi)/k Im f(vb(k), vb(k)) = (4 pi)/k Im f(0)
+$
+
+#proof[
+  将 Lippmann-Schwinger 方程的共轭方程
+  $
+    bra(vb(k)) = bra(psi^+) - bra(psi^+) hat(V) 1/(E_vb(k) - hat(H)_0 - i epsilon)
+  $
+  与$hat(V) ket(psi^+)$ 做内积得到
+  $
+    braket(vb(k), hat(V), psi^+) = braket(psi^+, hat(V), psi^+) - braket(psi^+, hat(V) 1/(E_vb(k) - hat(H)_0 - i epsilon) hat(V), psi^+)
+  $
+  散射振幅为
+  $
+    f(vb(k)', vb(k)) = - (4 pi^2 m)/(hbar^2) braket(vb(k)', hat(V), psi^+) = - (4 pi^2 m)/(hbar^2) braket(vb(k)', hat(T), vb(k))
+  $
+  考虑$f(vb(k), vb(k))$的虚部
+  $
+    Im braket(vb(k), hat(T), vb(k)) = Im braket(vb(k), hat(V), psi^+) = Im braket(psi^+, hat(V), psi^+) - Im braket(psi^+, hat(V) 1/(E_vb(k) - hat(H)_0 - i epsilon) hat(V), psi^+)
+  $
+  由于$hat(V)$是Hermitian算符，所以第一项为零
+  $
+    Im braket(vb(k), hat(T), vb(k)) &= - Im braket(psi^+, hat(V) 1/(E_vb(k) - hat(H)_0 - i epsilon) hat(V), psi^+)\
+    &= - Im braket(vb(k), hat(T)^dagger 1/(E_vb(k) - hat(H)_0 - i epsilon) hat(T), vb(k))\
+    &= - Im integral dd(vb(q), 3) braket(vb(k), hat(T)^dagger 1/(E_vb(k) - hat(H)_0 - i epsilon), vb(q)) braket(vb(q), hat(T), vb(k)) \
+    &= - Im integral dd(vb(q), 3) braket(vb(k), hat(T)^dagger, vb(q)) braket(vb(q), hat(T), vb(k)) 1/(E_vb(k) - E_vb(q) - i epsilon)\
+  $
+  利用Dirac恒等式
+  $
+    1/(x plus.minus i epsilon) = "P" 1/x minus.plus i pi delta(x)
+  $
+  得到
+  $
+    Im braket(vb(k), hat(T), vb(k)) &= - pi integral dd(vb(q), 3) abs(braket(vb(k), hat(T), vb(q)))^2 delta(E_vb(k) - E_vb(q))
+  $
+  采用球坐标，利用
+  $
+    delta(E_vb(k) - E_vb(q)) = m/(hbar^2 k) delta(k - q), dd(vb(q), 3) = q^2 dd(q) dd(Omega_vb(q))
+  $
+  完成对$q$的积分，得到$(abs(vb(k)') = abs(vb(k)) = k)$
+  $
+    Im braket(vb(k), hat(T), vb(k)) & = - (m pi k)/(hbar^2) integral dd(Omega_vb(k)) abs(braket(vb(k)', hat(T), vb(k)))^2 \
+  $
+  根据散射振幅与$T$矩阵元的关系
+  $
+    f(vb(k)', vb(k)) = - (4 pi^2 m)/(hbar^2) braket(vb(k)', hat(T), vb(k))
+  $
+  得到
+  $
+    Im f(vb(k), vb(k)) & = - (4 pi^2 m)/hbar^2 Im braket(vb(k), hat(T), vb(k)) \
+    & = - (4 pi^2 m)/hbar^2 (- (pi m k)/(hbar^2) integral dd(Omega_vb(k)) abs(braket(vb(k)', hat(T), vb(k)))^2) \
+    & = (k)/(4 pi) integral dd(Omega_vb(k)) abs(f(vb(k)', vb(k)))^2 \
+    & = k/(4 pi) sigma_t
+  $
+]
+
+== 含时散射理论
+
+喀兴林《高等量子力学》第六章 28 小节，或者孙昌璞《量子力学现代教程》 6.4 小节
+
+== 分波展开
+
+如果势场$V(vb(r))$是球对称的，即$V(vb(r)) = V(r)$，根据方程
+$
+  hat(T) = hat(V) + hat(V) 1/(E_vb(k) - hat(H)_0 + i epsilon) hat(T)
+$
+可知$T$算符与$hat(vb(L))^2$和$hat(L)_z$对易。对于自由粒子部分$hat(H)_0$，角动量亦是守恒量，可将力学量完备集取为${hat(H)_0, hat(vb(L))^2, hat(L)_z}$，共同本征态记为$ket(E l m)$，即
+$
+      hat(H)_0 ket(E l m) & = E ket(E l m), \
+  hat(vb(L))^2 ket(E l m) & = l(l+1) hbar^2 ket(E l m), \
+      hat(L)_z ket(E l m) & = m hbar ket(E l m)
+$
+这些本征态的归一化采用如下的 convention
+$
+  braket(E' l' m', E l m) = delta(E' - E) delta_(l l') delta_(m m')
+$
+完备性条件为
+$
+  sum_(l=0)^oo sum_(m=-l)^(l) integral dd(E) ketbra(E l m) = 1
+$
+可将$ket(vb(k))$态展开为
+$
+  ket(vb(k)) = sum_(l=0)^oo sum_(m=-l)^(l) integral dd(E) ket(E l m) braket(E l m, vb(k)) \
+$
+与$vb(k)$表象和$vb(r)$表象之间的变换矩阵元为 (Sakurai, pp.407)
+$
+  braket(vb(k), E l m) & = hbar/sqrt(m k) delta(E - E_vb(k)) Y_(l m) (vu(k)), E_vb(k) = (hbar^2 vb(k)^2)/(2m) \
+  braket(vb(r), E l m) & = i^l/hbar sqrt((2 m k)/pi) j_l (k r) Y_(l m) (vu(r)) \
+$
+考虑散射振幅，利用$E l m$表象的完备性得到
+$
+  f(vb(k)', vb(k)) &= - (4 pi^2 m)/(hbar^2) braket(vb(k)', hat(T), vb(k)) \
+  &= - (4 pi^2 m)/(hbar^2) sum_l sum_m sum_l' sum_m' integral dd(E) integral dd(E') braket(vb(k)', E' l' m') braket(E' l' m', hat(T), E l m) braket(E l m, vb(k)) \
+  &= - (4 pi^2)/(k) sum_l sum_m sum_l' sum_m' braket(E_vb(k) l' m', hat(T), E_vb(k) l m) Y_(l' m') (vu(k)) Y_(l m)^* (vu(k)) \
+$
+由于$hat(T)$算符与$hat(vb(L))^2$和$hat(L)_z$对易，因此
+$
+  braket(E_vb(k) l' m', hat(T), E_vb(k) l m) = T_l (E_vb(k)) delta_(l' l) delta_(m' m)
+$
+$T_l (E_vb(k))$称为*在壳的*$l$-分波$T$矩阵元。于是得到
+$
+  f(vb(k)', vb(k)) & = - (4 pi^2)/(k) sum_l sum_m T_l (E_vb(k)) Y_(l m) (vu(k)) Y_(l m)^* (vu(k)) \
+$
+取$vb(k)$的方向为$z$方向
+$
+  Y_(l m) (vu(k)) = sqrt((2 l + 1)/(4 pi)) delta_(m 0) = Y_(l m)^* (vu(k))
+$
+这样，对$m$求和只有$m = 0$一项。设$vb(k)'$和$vb(k)$的夹角为$theta$，则
+$
+  Y_(l 0) (vu(k)') = sqrt((2 l + 1)/(4 pi)) P_l (cos theta) \
+$
+其中$P_l (cos theta)$是Legendre多项式。
+
+定义*分波散射振幅*
+$
+  f_l (k) = - pi/k T_l (E_vb(k))
+$
+则*总散射振幅*可以写为
+$
+  f(vb(k)', vb(k)) = f(theta, k) = sum_(l=0)^oo (2 l + 1) f_l (k) P_l (cos theta)
+$
+回顾波函数在无穷远处的渐近行为
+$
+  braket(vb(r), psi^+) -> 1/(2 pi)^(3/2) (e^(i k z) + f(theta, k) e^(i k r)/r) \
+$
+利用
+$
+  e^(i k z) & = sum_(l=0)^oo i^l (2 l + 1) j_l (k r) P_l (cos theta) \
+  j_l (k r) & -> 1/(k r) sin(k r - (l pi)/2) 当 r -> oo \
+$
+可将波函数渐进行为写为
+$
+  braket(vb(r), psi^+) & -> 1/(2 pi)^(3/2) sum_(l=0)^oo (2 l + 1) (P_l (cos theta))/(2 i k) ((1 + 2 i k f_l (k)) (e^(i k r))/r - e^(-i(k r - l pi))/r)
+$
+
+#newpara()
+
+根据*概率守恒*，概率流密度满足
+$
+  pdv(rho, t) + div vb(J) = 0 => integral vb(J) dot dd(vb(S)) = 0
+$
+即在任意球面上入射和出射的粒子通量应相等。由于角动量守恒，每个分波都应满足这个要求。定义$l$-分波的$S$矩阵元
+$
+  vb(J) = (hbar)/(2 m i) (psi^* grad psi - psi grad psi^*)
+$
+$
+  S_l (k) = 1 + 2 i k f_l (k) = 1 - 2 pi i T_l (k)
+$
+概率守恒要求
+$
+  abs(S_l (k)) = 1
+$
+此即幺正性关系。也可以仔细计算概率流密度$vb(J)$来证明这个结论。
+#note[
+  在含时散射中，$hat(S)$是一个幺正算符，与这里的$S$矩阵元对应。
+]
+所以*在无穷远处出射波只有相位的改变*。定义
+$
+  S_l (k) = e^(2 i delta_l)
+$
+$delta_l = delta_l (k)$被称为$l$-分波的*散射相移*
+$
+  f_l (k) = (e^(2 i delta_l) - 1)/(2 i k) = (e^(i delta_l) sin delta_l)/k = 1/(k cot delta_l - i k)
+$
+总散射振幅可以用各分波相移表达为
+$
+  f(theta) & = sum_(l=0)^oo (2 l + 1) (e^(2 i delta_l) - 1)/(2 i k) P_l (cos theta) \
+           & = 1/k sum_(l=0)^oo (2 l + 1) e^(i delta_l) sin delta_l P_l (cos theta)
+$
+总散射截面可以直接计算为
+$
+  sigma_t &= integral abs(f(theta))^2 dd(Omega)\
+  &= 1/k^2 sum_l sum_l' (2l+1)(2l'+1) e^(-i delta_l) sin delta_l e^(i delta_l') sin delta_l' integral_0^(2pi) dd(phi) integral_(-1)^1 dd(cos theta) P_l (cos theta) P_(l') (cos theta) \
+  &= (4pi)/k sum_l (2l+1) sin^2 delta_l \
+$
+可以验证光学定理
+$
+  sigma_t = (4 pi)/k Im f(0)
+$
+#newpara()
+
+按照分波展开，散射振幅的计算归结为散射相移的计算。波函数的一般形式可写为
+$
+  braket(vb(r), psi^+) = 1/(2 pi)^(3/2) sum_(l=0)^oo (2 l + 1) i^' A_l (r) P_l (cos theta) \
+$
+径向函数$A_l (r)$满足的方程为
+$
+  1/r^2 dv(, r) (r^2 dv(, r) A_l (r)) + (k^2 - (2m)/hbar^2 V(r) - l(l+1)/r^2) A_l (r) = 0
+$
+定义$u_l (r) ≡ r A_l (r)$，则$u_l (r)$满足
+$
+  dv(u_l, r, 2) + (k^2 - (2m)/hbar^2 V(r) - l(l+1)/r^2) u_l (r) = 0
+$
+按照散射理论的精神，在边界$C$以外，势场为零。假设当$r > R$时，$V = 0$($R$称为力程)，则在$r > R$区域$A_l (r)$的一般解为
+$
+  A_l (r) = a_l j_l (k r) + b_l n_l (k r)
+$
+其中$j_l (x)$和$n_l (x)$分别为第一类和第二类球Bessel函数。或者利用球Hankel函数
+$
+  h_l^((1)) = j_l + i n_l, h_l^((2)) = j_l - i n_l
+$
+将一般解写为
+$
+  A_l (r) = c_l^((1)) h_l^((1)) (k r) + c_l^((2)) h_l^((2)) (k r)
+$
+利用球Bessel函数或者球Hankel函数在$r -> oo$时的渐近行为，可以确定叠加系数与散射相移 $δ_l$的关系。
+
+当$r -> oo$时，球Hankel函数的渐进行为是
+$
+  h_l^((1)) (k r) & -> e^(i (k r - (l pi)/2))/(k r) , h_l^((2)) (k r) & -> e^(-i (k r - (l pi)/2))/(k r)
+$
+与渐近行为
+$
+  braket(vb(r), psi^+) & -> 1/(2 pi)^(3/2) sum_(l=0)^oo (2 l + 1) (P_l (cos theta))/(2 i k) ((1 + 2 i k f_l (k)) (e^(i k r))/r - e^(-i(k r - l pi))/r)
+$
+比较可定出系数
+$
+  c_l^((1)) = 1/2 e^(2 i delta_l), c_l^((2)) = 1/2
+$
+因此，在$r > R$区域，径向函数的解为
+$
+  A_l (r) & = 1/2 e^(2 i delta_l) h_l^((1)) (k r) + 1/2 h_l^((2)) (k r) \
+          & = e^(i delta_l) (j_l (k r) cos delta_l - n_l (k r) sin delta_l) \
+          & -> 1/(k r) sin(k r - (l pi)/2 + delta_l), r -> oo
+$
+显然，散射相移$δ_l$取决于势场$V(r)$和入射能量$E$。因此需要求解相互作用区域即$r < R$区域的径向方程为（$u_l = r A_l$）
+$
+  dv(u_l, r, 2) + (k^2 - (2m)/hbar^2 V(r) - l(l+1)/r^2) u_l (r) = 0
+$
+在$r -> 0$时满足边界条件
+$
+  u_l (r=0) =0
+$
+另一个边界条件为径向函数$u_l (r)$及其导数在$r = R$处连续。
+
+#example(subname: [硬球散射])[
+  $
+    V(r) = cases(oo&r<R, 0&r>R)
+  $
+  这个问题无需计算$β_l$。利用$r = R$处$A_l (r = R) = 0$得到
+  $
+    j_l (k R) cos delta_l = n_l (k R) sin delta_l => tan delta_l = (j_l (k R))/(n_l (k R))
+  $
+  对于$s$波散射$(l = 0)$
+  $
+    tan delta_0 = (j_0 (k R))/(n_0 (k R)) = (sin(k R)/(k R)) / ((-cos(k R))/(k R)) = -tan(k R)
+  $
+  得到
+  $
+    delta_0 = - k R
+  $
+  $r > R$区域径向波函数为(除去相因子$e^(i δ_0)$
+  $
+    A_(l=0) (r) & prop (sin k r)/(k r) cos delta_0 + (cos k r)/(k r) sin delta_0 \
+                & = 1/(k r) sin(k r + delta_0)
+  $
+]
+#figure(
+  image("pic/2025-12-14-14-14-47.png", width: 80%),
+  numbering: none,
+)
+
+#example(subname: [低能散射与束缚态])[
+  在径向方程$(u_l ≡ r A_l)$
+  $
+    dv(u_l, r, 2) + (k^2 - (2m)/hbar^2 V(r) - l(l+1)/r^2) u_l (r) = 0
+  $
+  中，取$V = 0$得到边界外的解
+  $
+    dv(v_l, r, 2) + (k^2 - l(l+1)/r^2) v_l (r) = 0
+  $
+  以上两式分别乘以$v_l$和$u_l$，相减后得到
+  $
+    v_l dv(u_l, r, 2) - u_l dv(v_l, r, 2) = - (2m)/hbar^2 v_l u_l V(r)\
+    => dv(, r) (v_l dv(u_l, r) - u_l dv(v_l, r)) = - (2m)/hbar^2 v_l u_l V(r)
+  $
+  两边对$r$从$0$到$oo$积分得到
+  $
+    eval(v_l dv(u_l, r) - u_l dv(v_l, r))_(r->oo) = - (2m)/hbar^2 integral_0^(oo) v_l u_l V(r) dd(r)
+  $
+  $v_l$的解即为$v_l (r) = r j_l (k r)$。利用$r -> oo$的渐进行为，得到
+  $
+    (e^(i delta_l) sin delta_l)/k = - (2m)/hbar^2 integral_0^(oo) A_l (r) j_l (k r) V(r) r^2 dd(r)
+  $
+  在低能极限下，$1/k$远大于力程，我们预期$A_l (r)$与$j_l (k r)$区别不大。因此，右边$tilde k^(2l)$。这意味着$δ_l$也是很小的，因此左边$tilde δ_l/k$。所以，当$k -> 0$时，相移的行为是
+  $
+    delta_l tilde k^(2l + 1)
+  $
+  这意味着，对于*短程势的低能散射问题，只有$s$波是重要的*。
+]
+
+#newpara()
+
+考虑在如下势垒$(V_0 > 0)$或势阱$(V_0 < 0)$中的$s$波散射。
+$
+  V(r) = cases(V_0&r<R, 0&r>R)
+$
+只考虑$l = 0$。在$r > R$区域，波函数为
+$
+  A(r) & = e^(i delta_0) (j_0 (k r) cos delta_0 - n_0 (k r) sin delta_0) \
+       & = e^(i delta_0) (sin(k r + delta_0))/(k r) \
+$
+这实际上就是径向方程$u=r A$
+$
+  dv(u, r, 2) + k^2 u = 0
+$
+的一般解(差一个整体相因子$e^(i delta_0)$)。
+
+在$r < R$区域，径向方程为
+$
+  dv(u, r, 2) + (2m)/hbar^2 (E - V_0) u = 0, E = (hbar^2 k^2)/(2m)
+$
+满足边界条件$u(r = 0) = 0$的解为
+$
+  u(r) = alpha sin(k' r), k' = sqrt((2m(E - V_0))/hbar^2)
+$
+对于势垒且$E < V_0$的情形，此式也成立，利用
+$
+  sin(i kappa r) = i sinh(kappa r), k' = i kappa, kappa = sqrt((2m(V_0 - E))/hbar^2)
+$
+接下来利用$r = R$处的连续性条件。如果只需要定出散射相移$δ_0$，可利用$u'/u$在$r = R$处连续。得到
+$
+  tan(k R + delta_0)/k = tan(k' R)/k'\
+  => 1/k (tan(k R) + tan delta_0)/(1 - tan(k R) tan delta_0) = tan(k' R)/k'
+$
+解得
+$
+  tan delta_0 = (k tan(k' R) - k' tan(k R))/(k' + k tan(k R)tan(k' R))
+$
+对于势垒且$E < V_0$的情形，利用
+$
+  tan delta_0 = (k tanh(kappa R) - kappa tan(k R))/(kappa + k tan(k R)tanh(kappa R))
+$
+#figure(
+  image("pic/2025-12-14-16-07-11.png", width: 80%),
+  numbering: none,
+)
+- 势阱是吸引势，相移$δ_0/k$体现为左移
+- 势垒是排斥势，相移$δ_0/k$体现为右移
+考虑*势阱*的情形$(V_0 < 0)$。定义代表势阱深度的参数
+$
+  xi = sqrt((2 m abs(V_0))/hbar^2) R => k' R = sqrt((k R)^2 + xi^2)
+$
+则散射相移为$(x ≡ k R)$
+$
+  tan delta_0 = (x tan(sqrt(x^2 + xi^2)) - sqrt(x^2 + xi^2) tan x)/(sqrt(x^2 + xi^2) + x tan x tan(sqrt(x^2 + xi^2)))
+$
+由此可计算参数$xi$取不同值时，相移$δ_0$与$x = k R$的关系。我们发现，当势阱中出现*第一个束缚态*，即
+$
+  xi = pi/2
+$
+时，*散射相移的行为发生突变*。
+#figure(
+  image("pic/2025-12-14-16-11-51.png", width: 80%),
+  numbering: none,
+)
+$
+  xi = pi/2 => sqrt((2 m abs(V_0))/hbar^2) R = pi/2
+$
+这意味着势阱深度到一定程度才有束缚态。
+
+一般性地，考虑散射能量$E -> 0$即$k -> 0$的情形。在$r$大于力程的区域，$l = 0$的径向方程变成
+$
+  dv(u, r, 2)= 0
+$
+其一般解为
+$
+  u(r) = c(r - a), A(r) = c(1-a/r)
+$
+另一方面，对于有限散射能量，力程以外区域的波函数为
+$
+  A(r) = e^(i delta_0) (sin(k r + delta_0))/(k r) = e^(i delta_0) (sin(k r) cos delta_0 + cos(k r) sin delta_0)/(k r)
+$
+取$k -> 0$的极限，得到
+$
+  lim_(k->0) (sin(k r) cos delta_0 + cos(k r) sin delta_0)/(k r) = (lim_(k->0) cos delta_0) (1 + 1/r lim_(k->0) (tan delta_0)/k)
+$
+注意$delta_0 = delta_0(k) prop k$，因此常数$a$由下式定出
+$
+  a = - lim_(k->0) (tan delta_0)/k, lim_(k->0) k cot delta_0 = -1/a
+$
+这个常数$a$被称为*散射长度*。利用光学定理可以得到$k -> 0$时的散射截面为
+$
+  sigma_t = lim_(k->0) (4 pi)/k Im 1/(k cot delta_0 - i k) = 4 pi a^2
+$
+#figure(
+  image("pic/2025-12-14-16-23-38.png", width: 50%),
+  numbering: none,
+)
+- 对于势垒：$a>0$，散射长度是正的
+- 对于势阱：在没有束缚态时，$a<0$，散射长度是负的
+- 对于势阱：在出现束缚态时，$a>0$，散射长度是正的
+对于*排斥势*，散射长度$a > 0$，大致与力程同量级。例如，对于势垒$(V_0 > 0)$，可计算出散射长度为
+$
+  a/R = 1 - (tanh xi)/xi, xi = sqrt((2 m V_0)/hbar^2) R
+$
+对于硬球散射，$a = R$。
+#figure(
+  image("pic/2025-12-14-16-24-54.png", width: 30%),
+  numbering: none,
+)
+对于*吸引势*，情形则完全不同。散射长度$a$可正可负，而且可以远大于力程。对于势阱$(V_0 < 0)$的散射，可以计算出散射长度为
+$
+  a/R = 1 - (tan xi)/xi, xi = sqrt((2 m abs(V_0))/hbar^2) R
+$
+#figure(
+  image("pic/2025-12-14-16-30-41.png", width: 30%),
+  numbering: none,
+)
+可以看到，散射长度在
+$
+  xi = sqrt((2 m abs(V_0))/hbar^2) R = ((2n + 1) pi)/2, n = 1, 2, 3, ...
+$
+处发散，这些点是*势阱束缚态的散射共振*。考虑势阱中的*束缚态*问题$(E < 0)$。径向波函数的解为
+$
+  u(r) = cases(
+    alpha sin(sqrt((2m(E-V_0))/hbar^2) r) " " & r < R,
+    beta exp(- sqrt(-2m E)/hbar^2 r) " " & r > R
+  )
+$
+利用$u'/u$的连续性可得到$E$满足的方程
+$
+  cot(sqrt((2m(E-V_0))/hbar^2) R) = - sqrt((-E)/(E - V_0))
+$
+可见，满足上述条件时，势阱刚好要容纳一个新的束缚态$(E -> 0^-)$，同时，散射长度发散，并发生符号改变。这种现象被称为*散射共振*。在$xi$略大于共振点的地方，散射长度$a$很大，且是正的，对应束缚态能级$E -> 0^-$。在$r > R$的区域，束缚态$E -> 0^-$和散射态$E -> 0^+$的波函数分别为
+$
+  u(r) = cases(
+    alpha (r - a) " " & E-> 0^+,
+    beta exp(- kappa r) " " & E-> 0^-
+  )
+$
+令两者的$u'/u$相等，得到$(R ≪ a)$
+$
+  kappa tilde.eq 1/a
+$
+因此，接近共振点处的束缚态能量为
+$
+  E = - (hbar^2 kappa^2)/(2m) tilde.eq - (hbar^2)/(2m a^2)
+$
+#newpara()
+上述结果是普遍的，对于一般性的短程势也成立的。我们还可以证明，*散射振幅或者$S$矩阵的奇点正好就是束缚态能量*。
+
+考虑$l = 0$的情形。对于散射态，径向波函数 $A_(l=0) (r)$在$r -> oo$时的渐进行为是
+$
+  A_(l = 0) (r) tilde S_(l = 0) (k) e^(i k r)/r - e^(-i k r)/r, E = (hbar^2 k^2)/(2m) > 0
+$
+而对于束缚态，径向波函数的渐进行为是
+$
+  A_(l = 0) (r) tilde e^(- kappa r)/r , E = - (hbar^2 kappa^2)/(2m) < 0
+$
+需要注意的是，对于束缚态，$kappa$只能取某些特定的值。我们预期，如果*将$k$延拓到复数域，那么在虚轴上对应的就是束缚态的情形*。将$kappa$用$E < 0$表示为$(epsilon -> 0^+)$
+$
+  hbar kappa = sqrt(- 2 m(E + i epsilon))
+$
+若将此式延拓到$E > 0$的情形，则得到
+$
+  hbar kappa = - i sqrt(2 m E) = - i hbar k => k = - i kappa
+$
+在物理上，这表示出射波对应束缚态，入射波则无对应。两者系数的比值是$S_(l=0) (k)$。对于束缚态来说，没有入射波对应意味着两个系数的比值是$oo$。所以，如果认为将$k$延拓到复数域，虚轴上对应束缚态，那么$S_(l=0) (k)$在虚轴上将有一些特定的奇点$k = i kappa$，这些$kappa$对应的就是束缚态能量。
+
+对于给定的势$V(r)$，若求得散射振幅
+$
+  f_(l=0) (k) = 1/(k cot delta_0 - i k)
+$
+则$S_(l=0) (k)$可计算为
+$
+  S_(l=0) (k) = 1 + 2 i k f_(l=0) (k) = (cot delta_0 + i)/(cot delta_0 - i)
+$
+令
+$
+  k = i kappa = i sqrt(- 2 m E)
+$
+求出$E < 0$的奇点，即为束缚态能量。
+
+以有限深方势阱为例。前面已求得
+$
+  cot delta_0 = (k' + k tan(k R) tan(k' R))/(k tan(k R) - k' tan(k' R))
+$
+令$k = i kappa$，得到
+$
+  cot delta_0 = (k' - i kappa tanh(kappa R) tan(k' R))/(i kappa tan(k' R) + i k' tanh(kappa R))
+$
+因此，决定奇点的方程为
+$
+  cot delta_0 - i = 0 => cot(k' R) = - kappa/k'
+$
+与直接求解束缚态问题得到的方程一致。
+
+== 对称性考虑
+
+最后，讨论一下空间反演和时间反演对称性对散射振幅的限制。如果体系具有某种对称性，且对称变换算符$hat(U)$是幺正的，则
+$
+  hat(U) hat(H)_0 hat(U)^dagger = hat(H)_0\
+  hat(U) hat(V) hat(U)^dagger = hat(V)
+$
+根据$T$算符满足的方程
+$
+  hat(T) = hat(V) + hat(V) 1/(E_vb(k) - hat(H)_0 + i epsilon) hat(T)
+$
+可知$T$算符在对称变换下也不变
+$
+  hat(U) hat(T) hat(U)^dagger = hat(T)
+$
+定义
+$
+  ket(tilde(vb(k))) = hat(U) ket(vb(k)), ket(tilde(vb(k)')) = hat(U) ket(vb(k)')
+$
+则
+$
+  braket(tilde(vb(k)'), hat(T), tilde(vb(k))) = braket(vb(k)', hat(U)^dagger hat(U) hat(T) hat(U)^dagger hat(U), vb(k)) = braket(vb(k)', hat(T), vb(k))
+$
+若体系具有宇称反演对称性$(hat(U) = hat(P))$，根据
+$
+  hat(P) ket(k) = - ket(k)
+$
+得到
+$
+  braket(- tilde(vb(k)'), hat(T), - tilde(vb(k))) = braket(vb(k)', hat(T), vb(k))
+$
+#newpara()
+
+时间反演变换$hat(Theta)$是反幺正变换。根据$T$算符满足的方程
+$
+  hat(T) = hat(V) + hat(V) 1/(E_vb(k) - hat(H)_0 + i epsilon) hat(T)
+$
+若体系在时间反演变换下不变，即
+$
+  hat(Theta) hat(H)_0 hat(Theta)^(-1) = hat(H)_0\
+  hat(Theta) hat(V) hat(Theta)^(-1) = hat(V)
+$
+利用时间反演算符的性质得到
+$
+  hat(Theta) 1/(E_vb(k) - hat(H)_0 + i epsilon) hat(Theta)^(-1) = 1/(E_vb(k) - hat(H)_0 - i epsilon)
+$
+因此
+$
+  hat(Theta) hat(T) hat(Theta)^(-1) = hat(T)^dagger
+$
+对于任意量子态$ket(alpha)$和$ket(beta)$，定义时间反演态
+$
+  ket(tilde(alpha)) = hat(Theta) ket(alpha), ket(tilde(beta)) = hat(Theta) ket(beta)
+$
+反幺正变换要求
+$
+  braket(tilde(alpha), tilde(beta)) = braket(beta, alpha)
+$
+令
+$
+  ket(alpha) = hat(T) ket(vb(k)), ket(beta) = ket(vb(k)')
+$
+得
+$
+  ket(tilde(alpha)) &= hat(Theta) hat(T) ket(vb(k)) = hat(Theta) hat(T) hat(Theta)^(-1) hat(Theta) ket(vb(k)) = hat(T)^dagger hat(Theta) ket(vb(k)) = hat(T)^dagger ket(- vb(k))\
+  ket(tilde(beta)) &= hat(Theta) ket(vb(k)') = ket(- vb(k)')
+$
+因此，若体系具有时间反演不变性，则有
+$
+  braket(- vb(k)', hat(T), - vb(k)) = braket(vb(k)', hat(T), vb(k))
+$
+#newpara()
+
+若体系同时具有空间反演和时间反演不变性，根据以上结果，得到
+$
+  braket(vb(k)', hat(T), vb(k)) = braket(- vb(k), hat(T), - vb(k)') = braket(vb(k), hat(T), vb(k)')
+$
+第一个等号利用时间反演不变性，第二个等号利用空间反演不变性。所以
+$
+  f(vb(k)', vb(k)) = f(vb(k), vb(k)') => dv(sigma, Omega) (vb(k)' -> vb(k)) = dv(sigma, Omega) (vb(k) -> vb(k)')
+$
+这个结果被称为*细致平衡*。
