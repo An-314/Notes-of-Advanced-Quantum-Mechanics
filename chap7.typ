@@ -391,3 +391,223 @@ $
 $
   K(vb(x)_N, t_N; vb(x)_1, t_1) = braket(vb(x)_N, hat(U)(t_N, t_1), vb(x)_1)
 $
+将时间间隔$[t_1, t_N]$等分为$N − 1$个小间隔，每个小间隔为
+$
+  t_i - t_(i-1) = Delta t = (t_N - t_1)/(N - 1), i = 2, 3, ..., N
+$
+利用时间演化算符的合成性质
+$
+  hat(U)(t_N, t_1) = hat(U)(t_N, t_(N-1)) hat(U)(t_(N-1), t_(N-2)) ... hat(U)(t_2, t_1), t_1 < t_2 < ... < t_N
+$
+在相邻两个时间演化算符之间插入完备性关系
+$
+  integral dd(vb(x)_i, 3) ket(vb(x)_i) bra(vb(x)_i) = hat(I), i = 2, 3, ..., N-1
+$
+得到
+$
+  braket(vb(x)_N, hat(U)(t_N, t_1), vb(x)_1) & = integral dd(vb(x)_(N-1), 3) ... integral dd(vb(x)_2, 3) \
+                                             & braket(vb(x)_N, hat(U)(t_N, t_(N-1)), vb(x)_(N-1)) \
+                                             & braket(vb(x)_(N-1), hat(U)(t_(N-1), t_(N-2)), vb(x)_(N-2)) ... \
+                                             & braket(vb(x)_2, hat(U)(t_2, t_1), vb(x)_1) \
+$
+即
+$
+  K(vb(x)_N, t_N; vb(x)_1, t_1) & = integral dd(vb(x)_(N-1), 3) ... integral dd(vb(x)_2, 3) \
+  & K(vb(x)_N, t_N; vb(x)_(N-1), t_(N-1)) K(vb(x)_(N-1), t_(N-1); vb(x)_(N-2), t_(N-2)) ... K(vb(x)_2, t_2; vb(x)_1, t_1) \
+$
+若$hat(H)$不含时，利用Heisenberg绘景中位置算符的本征态
+$
+  ket(vb(x)\, t) = e^(i/hbar hat(H) t) ket(vb(x))
+$
+则传播子即为不同时空点之间的*跃迁振幅*
+$
+  braket(vb(x)_N, hat(U)(t_N, t_1), vb(x)_1) = braket(vb(x)_N\, t_N, vb(x)_1\, t_1)
+$
+利用完备性关系
+$
+  integral dd(vb(x), 3) ketbra(vb(x)\, t) = hat(I)
+$
+得到
+$
+  braket(vb(x)_N\, t_N, vb(x)_1\, t_1) & = integral dd(vb(x)_(N-1), 3) ... integral dd(vb(x)_2, 3) \
+  & braket(vb(x)_N\, t_N, vb(x)_(N-1)\, t_(N-1)) braket(vb(x)_(N-1)\, t_(N-1), vb(x)_(N-2)\, t_(N-2)) ... braket(vb(x)_2\, t_2, vb(x)_1\, t_1) \
+$
+以上结果表明，*粒子从一个时空点传播到另一个时空点，所有的路径$vb(x)(t)$都是有可能的！*
+#figure(
+  image("pic/2025-12-21-19-21-32.png", width: 60%),
+  numbering: none,
+)
+
+=== 路径积分量子化
+
+Fermman通过对双缝干涉实验的思考，结合力学中的最小作用量原理和光学中的Huygens原理，提出了*提出了路径积分量子化*。Fermman认为，*粒子从时空点$(vb(x)_A, t_A)$传播到$(vb(x)_B, t_B)$的几率振幅是所有可能的路径的几率振幅相加*，这样很自然地满足了量子力学的态叠加原理和传播子的合成性质。径积分量子化方案(Fermman公设)的具体内容是：
+- 找出连接$(x_A, t_A)$和$(x_B, t_B)$的全部路径$(t_B > t_A)$
+- 对每条路径$vb(x)(t)$，计算对应的作用量
+  $
+    S[vb(x)(t)] = integral_(t_A)^(t_B) dd(t) L(vb(x), dot(vb(x)), t)
+  $
+  该路径对应的*几率振幅*正比于$exp(i/hbar S[vb(x)(t)])$
+- $K(x_B, t_B; x_A, t_A)$即为*所有路径的几率振幅相加*
+  $
+    K(vb(x)_B, t_B; vb(x)_A, t_A) = c sum_"all path" exp(i/hbar S[vb(x)(t)])
+  $
+  其中$C$为适当的归一化常数
+由于粒子的路径是连续变化的，作用量$S$是$vb(x)(t)$的泛函，上述求和实际上是对$vb(x)(t)$的*泛函积分*
+$
+  K(vb(x)_B, t_B; vb(x)_A, t_A) = integral_((vb(x)_A, t_A))^((vb(x)_B, t_B)) cal(D)[vb(x)(t)] exp(i/hbar S[vb(x)(t)])
+$
+但是，常数$C$的取值或者说*积分测度*$D[vb(x)(t)]$的定义尚未明确。
+
+*推导路径积分*：考虑在势场$V(x)$中运动的粒子，Hamilton量为
+$
+  hat(H) = hat(vb(p))^2/(2m) + V(hat(vb(x)))
+$
+则传播子为
+$
+  K(vb(x)_B, t_B; vb(x)_A, t_A) = braket(vb(x)_B, exp(- i/hbar hat(H) (t_B - t_A)), vb(x)_A)
+$
+将时间间隔$[t_A, t_B]$等分为$N$份，每份为$epsilon = (t_A - t_B)/N$，则
+$
+  e^(-i/hbar hat(H) (t_B - t_A)) = (e^(- i/hbar hat(H) epsilon))^N = e^(- i/hbar hat(H) epsilon) ... e^(- i/hbar hat(H) epsilon)
+$
+插入完备性关系
+$
+  integral dd(x_i) ketbra(x_i) = hat(I), i = 1, 2, ..., N-1
+$
+得到
+$
+  K(vb(x)_B, t_B; vb(x)_A, t_A) & = integral dd(vb(x)_(N-1)) ... integral dd(vb(x)_1) \
+  & braket(vb(x)_B, e^(- i/hbar hat(H) epsilon), vb(x)_(N-1)) ... braket(vb(x)_1, e^(- i/hbar hat(H) epsilon), vb(x)_A) \
+$
+考虑$N$很大即$epsilon$很小的情形，考虑
+$
+  e^(A+B) = e^A e^B e^(- 1/2 [A, B])
+$
+有
+$
+  exp(- i/hbar hat(H) epsilon) & = exp(- (i epsilon)/hbar (hat(vb(p))^2/(2m) + V(hat(vb(x))))) \
+  &= exp(- (i epsilon)/hbar hat(vb(p))^2/(2m)) exp(- (i epsilon)/hbar V(hat(vb(x)))) + O(epsilon^2) \
+$
+因此
+$
+  braket(vb(x)_n, e^(- i/hbar epsilon hat(H)), vb(x)_(n-1)) & tilde.eq braket(vb(x)_n, exp(- (i epsilon)/hbar hat(vb(p))^2/(2m)) exp(- (i epsilon)/hbar V(hat(vb(x)))), vb(x)_(n-1)) \
+  &= braket(vb(x)_n, exp(- (i epsilon)/hbar hat(vb(p))^2/(2m)), vb(x)_(n-1)) exp(- (i epsilon)/hbar V(vb(x)_(n-1))) \
+  &= (m/(2 pi hbar i epsilon))^(3/2) exp((i m (vb(x)_n - vb(x)_(n-1))^2)/(2 hbar epsilon)) exp(- (i epsilon)/hbar V(vb(x)_(n-1))) \
+  &= (m/(2 pi hbar i epsilon))^(3/2) exp((i epsilon)/hbar (m/2 ((vb(x)_n - vb(x)_(n-1))/epsilon)^2 - V(vb(x)_(n-1))))
+$
+当$N -> oo, epsilon -> 0$时，高阶小量可忽略，得到
+$
+  K(vb(x)_B, t_B; vb(x)_A, t_A) & = lim_(N -> oo) (m/(2 pi hbar i epsilon))^(3 N/2) (product_(n=1)^(N-1) (m/(2 pi hbar i epsilon))^(3/2) dd(vb(x)_n))\ & exp((i epsilon)/hbar sum_(n=1)^N (m/2 ((vb(x)_n - vb(x)_(n-1))/epsilon)^2 - V(vb(x)_(n-1)))) \
+$
+指数的宗量可写成连续形式
+$
+  (i epsilon)/hbar sum_(n=1)^N (m/2 ((vb(x)_n - vb(x)_(n-1))/epsilon)^2 - V(vb(x)_(n-1))) & = (i)/hbar integral_(t_A)^(t_B) dd(t) (m/2 dot(vb(x))^2 - V(vb(x))) \
+  & = (i)/hbar integral_(t_A)^(t_B) dd(t) L(vb(x), dot(vb(x)), t) \
+  & = (i)/hbar S[vb(x)(t)]
+$
+定义*泛函积分测度*
+$
+  cal(D)[vb(x)(t)] = lim_(N -> oo) (m/(2 pi hbar i epsilon))^(3/2) (product_(n=1)^(N-1) (m/(2 pi hbar i epsilon))^(3/2) dd(vb(x)_n))
+$
+即可得到Fermman的路径积分表达式
+$
+  K(vb(x)_B, t_B; vb(x)_A, t_A) = integral_((vb(x)_A, t_A))^((vb(x)_B, t_B)) cal(D)[vb(x)(t)] exp((i)/hbar S[vb(x)(t)])
+$
+路径积分的积分变量是连续函数，是无穷维积分(甚至不可数)。
+
+注：
+- 归一化常数$C$和积分测度中的常数与相互作用无关；
+  $
+    (m/(2 pi hbar i epsilon))^((3N)/2) = ((m N)/(2 pi hbar i(t_B - t_A)))^(3/2) (N->oo)
+  $
+  在计算物理可观测量时，这些常数往往会相互抵消，因此不必过分关注它们的具体数值；
+- 路径积分中不需要态和算符，只需要经典的Lagrange量和作用量。路径积分量子化与Schrödinger方程(正则量子化) 等价，实际上，上面已经从Schrödinger方程推导出了路径积分，反之亦然；
+- 路径积分形式优美简洁，但是却难于计算(无穷维积分)。只有当作用量为$vb(x)(t)$的二次型时(Gauss型)，路径积分才可以被精确计算。
+
+=== 经典极限
+
+当$hbar -> 0$时，路径积分应回到经典极限。当$hbar -> 0$时，$exp(i/hbar S)$是剧烈震荡的函数，大部分相邻路径的贡献之间将导致干涉相消。考虑某个路径$vb(x)(t)$，其相邻路径为$vb(x)(t) + delta vb(x)(t)$(保持两个端点不变)，作用量的变化为
+$
+  S[vb(x)(t) + delta vb(x)(t)] = S[vb(x)(t)] + delta S
+$
+对于$delta S >> hbar$的那些路径(即宏观可区分的路径)，相位差$(delta S)/hbar >> 1$，彼此产生*相消干涉*。但是，对于$delta S = 0$的路径，即满足经典力学规律的路径$vb(x)_"c" (t)$的路径，它和附近路径之间的相位差很小，彼此产生*相长干涉*。
+
+在数学上，可以用*驻点相位近似(stationary phase approximation)*或者*鞍点近似(saddle point approximation)*更为严格地说明。考虑积分
+$
+  I = 1/sqrt(2 pi hbar) integral_(-oo)^oo dd(x) exp((i)/hbar f(x))
+$
+可以证明，当$hbar -> 0$时，有
+$
+  I = 1/sqrt(f''(x_"c")) exp((i)/hbar f(x_"c")) (1 + hbar(...) + hbar^2(...) + ...)
+$
+其中，$x_"c"$是函数$f(x)$的最小值点。
+
+=== 路径积分的计算
+
+- *计算方法 1*：积分变量是连续函数$vb(x)(t)$，将时间*离散化*，变成离散的积分(量子场论：时空离散化 $->$ 时空格点、格点规范场论)
+- *计算方法 2*：利用边界条件，将连续函数$vb(x)(t)$展开为*离散级数*，可将积分变量从连续函数变为离散的展开系数(模式)
+  $
+    vb(x)(t) = sum_n c_n vb(u)_n (t), cal(D)[vb(x)(t)] = product_n dd(c_n)
+  $
+- *计算方法 3*：这里介绍一种作用量为二次型的路径积分的计算方法：*经典贡献 + 量子涨落*。
+
+考虑一维粒子，最一般的二次型(Gauss型)Lagrange量为
+$
+  L = a(t) dot(x)^2 + b(t) x dot(x) + c(t) x^2 + d(t) dot(x) + e(t) x + f(t)
+$
+假设粒子从时空点$(x_A, t_A)$运动到$(x_B, t_B)$的*经典路径*为$x_"c" (t)$，可将任意路径$x(t)$写为
+$
+  x(t) = x_"c" (t) + y(t)
+$
+其中$y(t)$为“围绕经典路径的*量子涨落*”，满足边界条件
+$
+  y(t_A) = 0, y(t_B) = 0
+$
+Lagrange可以用$x_"c" (t)$和$y(t)$重写为
+$
+  L[x(t)] = L^((0)) + L^((1)) + L^((2))
+$
+其中$L^((n))$包含了涨落$y(t)$的$n$次方项
+$
+  L^((0)) & = a dot(x)_"c"^2 + b x_"c" dot(x)_"c" + c x_"c"^2 + d dot(x)_"c" + e x_"c" + f \
+  L^((1)) & = 2a dot(x)_"c" dot(y) + b x_"c" dot(y) + b dot(x)_"c" y + 2 c x_"c" y + d dot(y) + e y \
+  L^((2)) & = a dot(y)^2 + b y dot(y) + c y^2 \
+$
+相应地，作用量可以写为
+$
+  S[x(t)] = integral_(t_A)^(t_B) dd(t) L[x(t)] = S^((0)) + S^((1)) + S^((2))
+$
+其中，经典路径对应的作用量为
+$
+  S^((0)) = S_"cl" = S[x_"c" (t)] = integral_(t_A)^(t_B) dd(t) L^((0))
+$
+可以证明，涨落$y(t)$的一次方项贡献为零。具体计算为
+$
+  S^((1)) & = integral_(t_A)^(t_B) dd(t) L^((1)) \
+          & = integral_(t_A)^(t_B) dd(t) (dot(y) (2 a dot(x)_"c" + b x_"c" + d) + y (b dot(x)_"c" + 2 c x_"c" + e)) \
+          & = - integral_(t_A)^(t_B) dd(t) y (dv(, t) (2 a dot(x)_"c" + b x_"c" + d) - (b dot(x)_"c" + 2 c x_"c" + e)) \
+          & = - integral_(t_A)^(t_B) dd(t) y (dv(, t) (pdv(L^((0)), dot(x)_"c")) - pdv(L^((0)), x_"c")) = 0
+$
+最后，计算路径积分
+$
+  K(x_B, t_B; x_A, t_A) & = integral_((x_A, t_A))^((x_B, t_B)) cal(D)[x(t)] exp((i)/hbar S[x(t)]) \
+$
+对积分变量做平移$x(t) -> y(t)$，不改变积分测度，$cal(D)[x(t)] = cal(D)[y(t)]$，得到
+
+$
+  K(x_B, t_B; x_A, t_A) & = integral_((0, t_A))^((0, t_B)) cal(D)[y(t)] exp((i)/hbar S[x_"c" (t) + y(t)]) \
+                        & = exp((i)/hbar S_"cl") integral_((0, t_A))^((0, t_B)) cal(D)[y(t)] exp((i)/hbar S^((2))[y(t)]) \
+$
+其中
+$
+  S^((2)) = integral_(t_A)^(t_B) dd(t) L^((2)) = integral_(t_A)^(t_B) dd(t) (a dot(y)^2 + b y dot(y) + c y^2)
+$
+所以，*Gauss型Lagrange量对应的几率振幅为*
+$
+  K(x_B, t_B; x_A, t_A) & = F(t_A,t_B) exp((i)/hbar S_"cl") \
+$
+其中
+$
+  F(t_A,t_B) = integral_((0, t_A))^((0, t_B)) cal(D)[y(t)] exp((i)/hbar integral_(t_A)^(t_B) dd(t) (a dot(y)^2 + b y dot(y) + c y^2))
+$
+是来自量子涨落的贡献。它可以通过方法1和方法2直接计算。下面以自由粒子和谐振子为例介绍一种简便的间接方法(Fermman)。
