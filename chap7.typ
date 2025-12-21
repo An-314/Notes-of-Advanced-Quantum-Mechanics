@@ -206,10 +206,10 @@ $
 得到
 $
   K(vb(x)_2, t_2; vb(x)_1, t_1) &= braket(vb(x)_2, exp(- i/hbar hat(H) (t_2 - t_1)), vb(x)_1) \
-  & = sum_(n n') braket(vb(x)_2, ket(n)) braket(n, exp(- i/hbar hat(H) (t_2 - t_1)), n') braket(n', vb(x)_1) \
+  & = sum_(n n') braket(vb(x)_2, n) braket(n, exp(- i/hbar hat(H) (t_2 - t_1)), n') braket(n', vb(x)_1) \
   & = sum_n psi_n^*(vb(x)_1) psi_n (vb(x)_2) exp(- i/hbar E_n (t_2 - t_1))
 $
-其中$psi_n(vb(x)) = braket(vb(x), ket(n))$为坐标表象下Hamilton量的本征函数。当$t_2 -> t_1$时
+其中$psi_n(vb(x)) = braket(vb(x), n)$为坐标表象下Hamilton量的本征函数。当$t_2 -> t_1$时
 $
   lim_(t_2 -> t_1) K(vb(x)_2, t_2; vb(x)_1, t_1) = sum_n psi_n^*(vb(x)_1) psi_n (vb(x)_2) = delta(vb(x)_2 - vb(x)_1)
 $
@@ -497,7 +497,7 @@ $
 $
 当$N -> oo, epsilon -> 0$时，高阶小量可忽略，得到
 $
-  K(vb(x)_B, t_B; vb(x)_A, t_A) & = lim_(N -> oo) (m/(2 pi hbar i epsilon))^(3 N/2) (product_(n=1)^(N-1) (m/(2 pi hbar i epsilon))^(3/2) dd(vb(x)_n))\ & exp((i epsilon)/hbar sum_(n=1)^N (m/2 ((vb(x)_n - vb(x)_(n-1))/epsilon)^2 - V(vb(x)_(n-1)))) \
+  K(vb(x)_B, t_B; vb(x)_A, t_A) & = lim_(N -> oo) (m/(2 pi hbar i epsilon))^((3 N)/2) (product_(n=1)^(N-1) (m/(2 pi hbar i epsilon))^(3/2) dd(vb(x)_n))\ & exp((i epsilon)/hbar sum_(n=1)^N (m/2 ((vb(x)_n - vb(x)_(n-1))/epsilon)^2 - V(vb(x)_(n-1)))) \
 $
 指数的宗量可写成连续形式
 $
