@@ -142,11 +142,11 @@ $
 $
   A_x = - 1/2 B y, A_y = 1/2 B x, A_z = 0
 $
-考虑不随时间变化的磁场。可以证明，在矢量势的规范变换
+考虑不随时间变化的磁场。可以证明，在矢量势的*规范变换*
 $
   vb(A) -> tilde(vb(A)) = vb(A) + grad Lambda(vb(x))
 $
-下，Schrödinger方程亦是规范不变的。定义幺正算符
+下，*Schrödinger方程亦是规范不变的*。定义幺正算符
 $
   hat(cal(G)) = exp((i q Lambda(hat(vb(x))))/hbar)
 $
@@ -170,9 +170,13 @@ $
 
 == 路径积分
 
-正则量子化方案与经典力学的Hamilton形式对应，因此将Hamilton量放到了一个核心的位置。所以一个很自然的问题就是：可以不可以从经典系统的Lagrange量出发来进行量子化呢？确实是可以的。
+正则量子化方案与经典力学的Hamilton形式对应，因此将Hamilton量放到了一个核心的位置。所以一个很自然的问题就是：可以不可以从经典系统的Lagrange量出发来进行量子化呢？
 
 本小节将学习另一种量子化方案：*路径积分量子化*。
+
+=== 传播子与Green函数
+
+事实上，*路径积分量子化就是利用一种泛函积分的方法计算量子力学中的传播子(propagator)*。
 
 讨论路径积分，先引入传播子的概念。在Schrödinger绘景中，量子力学体系在$t_1$时刻和$t_2$时刻的状态$(t_1 < t_2)$由时间演化算符联系起来
 $
@@ -192,5 +196,198 @@ $
   psi(vb(x)_2, t_2) = integral dd(vb(x)_1, 3) K(vb(x)_2, t_2; vb(x)_1, t_1) psi(vb(x)_1, t_1)
 $
 假设$t_1$时刻粒子处于位置本征态，$psi(vb(x)_1, t_1) = delta(vb(x)_1 - vb(x)_0)$，根据上式立刻得到$psi(vb(x)_2, t_2) = K(vb(x)_2 , t_2 ; vb(x)_0 , t_1)$。为了方便，不妨仍将$vb(x)_0$记为$vb(x)_1$。那么传播子$K(vb(x)_2, t_2 ; vb(x)_1 , t_1)$的物理意义是：
+- 若粒子在$t_1$时刻处于空间$vb(x)_1$处(位置本征态)，则传播子表示在以后任意$t_2$时刻($t_2 > t_1$)粒子处于空间点$vb(x)_2$处的*概率幅*。简而言之，粒子从时空点$(t_1, vb(x)_1)$传播到$(t_2, vb(x)_2)$的概率振幅。
+- 若粒子在$t_1$时刻并不处于位置本征态，则利用传播子和$t_1$时刻的波函数可以得到以后任意$t_2$时刻的波函数。这实际上就是*符合因果律的幺正时间演化在坐标表象的体现*。
 
-若粒子在$t_1$时刻处于空间$vb(x)_1$ 处 (位置本征态)，则传播子表示在以后任意 $t_2$ 时刻 ($t_2 > t_1$) 粒子处于空间点 $vb(x)_2$ 处的概率幅。简而言之，粒子从时空点 ($t_1$ , $vb(x)_1$ ) 传播到 ($t_2$ , $vb(x)_2$ ) 的概率振幅。若粒子在 $t_1$ 时刻并不处于位置本征态，则利用传播子和 $t_1$ 时刻的波函数可以得到以后任意 $t_2$ 时刻的波函数。这实际上就是符合因果律的幺正时间演化在坐标表象的体现。
+若Hamilton量$hat(H)$不显含时间，则可利用
+$
+  hat(H) ket(n) = E_n ket(n), hat(U)(t_2, t_1) = exp(- i/hbar hat(H) (t_2 - t_1))
+$
+得到
+$
+  K(vb(x)_2, t_2; vb(x)_1, t_1) &= braket(vb(x)_2, exp(- i/hbar hat(H) (t_2 - t_1)), vb(x)_1) \
+  & = sum_(n n') braket(vb(x)_2, ket(n)) braket(n, exp(- i/hbar hat(H) (t_2 - t_1)), n') braket(n', vb(x)_1) \
+  & = sum_n psi_n^*(vb(x)_1) psi_n (vb(x)_2) exp(- i/hbar E_n (t_2 - t_1))
+$
+其中$psi_n(vb(x)) = braket(vb(x), ket(n))$为坐标表象下Hamilton量的本征函数。当$t_2 -> t_1$时
+$
+  lim_(t_2 -> t_1) K(vb(x)_2, t_2; vb(x)_1, t_1) = sum_n psi_n^*(vb(x)_1) psi_n (vb(x)_2) = delta(vb(x)_2 - vb(x)_1)
+$
+当$t > t_1$时，易证传播子$K(vb(x), t; vb(x)_1, t_1)$满足Schrödinger方程
+$
+  i hbar pdv(, t) K(vb(x), t; vb(x)_1, t_1) = (- hbar^2/(2m) laplacian + V(vb(x))) K(vb(x), t; vb(x)_1, t_1)
+$
+利用传播子的定义以及时间演化算符$hat(U)(t; t_1)$满足的Schrödinger方程即可证明之。对于$t < t_1$情形，传播子无定义。若要拓展其定义，根据因果律可定义
+$
+  K(vb(x), t; vb(x)_1, t_1) = 0, (t < t_1)
+$
+此时亦满足Schrödinger方程。但$t = t_1$时情形未知，传播子会出现不连续。根据
+$
+  lim_(t -> t_1) K(vb(x), t; vb(x)_1, t_1) = delta(vb(x) - vb(x)_1)
+$
+可以证明传播子满足如下微分方程
+$
+  (i hbar pdv(, t) + hbar^2/(2m) laplacian - V(vb(x))) K(vb(x), t; vb(x)_1, t_1) = i hbar delta(t - t_1) delta(vb(x) - vb(x)_1)
+$
+#proof[
+  将上式对$t$积分，积分区间为$(- oo, t_1 + epsilon]$，$epsilon = 0^+$，左边
+  $
+    i hbar eval(K(vb(x), t; vb(x)_1, t_1))_(-oo)^(t_1 + epsilon] = i hbar lim_(t -> t_1) K(vb(x), t; vb(x)_1, t_1) = i hbar delta(vb(x) - vb(x)_1)
+  $
+  右边的积分也正好等于这个结果。
+]
+这事实上是说，*传播子是含有源项的Schrödinger方程的Green函数*。
+
+方程右边可以理解为某种“点源”的影响，即：传播子$K(vb(x), t; vb(x)_1; t_1)$是含时Schrödinger方程的一类*Green函数*，即所谓的*推迟Green函数*。所谓推迟，就是要求$t < t_1$ 时 $K(vb(x), t; vb(x)_1; t_1) = 0$。所以传播子的定义可以写为以传播子的定义可以写为
+$
+  K(vb(x), t; vb(x)_1, t_1) = braket(vb(x), hat(U)(t, t_1), vb(x)_1) theta(t - t_1)
+$
+其中$theta(x)$为阶跃函数。利用此式可以更直接地证明刚才的微分方程。
+
+在理论物理中，*“传播子” (propagator)这个词通常与“Green函数”等价*，而且存在各种各样的传播子(Green函数)，推迟Green函数只是其中的一种。
+
+#example(subname: [自由粒子])[
+  考虑一维自由粒子，Hamilton量为$hat(H) = p^2/2m$，其能量本征态可取为动量本征态。传播子计算如下：
+  $
+    K(x_2, t_2; x_1, t_1) & = braket(x_2, exp(- i/hbar hat(H) (t_2 - t_1)), x_1) \
+                          & = integral dd(p) braket(x_2, exp(- i/hbar hat(H) (t_2 - t_1)), p) braket(p, x_1) \
+                          & = integral dd(p) braket(x_2, p) braket(p, x_1) exp(- i/hbar p^2/(2m) (t_2 - t_1)) \
+  $
+  利用
+  $
+    braket(x, p) = 1/sqrt(2 pi hbar) exp(i/hbar p x)
+  $
+  得到
+  $
+    K(x_2, t_2; x_1, t_1) & = 1/(2 pi hbar) integral_(-oo)^oo dd(p) exp(i/hbar (p (x_2 - x_1) - p^2/(2m) (t_2 - t_1))) \
+  $
+  利用 Fresnel 积分
+  $
+    integral_(-oo)^oo dd(x) e^(i a x^2) = sqrt((2 pi i)/a)
+  $
+  得到
+  $
+    K(x_2, t_2; x_1, t_1) = sqrt(m/(2 pi i hbar (t_2 - t_1))) exp((i m (x_2 - x_1)^2)/(2 hbar (t_2 - t_1)))
+  $
+  三维自由粒子也可做同样的计算，结果为
+  $
+    K(vb(x)_2, t_2; vb(x)_1, t_1) = (m/(2 pi i hbar (t_2 - t_1)))^(3/2) exp((i m (vb(x)_2 - vb(x)_1)^2)/(2 hbar (t_2 - t_1)))
+  $
+  可以证明，指数因子可以写成$exp(i/hbar S_"cl")$其中$S_"cl"$是经典运动对应的作用量
+  $
+    S_"cl" = integral_(t_1)^(t_2) dd(t) L = integral_(t_1)^(t_2) dd(t) (1/2 m dot(x)^2) = (m (x_2 - x_1)^2)/(2 (t_2 - t_1))
+  $
+]
+
+#example(subname: [谐振子])[
+  考虑一维谐振子
+  $
+    hat(H) ket(n) = E_n ket(n), E_n = hbar omega (n + 1/2)
+  $
+  传播子计算如下：
+  $
+    K(x_2, t_2; x_1, t_1) & = braket(x_2, exp(- i/hbar hat(H) (t_2 - t_1)), x_1) \
+                          & = sum_n braket(x_2, exp(- i/hbar hat(H) (t_2 - t_1)), n) braket(n, x_1) \
+                          & = sum_n braket(x_2, n) braket(n, x_1) exp(- i/hbar E_n (t_2 - t_1)) \
+                          & = sum_n psi_n^*(x_1) psi_n (x_2) exp(- i/hbar E_n (t_2 - t_1)) \
+  $
+  利用谐振子本征波函数的表达式
+  $
+    psi_n(x) = 1/sqrt(2^n n!) ((m omega)/(pi hbar))^(1/4) H_n (xi) exp(- 1/2 xi^2), xi = sqrt((m omega)/hbar) x
+  $
+  代入得到
+  $
+    K(x_2, t_2; x_1, t_1) = \
+    ((m omega)/(pi hbar))^(1/2) e^(- 1/2 (xi_1^2 + xi_2^2) - i/2 omega (t_2 - t_1)) sum_n 1/(2^n n!) H_n (xi_1) H_n (xi_2) e^(- i omega n (t_2 - t_1))\
+  $
+  利用Hermite多项式的积分表示
+  $
+    H_n (xi) = 1/sqrt(pi) (2/i)^n e^(xi^2) integral_(-oo)^(oo) dd(tau) e^(- tau^2 + 2 i xi tau) tau^n
+  $
+  代入得到
+  $
+    &K(x_2, t_2; x_1, t_1) \
+    =& ((m omega)/(pi^3 hbar))^(1/2) e^(- 1/2 (xi_1^2 + xi_2^2) - i/2 omega (t_2 - t_1)) integral_(-oo)^(oo) dd(tau) integral_(-oo)^(oo) dd(tau') e^(- (tau^2 + tau'^2) + 2 i (xi_2 tau + xi_1 tau')) sum_(n=0)^(oo) (-1)^n/n! (2 tau tau')^n e^(- i n omega (t_2 - t_1)) \
+    = & ((m omega)/(pi^3 hbar))^(1/2) e^(- 1/2 (xi_1^2 + xi_2^2) - i/2 omega (t_2 - t_1)) integral_(-oo)^(oo) dd(tau) e^(- tau^2 + 2 i xi_2 tau) integral_(-oo)^(oo) dd(tau') exp(- tau'^2 + 2 i xi_1 tau' - 2 tau tau' e^(- i omega (t_2 - t_1))) \
+  $
+  对$tau, tau'$的积分可利用Gauss积分
+  $
+    integral_(-oo)^(oo) dd(x) e^(- a x^2 + b x) = sqrt(pi/a) e^(b^2/(4 a)) (Re(a) > 0)
+  $
+  最终计算得到
+  $
+    &k(x_2, t_2; x_1, t_1) \
+    = &sqrt((m omega)/(2 pi i hbar sin(omega (t_2 - t_1)))) exp((i m omega)/(2 hbar sin(omega T)) ((x_2^2 + x_1^2) cos(omega T) - 2 x_2 x_1)) , T = t_2 - t_1
+  $
+]
+
+=== 传播子与统计力学
+
+考虑传播子中$vb(x)_1 = vb(x)_2 = vb(x)$的(*封闭*)情形，进一步对坐标$vb(x)$积分，定义
+$
+  G(t) = integral dd(vb(x), 3) K(vb(x), t; vb(x), 0)
+$
+这里考虑Hamilton量不含时，令$t_2 = t, t_1 = 0$。根据传播子的定义，得
+$
+  G(t) = integral dd(vb(x), 3) braket(vb(x), exp(- i/hbar hat(H) t), vb(x))
+$
+这实际上是*求迹*
+$
+  G(t) = tr(exp(- i/hbar hat(H) t))
+$
+而求迹与表象无关，因此可以用任意表象求迹。实际上，利用能量本征态$ket(n)$得到
+$
+  G(t) & = integral dd(vb(x), 3) braket(vb(x), exp(- i/hbar hat(H) t), vb(x)) \
+       & = sum_n integral dd(vb(x), 3) braket(vb(x), e^(- i/hbar hat(H) t), n) braket(n, vb(x)) \
+       & = sum_n e^(- i/hbar E_n t) integral dd(vb(x), 3) braket(vb(x), n) braket(n, vb(x)) \
+       & = sum_n e^(- i/hbar E_n t) \
+       & = sum_n braket(n, e^(- i/hbar hat(H) t), n) \
+$
+如果做如下替换
+$
+  (i t)/hbar -> beta = 1/(k_B T)
+$
+则函数$G(t)$变为
+$
+  G(t) -> Z(beta) = sum_n e^(- beta E_n)
+$
+这实际上就是*平衡态量子统计力学的配分函数*，前面的求迹则给出更一般的表达式
+$
+  Z(beta) = tr(e^(- beta hat(H)))
+$
+#newpara()
+如果对$G(t)$做Fourier变换
+$
+  tilde(G)(E) = 1/(i hbar) integral_0^(oo) dd(t) G(t) e^(i/hbar E t)
+$
+利用前面的结果，得到
+$
+  tilde(G)(E) & = 1/(i hbar) integral_0^(oo) dd(t) sum_n e^(- i/hbar E_n t) e^(i/hbar E t) \
+              & = 1/(i hbar) sum_n integral_0^(oo) dd(t) e^(i/hbar (E - E_n) t) \
+$
+若将$E$加上无穷小的虚部 (加上收敛因子)， $E -> E + i epsilon$，则积分可计算为
+$
+  tilde(G)(E) = sum_n 1/(E - E_n + i epsilon)
+$
+如果能将$G(t)$计算出来，则可以通过Fourier变换得到能级结构。
+
+=== 从传播子到路径积分
+
+考虑*传播子*
+$
+  K(vb(x)_3, t_3; vb(x)_1, t_1) = braket(vb(x)_3, hat(U)(t_3, t_1), vb(x)_1)
+$
+利用时间演化算符的合成性质
+$
+  hat(U)(t_3, t_1) = hat(U)(t_3, t_2) hat(U)(t_2, t_1)
+$
+得到$(t_1 < t_2 < t_3)$
+$
+  K(vb(x)_3, t_3; vb(x)_1, t_1) &= braket(vb(x)_3, hat(U)(t_3, t_2) hat(U)(t_2, t_1), vb(x)_1) \
+  & = integral dd(vb(x)_2, 3) braket(vb(x)_3, hat(U)(t_3, t_2), vb(x)_2) braket(vb(x)_2, hat(U)(t_2, t_1), vb(x)_1) \
+  & = integral dd(vb(x)_2, 3) K(vb(x)_3, t_3; vb(x)_2, t_2) K(vb(x)_2, t_2; vb(x)_1, t_1)
+$
+受此启发，我们考虑从时空点$(vb(x)_1, t_1)$到$(vb(x)_N, t_N)$的传播子
+$
+  K(vb(x)_N, t_N; vb(x)_1, t_1) = braket(vb(x)_N, hat(U)(t_N, t_1), vb(x)_1)
+$
