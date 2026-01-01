@@ -1,4 +1,5 @@
 #import "@preview/scripst:1.1.1": *
+#import "@preview/physica:0.9.7": *
 
 #let preface = [
 
@@ -77,3 +78,7 @@
 #pagebreak()
 
 #include "chap7.typ"
+
+#pagebreak()
+
+#include "chap8.typ"
