@@ -247,3 +247,381 @@ $
 $
   ket(k_i) <-> hat(a)_i^dagger, ket(k_i) <-> hat(a)_i^dagger, ketbra(k_i, k_j) <-> hat(a)_i^dagger hat(a)_j
 $
+意思是
+$
+  ket(k_i) = sum_m braket(g_m, k_i) ket(g_m) <-> hat(a)_i^dagger = sum_m braket(g_m, k_i) hat(b)_m^dagger
+$
+
+=== 全同性原理
+
+接下来考虑*全同性原理*，即Fock空间中的任意态矢，对于任意两个粒子的置换操作，要么是对称的，要么是反对称的。对于Fock空间中的任意态矢，考虑先在$ket(k_i)$态加一个粒子，再在$ket(k_j)$态加一个粒子。*置换等价于改变这两个操作的顺序*。所以
+$
+  hat(a)^dagger_i hat(a)^dagger_j ket(n_1\, n_2\, ...\, n_i\, ...) = plus.minus hat(a)^dagger_j hat(a)^dagger_i ket(n_1\, n_2\, ...\, n_i\, ...)
+$
+其中$+$号对应Bose子， $-$号对应Fermi子。态矢是任意的，所以
+$
+  hat(a)^dagger_i hat(a)^dagger_j minus.plus hat(a)^dagger_j hat(a)^dagger_i = 0
+$
+即（反对易子${A, B} ≡ A B + B A$）
+$
+  hat(a)^dagger_i hat(a)^dagger_j - hat(a)^dagger_j hat(a)^dagger_i = [hat(a)^dagger_i, hat(a)^dagger_j] = 0 "   " & "Bosons"\
+  hat(a)^dagger_i hat(a)^dagger_j + hat(a)^dagger_j hat(a)^dagger_i = {hat(a)^dagger_i, hat(a)^dagger_j} = 0 "   " & "Fermions"\
+$
+此关系的Hermite共轭给出
+$
+  [hat(a)_i, hat(a)_j] = 0 "   " & "Bosons" \
+  {hat(a)_i, hat(a)_j} = 0 "   " & "Fermions" \
+$
+#newpara()
+*Pauli不相容原理*自动包含在了其中：对于Fermi子
+$
+  hat(a)^dagger_i hat(a)^dagger_i = 0
+$
+即两个费米子不能占据同一个量子态。
+
+同样，当$i != j$时，由全同性原理得到
+$
+  hat(a)_i hat(a)^dagger_j ket(n_1\, n_2\, ...\, n_i\, ...) = plus.minus hat(a)^dagger_j hat(a)_i ket(n_1\, n_2\, ...\, n_i\, ...)
+$
+注意：当$i = j$时，此式不一定成立，例如
+$
+  hat(a)_i hat(a)^dagger_i ket(vb(0)) = ket(vb(0)) != hat(a)^dagger_i hat(a)_i ket(vb(0)) = 0
+$
+从而
+$
+  hat(a)_i hat(a)^dagger_j minus.plus hat(a)^dagger_j hat(a)_i = 0, i != j
+$
+即
+$
+  hat(a)_i hat(a)^dagger_j - hat(a)^dagger_j hat(a)_i = [hat(a)_i, hat(a)^dagger_j] = 0 "   " & "Bosons" \
+  hat(a)_i hat(a)^dagger_j + hat(a)^dagger_j hat(a)_i = {hat(a)_i, hat(a)^dagger_j} = 0 "   " & "Fermions" \
+$
+当$i = j$时上述对易（反对易）关系结果如何？我们假设
+$
+  hat(a)_i hat(a)^dagger_i - hat(a)^dagger_i hat(a)_i = [hat(a)_i, hat(a)^dagger_i] = 1 "   " & "Bosons" \
+  hat(a)_i hat(a)^dagger_i + hat(a)^dagger_i hat(a)_i = {hat(a)_i, hat(a)^dagger_i} = 1 "   " & "Fermions" \
+$
+#newpara()
+下面将证明：对于Bose子，这将使得粒子数$n_i$取值为$0, 1, 2, ...$；而对于Fermi子，这将使得粒子数$n_i$只能取值为$0$和$1$。
+
+根据以上讨论，当$i = j$时有
+$
+  "Bosons": [hat(a)_i, hat(a)^dagger_i] = 1, [hat(a)_i, hat(a)_i] = 0, [hat(a)^dagger_i, hat(a)^dagger_i] = 0\
+  "Fermions": {hat(a)_i, hat(a)^dagger_i} = 1, {hat(a)_i, hat(a)_i} = 0, {hat(a)^dagger_i, hat(a)^dagger_i} = 0
+$
+对于给定的$i$，可定义*粒子数算符*
+$
+  hat(N)_i = hat(a)^dagger_i hat(a)_i
+$
+不论对于Bose子还是Fermi子，都有
+$
+  [hat(N)_i, hat(a)^dagger_i] = hat(a)^dagger_i, [hat(N)_i, hat(a)_i] = - hat(a)_i
+$
+类似*谐振子的代数解法*，求解$hat(N)_i$的本征方程
+$
+  hat(N)_i ket(n_i) = n_i ket(n_i)
+$
+利用对易关系得到
+$
+  hat(N)_i hat(a)^dagger_i ket(n_i) = ([hat(N)_i, hat(a)^dagger_i] + hat(a)^dagger_i hat(N)_i) ket(n_i) = (n_i + 1) hat(a)^dagger_i ket(n_i)\
+  hat(N)_i hat(a)_i ket(n_i) = ([hat(N)_i, hat(a)_i] + hat(a)_i hat(N)_i) ket(n_i) = (n_i - 1) hat(a)_i ket(n_i)
+$
+所以$hat(a)^dagger_i ket(n_i)$和$hat(a)_i ket(n_i)$也是$hat(N)_i$的本征态，本征值增加或减少1。
+
+*对于Bose子*，$hat(a)_i hat(a)^dagger_i = hat(a)^dagger_i hat(a)_i + 1$，所以
+$
+  hat(a)_i ket(n_i) = alpha ket(n_i - 1) => braket(n_i, hat(a)_i^dagger hat(a)_i, n_i) = abs(alpha)^2 => n_i = abs(alpha)^2 => hat(a)_i ket(n_i) = sqrt(n_i) ket(n_i - 1)\
+  hat(a)^dagger_i ket(n_i) = beta ket(n_i + 1) => braket(n_i, hat(a)_i hat(a)_i^dagger, n_i) = abs(beta)^2 => n_i + 1 = abs(beta)^2 => hat(a)^dagger_i ket(n_i) = sqrt(n_i + 1) ket(n_i + 1)
+$
+利用湮灭算符$hat(a)_i$可不断使得本征值减小，再利用
+$
+  n_i = braket(n_i, hat(a)^dagger_i hat(a)_i, n_i) >= 0
+$
+可知$n_i$最小值为0，所以$n_i$取值为$0, 1, 2, ...$。利用上述结果还可以得到
+$
+  hat(a_i) ket(0) = 0\
+  ket(n_i) = (hat(a)^dagger_i)^(n_i)/sqrt(n_i !) ket(0)
+$
+这与之前谐振子的结果完全一致，所以又称为*Bose型谐振子*。
+
+*对于Fermi子*，同样
+$
+  hat(a)_i ket(n_i) = alpha ket(n_i - 1) => braket(n_i, hat(a)_i^dagger hat(a)_i, n_i) = abs(alpha)^2 => n_i = abs(alpha)^2 => hat(a)_i ket(n_i) = sqrt(n_i) ket(n_i - 1)\
+  hat(a)^dagger_i ket(n_i) = beta ket(n_i + 1) => braket(n_i, hat(a)_i hat(a)_i^dagger, n_i) = abs(beta)^2 => 1 - n_i = abs(beta)^2 => hat(a)^dagger_i ket(n_i) = sqrt(1 - n_i) ket(n_i + 1)
+$
+利用湮灭算符$hat(a)_i$不断使得本征值减小，可知$n_i$最小值为0。然后利用产生算符$hat(a)^dagger_i$不断使得本征值增大，得到
+$
+  hat(a)^dagger_i ket(0) = ket(1) => hat(a)^dagger_i hat(a)^dagger_i ket(0) = hat(a)^dagger_i ket(1) = 0
+$
+所以，$n_i$最大值为$1$。
+
+因此，对于Fermi子，$n_i$只能取$0$和$1$两个值。上述结果可总结为
+$
+  hat(a)_i ket(0) = 0, hat(a)_i ket(1) = ket(0)\
+  hat(a)^dagger_i ket(0) = ket(1), hat(a)^dagger_i ket(1) = 0\
+$
+这个系统也被称为*Fermi型谐振子*。对于Fermi子，我们也可以将本征态$ket(n)_i$写为与Bose子一样的形式，利用上述结果还可以得到
+$
+  ket(n_i) = (hat(a)^dagger_i)^(n_i)/sqrt(n_i !) ket(0) (n_i = 0, 1)
+$
+推广到Fock空间中的态矢，不论Bose子还是Fermi子，都可写为
+$
+  ket(n_1\, n_2\, ... n_i\, ...) = product_i (hat(a)^dagger_i)^(n_i)/sqrt(n_i !) ket(vb(0))
+$
+现在可以确定产生算符和湮灭算符作用在Fock空间中任意态矢得到的结果。
+
+- *对于Bose子*：
+  $
+    hat(a)^dagger_i ket(n_1\, n_2\, ... n_i\, ...) = sqrt(n_i + 1) ket(n_1\, n_2\, ... n_i + 1\, ...)\
+    hat(a)_i ket(n_1\, n_2\, ... n_i\, ...) = sqrt(n_i) ket(n_1\, n_2\, ... n_i - 1\, ...)
+  $
+- *对于Fermi子*：
+  $
+    hat(a)^dagger_i ket(n_1\, n_2\, ... n_i\, ...) = xi sqrt(1 - n_i) ket(n_1\, n_2\, ... n_i + 1\, ...)\
+    hat(a)_i ket(n_1\, n_2\, ... n_i\, ...) = xi sqrt(n_i) ket(n_1\, n_2\, ... n_i - 1\, ...)
+  $
+  其中因子$xi$来源于交换产生的$(-1)$的乘积
+  $
+    xi = (-1)^(sum_(j < i) n_j)
+  $
+  由于Fermi子的$n_i$只能取$0, 1$，上述关系又可明确写为
+  $
+    hat(a)^dagger_i ket(n_1\, n_2\, ... n_i\, ...) = xi delta_(n_i, 0) ket(n_1\, n_2\, ... 1_i\, ...)\
+    hat(a)_i ket(n_1\, n_2\, ... n_i\, ...) = xi delta_(n_i, 1) ket(n_1\, n_2\, ... 0_i\, ...)
+  $
+很显然，不论对Bose子还是Fermi子
+$
+  hat(N)_i ket(n_1\, n_2\, ... n_i\, ...) = n_i ket(n_1\, n_2\, ... n_i\, ...)
+$
+定义*总粒子数算符*
+$
+  hat(N) = sum_i hat(N)_i = sum_i hat(a)^dagger_i hat(a)_i
+$
+得
+$
+  hat(N) ket(n_1\, n_2\, ... n_i\, ...) = (sum_i n_i) ket(n_1\, n_2\, ... n_i\, ...)
+$
+#newpara()
+产生算符和湮灭算符满足的对易或反对易关系可总结如下：
+- *对于Bose子*：
+  $
+    [hat(a)_i, hat(a)_j] = 0, [hat(a)^dagger_i, hat(a)^dagger_j] = 0,[hat(a)_i, hat(a)^dagger_j] = delta_(i j)
+  $
+- *对于Fermi子*：
+  $
+    {hat(a)_i, hat(a)_j} = 0, {hat(a)^dagger_i, hat(a)^dagger_j} = 0, {hat(a)_i, hat(a)^dagger_j} = delta_(i j)
+  $
+Bose子满足的对易关系等价于要求体系的量子态对于任意两个粒子的置换是对称的，即*Bose-Einstein统计*；Fermi子满足的反对易关系等价于要求体系的量子态对于任意两个粒子的置换是反对称的，即*Fermi-Dirac统计*。
+
+因此，定义了Fock空间和产生湮灭算符，我们就可以描述全同粒子构成的多粒子系统。
+
+可以证明，*表象变换不改变产生湮灭算符的对易关系*。在以上讨论中，单粒子态采用$hat(K)$表象的基矢。若采用$hat(G)$表象，则可计算
+$
+  &[hat(b)_i, hat(b)_j] = sum_(k l) S_(i k) S_(j l) [hat(a)_k, hat(a)_l] = 0\
+  &[hat(b)^dagger_i, hat(b)^dagger_j] = sum_(k l) S_(i k)^dagger S_(j l)^dagger [hat(a)^dagger_k, hat(a)^dagger_l] = 0\
+  &[hat(b)_i, hat(b)^dagger_j] = sum_(k l) S_(i k) S_(j l)^dagger [hat(a)_k, hat(a)^dagger_l] = sum_(k l) S_(i k) S_(l j)^dagger delta_(k l) = delta_(i j)
+$
+此外，还可以证明：*总粒子数算符的形式与表象无关*
+$
+  hat(N) = sum_i hat(a)^dagger_i hat(a)_i = sum_(i k l) S_(k i) hat(b)^dagger_k S_(i l)^dagger hat(b)_l = sum_l hat(b)^dagger_l hat(b)_l
+$
+
+== Fock空间中的力学量
+
+=== Fock空间中的力学量
+
+构造了满足全同性原理的Fock空间以后，我们需要研究如何构造Fock空间中的力学量，即*力学量的二次量子化形式*。一般来说，$N$个粒子构成的全同粒子系统的力学量有如下几种类型：
+- *单体算符*：可以写成$N$个单体力学量之和，例如粒子的动能、在外场中的势能；
+- *两体算符*：可以写成$N(N - 1)$个两体力学量之和，例如一对粒子之间的相互作用势能；
+- *三体算符*：可以写成$N(N - 1)(N - 2)$个三体力学量之和，例如核子系统中的三体相互作用；
+- ...
+力学量的二次量子化形式，实际上就是求出上述算符在Fock空间中的形式，将其用产生算符和湮灭算符表示出来。
+
+=== 单体算符
+
+设单粒子力学量$hat(K)$的本征方程为
+$
+  hat(K) ket(k_i) = k_i ket(k_i), i = 1, 2, ...
+$
+Fock空间的基矢可以用本征态${ket(k_i)}$上的粒子数分布构造
+$
+  ket(Psi) = ket(n_1\, n_2\, ... n_i\, ...)
+$
+对于$N$粒子系统，与单粒子力学量$hat(K)$对应的单体算符为
+$
+  hat(cal(K)) = sum_(alpha = 1)^N hat(K)_alpha
+$
+容易看到，$ket(Psi)$是$hat(K)$的本征态，本征值为
+$
+  K_"total" = sum_i n_i k_i
+$
+所以*单体算符$hat(cal(K))$可以用产生算符和湮灭算符表示为*
+$
+  hat(cal(K)) = sum_i k_i hat(N)_i = sum_i k_i hat(a)^dagger_i hat(a)_i
+$
+
+#example(subname: [自由粒子])[
+  自由粒子，单粒子Hamilton量为
+  $
+    hat(H) = hat(vb(p))^2/(2m), hat(H) ket(vb(p)) = vb(p)^2/(2m) ket(vb(p))
+  $
+  二次量子化的Hamilton量为
+  $
+    hat(cal(H)) = sum_vb(p) vb(p)^2/(2m) hat(a)^dagger_vb(p) hat(a)_vb(p)
+  $
+  这里通常采用箱归一化，将体系看成边长为$L$的立方体，从而动量取值是离散化的。计算完再令 $L -> oo$。
+]
+
+#example(subname: [外势场中的粒子])[
+  外势场中的粒子，例如冷原子实验中囚禁在磁光阱中的原子、光晶格中的原子、固体晶格中的电子等。单粒子Hamilton量为
+  $
+    hat(H) = hat(vb(p))^2/(2m) + hat(U) (hat(vb(r)))
+  $
+  假设单粒子Hamilton量的本征值问题可以求解
+  $
+    hat(H) ket(phi_i) = epsilon_i ket(phi_i)
+  $
+  则多粒子系统二次量子化的Hamilton量为
+  $
+    hat(cal(H)) = sum_i epsilon_i hat(a)^dagger_i hat(a)_i
+  $
+]
+
+以上例子表明：*在利用单粒子力学量自身表象构造的Fock空间中，该单粒子力学量对应的单体算符的二次量子化形式是对角的*。
+
+如果单粒子态变了，那么单体算符的形式也会发生变化。考虑另一个单粒子力学量$hat(G)$，本征方程为
+$
+  hat(G) ket(g_i) = g_i ket(g_i), i = 1, 2, ...
+$
+Fock空间的基矢也可以用本征态$ket(g_i)$上的粒子数分布构造
+$
+  ket(Psi') = ket(m_1\, m_2\, ... m_i\, ...)
+$
+对应的产生(湮灭)算符为$hat(b)_i, hat(b)^dagger_i$。问题：采用这组基矢对应的产生湮灭算符，与单粒子力学量$hat(K)$对应的单体算符$hat(cal(K))$的形式如何？
+
+根据之前的讨论，新旧产生和湮灭算符之间存在表象变换
+$
+  hat(a)_i = sum_j braket(k_i, g_j) hat(b)_j\
+  hat(a)_i^dagger = sum_j hat(b)_j^dagger braket(g_j, k_i)
+$
+带入得到
+$
+  hat(cal(K)) & = sum_i k_i sum_(m n) hat(b)_m^dagger braket(g_m, k_i) braket(k_i, g_n) hat(b)_n \
+              & = sum_(m n) hat(b)_m^dagger (sum_i k_i braket(g_m, k_i) braket(k_i, g_n)) hat(b)_n \
+              & = sum_(m n) hat(b)_m^dagger bra(g_m) (hat(K) sum_i ketbra(k_i)) ket(g_n) hat(b)_n \
+$
+即
+$
+  hat(cal(K)) = sum_(m n) hat(b)_m^dagger bra(g_m) hat(K) ket(g_n) hat(b)_n = sum_(m n) K_(m n) hat(b)_m^dagger hat(b)_n
+$
+这就是单体算符最*一般性的二次量子化形式*。
+
+#example(subname: [外势场中的粒子])[
+  外势场中的粒子，单粒子Hamilton量为
+  $
+    hat(H) = hat(vb(p))^2/(2m) + hat(U) (hat(vb(r)))
+  $
+  若单粒子态仍取为动量本征态$ket(vb(p))$，则二次量子化的Hamilton量为
+  $
+    hat(cal(H)) &= sum_(vb(p) vb(p)') bra(vb(p)) hat(H) ket(vb(p)') hat(a)^dagger_vb(p) hat(a)_vb(p')\
+    &= sum_(vb(p)) vb(p)^2/(2m) hat(a)^dagger_vb(p) hat(a)_vb(p) + sum_(vb(p) vb(p)') bra(vb(p)) hat(U) ket(vb(p)') hat(a)^dagger_vb(p) hat(a)_vb(p')
+  $
+  可见，由于$ket(vb(p))$不是$hat(H)$的本征态，单体哈密顿量中出现了非对角项。
+]
+
+=== 两体算符
+
+在多粒子系统中，还存在两体算符($α, β$：粒子编号)
+$
+  hat(cal(V)) = sum_(alpha < beta) hat(V)_(alpha beta) = 1/2 sum_(alpha != beta) hat(V)_(alpha beta)
+$
+假设对任意两粒子的$K ⊗ K$表象，有如下本征方程
+$
+  hat(V)_(alpha beta) ket(k_i)_alpha ket(k_j)_beta = V_(i j) ket(k_i)_alpha ket(k_j)_beta
+$
+由于$hat(V)_(alpha beta)$是Hermite算符，所以$V_(i j)$是实数，且$V_(i j) = V_(j i)$。所以，在$K ⊗ K$表象中，$hat(V)_(alpha beta)$是对角的。
+
+两体算符可以用产生湮灭算符表示为
+$
+  hat(cal(V)) = 1/2 sum_(i != j) V_(i j) hat(N)_i hat(N)_j + 1/2 sum_i V_(i i) hat(N)_i (hat(N)_i - 1) \
+$
+
+#proof[
+  利用单粒子的$K$表象构造Fock空间的基矢
+  $
+    ket(Psi) = ket(n_1\, n_2\, ... n_i\, ...)
+  $
+  考虑两体算符$hat(cal(V))$对 Fock 空间基矢的作用。易知，$ket(Psi)$是$hat(cal(V))$的本征态，本征值为
+  $
+    V_"total" = 1/2 sum_(i != j) V_(i j) n_i n_j + 1/2 sum_i V_(i i) n_i (n_i - 1)
+  $
+  另一方面，考虑原始定义的两体算符对$ket(Psi)$的作用。在$ket(Psi)$定义的Fock态中，有 $n_i$个粒子处于$ket(k_i)$ 态，$n_j$个粒子处于$ket(k_j)$ 态。利用假设可知，$ket(Psi)$是$hat(cal(V))$的本征态，本征值与上式相同。因此，两体算符的二次量子化形式即为上述形式。
+]
+#newpara()
+可以将$i != j$和$i = j$的两项合并写为
+$
+  hat(cal(V)) = 1/2 sum_(i j) V_(i j)(hat(N)_i hat(N)_j - delta_(i j) hat(N)_i) = 1/2 sum_(i j) V_(i j) hat(Pi)_(i j)
+$
+其中
+$
+  hat(Pi)_(i j) = hat(N)_i hat(N)_j - delta_(i j) hat(N)_i
+$
+称为*对分布算符*。利用对易或反对易关系，可计算
+$
+  hat(Pi)_(i j) &= hat(N)_i hat(N)_j - delta_(i j) hat(N)_i = hat(a)^dagger_i hat(a)_i hat(a)^dagger_j hat(a)_j - delta_(i j) hat(a)^dagger_i hat(a)_i \
+  &= hat(a)^dagger_i (delta_(i j) plus.minus hat(a)^dagger_j hat(a)_i) hat(a)_j - delta_(i j) hat(a)^dagger_i hat(a)_i \
+  &= plus.minus hat(a)^dagger_i hat(a)^dagger_j hat(a)_i hat(a)_j\
+  &= (plus.minus) (plus.minus) hat(a)^dagger_i hat(a)^dagger_j hat(a)_j hat(a)_i\
+  &= hat(a)^dagger_i hat(a)^dagger_j hat(a)_j hat(a)_i
+$
+所以，两体算符可以写为更为简洁的形式
+$
+  hat(cal(V)) = 1/2 sum_(i j) V_(i j) hat(a)^dagger_i hat(a)^dagger_j hat(a)_j hat(a)_i
+$
+可知
+$
+  V_(i j) = braket(k_i\, k_j, hat(V), k_i\, k_j) = braket(k_i, braket(k_j, hat(V), k_i), k_j)
+$
+通常简记为
+$
+  V_(i j) = braket(i j, hat(V), i j)
+$
+则
+$
+  hat(cal(V)) = 1/2 sum_(i j) braket(i j, hat(V), i j) hat(a)^dagger_i hat(a)^dagger_j hat(a)_j hat(a)_i
+$
+#newpara()
+
+在以上形式中，选取了特殊的$K$表象，其中$hat(V)$是对角的。一般表象下两体算符的形式，可以通过表象变换得到。考虑另一个表象，即$hat(G)$表象，利用表象变换可以计算
+$
+  hat(cal(V)) & = 1/2 sum_(i j) V_(i j) hat(a)^dagger_i hat(a)^dagger_j hat(a)_j hat(a)_i \
+  & = 1/2 sum_(i j) V_(i j) sum_(m n p q) (S_(m i) hat(b)^dagger_m) (S_(n j) hat(b)^dagger_n) (S_(j p)^dagger hat(b)_p) (S_(i q)^dagger hat(b)_q) \
+  & = 1/2 sum_(i j) sum_(m n p q) V_(i j) braket(g_m, k_i) braket(g_n, k_j) braket(k_j, g_p) braket(k_i, g_q) hat(b)^dagger_m hat(b)^dagger_n hat(b)_p hat(b)_q \
+  & = 1/2 sum_(m n p q) braket(m n, hat(V), p q) hat(b)^dagger_m hat(b)^dagger_n hat(b)_p hat(b)_q\
+$
+其中
+$
+    & sum_(i j) V_(i j) braket(g_m, k_i) braket(g_n, k_j) braket(k_j, g_p) braket(k_i, g_q) = braket(m n, hat(V), p q) \
+  = & sum_(i j) V_(i j) (bra(g_m) bra(h_n))(ket(k_i) ket(k_j)) (bra(k_j) bra(k_i))(ket(g_p) ket(g_q)) \
+  = & sum_(i j) bra(g_m) bra(h_n) hat(V) (ket(k_i) ket(k_j) bra(k_j) bra(k_i))ket(g_p) ket(g_q) \
+  = & braket(g_m, braket(g_n, hat(V), g_p), g_q) \
+  = & braket(m n, hat(V), p q)
+$
+
+#example(subname: [粒子之间的两体相互作用])[
+  粒子之间的两体相互作用。单粒子取坐标表象，有
+  $
+    hat(V)_(alpha beta) ket(vb(x))_alpha ket(vb(x)')_beta = V(vb(x), vb(x)') ket(vb(x))_alpha ket(vb(x)')_beta
+  $
+  其中$V(vb(x), vb(x)') = V(abs(vb(x) - vb(x)'))$。由于$hat(V)$在坐标表象是对角的，所以两体相互作用的二次量子化形式为
+  $
+    hat(cal(V)) = 1/2 integral dd(vb(x), 3) integral dd(vb(x)', 3) V(abs(vb(x) - vb(x)')) hat(a)^dagger (vb(x)) hat(a)^dagger (vb(x)') hat(a)(vb(x)') hat(a)(vb(x))
+  $
+  下面将看到，这里的产生湮灭算符，实际上就是场算符，即
+  $
+    hat(cal(V)) = 1/2 integral dd(vb(x), 3) integral dd(vb(x)', 3) V(abs(vb(x) - vb(x)')) hat(psi)^dagger (vb(x)) hat(psi)^dagger (vb(x)') hat(psi)(vb(x)') hat(psi)(vb(x))
+  $
+  若采用动量表象，则$hat(V)$不是对角的，需要采用一般的形式。将在后面的实例中进行推导。
+]
+
+== 实例：电子气
