@@ -625,3 +625,66 @@ $
 ]
 
 == 实例：电子气
+
+作为一个计算实例，考虑金属中的电子气。做为简化模型，取边长为$L$的立方体$(V = L^3)$，$N$个电子在其中运动。由于整体是电中性的（正离子），将正电荷看成是在立方体中*均匀分布*的背景。
+
+只考虑Coulomb相互作用，系统的Hamilton量为
+$
+  hat(H) = hat(H)_e + hat(H)_"b" + hat(H)_(e"b")\
+$
+其中，$hat(H)_e$包含电子的动能和电子之间的Coulomb相互作用
+$
+  hat(H)_e = sum_i hat(vb(p))_i^2/(2m) + 1/2 e^2 sum_(i != j) e^(- mu abs(hat(vb(x))_i - hat(vb(x))_j))/abs(hat(vb(x))_i - hat(vb(x))_j)
+$
+这里，我们假设Coulomb力被屏蔽了，引入了屏蔽质量$mu$，计算的最后令$mu -> 0$。
+
+$hat(H)_"b"$为正电背景的相互作用能
+$
+  hat(H)_"b" = 1/2 integral dd(vb(x), 3) integral dd(vb(x)', 3) rho(vb(x)) rho(vb(x)') e^(- mu abs(vb(x) - vb(x)'))/(abs(vb(x) - vb(x)'))
+$
+根据模型假设，$ρ(x) = N/V$，计算得到
+$
+  hat(H)_"b" = 1/2 e^2 (N/V)^2 integral dd(vb(x)', 3) integral dd(vb(x), 3) e^(- mu abs(vb(x)))/(abs(vb(x))) = 1/2 e^2 N^2/V (4pi)/(mu^2) \
+$
+$hat(H)_(e"b")$为电子与正电背景的相互作用能
+$
+  hat(H)_(e"b") = - e^2 sum_i integral dd(vb(x), 3) rho(vb(x)) e^(- mu abs(hat(vb(x))_i - vb(x)))/(abs(hat(vb(x))_i - vb(x))) = - e^2 N^2/V (4pi)/(mu^2) \
+$
+注意：要用国际单位制，做代换$e^2 -> e^2/(4 pi epsilon_0)$。
+
+所以，体系的Hamilton顿量可写为
+$
+  hat(H) = sum_i hat(vb(p))_i^2/(2m) + 1/2 e^2 sum_(i != j) e^(- mu abs(hat(vb(x))_i - hat(vb(x))_j))/abs(hat(vb(x))_i - hat(vb(x))_j) - 1/2 e^2 N^2/V (4pi)/(mu^2)
+$
+虽然最后一项当$µ -> 0$时发散，但是后面会看到，它将被精确抵消。接下来，将此Hamilton量写成二次量子化的形式。
+
+将单电子态取为动量$hat(vb(p))$和自旋$sigma_z$的共同本征态$ket(vb(k) lambda), lambda=plus.minus$。考虑由于周期性边界条件，$vb(k)$的取值是离散的($vb(k) = vb(p)/hbar$)
+$
+  vb(k) = (2pi)/L vb(n), vb(n) in ZZ^3
+$
+动量本征态在坐标表象的波函数为
+$
+  braket(vb(x), vb(k) lambda) = 1/sqrt(V) e^(i vb(k) dot vb(x)) chi_lambda
+$
+正交归一和完备性条件
+$
+  braket(vb(k)' lambda', vb(k) lambda) = delta_(vb(k)', vb(k)) delta_(lambda', lambda)\
+  sum_(vb(k) lambda) ketbra(vb(k) lambda) = 1
+$
+#newpara()
+*电子动能项*：这项对应单体算符，根据前面的公式，得到
+$
+  sum_i hat(vb(p))_i^2/(2m) -> hat(cal(K))& = sum_(vb(k) lambda) sum_(vb(k)' lambda') braket(vb(k) lambda, hat(vb(p))^2/(2m), vb(k)' lambda') hat(a)^dagger_(vb(k) lambda) hat(a)_(vb(k)' lambda') \
+  & = sum_(vb(k) lambda) (hbar^2 vb(k)^2)/(2m) hat(a)^dagger_(vb(k) lambda) hat(a)_(vb(k) lambda)
+$
+#newpara()
+*电子间相互作用项*：这项对应两体算符，根据前面的公式，得到
+$
+  hat(cal(V)) = sum_(vb(k)_1 lambda_1) sum_(vb(k)_2 lambda_2) sum_(vb(k)_3 lambda_3) sum_(vb(k)_4 lambda_4) braket(vb(k)_1 lambda_1\, vb(k)_2 lambda_2, hat(V), vb(k)_3 lambda_3\, vb(k)_4 lambda_4) times hat(a)^dagger_(vb(k)_1 lambda_1) hat(a)^dagger_(vb(k)_2 lambda_2) hat(a)_(vb(k)_4 lambda_4) hat(a)_(vb(k)_3 lambda_3)
+$
+其中的矩阵元可如下计算
+$
+  &braket(vb(k)_1 lambda_1\, vb(k)_2 lambda_2, hat(V), vb(k)_3 lambda_3\, vb(k)_4 lambda_4) \
+  = &integral dd(vb(x)_1, 3) integral dd(vb(x)_2, 3) integral dd(vb(x)_3, 3) integral dd(vb(x)_4, 3) braket(vb(k)_1 lambda_1, vb(x)_1) braket(vb(k)_2 lambda_2, vb(x)_2) bra(vb(x)_1\, vb(x)_2) hat(V) ket(vb(x)_3\, vb(x)_4) braket(vb(x)_3, vb(k)_3 lambda_3) braket(vb(x)_4, vb(k)_4 lambda_4) \
+  = &integral dd(vb(x), 3) integral dd(vb(x)', 3) braket(vb(k)_1 lambda_1, vb(x)) braket(vb(k)_2 lambda_2, vb(x)') hat(V)(vb(x), vb(x)') braket(vb(x), vb(k)_3 lambda_3) braket(vb(x)', vb(k)_4 lambda_4)
+$
