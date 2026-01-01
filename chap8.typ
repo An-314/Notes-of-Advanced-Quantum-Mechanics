@@ -72,7 +72,11 @@ $
 $
   hat(H) = hat(vb(p))_1^2/(2m) + hat(U)_"ext" (vb(x)_1) + hat(vb(p))_2^2/(2m) + hat(U)_"ext" (vb(x)_2) + hat(V)_"int" (abs(vb(x)_1 - vb(x)_2))
 $
-这意味着$hat(P)_12$是守恒量。由$hat(P)_12^2 = 1$可知其本征值为$+1$和$-1$。所以，如果体系在初始时刻处于本征值为$+1$和$-1$的本征态，这种状态将不随时间变化。
+这意味着
+$
+  [hat(H), hat(P)_12] = 0
+$
+$hat(P)_12$是守恒量。由$hat(P)_12^2 = 1$可知其本征值为$+1$和$-1$。所以，如果体系在初始时刻处于本征值为$+1$和$-1$的本征态，这种状态将不随时间变化。之前所学的量子力学并没有对全同粒子的态矢做出要求，因此全同粒子体系的态矢可以是$hat(P)_12$的线性组合态。但全同性原理要求，全同粒子的态矢必须是$hat(P)_12$的本征态，要么是对称的，要么是反对称的。
 
 以上讨论可以直接推广到任意$N$粒子系统，置换算符$hat(P)_(i j)$定义为
 $
@@ -80,6 +84,166 @@ $
 $
 *全同性原理*则对全同粒子体系的量子态有着更高的要求，即对于任意两个粒子的置换操作，要么是对称的，要么是反对称的
 $
-  hat(P)_(i j) ket(N "identical particles") = + ket(N "identical particles")\
-  hat(P)_(i j) ket(N "identical particles") = - ket(N "identical particles")
+  hat(P)_(i j) ket(N "identical bosons") = + ket(N "identical bosons")\
+  hat(P)_(i j) ket(N "identical fermions") = - ket(N "identical fermions")
+$
+很显然，直接将单粒子态直积起来构造的基矢不满足对称性要求，多粒子系统的Hilbert空间中存在大量不满足对称性要求的态矢。因此，我们需要构造对称化或反对称化的基矢。
+
+在非相对论量子力学的框架下，*全同性原理是其第五大公设*。在相对论的量子场论中，自旋-统计定理表明，自旋为整数的粒子必须服从对称化原理，自旋为半整数的粒子必须服从反对称化原理。因此，全同性原理与粒子的自旋密切相关。
+
+#example(subname: [两粒子系统])[
+  对于两粒子系统，假设单粒子空间基矢为$ket(k')$和$ket(k'')$。若不考虑全同性，则基矢为
+  $
+    ket(k') ket(k''), ket(k'') ket(k'), ket(k') ket(k'), ket(k'') ket(k'')
+  $
+  若为全同粒子，则对称化的基矢为
+  $
+    ket(k') ket(k'), ket(k'') ket(k''), 1/sqrt(2) (ket(k') ket(k'') + ket(k'') ket(k'))
+  $
+  反对称化的基矢为
+  $
+    1/sqrt(2) (ket(k') ket(k'') - ket(k'') ket(k'))
+  $
+]
+
+#example(subname: [三粒子系统])[
+  对于三粒子系统，假设单粒子空间基矢为$ket(k')$、$ket(k'')$和$ket(k''')$。若考虑三个不同的状态构造的对称化或反对称化的基矢，则为
+  $
+    ket(k' k'' k''')_plus.minus = & 1/sqrt(6) (ket(k') ket(k'') ket(k''') plus.minus ket(k') ket(k''') ket(k'') \
+                                  & + ket(k'') ket(k''') ket(k') plus.minus ket(k'') ket(k') ket(k''') \
+                                  & + ket(k''') ket(k') ket(k'') plus.minus ket(k''') ket(k'') ket(k'))
+  $
+  其中正号和负号代表对称化和反对称化的基矢。当然，还存在有两个单粒子态相同的基矢，例如
+  $
+    ket(k' k' k'')_+ = 1/sqrt(3) (ket(k') ket(k') ket(k'') + ket(k') ket(k'') ket(k') + ket(k'') ket(k') ket(k'))
+  $
+]
+
+== Fock 空间
+
+对于一个$N$粒子系统，原则上可以构造对称化或反对称化的基矢，从而构造出满足全同性原理的Hilbert空间。但是如果粒子数很大，这种基矢的数量必然也很大，彼此之间又没有明显联系，理论上处理起来很不方便。因此前人发展了另一种处理方法，即*二次量子化*。
+
+=== Fock 空间的构造与产生湮灭算符
+
+设单粒子力学量$hat(K)$的本征方程为
+$
+  hat(K) ket(k_i) = k_i ket(k_i)
+$
+即: 本征值为${k_i}$，本征态为$ket(k_i)$。*二次量子化方法，就是用单粒子本征态上的粒子数分布来描述全同粒子体系的状态。*定义多粒子系统态矢为
+$
+  ket(n_1\, n_2\, ... n_i\, ...), n_i = 0, 1, 2, ...
+$
+$n_i$是处于第$i$个单粒子本征态$ket(k_i)$的粒子数。
+
+由这些态矢构成的矢量空间称为*Fock空间*。它实际上是*所有可能的粒子数的对称化（或反对称化）Hilbert空间的直和*。因此，它既可以处理粒子数不变的系统，也可以处理粒子数可变的系统。
+$
+  cal(H) = cal(H)_1 times.o cal(H)_2 times.o ... times.o cal(H)_N
+$
+一次量子化构造的满足对称和反对称的子空间分别为
+$
+  cal(H)_"B"^((n)), cal(H)_"F"^((n))
+$
+这都是对于$N$粒子系统而言的。Fock空间的基矢为
+$
+  ket(n_1\, n_2\, ... n_i\, ...), sum_i n_i = N != "const"
+$
+这样给出的Hilbert空间不再局限于固定粒子数$N$，而是包含了所有可能的粒子数。从而
+$
+  cal(H)_"Fock" = sum_n cal(H)^((n))_"B or F"
+$
+
+#newpara()
+Fock 空间中有两个特殊的态矢。第一个是*真空态*
+$
+  ket(0\, 0\, ... 0\, ...) = ket(vb(0))
+$
+即：所有单粒子态上都没有粒子。第二个是*单粒子态*
+$
+  ket(0\, 0\, ... n_i = 1\, ... 0\, ...) = ket(k_i)
+$
+即：一个粒子处于本征值为$k_i$的本征态$ket(k_i)$。这两个态都已经归一化，即
+$
+  braket(vb(0)) = 1, braket(k_i) = 1
+$
+#newpara()
+多粒子态如何满足全同性原理呢？既然全同粒子系统的状态用粒子数分布表示，则可以定义改变粒子数的算符：*产生算符和湮灭算符*（某种意义下也可称为场算符）。
+
+#note[
+  这里的产生湮灭算符和当时谐振子中的产生湮灭算符有着本质的区别：谐振子中的产生湮灭算符是改变谐振子能级的，而这里的产生湮灭算符是改变粒子数的。但我们如此命名的方式是其对易关系是一致的。后面我们会说这样的算符也可以被称为*场算符*，因为它们可以看成是场的量子化。
+]
+
+定义*产生算符*$hat(a)^dagger_i$，对Fock空间中任意态矢的作用为
+$
+  hat(a)^dagger_i ket(n_1\, n_2\, ... n_i\, ...) prop ket(n_1\, n_2\, ... n_i + 1\, ...)
+$
+其中归一化常数待定。假设$hat(a)^dagger_i$作用在真空态上，得到单粒子态
+$
+  hat(a)^dagger_i ket(vb(0)) = ket(k_i)
+$
+由此得到
+$
+  1 = braket(k_i) = braket(vb(0), hat(a)_i hat(a)^dagger_i, vb(0)) = braket(vb(0), hat(a)_i, k_i)\
+  => hat(a)_i ket(k_i) = ket(vb(0))
+$
+所以产生算符$hat(a)^dagger_i$的Hermite共轭是*湮灭算符*，定义其对Fock空间中任意态矢的作用为
+$
+  hat(a)_i ket(n_1\, n_2\, ... n_i\, ...) prop ket(n_1\, n_2\, ... n_i - 1\, ...)
+$
+尤其是
+$
+  hat(a)_i ket(vb(0)) = 0, hat(a)_i ket(k_j) = 0 (i!-j)
+$
+湮灭算符对单粒子态的作用可合并写为
+$
+  hat(a)_i ket(k_j) = delta_(i j) ket(vb(0))
+$
+产生算符和湮灭算符可以很自然地用来表示多粒子系统的力学量。
+
+=== 表象变换
+
+*表象变换*：Fock态中粒子占据的单粒子态，原则上*可以用任意单粒子力学量的完备本征态*。之前用的是单粒子力学量$hat(K)$的本征态，如果换成别的力学量，例如$hat(G)$，在新的 Fock 态中定义的产生湮灭算符与原来的有何关系？Fock的Hilbert空间是一致的，我们认为是其基矢的表示方式不同，也就是表象不同。
+
+假设$hat(G)$的本征方程为
+$
+  hat(G) ket(g_i) = g_i ket(g_i), i = 1, 2, ...
+$
+即：本征值为${g_i}$，本征态为${ket(g_i)}$。利用这组单粒子态定义的Fock态为
+$
+  ket(m_1\, m_2\, ... m_i\, ...), m_i = 0, 1, 2, ...
+$
+同样，定义产生算符和湮灭算符
+$
+  hat(b)_i^dagger ket(m_1\, m_2\, ... m_i\, ...) prop ket(m_1\, m_2\, ... m_i + 1\, ...)\
+  hat(b)_i ket(m_1\, m_2\, ... m_i\, ...) prop ket(m_1\, m_2\, ... m_i - 1\, ...)
+$
+#newpara()
+
+*单粒子态的表象变换*：(K 表象$<->$G 表象)
+$
+  ket(k_i) = sum_m ket(g_m) braket(g_m, k_i) = sum_m S_(m i) ket(g_m)\
+  S_(m i) = braket(g_m, k_i)
+$
+#newpara()
+*产生湮灭算符的表象变换*：利用表象变换矩阵的幺正性
+$
+  (S^dagger S)_(i j) = (S S^dagger)_(i j) = delta_(i j)
+$
+得到($S_(i j)^dagger = (S^dagger)_(i j) = (S^*)_(j i)$)
+$
+  hat(a)_i ket(k_j) &= delta_(i j) ket(vb(0)) = sum_m S_(i m)^dagger S_(m j) ket(vb(0)) = sum_(m l) S_(i m)^dagger S_(l j) delta_(m l) ket(vb(0))\
+  &= sum_(m l) S_(i m)^dagger S_(l j) hat(b)_m ket(g_l) = sum_m S_(i m)^dagger hat(b)_m (sum_l S_(l j) ket(g_l)) = sum_m S_(i m)^dagger hat(b)_m ket(k_j)\
+$
+由于$ket(k_j)$是任意单粒子态，所以
+$
+  hat(a)_i = sum_m braket(k_i, g_m) hat(b)_m\
+  hat(a)_i^dagger = sum_m hat(b)_m^dagger braket(g_m, k_i)
+$
+逆变换为
+$
+  hat(b)_m = sum_i braket(g_m, k_i) hat(a)_i\
+  hat(b)_m^dagger = sum_i hat(a)_i^dagger braket(k_i, g_m)
+$
+以上结果表明：*利用某个（单粒子）表象定义的产生算符（湮灭算符），可以用别的表象定义的产生算符（湮灭算符）的线性叠加表示出来，叠加系数就是（单粒子）表象变换的矩阵元*。我们还发现*单粒子态和产生湮灭算符的对应关系*
+$
+  ket(k_i) <-> hat(a)_i^dagger, ket(k_i) <-> hat(a)_i^dagger, ketbra(k_i, k_j) <-> hat(a)_i^dagger hat(a)_j
 $
