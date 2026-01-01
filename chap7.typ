@@ -509,7 +509,7 @@ $
 $
   cal(D)[vb(x)(t)] = lim_(N -> oo) (m/(2 pi hbar i epsilon))^(3/2) (product_(n=1)^(N-1) (m/(2 pi hbar i epsilon))^(3/2) dd(vb(x)_n))
 $
-即可得到Fermman的路径积分表达式
+即可得到Fermman的*路径积分表达式*
 $
   K(vb(x)_B, t_B; vb(x)_A, t_A) = integral_((vb(x)_A, t_A))^((vb(x)_B, t_B)) cal(D)[vb(x)(t)] exp((i)/hbar S[vb(x)(t)])
 $
@@ -611,3 +611,247 @@ $
   F(t_A,t_B) = integral_((0, t_A))^((0, t_B)) cal(D)[y(t)] exp((i)/hbar integral_(t_A)^(t_B) dd(t) (a dot(y)^2 + b y dot(y) + c y^2))
 $
 是来自量子涨落的贡献。它可以通过方法1和方法2直接计算。下面以自由粒子和谐振子为例介绍一种简便的间接方法(Fermman)。
+
+#example(subname: [自由粒子])[
+  经典作用量可以计算为
+  $
+    S_"cl" = (m (x_B - x_A)^2)/(2 (t_B - t_A))
+  $
+  几率振幅为
+  $
+    K(x_B, t_B; x_A, t_A) = F(t_A,t_B) exp((i)/hbar (m (x_B - x_A)^2)/(2 (t_B - t_A)))
+  $
+  因子$F(t_A, t_B)$可以直接计算$(a = m/2, b = c = 0)$。这里利用传播子的性质来确定。
+
+  - *方法 1*: 利用传播子的合成性质$(t_B > t_C > t_A)$
+    $
+      K(x_B, t_B; x_A, t_A) & = integral_(-oo)^(oo) dd(x_C) K(x_B, t_B; x_C, t_C) K(x_C, t_C; x_A, t_A) \
+    $
+    由于$F(t_A, t_B)$与坐标无关，令$x_A = x_B = 0$，得到
+    $
+      K(0, t_B; 0, t_A) & = integral dd(x_C) K(0, t_B; x_C, t_C) K(x_C, t_C; 0, t_A) \
+    $
+    即
+    $
+      F(t_A,t_B) & = F(t_A,t_C) F(t_C,t_B) integral_(-oo)^(+oo) dd(x_C) exp((i)/hbar (m x_C^2)/(2 (t_B - t_C))) exp((i)/hbar (m x_C^2)/(2 (t_C - t_A))) \
+      &= F(t_A,t_C) F(t_C,t_B) sqrt((2 pi i hbar (t_B - t_C)(t_C - t_A))/(m (t_B - t_A))) \
+    $
+    由于时间平移不变性，$F(t_1, t_2)$只是$t_2 - t_1$的函数，$F(t_1; t_2) = F(t_2 - t_1)$。令$t = t_B - t_C$，$s = t_C - t_A$，则$t_B - t_A = t + s$，得到
+    $
+      F(t + s) = F(t) F(s) sqrt((2 pi i hbar t s)/(m (t + s)))
+    $
+    这个函数方程的解可取为
+    $
+      F(t) = sqrt(m/(2 pi i hbar t))
+    $
+    从而
+    $
+      F(t_A,t_B) = sqrt(m/(2 pi i hbar (t_B - t_A)))
+    $
+    #newpara()
+  - *方法2*：利用传播子的等时性质
+    $
+      lim_(t_B -> t_A) K(x_B, t_B; x_A, t_A) = delta(x_B - x_A)
+    $
+    对于自由粒子，即
+    $
+      lim_(t_B -> t_A) F(t_A,t_B) exp((i)/hbar (m (x_B - x_A)^2)/(2 (t_B - t_A))) = delta(x_B - x_A)
+    $
+    利用$δ$函数的一种极限表达式
+    $
+      delta(x) = lim_(alpha -> 0) 1/sqrt(pi alpha) exp(- x^2/alpha)
+    $
+    令
+    $
+      alpha = (2 hbar i (t_B - t_A))/m
+    $
+    得到
+    $
+      delta(x_B - x_A) = lim_(t_B - t_A ->0) sqrt(m/(2 pi i hbar (t_B - t_A))) exp((i)/hbar (m (x_B - x_A)^2)/(2 (t_B - t_A)))
+    $
+    比较得到
+    $
+      F(t_A,t_B) = sqrt(m/(2 pi i hbar (t_B - t_A)))
+    $
+]
+
+#example(subname: [谐振子])[
+  谐振子Lagrange量为
+  $
+    L = 1/2 m dot(x)^2 - 1/2 m omega^2 x^2
+  $
+  先求经典路径的作用量。利用Euler-Lagrange方程
+  $
+    dv(, t) pdv(L, dot(x)) - pdv(L, x) = 0 => dot.double(x) + omega^2 x = 0
+  $
+  一般解为
+  $
+    x(t) = C_1 cos(omega t) + C_2 sin(omega t)
+  $
+  利用边界条件$x(t_A) = x_A, x(t_B) = x_B$得到
+  $
+    C_1 & = (x_A sin(omega t_B) - x_B sin(omega t_A))/sin(omega T) \
+    C_2 & = - (x_B cos(omega t_B) - x_A cos(omega t_A))/sin(omega T) \
+  $
+  其中定义$T = t_B - t_A$。于是得到经典路径的作用量
+  $
+    S_"cl" & = integral_(t_A)^(t_B) dd(t) L(x_"c" (t)) \
+           & = (m omega)/(2 sin(omega T)) ((x_B^2 + x_A^2) cos(omega T) - 2 x_B x_A)
+  $
+  几率振幅为
+  $
+    K(x_B, t_B; x_A, t_A) & = F(t_A,t_B) exp((i)/hbar S_"cl") \
+                          & = F(T) exp((i m omega)/(2 hbar sin(omega T)) ((x_B^2 + x_A^2) cos(omega T) - 2 x_B x_A)) \
+  $
+  求解因子$F(T)$仍然利用等时极限
+  $
+    delta(x_B - x_A) = lim_(T -> 0) F(T) exp(- (m omega (x_B - x_A)^2)/(2 i hbar sin(omega T)))
+  $
+  再一次利用$δ$函数的极限表达式
+  $
+    delta(x) = lim_(alpha -> 0) 1/sqrt(pi alpha) exp(- x^2/alpha)\
+    alpha -> (2 i hbar sin(omega T))/(m omega)
+  $
+  比较得到
+  $
+    F(T) = sqrt((m omega)/(2 pi i hbar sin(omega T)))
+  $
+  注：更为严格的做法是
+  $
+    (x_A^2 + x_B^2) cos(omega T) - 2 x_A x_B = (x_B - x_A)^2 + 2(x_A^2 + x_B^2) sin^2 ((omega T)/2)
+  $
+  令$x_A = x_B = x$，$t_A = 0$，$t_B = t$，得到的封闭传播子对$x$积分
+  $
+    G(t) &= integral_(-oo)^(+oo) dd(x) K(x, t; x, 0)\
+    &= sqrt((m omega)/(2 pi i hbar sin(omega t))) integral_(-oo)^(+oo) dd(x) exp((i m omega)/(hbar) x^2 tan((omega t)/2)) \
+    &= 1/(2 i sin((omega t)/2)) = sum_(n=0)^(oo) e^(- i omega t (n + 1/2)) \
+  $
+  对照以前推出的
+  $
+    G(t) = sum_n e^(- i/hbar E_n t)
+  $
+  则得到谐振子能级
+  $
+    E_n = hbar omega (n + 1/2)
+  $
+]
+
+=== 半经典近似
+
+只有Gauss型路径积分才能被严格计算出来，如果不是Gauss型，就难以近似。这时候，只能疯狂地近似。近似的基本思想是将作用量写成Gauss型的部分和非Gauss型的部分，把后者扔掉。考虑在势场中运动的粒子的Lagrange量
+$
+  L = 1/2 m dot(x)^2 - V(x)
+$
+根据Euler-Lagrange方程可以求出其经典路径$x_c (t)$，对应的作用量$S$是最小值。采用跟之前类似的思路，将任意路径$x(t)$写成
+$
+  x(t) = x_c (t) + y(t)， y(t_A) = y(t_B) = 0
+$
+代入作用量
+$
+  S[x(t)] = integral_(t_A)^(t_B) dd(t) (1/2 m (dot(x_c) + dot(y))^2 - V(x_c + y))
+$
+展开到$y$的二次方项，像前面推导一样消去Newton运动方程对应的一次项，得到
+$
+  S[x(t)] = S[x_c (t)] + integral_(t_A)^(t_B) dd(t) (1/2 m dot(y)^2 - 1/2 V''(x_c (t)) y^2) + ...
+$
+当然，后面的高阶项只能被无情地扔掉了。这样，只需计算
+$
+  integral_((0, t_A))^((0, t_B)) cal(D)[y(t)] exp((i)/hbar integral_(t_A)^(t_B) dd(t) (1/2 m dot(y)^2 - 1/2 V''(x_c (t)) y^2))
+$
+这就类似于经典力学的谐振子近似。
+
+== 外势场与量子相位
+
+本小节来讨论微观粒子在外势场中可能产生的*量子干涉效应*。外势场：常数势差、重力势差、电磁势、...
+
+- 观点一：波函数是复数，时间演化中相位也会演化
+  $
+    ket(psi \, t) = exp(- i/hbar hat(H) (t - t_0)) ket(psi \, t_0)
+  $
+- 观点二：路径积分形式，不同的路径之间可能有相位差
+  $
+    K(vb(x)_B, t_B; vb(x)_A, t_A) = C sum_"all path" exp((i)/hbar S[vb(x)(t)])
+  $
+
+=== 常数势场
+
+在*经典力学*中，考虑粒子在势场$V(vb(x))$中的运动，Hamilton量为
+$
+  cal(H) = vb(p)^2/(2m) + V(vb(x))
+$
+若给势场加上一个与时空无关的常数项，即
+$
+  V(vb(x)) -> V(vb(x)) + V_0
+$
+根据运动方程(Hamilton正则方程)
+$
+  dot(vb(x)) = pdv(cal(H), vb(p)), dot(vb(p)) = - pdv(cal(H), vb(x))
+$
+(除了能量以外)所有力学量的时间演化都不会发生改变。
+
+在*量子力学*中，情形又如何呢？同样考虑粒子在势场$V(vb(x))$中的运动，Hamilton量为
+$
+  hat(H) = hat(vb(p))^2/(2m) + V(hat(vb(x)))
+$
+量子态的时间演化为
+$
+  ket(psi \, t) = exp(- i/hbar (hat(vb(p))^2/(2m) + V(hat(vb(x)))) (t - t_0)) ket(psi \, t_0)
+$
+若也给势场加上一个与时空无关的常数项，即
+$
+  V(vb(x)) -> V(vb(x)) + V_0
+$
+那么量子态将变为
+$
+  ket(psi \, t) &= exp(- i/hbar (hat(vb(p))^2/(2m) + V(hat(vb(x))) + V_0) (t - t_0)) ket(psi \, t_0)\
+  &= exp(- i/hbar V_0 (t - t_0)) exp(- i/hbar (hat(vb(p))^2/(2m) + V(hat(vb(x)))) (t - t_0)) ket(psi \, t_0)\
+  &= exp(- i/hbar V_0 (t - t_0)) ket(psi \, t)
+$
+因此，在势场改变一个时空无关的常数时，量子态只改变一个*整体相位因子*，这将不会对(除了能量以外的)所有力学量的取值几率和平均值产生影响。根据定态Schrödinger方程，体系的能级也只在整体上改变一个常数，即
+$
+  E_n -> E_n + V_0
+$
+而原子光谱等可观测效应只依赖能量差，因此也不会受到影响。
+
+我们可以将此看成是一类变换(*规范变换*)的一个简单例子。即，当势场$V(x)$做变换
+$
+  V(x) -> V(x) + V_0
+$
+时，量子态的变换为
+$
+  ket(psi \, t) -> exp(- i/hbar V_0 (t - t_0)) ket(psi \, t)
+$
+波函数的变换为
+$
+  psi(vb(x), t) -> exp(- i/hbar V_0 (t - t_0)) psi(vb(x), t)
+$
+#newpara()
+上述变换可以推广到$V_0$依赖时间但是空间均匀的情形，即$V_0 = V_0(t)$。在此情形下，由于不同时刻的Hamilton量对易，所以量子态变换为
+$
+  ket(psi \, t) -> exp(- i/hbar integral_(t_0)^(t) dd(t') V(t')) ket(psi \, t)
+$
+因此，即使在$V_0$依赖时间的情形，也不会对(除了能量以外的)可观测量产生影响。
+
+虽然(空间均匀的)势场改变$V_0$带来的整体相位因子不会产生物理效应，但是如果能让粒子感受到两种不同的势场改变，那么这种势场差异则会带来可观测的*量子干涉效应*。
+
+带电粒子被分两束，分别经过两个金属管，每个金属管中的电势是均匀的，即没有电场。粒子在金属管中感受不到(电场)力，但是会感受到电势。若闭合关开，粒子在两个金属管中运动时可感受到电势差。两束粒子到达汇合(干涉)区域时，具有相位差，因此产生量子干涉。
+$
+  phi_1 - phi_2 = - 1/hbar integral dd(t) (V_1 (t) - V_2 (t))
+$
+#figure(
+  image("pic/2026-01-01-17-38-58.png", width: 80%),
+  numbering: none,
+)
+
+=== 重力导致的量子干涉
+
+在经典力学中，粒子在重力场中的运动方程为
+$
+  m dot.double(vb(x)) = - m grad Phi_g = - m g vu(z)
+$
+其中$Phi_g = g z$是重力势。由于惯性质量与引力质量相等，质量在运动方程中被消掉了，即粒子的运动轨迹与质量无关。
+
+在量子力学中，则不一样。波动力学中的运动方程(Schrödinger方程)为
+$
+  i hbar pdv(psi, t) = (- hbar^2/(2m) laplacian + Phi_g) psi
+$
