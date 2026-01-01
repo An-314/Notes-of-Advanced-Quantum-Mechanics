@@ -853,5 +853,118 @@ $
 
 在量子力学中，则不一样。波动力学中的运动方程(Schrödinger方程)为
 $
-  i hbar pdv(psi, t) = (- hbar^2/(2m) laplacian + Phi_g) psi
+  i hbar pdv(psi, t) = (- hbar^2/(2m) laplacian + m Phi_g) psi
 $
+将方程改写一下，成为
+$
+  i hbar/m pdv(psi, t) = (- 1/2 (hbar/m)^2 laplacian + Phi_g) psi
+$
+可以看到，质量$m$并不会被消掉，而是和Plank常数组合在一起，以$hbar/m$出现。在路径积分形式中，在无穷小时间间隔$∆ t = t_n - t_(n-1)$中的跃迁振幅为
+$
+  braket(vb(x)_n \, t_n, vb(x)_(n-1) \, t_(n-1)) & = sqrt(m/(2 pi i hbar ∆ t)) exp(i/hbar integral_(t_(n-1))^(t_n) dd(t) (1/2 m dot(vb(x))^2 - m Phi_g (vb(x)))) \
+$
+可以看到，质量照样是以$m/hbar$的组合出现的。
+
+其实，将重力势看成$V(x)$进入Schrödinger方程乃是一个很强的假设。因此需要在实验上去验证。由于引力效应在微观尺度上非常微弱，因此很难直接探测。例如，考虑中子和电子构成的束缚态，由于电子和中子之间的引力只是电子和质子之间的库仑力的大约$2 times 10^39$分之一，这样的“引力原子”的Bohr半径比宇宙的半径还要大。
+
+因此，*只有在比较宏观的尺度上，才可能探测到重力的量子效应*，这个实验就是重力导致的量子干涉。其基本思想就是*让粒子分别通过重力场中的两个不同的路径，产生相位差，然后在汇合区域发生干涉*。如下图所示。
+
+实验中，在 A 处将中子分成两束，一束经 ACD 路径到达 D，另一束经 ABD 路径到达 D。
+
+#figure(
+  image("pic/2026-01-01-21-03-55.png", width: 50%),
+  numbering: none,
+)
+
+如果平面 ABCD 平行于地面，则中子在两条路径上感受到的重力势相同，不会积累相位差，因此在 D 不会产生干涉。
+
+要产生相位差，可将平面 ABCD 以 AC 为轴向上翘起一个角度$δ$，则粒子在 BD 和 AC 路径上产生一个*常数势差*
+$
+  Delta V = m g l_2 sin delta
+$
+很容易看到，路径 AB 和 CD 对相位差无贡献。设中子 (波包) 从 B 运动到 D(或从 A 运动到 C) 的时间是$∆ t$，则经过两条不同路径 ACD 和 ABD 的中子积累的相位差为
+
+$
+  Delta phi = - (Delta V)/hbar ∆ t = - (m g l_2 sin delta)/hbar ∆ t
+$
+
+时间$∆ t$可计算为
+$
+  Delta t = l_1/v = l_1/(h/(m lambda)) = (m l_1 lambda)/(2 pi hbar)
+$
+其中$v$是中子波包的速度，$λ$是其de Broglie波长。则相位差为
+$
+  Delta phi = - 1/(hbar) (m/hbar)^2 g l_1 l_2 lambda sin delta
+$
+若取$λ = 1.42 angstrom$，$l_1 l_2 = 10 "cm"^2$，$δ = 90^degree$，则$∆ϕ = -55.6$。如果转动平面 ABCD 使得 $δ$ 逐渐从零变为 90 度，则可以观测到约 9 次干涉条纹变化。
+
+=== Aharonov-Bohm 效应
+
+问题 1：考虑下图中的情形，若只在垂直于纸面的无限长螺线管内存在磁场$vb(B)$，其它区域磁场均为零。那么在经典力学中，由于粒子的运动方程
+$
+  m dot.double(vb(x)) = q (vb(E) + dot(vb(x)) times vb(B))
+$
+只与磁场$vb(B)$有关，而与矢量势$vb(A)$无关，因此，带电粒子在螺线管外的运动不会收到螺线管中磁场的影响。
+
+#figure(
+  image("pic/2026-01-01-21-15-25.png", width: 70%),
+  numbering: none,
+)
+
+问题 2：圆柱壳层内的束缚态问题。
+$
+  V(rho) = cases(
+    oo \, & rho>rho_b,
+    0 \, & rho_a<rho<rho_b,
+    oo \, & rho<rho_a,
+  )
+$
+中心区域加不加磁场，将影响束缚态能级，即使粒子并不能在在中心区域运动。说明在量子力学中，矢量势$vb(A)$有物理效应。在Schrödinger方程中，Hamilton量为
+$
+  hat(H) = 1/(2m) (hat(vb(p)) - q vb(A)(hat(vb(x))))^2 + V(hat(vb(x)))
+$
+从而$vb(A)$进入了运动方程，计算时会对束缚态能级产生影响。
+
+#figure(
+  image("pic/2026-01-01-21-15-45.png", width: 70%),
+  numbering: none,
+)
+
+继续考虑第一个问题：粒子束从 A 点出发，经过两条不同的路径(不经过螺线管区域) 到达 B 点， 这两束粒子之间是否存在相位差？
+
+用路径积分形式考虑这个问题。尽管螺线管外磁场$vb(B) = curl vb(A)$为零，但是矢量势$vb(A)$可以不为零
+$
+  vb(A)' = vb(A) + grad chi
+$
+因此，粒子的Lagrange量应替换为
+$
+  L_0 = m/2 (dv(vb(x), t))^2 -> L = L_0 + e dv(vb(x), t) dot vb(A)
+$
+#note(subname: [带电粒子在电磁场中的Lagrange量])[
+  带电粒子在电磁场中的Lagrange量为
+  $
+    L = m/2 (dv(vb(x), t))^2 + e dv(vb(x), t) dot vb(A)(vb(x), t) - e phi(vb(x), t)
+  $
+]
+这样，粒子从时空点$(x_(n-1), t_(n-1))$传播到时空点$(x_n, t_n)$的某条路径微元的作用量将替换为
+$
+  S_0 (n,n-1) = integral_(t_(n-1))^(t_n) dd(t) L_0 -> S(n,n-1) = S_0 (n,n-1) + e integral_(t_(n-1))^(t_n) dd(t) dv(vb(x), t) dot vb(A)
+$
+最后一个积分可以写为线积分
+$
+  integral_(t_(n-1))^(t_n) dd(t) dv(vb(x), t) dot vb(A) = integral_(vb(x)_(n-1))^(vb(x)_n) vb(A) dot dd(vb(s))
+$
+将所有的路径微元叠加起来，某条路径$A -> B$的几率振幅将做如下替换
+$
+  product_n exp(i/hbar S_0 (n,n-1)) -> \
+  product_n exp(i/hbar S(n,n-1)) = product_n exp(i/hbar S_0 (n,n-1)) exp((i e)/hbar integral_(vb(x)_(n-1))^(vb(x)_n) vb(A) dot dd(vb(s))) \
+$
+因此，粒子从螺线管上方和下方的两条路径从 A 到达 B，将积累一个相位差
+$
+  Delta phi = e/hbar (integral_(A -> B \, "above") vb(A) dot dd(vb(s)) - integral_(A -> B \, "below") vb(A) dot dd(vb(s))) \
+$
+这是一个闭合回路的线积分，利用微积分Green公式可以计算为
+$
+  Delta phi = e/hbar integral.cont vb(A) dot dd(vb(s)) = e/hbar integral.double curl vb(A) dot dd(vb(sigma)) = e/hbar integral.double vb(B) dot dd(vb(sigma)) = e/hbar Phi_B
+$
+$Φ_B$为螺线管内的磁通量。改变螺线管内的磁场强度，两束粒子的相位差也会发生改变，在汇合区域就能探测到不一样的干涉图样。这就是*Aharonov-Bohm效应*，它表明矢量势在量子力学中的确存在可观测效应。
