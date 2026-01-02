@@ -913,9 +913,141 @@ $
 不过，$ket(Ψ(t))$是定义在 Fock 空间中的。当粒子数很大时，采用Schrödinger绘景描述时间演化变得很困难。所以，采用Heisenberg绘景更为方便。在Heisenberg绘景中，产生和湮灭算符变为
 $
   hat(psi)^(dagger"H") (vb(x), t) = e^(i hat(cal(H)) t/hbar) hat(psi)^dagger (vb(x)) e^(- i hat(cal(H)) t/hbar)\
+  hat(psi)^("H") (vb(x), t) = e^(i hat(cal(H)) t/hbar) hat(psi) (vb(x)) e^(- i hat(cal(H)) t/hbar)
 $
-由于时间宗量可以表示出Heisenberg绘景，下面略去上标H。由于Hamilton量不含时，所以不变。用 ψ̂(x, t) 和 ψ̂ † (x, t) 写出来的形式为
+由于时间宗量可以表示出Heisenberg绘景，下面略去上标H。由于Hamilton量不含时，所以不变。用$hat(psi) (vb(x), t)$和$hat(psi)^dagger (vb(x), t)$写出来的形式为
+$
+  hat(cal(H)) &= hat(cal(H))_0 + hat(cal(H))_"I"\
+  hat(cal(H))_0 &= integral dd(vb(x), 3) hat(psi)^dagger (vb(x), t) (- (hbar^2)/(2m) nabla^2 + U(vb(x))) hat(psi) (vb(x), t)\
+  hat(cal(H))_"I" &= 1/2 integral dd(vb(x), 3) integral dd(vb(x)', 3) hat(psi)^dagger (vb(x), t) hat(psi)^dagger (vb(x)', t) V(vb(x), vb(x)') hat(psi) (vb(x)', t) hat(psi) (vb(x), t)
+$
+由于绘景变换不改变对易或反对易关系，在Heisenberg绘景中，产生湮灭算符仍满足如下的等时对易或反对易关系
+$
+  [hat(psi) (vb(x), t), hat(psi)^dagger (vb(x)', t)]_(plus.minus) = delta(vb(x) - vb(x)'), [hat(psi) (vb(x), t), hat(psi) (vb(x)', t)]_(plus.minus) = 0, [hat(psi)^dagger (vb(x), t), hat(psi)^dagger (vb(x)', t)]_(plus.minus) = 0
+$
+在Heisenberg绘景中，算符$hat(psi) (vb(x), t)$满足的运动方程为
+$
+  pdv(, t) hat(psi) (vb(x), t) = 1/(i hbar) [hat(psi) (vb(x), t), hat(cal(H))]
+$
+计算对易关系，不论对于Bose子还是Fermi子都得到
+$
+  [hat(psi) (vb(x), t), hat(cal(H))_0] = (- (hbar^2)/(2m) nabla^2 + U(vb(x))) hat(psi) (vb(x), t)\
+  [hat(psi) (vb(x), t), hat(cal(H))_"I"] = integral dd(vb(x)', 3) hat(psi)^dagger (vb(x)', t) V(vb(x), vb(x)') hat(psi) (vb(x)', t) hat(psi) (vb(x), t)
+$
+所以，运动方程可以写为
+$
+  i hbar pdv(, t) hat(psi) (vb(x), t) = (- (hbar^2)/(2m) nabla^2 + U(vb(x))) hat(psi) (vb(x), t) \ + integral dd(vb(x)', 3) hat(psi)^dagger (vb(x)', t) V(vb(x), vb(x)') hat(psi) (vb(x)', t) hat(psi) (vb(x), t)
+$
+如果忽略粒子间的相互作用，则运动方程变为
+$
+  i hbar pdv(, t) hat(psi) (vb(x), t) = (- (hbar^2)/(2m) nabla^2 + U(vb(x))) hat(psi) (vb(x), t)
+$
+此方程在形式上与单粒子波函数$psi(vb(x), t)$满足的Schrödinger方程完全一致。
+
+这并不是一种巧合，而是暗示我们：*可以把单粒子波函数$psi(vb(x), t)$看成是一个经典场，对此经典场进行量子化的手续等价于本章讨论的二次量子化方法*，而且给出了“二次量子化”的含义。
 
 === Schrödinger场
 
-二次量子化是场的量子化，把Schrödinger方程当作经典场，考虑其Lagrange量，之后在用正则量子化方法进行量子化。
+考虑单粒子波函数满足的Schrödinger方程
+$
+  i hbar pdv(, t) psi(vb(x), t) = (- (hbar^2)/(2m) nabla^2 + U(vb(x))) psi(vb(x), t)
+$
+若将$psi(vb(x), t)$看成是一个经典场，即“*Schrödinger场*”，则*Schrödinger方程即为此经典场的运动方程*。
+
+与经典力学系统一样，经典场系统也存在一个Lagrange量，例如电磁场的Lagrange量密度就可以写为
+$
+  cal(L) = 1/2 (vb(E)^2 - vb(B)^2) = - 1/2 F_(mu nu) F^(mu nu)
+$
+利用最小作用量原理就可以得到Maxwell方程组，即电磁场的运动方程。
+
+能不能构造出一个Lagrange量，利用最小作用量就可以得到Schrödinger方程呢？答案是肯定的。
+
+(无相互作用)Schrödinger场的Lagrange量密度可以写为
+$
+  cal(L) = psi^* i hbar pdv(, t) psi - (hbar^2)/(2m) nabla psi^* dot nabla psi - psi^* U psi
+$
+其中，$psi = psi(vb(x), t)$。求作用量$S$还要对时空积分，
+$
+  S = integral dd(t) integral dd(vb(x), 3) cal(L)
+$
+因此$cal(L)$也可以写为
+$
+  cal(L) = psi^*(vb(x), t) (i hbar pdv(, t) + (hbar^2)/(2m) laplacian - U(vb(x))) psi(vb(x), t)
+$
+由于$psi$是复数场，须*将$psi$和$psi^*$看成独立的两个场*。利用变分原理，从$δ S = 0$就可以得到Schrödinger方程式。
+
+按照从Lagrange形式到Hamilton形式的标准步骤，将$psi$和$psi^*$看成“*正则坐标*”，与之对应的“*正则共轭动量*”为
+$
+  pi(vb(x), t) = pdv(cal(L), dot(psi)(vb(x), t)) = i hbar psi^*(vb(x), t)\
+  pi^*(vb(x), t) = pdv(cal(L), dot(psi)^*(vb(x), t)) = 0
+$
+可以理解为，每一个空间点$vb(x)$的场$psi$和$psi^*$都是体系的“正则坐标”。对于Schrödinger场，*与$psi^*$对应的正则共轭动量场恒为零*。所以，求得Hamilton量为
+$
+  H = integral dd(vb(x)) (pi dot(psi) - cal(L)) = integral dd(vb(x), 3) psi^*(vb(x), t) (- (hbar^2)/(2m) nabla^2 + U(vb(x))) psi(vb(x), t)
+$
+为了便于理解，可将空间点离散化（$integral dd(x) -> sum_i$）。
+
+计算等时的“经典”Poisson括号可得到
+$
+  { psi(vb(x), t), psi(vb(x)', t) } = 0,\
+  { psi^*(vb(x), t), psi^*(vb(x)', t) } = 0,\
+  { psi(vb(x), t), psi^*(vb(x)', t) } = - i/hbar delta(vb(x) - vb(x)')
+$
+接下来就是标准的*正则量子化*步骤。将经典场替换为*场算符*
+$
+  psi(vb(x), t) -> hat(psi)(vb(x), t), pi(vb(x), t) -> hat(pi)(vb(x), t)
+$
+将Poisson括号替换为*对易关系*，根据以下对应规则
+$
+  {A, B}_"PB" = 1/(i hbar) [hat(A), hat(B)]
+$
+得到场算符满足的等时对易关系
+$
+  [hat(psi) (vb(x), t), hat(psi) (vb(x)', t)] = 0,\
+  [hat(psi)^dagger (vb(x), t), hat(psi)^dagger (vb(x)', t)] = 0,\
+  [hat(psi) (vb(x), t), hat(psi)^dagger (vb(x)', t)] = delta(vb(x) - vb(x)')
+$
+#newpara()
+将场算符用一组正交完备的基函数${phi_i (vb(x))}$进行展开
+$
+  hat(psi) (vb(x), t) = sum_i hat(a)_i (t) phi_i (vb(x))\
+  hat(psi)^dagger (vb(x), t) = sum_i hat(a)^dagger_i (t) phi_i^* (vb(x))
+$
+可以证明如下等时对易关系
+$
+  [hat(a)_i (t), hat(a)_j (t)] = 0,\
+  [hat(a)^dagger_i (t), hat(a)^dagger_j (t)] = 0,\
+  [hat(a)_i (t), hat(a)^dagger_j (t)] = delta_(i, j)
+$
+若${phi_i (vb(x))}$就是单粒子Hamilton量的本征态，本征值为${E_i}$，令
+$
+  hat(a)_i (t) = hat(a)_i e^(- i E_i t/hbar), hat(a)^dagger_i (t) = hat(a)^dagger_i e^(i E_i t/hbar)
+$
+则得到
+$
+  [hat(a)_i, hat(a)_j] = 0,
+  [hat(a)^dagger_i, hat(a)^dagger_j] = 0,
+  [hat(a)_i, hat(a)^dagger_j] = delta_(i, j)
+$
+以上讨论仅针对Bose子。对于Fermi子，要采用反对易关系。
+
+正则量子化手续完成后，经典场的Hamilton量就成了
+$
+  hat(cal(H)) = integral dd(vb(x), 3) hat(psi)^dagger (vb(x), t) (- (hbar^2)/(2m) nabla^2 + U(vb(x))) hat(psi) (vb(x), t)
+$
+即无相互作用多粒子系统的哈密顿量。再进行表象变换，即可得到一般单粒子表象下的形式。
+
+对于有相互作用的情形，拉格朗日量密度则取为
+$
+  cal(L) = psi^* i hbar pdv(, t) psi - (hbar^2)/(2m) nabla psi^* dot nabla psi - psi^* U psi \ - 1/2 integral dd(vb(x)', 3) psi^* (vb(x), t) psi^* (vb(x)', t) V(vb(x), vb(x)') psi (vb(x)', t) psi (vb(x), t)
+$
+采用同样的手续，可得到量子化的哈密顿量
+$
+  hat(cal(H))_"I" = 1/2 integral dd(vb(x), 3) integral dd(vb(x)', 3) hat(psi)^dagger (vb(x), t) hat(psi)^dagger (vb(x)', t) V(vb(x), vb(x)') hat(psi) (vb(x)', t) hat(psi) (vb(x), t)
+$
+#newpara()
+
+综上，二次量子化有两种理解：
+- 二次量子化是多粒子系统的量子化，把单粒子波函数看成多粒子系统的态矢，在Fock空间中引入产生湮灭算符，从而得到多粒子系统的量子力学描述。
+- 二次量子化是场的量子化，把Schrödinger方程当作经典场，考虑其Lagrange量，以及Hamilton量，通过正则量子化手续将经典场量子化，
+
