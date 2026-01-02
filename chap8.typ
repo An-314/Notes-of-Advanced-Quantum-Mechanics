@@ -686,5 +686,236 @@ $
 $
   &braket(vb(k)_1 lambda_1\, vb(k)_2 lambda_2, hat(V), vb(k)_3 lambda_3\, vb(k)_4 lambda_4) \
   = &integral dd(vb(x)_1, 3) integral dd(vb(x)_2, 3) integral dd(vb(x)_3, 3) integral dd(vb(x)_4, 3) braket(vb(k)_1 lambda_1, vb(x)_1) braket(vb(k)_2 lambda_2, vb(x)_2) bra(vb(x)_1\, vb(x)_2) hat(V) ket(vb(x)_3\, vb(x)_4) braket(vb(x)_3, vb(k)_3 lambda_3) braket(vb(x)_4, vb(k)_4 lambda_4) \
-  = &integral dd(vb(x), 3) integral dd(vb(x)', 3) braket(vb(k)_1 lambda_1, vb(x)) braket(vb(k)_2 lambda_2, vb(x)') hat(V)(vb(x), vb(x)') braket(vb(x), vb(k)_3 lambda_3) braket(vb(x)', vb(k)_4 lambda_4)
+  = &integral dd(vb(x), 3) integral dd(vb(x)', 3) braket(vb(k)_1 lambda_1, vb(x)) braket(vb(k)_2 lambda_2, vb(x)') hat(V)(vb(x), vb(x)') braket(vb(x), vb(k)_3 lambda_3) braket(vb(x)', vb(k)_4 lambda_4)\
+  = &e^2/V^2 integral dd(vb(x), 3) integral dd(vb(x)', 3) e^(i (vb(k)_3 - vb(k)_1) dot vb(x)) e^(i (vb(k)_4 - vb(k)_2) dot vb(x)') e^(- mu abs(vb(x) - vb(x)'))/(abs(vb(x) - vb(x)')) chi_(lambda_1)^dagger chi_(lambda_3) chi_(lambda_2)^dagger chi_(lambda_4)\
+  = &e^2/V^2 delta_(lambda_1, lambda_3) delta_(lambda_2, lambda_4) integral dd(vb(y), 3) e^(- i (vb(k)_1 + vb(k)_2 - vb(k)_3 - vb(k)_4) dot vb(y)) integral dd(vb(z), 3) e^(- mu abs(vb(z)))/(abs(vb(z))) e^(- i (vb(k)_1 - vb(k)_3) dot vb(z))\
 $
+第二步中做了变量代换：$vb(y) = vb(x)'$,$vb(z) = vb(x) - vb(x)'$。定义动量转移 $vb(q) = vb(k)_1 - vb(k)_3$，完成积分得到
+$
+  &braket(vb(k)_1 lambda_1\, vb(k)_2 lambda_2, hat(V), vb(k)_3 lambda_3\, vb(k)_4 lambda_4) \
+  = &e^2/V delta_(lambda_1, lambda_3) delta_(lambda_2, lambda_4) delta_(vb(k)_1 + vb(k)_2, vb(k)_3 + vb(k)_4) (4pi)/(mu^2 + vb(q)^2)
+$
+所以，电子间相互作用项的二次量子化形式为
+$
+  hat(cal(V)) = e^2/(2V) sum_(lambda_1 lambda_2) sum_(vb(k)_1 vb(k)_2 vb(k)_3 vb(k)_4) delta_(vb(k)_1 + vb(k)_2, vb(k)_3 + vb(k)_4) (4pi)/(mu^2 + (vb(k)_1 - vb(k)_3)^2) times hat(a)^dagger_(vb(k)_1 lambda_1) hat(a)^dagger_(vb(k)_2 lambda_2) hat(a)_(vb(k)_4 lambda_2) hat(a)_(vb(k)_3 lambda_1)
+$
+令$vb(k)_3 = vb(k)$, $vb(k)_4 = vb(p)$，则$vb(k)_1 = vb(k) + vb(q)$。当$vb(k)_1 + vb(k)_2 = vb(k)_3 + vb(k)_4$时$vb(k)_2 = vb(p) - vb(q)$。所以，上式又可以写为
+$
+  hat(cal(V)) = e^2/(2V) sum_(lambda_1 lambda_2) sum_(vb(k) vb(p) vb(q)) (4pi)/(mu^2 + vb(q)^2) times hat(a)^dagger_(vb(k) + vb(q) lambda_1) hat(a)^dagger_(vb(p) - vb(q) lambda_2) hat(a)_(vb(p) lambda_2) hat(a)_(vb(k) lambda_1)
+$
+其中动量转移为零$vb(q) = 0$的项为
+$
+  e^2/(2V) sum_(lambda_1 lambda_2) sum_(vb(k) vb(p)) (4pi)/(mu^2) hat(a)^dagger_(vb(k) lambda_1) hat(a)^dagger_(vb(p) lambda_2) hat(a)_(vb(p) lambda_2) hat(a)_(vb(k) lambda_1) &= e^2/(2V) (4pi)/(mu^2) sum_(vb(k) lambda_1) sum_(vb(p) lambda_2) hat(N)_(vb(k) lambda_1) hat(a)^dagger_(vb(k) lambda_1) hat(a)_(vb(k) lambda_1) (hat(a)^dagger_(vb(p) lambda_2) hat(a)_(vb(p) lambda_2) - delta_(vb(k), vb(p)) delta_(lambda_1, lambda_2))\
+  & = e^2/(2V) (4pi)/(mu^2) (hat(N)^2 - hat(N))
+$
+由于讨论固定粒子数的系统， $hat(N)$可用总粒子数$N$代替。因此，第一项与
+$
+  hat(H) = sum_i hat(vb(p))_i^2/(2m) + 1/2 e^2 sum_(i != j) e^(- mu abs(hat(vb(x))_i - hat(vb(x))_j))/abs(hat(vb(x))_i - hat(vb(x))_j) - 1/2 e^2 N^2/V (4pi)/(mu^2)
+$
+中的背景项精确抵消。第二项表示平均每个粒子的能量为$- (2 π e^2)/(µ^2 V)$，当体积$V → ∞$时这项消失。所以，$vb(q) = 0$的项没有贡献(正好抵消背景带来的发散项)。
+
+去掉$vb(q) = 0$的项后，可以令屏蔽质量$mu = 0$而不出现奇异性。最后得到二次量子化的Hamilton量为
+$
+  hat(cal(H)) = hat(cal(H))_0 + hat(cal(H))_"int"
+$
+其中
+$
+  hat(cal(H))_0 &= sum_(vb(k) lambda) (hbar^2 vb(k)^2)/(2m) hat(a)^dagger_(vb(k) lambda) hat(a)_(vb(k) lambda)\
+  hat(cal(H))_"int" &= e^2/(2V) sum_(lambda_1 lambda_2) sum_(vb(k) vb(p) (vb(q) != 0)) (4pi)/(vb(q)^2) times hat(a)^dagger_(vb(k) + vb(q) lambda_1) hat(a)^dagger_(vb(p) - vb(q) lambda_2) hat(a)_(vb(p) lambda_2) hat(a)_(vb(k) lambda_1)
+$
+#newpara()
+
+求解上页给出的Hamilton量的本征值问题是非常困难的。可以用*微扰论*计算其基态能量，即将$hat(cal(H))_"int"$看成微扰，体系基态的零级近似就是*自由Fermi气体*。为了进一步计算基态能量的微扰修正，定义两个长度。
+- 第一个是电子间的平均距离$r_0$ ，定义为
+  $
+    n = N/V = ((4 pi)/3 r_0^3)^(-1) => r_0 = (3/(4 pi n))^(1/3)
+  $
+- 第二个是*Bohr半径* $a_0$，定义为
+  $
+    a_0 = (hbar^2)/(m e^2)
+  $
+可以用Bohr半径作为长度标度，定义无量纲参数
+$
+  r_s = r_0/a_0
+$
+#newpara()
+零级近似：在零级近似下，体系的基态就是$hat(cal(H))_0$的基态，即*自由Fermi气体*，其能量就是基态能量的零级近似$E^((0))$。自由Fermi气体基态可以表示为
+$
+  ket(G) = product_(abs(vb(k)) < k_F, lambda) hat(a)^dagger_(vb(k) lambda) ket(0)
+$
+其中$k_F$为Fermi动量（波矢），总粒子数$N$可如下计算
+$
+  N = sum_(vb(k) lambda) braket(G, hat(a)^dagger_(vb(k) lambda) hat(a)_(vb(k) lambda), G) = 2 sum_(abs(vb(k)) < k_F) theta(k_F - k) = 2 integral dd(vb(k), 3)/(2 pi)^3 theta(k_F - k) = (V)/(3 pi^2) k_F^3\
+  => k_F = (3 pi^2 N/2)^(1/3) = ((9 pi)/4)^(1/3) 1/r_0
+$
+基态能量的零级近似$E^((0))$可如下计算
+$
+  E^((0)) &= sum_(vb(k) lambda) (hbar^2 vb(k)^2)/(2m) braket(G, hat(a)^dagger_(vb(k) lambda) hat(a)_(vb(k) lambda), G) \
+  &= 2 sum_(abs(vb(k)) < k_F) (hbar^2 vb(k)^2)/(2m) = 2 integral dd(vb(k), 3)/(2 pi)^3 (hbar^2 vb(k)^2)/(2m) theta(k_F - k) \
+  &= V/(pi^2) (hbar^2)/(2m) integral_0^(k_F) dd(k) k^4 = V/(pi^2) (hbar^2)/(2m) (k_F^5)/5 \
+  &= 3/5 (hbar^2 k_F^2)/(2m) N = e^2/(2 a_0) N 3/5 ((9 pi)/4)^(2/3) 1/r_s^2
+$
+
+一级近似：基态能量的一阶修正为
+$
+  E^((1)) &= braket(G, hat(cal(H))_"int", G) \
+  &= e^2/(2V) sum_(lambda_1 lambda_2) sum_(vb(k) vb(p) (vb(q) != 0)) (4pi)/(vb(q)^2) times braket(G, hat(a)^dagger_(vb(k) + vb(q) lambda_1) hat(a)^dagger_(vb(p) - vb(q) lambda_2) hat(a)_(vb(p) lambda_2) hat(a)_(vb(k) lambda_1), G)\
+$
+对角矩阵元中的 4 个算符必须两两配对，矩阵元才可能不为零。只有两种情况
+- $vb(k) + vb(q) = vb(p)$, $vb(p) - vb(q) = vb(l)$, $lambda_1 = lambda_2$
+- $vb(k) + vb(q) = vb(k)$, $vb(p) - vb(q) = vb(p)$
+第二种情况要求$vb(q) = 0$，不在求和范围内，因此不用考虑。
+
+对于第一种情况，矩阵元为
+$
+  delta_(vb(k) + vb(q), vb(p))delta_(lambda_1, lambda_2) times braket(G, hat(a)^dagger_(vb(k)+vb(q) lambda_1) hat(a)^dagger_(vb(k) lambda_1) hat(a)_(vb(k)+vb(q) lambda_1) hat(a)_(vb(k) lambda_1), G) &= - delta_(vb(k) + vb(q), vb(p)) delta_(lambda_1, lambda_2) times braket(G, hat(N)_(vb(k)+vb(q) lambda_1) hat(N)_(vb(k) lambda_2), G)\
+  &= - delta_(vb(k) + vb(q), vb(p)) delta_(lambda_1, lambda_2) theta(k_F - abs(vb(k) + vb(q))) theta(k_F - abs(vb(k)))
+$
+带入计算基态能量的一阶修正
+$
+  E^((1)) &= - e^2/(2V) sum_(lambda_1) sum_(vb(k) vb(q)) (4pi)/(vb(q)^2) theta(k_F - abs(vb(k) + vb(q))) theta(k_F - abs(vb(k))) \
+  &= - e^2 V integral dd(vb(k), 3)/(2 pi)^3 integral dd(vb(q), 3)/(2 pi)^3 (4pi)/(vb(q)^2) theta(k_F - abs(vb(k) + vb(q))) theta(k_F - abs(vb(k)))\
+$
+做积分变量代换
+$
+  vb(k) -> vb(P) = vb(k) + 1/2 vb(q)
+$
+得到
+$
+  E^((1)) = - e^2 V integral dd(vb(P), 3)/(2 pi)^3 integral dd(vb(q), 3)/(2 pi)^3 (4pi)/(vb(q)^2) theta(k_F - abs(vb(P) + 1/2 vb(q))) theta(k_F - abs(vb(P) - 1/2 vb(q)))
+$
+完成积分后得到
+$
+  E^((1)) = - e^2/(2 a_0) N (3)/(2 pi) ((9 pi)/4)^(1/3) 1/r_s
+$
+所以，计算到一级近似的基态能量为
+$
+  E/N = e^2/(2 a_0) [3/5 ((9 pi)/4)^(2/3) 1/r_s^2 - (3)/(2 pi) ((9 pi)/4)^(1/3) 1/r_s]
+$
+
+== Schrödinger场的量子化
+
+采用任意的单粒子表象都可以建立多粒子系统的Fock空间，不同的表象之间通过表象变换联系起来。
+
+=== 单粒子表象与场算符
+
+设单粒子力学量$hat(K)$的本征方程为($K$表象)
+$
+  hat(K) ket(k_i) = k_i ket(k_i), i = 1, 2, ...
+$
+Fock空间的基矢可以用本征态${ket(k_i)}$上的粒子数分布构造
+$
+  ket(Psi) = ket(n_1\, n_2\, ... n_i\, ...)
+$
+产生湮灭算符为$hat(a)_i, hat(a)^dagger_i$。当然，我们也可以采用单粒子的*坐标表象*构造Fock态$(i → vb(x)_i)$
+$
+  ket(Psi') = ket(n(vb(x)_1)\, n(vb(x)_2)\, ... n(vb(x)_i)\, ...)
+$
+将坐标表象中的产生湮灭算符记为$hat(psi)^dagger (vb(x))$和$hat(psi)(vb(x))$。根据表象变换关系得到
+$
+  hat(a)^dagger_i = integral dd(vb(x), 3) hat(psi)^dagger (vb(x)) braket(vb(x), k_i)\
+  hat(a)_i = integral dd(vb(x), 3) braket(k_i, vb(x)) hat(psi) (vb(x))
+$
+其逆变换为
+$
+  hat(psi)^dagger (vb(x)) = sum_i hat(a)^dagger_i braket(k_i, vb(x))\
+  hat(psi) (vb(x)) = sum_i braket(vb(x), k_i) hat(a)_i
+$
+上述变换中的内积$braket(vb(x), k_i)$即为$ket(k_i)$态在坐标表象中的波函数
+$
+  phi_i (vb(x)) = braket(vb(x), k_i)
+$
+所以，上述变换又可写为
+$
+  hat(psi)^dagger (vb(x)) = sum_i hat(a)^dagger_i phi_i^* (vb(x))\
+  hat(psi) (vb(x)) = sum_i hat(a)_i phi_i (vb(x))
+$
+*在形式上，这与将任意波函数用完备本征函数进行展开完全一致*。
+
+利用$hat(a)^dagger_i$和$hat(a)_i$满足的对易或反对易关系，可以计算$hat(psi)^dagger (vb(x))$和$hat(psi) (vb(x))$满足的对易或反对易关系
+$
+  [hat(psi) (vb(x)), hat(psi) (vb(x)')]_(plus.minus) = sum_(i j) braket(vb(x), k_i) braket(vb(x)', k_j) [hat(a)_i, hat(a)_j]_(plus.minus) = 0\
+  [hat(psi)^dagger (vb(x)), hat(psi)^dagger (vb(x)')]_(plus.minus) = sum_(i j) braket(k_i, vb(x)) braket(k_j, vb(x)') [hat(a)^dagger_i, hat(a)^dagger_j]_(plus.minus) = 0\
+$
+其中下标正号($[..., ...]_+$)代表对易关系(Bose子)，负号($[..., ...]_-$)代表反对易关系(Fermi子)。最后一个对易或反对易关系可计算为
+$
+  [hat(psi) (vb(x)), hat(psi)^dagger (vb(x)')]_(plus.minus) = sum_(i j) braket(vb(x), k_i) braket(k_j, vb(x)') [hat(a)_i, hat(a)^dagger_j]_(plus.minus) = sum_i phi_i (vb(x)) phi_i^* (vb(x)') = delta(vb(x) - vb(x)')
+$
+#newpara()
+采用坐标表象，多粒子系统的单体算符$hat(cal(K))$的形式为
+$
+  hat(cal(K)) = integral dd(vb(x), 3) integral dd(vb(x)', 3) hat(psi)^dagger (vb(x)) bra(vb(x)) hat(K) ket(vb(x)') hat(psi) (vb(x)')\
+$
+对于*动能算符*$hat(T) = hat(vb(p))^2/(2m)$，有
+$
+  hat(cal(T)) &= integral dd(vb(x), 3) integral dd(vb(x)', 3) hat(psi)^dagger (vb(x)) bra(vb(x)) hat(vb(p))^2/(2m) ket(vb(x)') hat(psi) (vb(x)')\
+  &= - (hbar^2)/(2m) integral dd(vb(x), 3) hat(psi)^dagger (vb(x)) nabla^2 hat(psi) (vb(x))\
+  &= (hbar^2)/(2m) integral dd(vb(x), 3) nabla hat(psi)^dagger (vb(x)) dot nabla hat(psi) (vb(x))\
+$
+*粒子在外场中的势能*$hat(U)(x)$，可进一步计算为
+$
+  hat(cal(U)) &= integral dd(vb(x), 3) integral dd(vb(x)', 3) hat(psi)^dagger (vb(x)) bra(vb(x)) hat(U) ket(vb(x)') hat(psi) (vb(x)')\
+  &= integral dd(vb(x), 3)integral dd(vb(x)', 3) hat(psi)^dagger (vb(x)) U(vb(x)) delta(vb(x) - vb(x)') hat(psi) (vb(x)')\
+  &= integral dd(vb(x), 3) hat(psi)^dagger (vb(x)) U(vb(x)) hat(psi) (vb(x))\
+$
+*粒子之间的两体相互作用*$hat(V)$对应的两体算符，在坐标表象中的形式为
+$
+  hat(cal(V)) = 1/2 integral dd(vb(x)_1, 3) integral dd(vb(x)_2, 3) integral dd(vb(x)_3, 3) integral dd(vb(x)_4, 3) hat(psi)^dagger (vb(x)_1) hat(psi)^dagger (vb(x)_2) bra(vb(x)_1\, vb(x)_2) hat(V) ket(vb(x)_3\, vb(x)_4) hat(psi) (vb(x)_4) hat(psi) (vb(x)_3)\
+$
+对于通常的两体相互作用，有
+$
+  braket(vb(x)_1\, vb(x)_2, hat(V), vb(x)_3\, vb(x)_4) = V(vb(x)_3, vb(x)_4) delta(vb(x)_1 - vb(x)_3) delta(vb(x)_2 - vb(x)_4)
+$
+带入得到
+$
+  hat(cal(V)) = 1/2 integral dd(vb(x), 3) integral dd(vb(x)', 3) V(vb(x), vb(x)') hat(psi)^dagger (vb(x)) hat(psi)^dagger (vb(x)') hat(psi) (vb(x)') hat(psi) (vb(x))
+$
+多粒子系统的Hamilton量一般可以写为
+$
+  hat(H) = sum_i (hat(vb(p))_i^2/(2m) + hat(U)(hat(vb(x))_i)) + 1/2 sum_(i != j) hat(V)(hat(vb(x))_i, hat(vb(x))_j)
+$
+采用坐标表象，其二次量子化形式为
+$
+  hat(cal(H)) &= hat(cal(T)) + hat(cal(U)) + hat(cal(V))\
+  &= integral dd(vb(x), 3) hat(psi)^dagger (vb(x)) (- (hbar^2)/(2m) nabla^2 + U(vb(x))) hat(psi) (vb(x)) + 1/2 integral dd(vb(x), 3) integral dd(vb(x)', 3) hat(psi)^dagger (vb(x)) hat(psi)^dagger (vb(x)') V(vb(x), vb(x)') hat(psi) (vb(x)') hat(psi) (vb(x))\
+$
+总粒子数算符为
+$
+  hat(N) &= sum_i hat(a)_i^dagger hat(a)_i = integral dd(vb(x), 3) integral dd(vb(x)', 3) hat(psi)^dagger (vb(x)) delta(vb(x) - vb(x)') hat(psi) (vb(x)')\
+  &= integral dd(vb(x), 3) hat(psi)^dagger (vb(x)) hat(psi) (vb(x)) = integral dd(vb(x), 3) hat(n)(vb(x))
+$
+其中
+$
+  hat(n)(vb(x)) = hat(psi)^dagger (vb(x)) hat(psi) (vb(x))
+$
+称为粒子数密度算符。
+
+利用对易关系
+$
+  [hat(psi) (vb(x)), hat(psi)^dagger (vb(x)')]_(plus.minus) = delta(vb(x) - vb(x)'), [hat(psi) (vb(x)), hat(psi) (vb(x)')]_(plus.minus) = 0, [hat(psi)^dagger (vb(x)), hat(psi)^dagger (vb(x)')]_(plus.minus) = 0
+$
+可以证明，不论对于Bose子还是Fermi子都有
+$
+  [hat(N), hat(psi)^dagger (vb(x))] = hat(psi)^dagger (vb(x)), [hat(N), hat(psi) (vb(x))] = - hat(psi) (vb(x))
+$
+所以，对于上式给出的Hamilton量，有
+$
+  [hat(H), hat(N)] = 0
+$
+即：*系统的总粒子数是一个守恒量*。这正是我们预期的结果：非相对论多粒子系统，总粒子数守恒。
+
+=== 时间演化
+
+在Schrödinger绘景中，多粒子系统的态矢$ket(Ψ(t))$的演化仍然满足Schrödinger方程
+$
+  i hbar pdv(, t) ket(Ψ(t)) = hat(cal(H)) ket(Ψ(t))
+$
+不过，$ket(Ψ(t))$是定义在 Fock 空间中的。当粒子数很大时，采用Schrödinger绘景描述时间演化变得很困难。所以，采用Heisenberg绘景更为方便。在Heisenberg绘景中，产生和湮灭算符变为
+$
+  hat(psi)^(dagger"H") (vb(x), t) = e^(i hat(cal(H)) t/hbar) hat(psi)^dagger (vb(x)) e^(- i hat(cal(H)) t/hbar)\
+$
+由于时间宗量可以表示出Heisenberg绘景，下面略去上标H。由于Hamilton量不含时，所以不变。用 ψ̂(x, t) 和 ψ̂ † (x, t) 写出来的形式为
+
+=== Schrödinger场
+
+二次量子化是场的量子化，把Schrödinger方程当作经典场，考虑其Lagrange量，之后在用正则量子化方法进行量子化。
