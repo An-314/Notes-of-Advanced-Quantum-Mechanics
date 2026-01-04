@@ -5,10 +5,10 @@
 
 在经典力学中，动力学就是研究系统的*时间演化*，即在系统内部的*相互作用*以及系统与外界之间的相互作用的支配下，系统的状态如何随时间演化。
 
-在正统的量子力学中，时间演化分为两种，一是在相互作用支配下的动力学演化，二是量子测量过程。关于量子测量是否可以纳入动力学演化，仍然是一个 open 的问题。本章讨论量子系统的动力学演化，即“计算量子力学” 。
+在正统的量子力学中，时间演化分为两种，一是在相互作用支配下的动力学演化，二是量子测量过程。关于量子测量是否可以纳入动力学演化，仍然是一个具有争议性的开放的问题。本章讨论量子系统的动力学演化，即“计算量子力学” 。
 
 主要探讨如下内容：
-- Schrödinger绘景：时间演化算符和传播子
+- Schrödinger绘景：时间演化算符和Dyson级数解
 - 绘景理论：Heisenberg绘景和相互作用绘景
 - 绝热演化：量子绝热近似和几何相位
 - 密度矩阵：纯态和混合态，量子开放系统
@@ -29,7 +29,19 @@ $
 $
   i hbar pdv(, t) hat(U)(t, t_0) = hat(H) hat(U)(t, t_0)
 $
-此即时间演化算符的演化方程。其Hermite共轭方程为
+此即*时间演化算符的演化方程*。
+#theorem(subname: [时间演化算符])[
+  量子系统的时间演化算符$hat(U)(t, t_0)$满足演化方程
+  $
+    i hbar pdv(, t) hat(U)(t, t_0) = hat(H) hat(U)(t, t_0)
+  $
+  对于任意初始态$ket(psi(t_0))$，系统的状态在$t$时刻为
+  $
+    ket(psi(t)) = hat(U)(t, t_0) ket(psi(t_0))
+  $
+  如果Hamilton量$hat(H)$是Hermite算符，则时间演化算符是幺正算符。
+]
+其Hermite共轭方程为
 $
   - i hbar pdv(, t) hat(U)^(dagger)(t, t_0) = hat(U)^(dagger)(t, t_0) hat(H)^dagger
 $
@@ -68,7 +80,9 @@ $
 $
   hat(U)(t_2, t_0) = hat(U)(t_2, t_1) hat(U)(t_1, t_0), (t_2 > t_1 > t_0)
 $
-#newpara()
+
+=== 无穷小时间演化与Schrödinger方程
+
 考虑*无穷小时间演化*：$t -> t + dd(t)$，即
 $
   ket(psi(t + dd(t))) = hat(U)(t + dd(t), t) ket(psi(t))
@@ -91,7 +105,7 @@ $
 $
 其中$hbar$实际上就是约化Planck常数，这保证最终得到的时间演化方程就是Schrödinger方程。
 
-根据时间演化算符的合成性质
+根据*时间演化算符的合成性质*
 $
   hat(U)(t_2, t_0) = hat(U)(t_2, t_1) hat(U)(t_1, t_0)
 $
@@ -108,7 +122,7 @@ $
 $
   i hbar pdv(, t) hat(U)(t, t_0) = hat(H) hat(U)(t, t_0)
 $
-此方程两边都作用初态$ket(ψ(t_0))$，就得到了Schrödinger方程
+此方程两边都作用初态$ket(ψ(t_0))$，就得到了*Schrödinger方程*
 $
   i hbar pdv(, t) ket(psi(t)) = hat(H) ket(psi(t))
 $
@@ -147,7 +161,7 @@ $
 将初态用这组完备本征态${ket(n)}$展开，$ket(ψ(t_0)) = sum_n c_n ket(n)$，得到
 $
   ket(psi(t)) & = hat(U)(t, t_0) ket(psi(t_0)) \
-              & = sum_n e^(- (i E_n (t - t_0))/hbar) sum_n c_n ket(n) \
+              & = sum_m e^(- (i E_m (t - t_0))/hbar) sum_n c_n ket(n) \
               & = sum_n c_n e^(- (i E_n (t - t_0))/hbar) ket(n)
 $
 这是我们熟悉的结果。解析计算的难度在于：
@@ -224,7 +238,7 @@ $
 $
   (- i/hbar)^2 integral_(t_0)^(t) dd(t_1) integral_(t_0)^(t) dd(t_2) hat(H)(t_1) hat(H)(t_2)
 $
-其中要求$t_1 > t_2$。要将积分上限都扩展为$t$，我们需要引入*时序乘积*(又称为*编时乘积*) 的概念。时序乘积$T$使若干个含时算符的乘积从左到右按照时间的大小降序排列。最简单的例子是
+其中要求$t_1 > t_2$。要将积分上限都扩展为$t$，我们需要引入*时序乘积*(又称为*编时乘积*) 的概念。时序乘积$"T"$使若干个含时算符的乘积从左到右按照时间的大小降序排列。最简单的例子是
 $
   "T"[hat(H)(t_1) hat(H)(t_2)] = theta(t_1 - t_2) hat(H)(t_1) hat(H)(t_2) + theta(t_2 - t_1) hat(H)(t_2) hat(H)(t_1)
 $
@@ -253,10 +267,24 @@ $
   hat(U)(t, t_0) & = "T"(1 + sum_(n=1)^(oo) 1/n! (- i/hbar)^n (integral_(t_0)^(t) hat(H)(t') dd(t'))^n) \
                  & = "T" exp(- i/hbar integral_(t_0)^(t) hat(H)(t') dd(t'))
 $
+#proposition(subname: [时间演化算符的形式])[
+  - 如果Hamilton量$hat(H)$不显含时间，则时间演化算符为
+    $
+      hat(U)(t, t_0) = exp(- i/(hbar) hat(H) (t - t_0))
+    $
+  - 如果Hamilton量$hat(H)(t)$显含时间，且不同时刻的Hamilton量对易，即$[hat(H)(t_1), hat(H)(t_2)] = 0$，则时间演化算符为
+    $
+      hat(U)(t, t_0) = exp(- i/hbar integral_(t_0)^(t) hat(H)(t') dd(t'))
+    $
+  - 如果Hamilton量$hat(H)(t)$显含时间，且不同时刻的Hamilton量不对易，则时间演化算符为
+    $
+      hat(U)(t, t_0) = "T" exp(- i/hbar integral_(t_0)^(t) hat(H)(t') dd(t'))
+    $
+]
 
 == 绘景理论
 
-我们一直都听说，Heisenberg、Born和Jordan在几篇开创性论文中提出了*矩阵力学*。如果认为矩阵力学就是Schrödinger方程在离散表象的具体形式，那么我们去阅读那几篇原始论文，必定会一头雾水。因为*表象*(representation) 只是量子力学的一个方面，它决定了量子态和力学量的具体表现形式。而量子力学还存在另一个重要方面，就是*绘景*(picture)，它决定了运动方程的具体表现形式。
+我们一直都听说，Heisenberg、Born和Jordan在几篇开创性论文中提出了*矩阵力学*。如果认为矩阵力学就是Schrödinger方程在离散表象的具体形式，那么我们去阅读那几篇原始论文，必定会一头雾水。因为*表象*(representation)只是量子力学的一个方面，它决定了量子态和力学量的具体表现形式。而量子力学还存在另一个重要方面，就是*绘景*(picture)，它决定了运动方程的具体表现形式。
 
 === Heisenberg方程
 
@@ -290,7 +318,7 @@ $
 $
 这是我们熟悉的结果。如果仔细检查一下计算过程，可以看到，*我们假定基矢$ket(n)$是不随时间变化的*。
 
-现在，我们考虑“随动”的基矢
+现在，我们考虑*“随动”的基矢*
 $
   ket(tilde(n)(t)) = e^(-(i E_n (t - t_0)) / hbar) ket(n)
 $
@@ -303,7 +331,7 @@ $
 利用这组“随动”的基矢，Schrödinger方程的左边计算为
 $
   i hbar pdv(, t) ket(psi(t)) & = i hbar pdv(, t) sum_n ketbra(tilde(n)(t)) ket(psi(t)) \
-  & = sum_n ((i hbar pdv(, t) ket(tilde(n)(t))) braket(tilde(n)(t), psi(t)) + ket(psi(t)) (i hbar pdv(, t) ketbra(tilde(n)(t))))\
+  & = sum_n ((i hbar pdv(, t) ket(tilde(n)(t))) braket(tilde(n)(t), psi(t)) + ket(tilde(n)(t)) (i hbar pdv(, t) braket(tilde(n)(t), psi(t))))\
   &= sum_n ket(tilde(n)(t)) (E_n tilde(psi)_n (t) + i hbar pdv(, t) tilde(psi)_n (t))
 $
 其中$tilde(psi)_n (t)$定义为
@@ -322,7 +350,7 @@ $
 $
 即：*波函数不随时间演化*！
 
-波函数不随时间演化，那么什么在随时间变化呢？我们来考虑力学量$hat(A)$的矩阵元，采用“随动”基矢表示为
+波函数不随时间演化，那么什么在随时间变化呢？我们来考虑*力学量$hat(A)$的矩阵元*，采用“随动”基矢表示为
 $
   tilde(A)_(m n)(t) = braket(tilde(m)(t), hat(A), tilde(n)(t))
 $
@@ -334,10 +362,13 @@ $
   & = 1/(i hbar) braket(tilde(m)(t), [hat(A), hat(H)], tilde(n)(t))
 $
 写成矩阵形式，就是Born和Jordan在1925年提出的*Heisenberg方程*
-$
-  dv(, t) tilde(A) = 1/(i hbar) [tilde(A), hat(H)]
-$
-这就是矩阵力学的基本方程。
+#theorem(subname: [Heisenberg方程])[
+  力学量$hat(A)$在“随动”基矢下的矩阵元$tilde(A)_(m n)(t) = braket(tilde(m)(t), hat(A), tilde(n)(t))$满足*Heisenberg方程*
+  $
+    dv(, t) tilde(A) = 1/(i hbar) [tilde(A), hat(H)]
+  $
+]
+这就是*矩阵力学的基本方程*。
 
 === 绘景变换
 
@@ -355,6 +386,8 @@ $
   braket(psi(t), hat(A), psi(t)) = braket(psi(t_0), e^((i hat(H) (t - t_0)) / hbar) hat(A) e^(-(i hat(H) (t - t_0)) / hbar), psi(t_0)) = braket(tilde(psi)(t_0), tilde(A)(t), tilde(psi)(t_0))
 $
 平均值随着时间演化，按照左边，我们认为是由于量子态在演化，也可以按照右边，等效地认为是由于*力学量在演化*。
+
+==== 含时幺正变换与绘景理论
 
 在上述例子的基础上，我们考虑更一般的*含时幺正变换*$hat(Q)(t)$
 $
@@ -378,7 +411,7 @@ $
                          & = hat(Q)(t) hat(C) hat(Q)^dagger (t) = hat(C)^Q
   $
   注意：两个时间必须相同才成立，即等时对易关系。
-- *力学量的本征值和取值概率不变*
+- *力学量的本征值不变*
 
   假设$hat(A) ket(a) = a ket(a)$，则
   $
@@ -401,6 +434,8 @@ $
     c^Q_a (t) = braket(a^Q, psi^Q (t)) = braket(a, hat(Q)^dagger (t) hat(Q)(t), psi(t)) = braket(a, psi(t)) = c_a (t)
   $
 
+==== 量子态和力学量的演化方程
+
 对系统进行$Q$变换以后，*量子态$ket(psi^Q (t))$的演化方程*也将发生变化。直接计算得到
 $
   i hbar pdv(, t) ket(psi^Q (t)) & = i hbar pdv(, t) (hat(Q) ket(psi(t))) \
@@ -412,6 +447,7 @@ $
 $
   i hbar pdv(, t) ket(psi^Q (t)) = (hat(H)^Q (t) + i hbar pdv(hat(Q), t) hat(Q)^dagger) ket(psi^Q (t))
 $
+#newpara()
 进行$Q$变换以后，*力学量$A^Q$也将随时间演化*。直接计算得到
 $
   dv(, t) hat(A)^Q & = dv(, t) (hat(Q) hat(A) hat(Q)^dagger) \
@@ -426,15 +462,16 @@ $
 $
   dv(, t) hat(A)^Q = [dv(hat(Q), t) hat(Q)^dagger, hat(A)^Q] + hat(Q) pdv(hat(A), t) hat(Q)^dagger
 $
+#newpara()
 根据以上一般性的讨论，我们发现，从Schrödinger方程
 $
   i hbar pdv(, t) ket(psi(t)) = hat(H) ket(psi(t))
 $
-出发，通过含时幺正变换$hat(Q)(t)$，可以得到量子体系时间演化的其他等价形式。这个含时幺正变换 $hat(Q)(t)$ 被称为绘景变换，变换后的时间演化形式称为 $Q$ 绘景。
+出发，通过含时幺正变换$hat(Q)(t)$，可以得到量子体系时间演化的其他*等价形式*。这个*含时幺正变换$hat(Q)(t)$被称为绘景变换*，变换后的时间演化形式称为*$Q$绘景*。
 
-我们将没有经过变换的时间演化形式，即原始的Schrödinger方程演化形式，称为Schrödinger绘景。在理论上，如果找到一个含时幺正变换$hat(Q)$，就可以创建一个新的绘景。除了Schrödinger绘景，常用的其他绘景实际上只有两种：Heisenberg绘景和相互作用绘景（又称为Dirac绘景）。
+我们将没有经过变换的时间演化形式，即原始的Schrödinger方程演化形式，称为*Schrödinger绘景*。在理论上，如果找到一个含时幺正变换$hat(Q)$，就可以创建一个新的绘景。除了Schrödinger绘景，常用的其他绘景实际上只有两种：*Heisenberg绘景*和*相互作用绘景*（又称为Dirac绘景）。
 
-#theorem(subname: [绘景变换])[
+#proposition(subname: [绘景变换])[
   量子力学中，所有含时幺正变换$hat(Q)(t)$都定义了一种新的绘景。不同绘景下的量子态和力学量的取值概率、平均值和对易关系都是相同的。
 
   力学量$hat(A)$和量子态$ket(psi(t))$在$Q$绘景下的变换为
@@ -449,7 +486,7 @@ $
   $
 ]
 
-=== Heisenberg绘景
+== Heisenberg绘景
 
 在Schrödinger绘景中，力学量不随时间演化，量子态的演化为
 $
@@ -459,7 +496,9 @@ $
 $
   hat(Q)(t) = hat(U)^dagger (t, t_0) = hat(U)^(-1) (t, t_0)
 $
-得到的绘景称为*Heisenberg绘景*。量子态和力学量变换为
+得到的绘景称为*Heisenberg绘景*。
+
+量子态和力学量变换为
 $
   ket(psi^"H" (t)) = hat(U)^dagger (t, t_0) ket(psi(t)) = ket(psi(t_0))\
   hat(A)^"H" (t) = hat(U)^dagger (t, t_0) hat(A) hat(U)(t, t_0)
@@ -493,7 +532,23 @@ $
   hat(H)^"H" = hat(H)^"S" = hat(H)
 $
 
-==== 算力学量的时间演化
+#proposition(subname: [Heisenberg绘景])[
+  Heisenberg绘景由含时幺正变换$hat(Q)(t) = hat(U)^dagger (t, t_0)$定义。量子态和力学量的变换为
+  $
+    ket(psi(t)) -> ket(psi^"H" (t)) = hat(U)^dagger (t, t_0) ket(psi(t)) = ket(psi(t_0))\
+    hat(A) -> hat(A)^"H" (t) = hat(U)^dagger (t, t_0) hat(A) hat(U)(t, t_0)
+  $
+  在Heisenberg绘景中，量子态不随时间演化，力学量随时间演化。力学量$hat(A)^"H" (t)$满足的演化方程为
+  $
+    dv(, t) hat(A)^"H" (t) = 1/(i hbar) [hat(A)^"H" (t), hat(H)^"H" (t)] + hat(U)^dagger pdv(hat(A), t) hat(U)
+  $
+  如果Schrödinger绘景中的Hamilton量$hat(H)$不显含时间，则Heisenberg绘景中的Hamilton量与Schrödinger绘景中的Hamilton量一致，即
+  $
+    hat(H)^"H" = hat(H)^"S" = hat(H)
+  $
+]
+
+=== 力学量的时间演化
 
 考虑不显含时间的力学量$hat(A)$，在Heisenberg绘景中求解其时间演化，
 最一般的方法是求解Heisenberg方程
@@ -507,9 +562,12 @@ $
 对于$hat(H)^"S" (t)$含时的系统，即使$hat(H)^"H" (t)$很难求出，Heisenberg方程仍然有可能写出并求解。
 
 对于Hamilton量$hat(H)^"S"$不含时的情形，也可以利用*Baker-Hausdorff公式*
-$
-  e^(hat(X)) hat(Y) e^(-hat(X)) = hat(Y) + [hat(X), hat(Y)] + 1/2! [hat(X), [hat(X), hat(Y)]] + 1/3! [hat(X), [hat(X), [hat(X), hat(Y)]]] + ...
-$
+#theorem(subname: [Baker–Campbell–Hausdorff公式])[
+  设$hat(X)$和$hat(Y)$为两个算符，则有
+  $
+    e^(hat(X)) hat(Y) e^(-hat(X)) = hat(Y) + [hat(X), hat(Y)] + 1/2! [hat(X), [hat(X), hat(Y)]] + 1/3! [hat(X), [hat(X), [hat(X), hat(Y)]]] + ...
+  $
+]
 #proof[
   引入函数$f(lambda) = e^(lambda hat(X)) hat(Y) e^(- lambda hat(X))$，则
   $
@@ -532,11 +590,13 @@ $
 $
   hat(A)^"H" (t) = hat(A) + (i t)/hbar [hat(H), hat(A)] + 1/2! ((i t)/hbar)^2 [hat(H), [hat(H), hat(A)]] + 1/3! ((i t)/hbar)^3 [hat(H), [hat(H), [hat(H), hat(A)]]] + ...
 $
-不失一般性，从这里开始，令$t_0 = 0$。一般来说，对于如下的情况上述方法可以奏效：
+不失一般性，从这里开始，令$t_0 = 0$。
+
+一般来说，对于如下的情况上述方法可以奏效：
 + 上述级数中的对易子在某一阶等于零，从而只需要计算有限阶
 + 上述级数中的对易子出现周期性结果，从而可以写成级数形式并求和
 
-==== 谐振子
+=== 谐振子
 
 谐振子是量子理论中非常基本且重要的一个模型。考虑*一维谐振子*，其Hamilton量为
 $
@@ -608,6 +668,18 @@ $
 $
 即可求得$hat(q)^"H" (t)$和$hat(p)^"H" (t)$的解，与之前的结果一致。
 
+#proposition(subname: [谐振子模型])[
+  一维谐振子的Hamilton量为
+  $
+    hat(H) = hat(p)^2/(2 m) + 1/2 m omega^2 hat(q)^2
+  $
+  其中$hat(q)$和$hat(p)$满足对易关系$[hat(q), hat(p)] = i hbar$。在Heisenberg绘景中，谐振子的坐标算符和动量算符的时间演化为
+  $
+    hat(q)^"H" (t) = hat(q) cos(omega t) + hat(p)/(m omega) sin(omega t)\
+    hat(p)^"H" (t) = hat(p) cos(omega t) - m omega hat(q) sin(omega t)
+  $
+]
+
 == 谐振子的相干态
 
 === 产生和湮灭算符与能量本征态
@@ -661,6 +733,23 @@ $
 $
   ket(n) = 1/sqrt(n!) (hat(a)^dagger)^n ket(0)
 $
+
+#proposition(subname: [谐振子的产生算符与湮灭算符])[
+  谐振子的产生算符和湮灭算符定义为
+  $
+    hat(a) = sqrt((m omega)/(2 hbar)) (hat(q) + (i hat(p))/(m omega)),
+    hat(a)^dagger = sqrt((m omega)/(2 hbar)) (hat(q) - (i hat(p))/(m omega))
+  $
+  它们满足对易关系$[hat(a), hat(a)^dagger] = 1$。谐振子的Hamilton量可表达为
+  $
+    hat(H) = hbar omega (hat(a)^dagger hat(a) + 1/2)
+  $
+  能量本征态可由基态通过产生算符作用得到
+  $
+    ket(n) = 1/sqrt(n!) (hat(a)^dagger)^n ket(0)
+  $
+]
+#newpara()
 进一步地，进入坐标表象，可以求得各个能级的波函数$psi_n (q)= braket(q, n)$。对于基态，利用$hat(a) ket(0) = 0$的得到
 $
   braket(q, hat(q) + (i hat(p))/(m omega), 0) = 0\
@@ -709,25 +798,25 @@ $
 
 === 相干态
 
-*相干态*的引出：在前面Heisenberg绘景的计算中，谐振子的坐标和动量算符的解为
+在前面Heisenberg绘景的计算中，谐振子的坐标和动量算符的解为
 $
-  hat(q)^"H" (t) = hat(q) cos(omega t) + hat(p)/(m omega) sin(omega t)\
-  hat(p)^"H" (t) = hat(p) cos(omega t) - m omega hat(q) sin(omega t)
+  hat(q)^"H" (t) = hat(q)^"H" (0) cos(omega t) + (hat(p)^"H" (0))/(m omega) sin(omega t)\
+  hat(p)^"H" (t) = hat(p)^"H" (0) cos(omega t) - m omega hat(q)^"H" (0) sin(omega t)
 $
 虽然在形式上与经典谐振子的解一致，但是若初态为能量本征态(定态)，则坐标和动量的平均值为
 $
   braket(n, hat(q)^"H" (t), n) = 0\
   braket(n, hat(p)^"H" (t), n) = 0
 $
-所以，在力学量平均值的意义上，量子谐振子与经典谐振子完全不一样 (基态$n = 0$是例外)。
+所以，*在力学量平均值的意义上，量子谐振子与经典谐振子完全不一样*(基态$n = 0$是例外)。
 
-问：能不能找到一种初态$ket(z)$，力学量平均值的演化与经典谐振子一致？(考虑能量时须将零点能去除)
+问：*能不能找到一种初态$ket(z)$，力学量平均值的演化与经典谐振子一致*？(考虑能量时须将零点能去除)
 
-这样一种初态真的存在，它就是湮灭算符$hat(a)$的本征态
+*这样一种初态真的存在，它就是湮灭算符$hat(a)$的本征态*
 $
   hat(a) ket(z) = z ket(z) <=> bra(z) hat(a)^dagger = z^* bra(z)
 $
-由于$hat(a)$不是厄米算符，所以$z$一般是复数。显然，$ket(z)$可以用能量本征态展开
+由于*$hat(a)$不是Hermite算符*，所以$z$一般是复数。显然，$ket(z)$可以用能量本征态展开
 $
   ket(z) = sum_(n=0)^(oo) ketbra(n, n) ket(z)
 $
@@ -758,19 +847,8 @@ $
 $
 这样的态被称为*相干态*，*本征值$z$可以取所有的复数*。注意：只有$z = 0$的相干态才与基态$ket(0)$重合，$z = 1, 2, 3, dots$的那些态与能量本征态$ket(n)$是不同的。
 
-#proposition(subname: [相干态])[
-  谐振子的相干态$ket(z)$定义为湮灭算符$hat(a)$的本征态
-  $
-    hat(a) ket(z) = z ket(z)
-  $
-  其中本征值$z$为任意复数。相干态可以用能量本征态表示为
-  $
-    ket(z) = e^(- abs(z)^2/2) sum_(n=0)^(oo) z^n/sqrt(n!) ket(n)
-  $
-]
-#newpara()
 
-定义算符 ($z$为任意复数)
+定义*算符* ($z$为任意复数)
 $
   hat(D)(z) = exp(z hat(a)^dagger - z^* hat(a))
 $
@@ -792,20 +870,35 @@ $
     hat(D)(z) ket(0) & = e^(- abs(z)^2/2) e^(z hat(a)^dagger) e^(- z^* hat(a)) ket(0) \
                      & = e^(- abs(z)^2/2) e^(z hat(a)^dagger) sum_(n=0)^(oo) (- z^*)^n/n! (hat(a))^n ket(0) \
                      & = e^(- abs(z)^2/2) e^(z hat(a)^dagger) ket(0) \
-                     & = e^(- abs(z)^2/2) sum_(n=0)^(oo) z^n/sqrt(n!) ket(n) = ket(z)c
-  $
-  另外可以证明
-  $
-    hat(D)^(-1) (z) = hat(D)^dagger (z) = hat(D)(- z)\
-    hat(D)^dagger (z) hat(a) hat(D)(z) = hat(a) + z\
+                     & = e^(- abs(z)^2/2) sum_(n=0)^(oo) z^n/sqrt(n!) ket(n) = ket(z)
   $
 ]
+另外可以证明
+$
+  hat(D)^(-1) (z) = hat(D)^dagger (z) = hat(D)(- z)\
+  hat(D)^dagger (z) hat(a) hat(D)(z) = hat(a) + z\
+$
 
+#proposition(subname: [相干态])[
+  谐振子的相干态$ket(z)$定义为湮灭算符$hat(a)$的本征态
+  $
+    hat(a) ket(z) = z ket(z)
+  $
+  其中本征值$z$为任意复数。相干态可以用能量本征态表示为
+  $
+    ket(z) = e^(- abs(z)^2/2) sum_(n=0)^(oo) z^n/sqrt(n!) ket(n)
+  $
+  定义算符$hat(D)(z) = exp(z hat(a)^dagger - z^* hat(a))$，则相干态也可以表示为
+  $
+    ket(z) = hat(D)(z) ket(0)
+  $
+]
+#newpara()
 === 时间演化
 
-设谐振子初态为相干态，$ket(ψ(0)) = ket(z)$，在Schrödinger绘景中讨论其时间演化。利用时间演化算符，得到
+设谐振子初态为相干态，$ket(ψ(0)) = ket(z)$，在Schrödinger绘景中讨论其*时间演化*。利用时间演化算符，得到
 $
-  ket(psi(0)) &= e^(- (i hat(H) t)/hbar) ket(z) \
+  ket(psi(t)) &= e^(- (i hat(H) t)/hbar) ket(z) \
   &= e^(- (i omega t)/2) e^(- abs(z)^2/2) sum_(n=0)^(oo) (z^n)/(sqrt(n!)) e^(- i n omega t) ket(n) \
   &= e^(- (i omega t)/2) e^(- abs(z e^(-i omega t))^2/2) sum_(n=0)^(oo) ((z e^(- i omega t))^n)/(sqrt(n!)) ket(n) \
   &= e^(- (i omega t)/2) ket(z e^(- i omega t))
@@ -817,7 +910,7 @@ $
   braket(psi(t), hat(q), psi(t)) & = braket(z e^(- i omega t), hat(q), z e^(- i omega t)) = sqrt((hbar)/(2 m omega)) (z e^(- i omega t) + z^* e^(i omega t))\
   braket(psi(t), hat(p), psi(t)) & = braket(z e^(- i omega t), hat(p), z e^(- i omega t)) = -i sqrt((hbar m omega)/2) (z e^(- i omega t) - z^* e^(i omega t))
 $
-都可以写成$A cos(ω t + φ)$的形式，即与经典谐振子的运动规律一致。
+都可以写成$A cos(ω t + φ)$的形式，即与*经典谐振子的运动规律一致*。
 
 进一步地，可以计算得到
 $
@@ -839,7 +932,9 @@ $
 
 === 坐标空间
 
-根据上面的计算，相干态在时间演化中坐标和动量的不确定度均保存不变。实际上，*在坐标空间或动量空间，相干态波包的形状均保持不变，其中心随着时间简谐变化*，符合经典谐振子的运动规律。以坐标空间为例说明。进入坐标表象，对于初态$ket(z)$，求得波函数为
+根据上面的计算，相干态在时间演化中坐标和动量的不确定度均保存不变。实际上，*在坐标空间或动量空间，相干态波包的形状均保持不变，其中心随着时间简谐变化*，符合经典谐振子的运动规律。以坐标空间为例说明。
+
+进入*坐标表象*，对于初态$ket(z)$，求得波函数为
 $
   braket(q, z) & = psi_z (q) \
                & = e^(- abs(z)^2/2) sum_(n=0)^(oo) z^n/sqrt(n!) braket(q, n) \
@@ -854,11 +949,11 @@ $
 $
   abs(psi (q, t))^2 = ((m omega)/(pi hbar))^(1/2) e^(- (xi - sqrt(2) abs(z) cos(omega t + phi))^2)
 $
-这是一个高斯波包，在时间演化中，其形状不变，中心的运动与经典谐振子相同。
+这是一个Gauss波包，*在时间演化中，其形状不变，中心的运动与经典谐振子相同*。
 
-=== 相干态表
+=== 相干态表象
 
-不同的相干态之间是不正交的。考虑本征值为$z_1$和$z_2$的两个相干态，利用相干态的表达式得到
+*不同的相干态之间是不正交的*。考虑本征值为$z_1$和$z_2$的两个相干态，利用相干态的表达式得到
 $
   braket(z_1, z_2) & = e^(- (abs(z_1)^2 + abs(z_2)^2)/2) sum_(n=0)^(oo) sum_(m=0)^(oo) ((z_1^*)^n z_2^m)/sqrt(n! m!) braket(n, m) \
   & = e^(- (abs(z_1)^2 + abs(z_2)^2)/2) sum_(n=0)^(oo) ((z_1^*)^n z_2^n)/n! \
@@ -900,7 +995,8 @@ $
   ket(psi) & = 1/pi integral dd(z, 2) braket(z, psi) ket(z) \
            & = 1/pi integral dd(z, 2) psi(z) ket(z)
 $
-可以证明，全体相干态 (无穷多个) 是线性相关的。实际上，可以计算 (对任意正整数$m$)
+#newpara()
+可以证明，*全体相干态(无穷多个)是线性相关的*。实际上，可以计算(对任意正整数$m$)
 $
   integral dd(z, 2) z^m ket(z) & = integral dd(z, 2) z^m e^(- abs(z)^2/2) sum_(n=0)^(oo) z^n/sqrt(n!) ket(n) \
   & = sum_(n=0)^(oo) ket(n)/sqrt(n!) integral_0^oo r^(m+n+1) e^(- r^2/2) dd(r) integral_0^(2 pi) e^(i (m - n) theta) dd(theta) \
@@ -940,7 +1036,7 @@ $
 
 === 相互作用绘景
 
-除了Heisenberg绘景，另一个在理论上常用的绘景是相互作用绘景，也称为Dirac绘景。假设系统的Hamilton量可以写为
+除了Heisenberg绘景，另一个在理论上常用的绘景是*相互作用绘景*，也称为Dirac绘景。假设系统的Hamilton量可以写为
 $
   hat(H) = hat(H)_0 + hat(H)_"int"
 $
@@ -1185,22 +1281,22 @@ $
 $
   hat(U)^"I" (t, t_0) = e^(i/hbar hat(H)_0 t) hat(U)(t, t_0) e^(-i/hbar hat(H)_0 t_0)
 $
-对于我们感兴趣的跃迁振幅，由于$ket(i)$ 和 $ket(f)$ 都是 $hat(H)_0$ 的本征态，得
+对于我们感兴趣的跃迁振幅，由于$ket(i)$和$ket(f)$都是$hat(H)_0$的本征态，得
 $
-  K_"fi" = braket(f, hat(U)^"I" (t, 0), i) = e^(i/hbar (E_f t - E_i 0)) braket(f, hat(U)(t, 0), i) = e^(i/hbar E_f t) braket(f, hat(U)(t, 0), i)
+  braket(f, hat(U)^"I" (t, 0), i) = e^(i/hbar (E_f t - E_i 0)) braket(f, hat(U)(t, 0), i) = e^(i/hbar E_f t) braket(f, hat(U)(t, 0), i) = e^(i/hbar E_f t) K_"fi"
 $
 由于我们最终感兴趣的是跃迁几率，所以可以直接计算
 $
   cal(A)_"fi" = braket(f, hat(U)^"I" (t, 0), i)
 $
-利用$hat(U)^"I" (t, 0)$ 的 Dyson 级数解，逐级计算即可。
+利用$hat(U)^"I" (t, 0)$的Dyson级数解，逐级计算即可。
 - 零阶计算：
   $
-    cal(A)_"fi"^(0) = braket(f, i) = delta_"fi"
+    cal(A)_"fi"^((0)) = braket(f, i) = delta_"fi"
   $
 - 一阶计算：
   $
-    cal(A)_"fi"^(1) = -i/hbar integral_0^t dd(t_1) braket(f, hat(V)^"I" (t_1), i)
+    cal(A)_"fi"^((1)) = -i/hbar integral_0^t dd(t_1) braket(f, hat(V)^"I" (t_1), i)
   $
   利用
   $
@@ -1208,7 +1304,7 @@ $
   $
   得到
   $
-    cal(A)_"fi"^(1) = -i/hbar integral_0^t dd(t_1) e^(i/hbar E_"fi" t_1) V_"fi" (t_1)
+    cal(A)_"fi"^((1)) = -i/hbar integral_0^t dd(t_1) e^(i/hbar E_"fi" t_1) V_"fi" (t_1)
   $
   其中
   $
@@ -1216,17 +1312,31 @@ $
   $
 - 二阶计算：
   $
-    cal(A)_"fi"^(2) = (-i/hbar)^2 integral_0^t dd(t_1) integral_0^(t_1) dd(t_2) braket(f, hat(V)^"I" (t_1) hat(V)^"I" (t_2), i)
+    cal(A)_"fi"^((2)) = (-i/hbar)^2 integral_0^t dd(t_1) integral_0^(t_1) dd(t_2) braket(f, hat(V)^"I" (t_1) hat(V)^"I" (t_2), i)
   $
   插入$hat(H)_0$表象的完备性关系最终得到
   $
-    cal(A)_"fi"^(2) = - 1 /hbar^2 sum_k integral_0^t dd(t_1) integral_0^(t_1) dd(t_2) e^(i/hbar E_"fk" t_1) e^(i/hbar E_"ki" t_2) V_"fk" (t_1) V_"ki" (t_2)
+    cal(A)_"fi"^((2)) = - 1 /hbar^2 sum_k integral_0^t dd(t_1) integral_0^(t_1) dd(t_2) e^(i/hbar E_"fk" t_1) e^(i/hbar E_"ki" t_2) V_"fk" (t_1) V_"ki" (t_2)
   $
 - 三阶计算：
   $
     cal(A)_"fi"^(3) = i/hbar^3 sum_(j k) integral_0^t dd(t_1) integral_0^(t_1) dd(t_2) integral_0^(t_2) dd(t_3) \ e^(i/hbar E_"fj" t_1) e^(i/hbar E_"jk" t_2) e^(i/hbar E_"ki" t_3) V_"fj" (t_1) V_"jk" (t_2) V_"ki" (t_3)
   $
 
+#proposition(subname: [微扰跃迁振幅])[
+  假设体系Hamilton量为$hat(H)_0 + hat(V)(t)$，在初始时刻$t = 0$处于$hat(H)_0$的本征态$ket(i)$，则在任意$t > 0$时刻跃迁到$hat(H)_0$的本征态$ket(f)$的跃迁振幅为
+  $
+    cal(A)_"fi" = braket(f, hat(U)^"I" (t, 0), i), K_"fi" = e^(-i/hbar E_f t) cal(A)_"fi"
+  $
+  其中$hat(U)^"I" (t, t_0)$是相互作用绘景中的时间演化算符。将$hat(U)^"I" (t, t_0)$的Dyson级数解代入，逐级计算得到微扰展开
+  $
+    cal(A)_"fi" & = cal(A)_"fi"^((0)) + cal(A)_"fi"^((1)) + cal(A)_"fi"^((2)) + ... \
+    cal(A)_"fi"^((0)) & = delta_"fi" \
+    cal(A)_"fi"^((1)) & = -i/hbar integral_0^t dd(t_1) e^(i/hbar E_"fi" t_1) V_"fi" (t_1) \
+    cal(A)_"fi"^((2)) & = - 1 /hbar^2 sum_k integral_0^t dd(t_1) integral_0^(t_1) dd(t_2) e^(i/hbar E_"fk" t_1) e^(i/hbar E_"ki" t_2) V_"fk" (t_1) V_"ki" (t_2) \
+    cal(A)_"fi"^((3)) & = i/hbar^3 sum_(j k) integral_0^t dd(t_1) integral_0^(t_1) dd(t_2) integral_0^(t_2) dd(t_3) \ &e^(i/hbar E_"fj" t_1) e^(i/hbar E_"jk" t_2) e^(i/hbar E_"ki" t_3) V_"fj" (t_1) V_"jk" (t_2) V_"ki" (t_3)
+  $
+]
 #example(subname: [常数微扰])[
   $
     hat(V)(t) = hat(V) Theta(t)
@@ -1235,7 +1345,7 @@ $
 
   直接计算得到一阶项结果为
   $
-    cal(A)_"fi"^(1) &= -i/hbar integral_0^t dd(t_1) e^(i/hbar E_"fi" t_1) V_"fi" = - V_"fi"/E_"fi" (e^(i/hbar E_"fi" t) - 1)\
+    cal(A)_"fi"^((1)) &= -i/hbar integral_0^t dd(t_1) e^(i/hbar E_"fi" t_1) V_"fi" = - V_"fi"/E_"fi" (e^(i/hbar E_"fi" t) - 1)\
     &= - 2 pi i V_"fi" e^(i/(2hbar) E_"fi" t) delta_t (E_"fi")
   $
   其中
@@ -1246,7 +1356,7 @@ $
 
   二阶项结果为
   $
-    cal(A)_"fi"^(2) &= (-i/hbar)^2 sum_k integral_0^t dd(t_1) integral_0^(t_1) dd(t_2) e^(i/hbar E_"fk" t_1) e^(i/hbar E_"ki" t_2) V_"fk" V_"ki"\
+    cal(A)_"fi"^((2)) &= (-i/hbar)^2 sum_k integral_0^t dd(t_1) integral_0^(t_1) dd(t_2) e^(i/hbar E_"fk" t_1) e^(i/hbar E_"ki" t_2) V_"fk" V_"ki"\
     &= - 1/hbar^2 sum_k V_"fk" V_"ki" integral_0^t dd(t_1) integral_0^(t) dd(t_2) e^(i/hbar E_f t_1) e^(- i/hbar E_i t_2) e^(- i/hbar E_k (t_1 - t_2)) Theta(t_1 - t_2)
   $
   计算这个式子，可利用积分
@@ -1287,15 +1397,15 @@ $
   ]
   带入得到
   $
-    cal(A)_"fi"^(2) = - 1/hbar^2 sum_k V_"fk" V_"ki" integral_0^t dd(t_1) integral_0^t dd(t_2) integral_(-oo)^oo dd(E) (e^(i/hbar (E_f - E) t_1) e^(-i/hbar (E_i - E) t_2))/(E + i epsilon - E_k)
+    cal(A)_"fi"^((2)) = - 1/hbar^2 sum_k V_"fk" V_"ki" integral_0^t dd(t_1) integral_0^t dd(t_2) integral_(-oo)^oo dd(E) (e^(i/hbar (E_f - E) t_1) e^(-i/hbar (E_i - E) t_2))/(E + i epsilon - E_k)
   $
   由此可以看到刚才引入阶跃函数$Theta(t_1 - t_2)$：两个时间积分的上限都统一为$t$。完成两个时间积分得到
   $
-    cal(A)_"fi"^(2) = - 1/hbar^2 sum_k V_"fk" V_"ki"integral_(-oo)^oo dd(E) (delta_t (E_f - E) delta_t (E - E_i))/(E + i epsilon - E_k) e^(i/(2hbar) (E_f - E_i) t)
+    cal(A)_"fi"^((2)) = - 1/hbar^2 sum_k V_"fk" V_"ki"integral_(-oo)^oo dd(E) (delta_t (E_f - E) delta_t (E - E_i))/(E + i epsilon - E_k) e^(i/(2hbar) (E_f - E_i) t)
   $
   当$t$很大时，$δ_t (x)$函数是在原点附近高度定域化的，因此只要没有能级$E_k$非常接近 $E_i ≈ E_f$，就可以将分母中的$E$用$E_i$代替。这样近似以后得到
   $
-    cal(A)_"fi"^(2) = - 1/hbar^2 sum_k (V_"fk" V_"ki")/(E_i - E_k + i epsilon) e^(i/(2hbar) (E_f - E_i) t) integral_(-oo)^oo dd(E) delta_t (E_f - E) delta_t (E - E_i) e^(i/(2 hbar) E_"fi" t)
+    cal(A)_"fi"^((2)) = - 1/hbar^2 sum_k (V_"fk" V_"ki")/(E_i - E_k + i epsilon) e^(i/(2hbar) (E_f - E_i) t) integral_(-oo)^oo dd(E) delta_t (E_f - E) delta_t (E - E_i) e^(i/(2 hbar) E_"fi" t)
   $
   对$E$的积分可计算为
   $
@@ -1306,18 +1416,18 @@ $
   $
   最终得到二阶项的近似结果
   $
-    cal(A)_"fi"^(2) approx - 2 pi i sum_k (V_"fk" V_"ki")/(E_i - E_k + i epsilon) e^(i/(2hbar) (E_f - E_i) t) delta_t (E_f - E_i)
+    cal(A)_"fi"^((2)) approx - 2 pi i sum_k (V_"fk" V_"ki")/(E_i - E_k + i epsilon) e^(i/(2hbar) (E_f - E_i) t) delta_t (E_f - E_i)
   $
   同样可以得到三阶项的近似结果
   $
-    cal(A)_"fi"^(3) approx - 2 pi i sum_(j k) (V_"fj" V_"jk" V_"ki")/((E_i - E_j + i epsilon)(E_i - E_k + i epsilon)) e^(i/(2hbar) (E_f - E_i) t) delta_t (E_f - E_i)
+    cal(A)_"fi"^((3)) approx - 2 pi i sum_(j k) (V_"fj" V_"jk" V_"ki")/((E_i - E_j + i epsilon)(E_i - E_k + i epsilon)) e^(i/(2hbar) (E_f - E_i) t) delta_t (E_f - E_i)
   $
-  上述各阶计算的结果可以用一个图来表示：
-  #figure(
-    image("pic/2025-10-15-11-11-15.png", width: 80%),
-    numbering: none,
-  )
 ]
+上述各阶计算的结果可以用一个图来表示：
+#figure(
+  image("pic/2025-10-15-11-11-15.png", width: 80%),
+  numbering: none,
+)
 
 === 能级移动和展宽
 
@@ -1330,7 +1440,7 @@ $
   cal(A)_"ii" &= 1 - 2 pi i lim_(f->i) (V_"fi" + sum_k (V_"fk" V_"ki") / (E_i - E_k + i epsilon)) e^(i/(2hbar) (E_f - E_i) t) delta_t (E_f - E_i)\
   &= 1 - (i t)/hbar (V_"ii" + sum_k abs(V_"ik")^2 / (E_i - E_k + i epsilon))
 $
-可以看到，方括号里面 (的实部) 实际上就是*定态微扰论*给出的能量移动的二阶结果。由于其是*微扰展开*的结果，我们猜测它可以改写为
+可以看到，括号里面(的实部)实际上就是*定态微扰论*给出的能量移动的二阶结果。由于其是*微扰展开*的结果，我们猜测它可以改写为
 $
   cal(A)_"ii" approx e^(- i/hbar Delta_i t), Delta = V_"ii" + sum_k abs(V_"ik")^2 / (E_i - E_k + i epsilon)
 $
@@ -1391,7 +1501,7 @@ $
 $
   cal(A)_"ii" (t) & = 1 - i V_"ii" (e^(eta t))/(eta hbar) - abs(V_"ii")^2 e^(2 eta t)/(2 eta^2 hbar^2) - (i e^(2 eta t))/(eta hbar) sum_(k!=i) abs(V_"ik")^2/(E_i - E_k + i eta hbar)
 $
-直接取$η -> 0$会得到发散的结果。考虑$cal(A)_"ii"(t)$的时间导数，计算到二阶项得到
+直接取$η -> 0$会得到发散的结果。考虑$cal(A)_"ii" (t)$的时间导数，计算到二阶项得到
 $
   dot(cal(A))_"ii"/cal(A)_"ii" &= (- (i V_"ii")/hbar - abs(V_"ii")^2 / (eta hbar^2) - i / hbar sum_(k!=i) abs(V_"ik")^2/(E_i - E_k + i eta hbar))/(1 - (i V_"ii")/(eta hbar))\
   &= - i/hbar (V_"ii" + sum_(k!=i) abs(V_"ik")^2/(E_i - E_k + i eta hbar))
@@ -1443,7 +1553,7 @@ $
 $
   hat(V)(t) = hat(A) J(t)
 $
-其中 $hat(A)$ 是Hermite算符，通常是系统的某个力学量，$J(t)$是时间的实函数。当$t < t_0$ 时，$J(t) = 0$。考虑力学量$hat(Omega)$的平均值
+其中$hat(A)$是Hermite算符，通常是系统的某个力学量，$J(t)$是时间的实函数。当$t < t_0$ 时，$J(t) = 0$。考虑力学量$hat(Omega)$的平均值
 $
   expval(hat(Omega)) (t) = braket(psi(t), hat(Omega), psi(t))
 $
@@ -1731,7 +1841,7 @@ $
 $
 采用任意一组正交完备基矢${ket(n)}$，利用完备性关系得到
 $
-  expval(hat(A)) = sum_n braket(psi, hat(A), n) braket(n, psi) = sum_n braket(n, psi) braket(n, hat(A), psi)
+  expval(hat(A)) = sum_n braket(psi, hat(A), n) braket(n, psi) = sum_n braket(n, psi) braket(psi, hat(A), n)
 $
 定义*密度算符*
 $
@@ -1874,7 +1984,7 @@ $
 
 === 密度矩阵
 
-*密度矩阵*: 密度算符在某个具体表象中的矩阵形式称为密度矩阵。
+*密度矩阵*: 密度算符在*某个具体表象*中的矩阵形式称为密度矩阵。
 
 显然，密度矩阵的具体形式与表象的选取有关。考虑由一组正交完备基矢$ket(n)$构成的表象，密度矩阵的矩阵元为
 $
@@ -1925,7 +2035,7 @@ $
 $
   a_0 = 1/2
 $
-密度矩阵乘以$sigma_i(i = x; y; z)$并求迹得到
+密度矩阵乘以$sigma_i (i = x; y; z)$并求迹得到
 $
   Tr(rho sigma_i) = expval(expval(sigma_i)) = 2 a_i => vb(a) = 1/2 expval(expval(vb(sigma)))
 $
@@ -1973,6 +2083,16 @@ $
 $
 - 纯态：由于$ρ^2 = ρ$，所以$Tr(ρ^2) = Tr(ρ) = 1$，要求 $abs(vb(P)) = 1$，即 Bloch 球表面上的点代表纯态。
 - 混合态：由于$Tr(ρ^2) < 1$，所以$abs(vb(P)) < 1$，即 Bloch 球内部的点代表混合态。
+
+#proposition(subname: [二能级系统的密度矩阵与Bloch矢量])[
+  二能级系统的密度矩阵可以表示为
+  $
+    rho = 1/2 (vb(I) + vb(P) dot vb(sigma))
+  $
+  其中$vb(P) = Tr(rho vb(sigma))$为*极化矢量*或者*Bloch矢量*，满足$abs(vb(P)) <= 1$。
+  - 纯态对应于$abs(vb(P)) = 1$，即 Bloch 球表面上的点
+  - 混合态对应于$abs(vb(P)) < 1$，即 Bloch 球内部的点
+]
 
 === 量子统计力学
 
