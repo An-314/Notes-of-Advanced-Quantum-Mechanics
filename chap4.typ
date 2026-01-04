@@ -10,7 +10,7 @@
 
 == 对称性变换
 
-在经典力学中，对称性变换是对力学量直接变换。在量子力学中，描述系统状态的是Hilbert空间中的态矢，力学量成了算符。我们预期，量子系统的对称性变换包含了对态矢和力学量的变换。
+在经典力学中，对称性变换是对力学量直接变换。在量子力学中，描述系统状态的是Hilbert空间中的态矢，力学量成了算符。我们预期，*量子系统的对称性变换包含了对态矢和力学量的变换*。
 
 #definition(subname: [量子系统的对称性变换])[
   量子系统的对称性变换，就是在保持系统的*物理观测结果不变*的情况下，把它的力学量和态矢都变换为新的力学量和态矢。具体来说，对称性变换$cal(Q)$将系统的力学量$hat(Ω)$变换为系统的另一个力学量$hat(Omega)'$，
@@ -210,11 +210,11 @@ $
   $
     hat(Q) ket(u) = ket(u')
   $
-  将$ket(u)$和$ket(u')$的展开式带入上式，对于线性幺正变换，有
+  将$ket(u)$和$ket(u')$的展开式带入上式，对于*线性幺正变换*，有
   $
     hat(Q) (sum_m c_m ket(phi_m)) = sum_m c_m hat(Q) ket(phi_m) = sum_m c_m ket(phi''_m)
   $
-  对于反线性幺正变换，有
+  对于*反线性幺正变换*，有
   $
     hat(Q) (sum_m c_m ket(phi_m)) = sum_m c^*_m hat(Q) ket(phi_m) = sum_m c^*_m ket(phi''_m)
   $
@@ -254,11 +254,11 @@ $
     => braket(psi_1, psi_2) = sum_m x^*_m y_m = braket(psi'_1, psi'_2)
   $
 ]
-最后我们证明：$hat(Q)$ 是幺正算符，即 $Q^(-1) = Q^dagger$。对于任意的线性算符$hat(L)$，我们有
+最后我们证明：$hat(Q)$是*幺正算符，即$Q^(-1) = Q^dagger$*。对于任意的线性算符$hat(L)$，我们有
 $
   bra(psi_1) (hat(L) ket(psi_2)) = (bra(psi_1) hat(L)) ket(psi_2) = braket(psi_1, hat(L), psi_2)
 $
-即：对于线性算符，不用区分向前还是向后作用。为了与后面的反线性算符对比，我们简要说明这一性质。利用展开式以及$hat(L)$是线性算符以及内积的线性性质，得到
+即：对于*线性算符，不用区分向前还是向后作用*。为了与后面的反线性算符对比，我们简要说明这一性质。利用展开式以及$hat(L)$是线性算符以及内积的线性性质，得到
 $
   bra(psi_1) (hat(L) ket(psi_2)) & = (sum_m x^*_m bra(phi_m)) (hat(L) sum_n y_n ket(phi_n)) \
                                  & = (sum_m x^*_m bra(phi_m)) (sum_n y_n hat(L) ket(phi_n)) \
@@ -341,6 +341,30 @@ $
   $
   由于$hat(Q)$变换是可逆的(定理的条件设定)，所以$hat(Q)^(-1) = hat(Q)^dagger$，即 $hat(Q)$是幺正算符(同时也得到 $hat(Q) hat(Q)^dagger = 1$)。
 ]
+
+#proposition(subname: [线性幺正变换和反线性幺正变换])[
+  - 线性幺正变换$hat(Q)$满足
+    $
+      hat(Q)(a ket(u) + b ket(v)) = a hat(Q) ket(u) + b hat(Q) ket(v)
+    $
+    其中$a, b in CC$是任意复数，并且
+    $
+      braket(psi_1, psi_2) = braket(psi'_1, psi'_2)
+    $
+  - 反线性幺正变换$hat(Q)$满足
+    $
+      hat(Q)(a ket(u) + b ket(v)) = a^* hat(Q) ket(u) + b^* hat(Q) ket(v)
+    $
+    其中$a, b in CC$是任意复数，并且
+    $
+      braket(psi_1, psi_2) = braket(psi'_1, psi'_2)^*
+    $
+  - 两种变换均满足幺正算符条件
+    $
+      hat(Q)^dagger hat(Q) = hat(Q) hat(Q)^dagger = 1 => hat(Q)^(-1) = hat(Q)^dagger
+    $
+]
+#newpara()
 
 接下来要解决的问题是：*在对称性变换下，任意力学量$hat(Ω)$如何变换？*根据物理观测结果不变的要求，力学量在变换前后本征值和取值几率都不变，所以其平均值必然是不变的，即
 $
@@ -1025,11 +1049,23 @@ $
   hat(P)^dagger = hat(P) = hat(P)^(-1)
 $
 由此得到如下结论：
-- $hat(P)$是Hermite算符，可以作为一个力学量， *无经典对应*。
+- $hat(P)$是Hermite算符，可以作为一个力学量，*无经典对应*。
 - $hat(P)$的本征值为$±1$，对应本征态分别称为偶宇称态和奇宇称态。任意态矢必然可以展开为偶宇称态和奇宇称态的叠加
   $
     ket(psi) = 1/2 (ket(psi) + hat(P) ket(psi)) + 1/2 (ket(psi) - hat(P) ket(psi))
   $
+
+#proposition(subname: [空间反演算符])[
+  空间反演算符$hat(P)$是线性Hermite算符，满足$hat(P)^2 = 1$，其本征值为$±1$。并且
+  $
+    hat(P) hat(vb(r)) hat(P)^dagger & = - hat(vb(r)) \
+    hat(P) hat(vb(p)) hat(P)^dagger & = - hat(vb(p))
+  $
+  以及与虚数单位$i$可交换的关系
+  $
+    hat(P) i = i hat(P)
+  $
+]
 
 === 空间反演算符的作用
 
@@ -1077,9 +1113,10 @@ $
 $
 在空间反演下，波函数变为
 $
-  psi(vb(x)) -> braket(vb(x), hat(P), psi) = - braket(- vb(x), psi) = psi(- vb(x))
+  psi(vb(x)) -> braket(vb(x), hat(P), psi) = braket(- vb(x), psi) = psi(- vb(x))
 $
-假设$ket(psi)$是宇称本征态，即
+#newpara()
+假设$ket(psi)$是*宇称本征态*，即
 $
   hat(P) ket(psi) = plus.minus ket(psi)
 $
@@ -1093,7 +1130,7 @@ $
 $
   hat(P) hat(vb(L)) hat(P)^dagger = hat(vb(L)) <=> hat(P) hat(vb(L)) = hat(vb(L)) hat(P)
 $
-很自然地，我们要求自旋角动量$hat(vb(S))$也满足同样的性质，即
+*$hat(P)$和轨道角动量算符$hat(vb(L))$对易*。很自然地，我们要求自旋角动量$hat(vb(S))$也满足同样的性质，即
 $
   hat(P) hat(vb(S)) hat(P)^dagger = hat(vb(S)) <=> hat(P) hat(vb(S)) = hat(vb(S)) hat(P)
 $
@@ -1108,7 +1145,7 @@ $
 
 #newpara()
 
-在经典力学中，空间反演和转动操作是可交换(对易)的。在量子力学中，我们也很自然地假设空间反演变换$hat(P)$和转动变换$hat(D)_n (phi)$对易
+在经典力学中，*空间反演和转动操作是可交换(对易)的*。在量子力学中，我们也很自然地假设空间反演变换$hat(P)$和转动变换$hat(D)_n (phi)$对易
 $
   hat(P) hat(D)_n (phi) = hat(D)_n (phi) hat(P)
 $
@@ -1121,6 +1158,29 @@ $
   hat(P) hat(J) hat(P)^dagger = hat(J) <=> hat(P) hat(J) = hat(J) hat(P)
 $
 当然，这个结果也可从假设$hat(P) hat(vb(S)) hat(P)^dagger = hat(vb(S))$得到。
+
+#proposition(subname: [空间反演算符的作用])[
+  空间反演算符$hat(P)$作用在坐标表象基矢上为
+  $
+    hat(P) ket(vb(r)) = ket(- vb(r))
+  $
+  作用在动量表象基矢上为
+  $
+    hat(P) ket(vb(p)) = ket(- vb(p))
+  $
+  并且与轨道角动量算符$hat(vb(L))$和自旋角动量算符$hat(vb(S))$对易，即
+  $
+    hat(P) hat(vb(L)) hat(P)^dagger = hat(vb(L)) , hat(P) hat(vb(S)) hat(P)^dagger = hat(vb(S))
+  $
+  有共同本征态$ket(S M)$，满足
+  $
+    hat(P) ket(S M) = ket(S M)
+  $
+  以及与总角动量算符$hat(vb(J))$对易，即
+  $
+    hat(P) hat(vb(J)) hat(P)^dagger = hat(vb(J)) => hat(P) hat(D)_n (phi) = hat(D)_n (phi) hat(P)
+  $
+]
 
 #example(subname: [中心势场波函数的空间反演])[
   考虑无自旋粒子在中心势场中的能量本征态$ket(n l m)$。由于轨道角动量$hat(vb(L))$和$hat(P)$对易，则$ket(n l m)$亦是宇称本征态。波函数为
@@ -1188,7 +1248,7 @@ $
 $
   i hbar pdv(, t) (hat(P) ket(psi(t))) = hat(P) hat(H) hat(P)^dagger (hat(P) ket(psi(t)))
 $
-因此，若$hat(P) hat(H) hat(P)^dagger = hat(H)$，则宇称变换态$ket(psi'(t)) = hat(P) ket(psi(t))$遵守相同的运动方程。即：*空间反演不变性导致宇称守恒*。反之，若哈密顿量不具有空间反演不变性，$hat(P) hat(H) hat(P)^dagger != hat(H)$，则宇称不守恒。例如：弱相互作用中宇称不守恒。
+因此，若$hat(P) hat(H) hat(P)^dagger = hat(H)$，则宇称变换态$ket(psi'(t)) = hat(P) ket(psi(t))$遵守相同的运动方程。即：*空间反演不变性导致宇称守恒*。反之，若Hamilton量不具有空间反演不变性，$hat(P) hat(H) hat(P)^dagger != hat(H)$，则宇称不守恒。例如：弱相互作用中宇称不守恒。
 
 == 时间反演
 
@@ -1213,7 +1273,7 @@ $
 $
   braket(psi', hat(Omega), psi') = (bra(psi) hat(T)^dagger) hat(Omega) (hat(T) ket(psi))
 $
-由于前后都是同一个态，而且$hat(T)^dagger hat(Omega) hat(T)$必为厄米算符，所以不论 $hat(T)$是线性还是反线性，都有
+由于前后都是同一个态，而且$hat(T)^dagger hat(Omega) hat(T)$必为Hermite算符，所以不论 $hat(T)$是线性还是反线性，都有
 $
   braket(psi', hat(Omega), psi') = braket(psi, hat(T)^dagger hat(Omega) hat(T), psi)
 $
@@ -1224,10 +1284,10 @@ $
 $
 由于$ket(psi)$是任意态，所以有
 $
-  hat(T) vb(hat(r))^dagger hat(T) & = vb(hat(r)) \
-  hat(T) vb(hat(p))^dagger hat(T) & = - vb(hat(p))
+  hat(T) vb(hat(r)) hat(T)^dagger & = vb(hat(r)) \
+  hat(T) vb(hat(p)) hat(T)^dagger & = - vb(hat(p))
 $
-所以可以计算
+所以可以计算($hat(T)^(-1) = hat(T)^dagger$)
 $
   hat(T) [hat(x)_i, hat(p)_j] hat(T)^dagger & = [hat(T) hat(x)_i^dagger hat(T)^dagger, hat(T) hat(p)_j^dagger hat(T)^dagger] \
   & = [hat(x)_i, - hat(p)_j] \
@@ -1243,14 +1303,17 @@ $
 $
 所以$hat(T)$是我们期盼已久的那个*反线性算符*。对于反线性算符，不能定义其矩阵元，从而在任意表象中*不存在矩阵表示*(矩阵必然是线性变换)，它的厄米共轭$hat(T)^dagger$也不能理解为转置加复共轭(可以认为它就是个记号)。所以，我们对待它必须如履薄冰。
 
-这里更为严谨的做法是利用如下的定理：设$ket(alpha)$和$ket(beta)$为任意态矢，其时间反演态为
-$
-  ket(alpha') = hat(T) ket(alpha), ket(beta') = hat(T) ket(beta)
-$
-则对于任意线性算符$hat(Omega)$有如下等式
-$
-  braket(beta, hat(Omega), alpha) = braket(alpha', hat(T) hat(Omega)^dagger hat(T)^(-1), beta')
-$
+这里更为严谨的做法是利用如下的定理：
+#theorem[
+  设$ket(alpha)$和$ket(beta)$为任意态矢，其时间反演态为
+  $
+    ket(alpha') = hat(T) ket(alpha), ket(beta') = hat(T) ket(beta)
+  $
+  则对于任意线性算符$hat(Omega)$有如下等式
+  $
+    braket(beta, hat(Omega), alpha) = braket(alpha', hat(T) hat(Omega)^dagger hat(T)^(-1), beta')
+  $
+]
 #proof[
   令$ket(gamma) eq.triple hat(Omega)^dagger ket(beta)$，利用反幺正算符的性质可得
   $
@@ -1262,6 +1325,20 @@ $
     braket(psi, hat(Omega), psi) = braket(psi', hat(T) hat(Omega) hat(T)^(-1), psi')
   $
 ]
+
+#proposition(subname: [时间反演算符])[
+  时间反演算符$hat(T)$是反线性算符，满足
+  $
+    hat(T) vb(hat(r)) hat(T)^dagger & = vb(hat(r)) \
+    hat(T) vb(hat(p)) hat(T)^dagger & = - vb(hat(p))
+  $
+  以及与复数$c$的交换关系
+  $
+    hat(T) c = c^* hat(T)
+  $
+]
+#newpara()
+
 接下来研究*$hat(T)$对坐标算符本征态的作用*。利用$hat(vb(r))hat(T) = hat(T) hat(vb(r))$得到
 $
   hat(vb(r)) hat(T) ket(vb(r)) & = hat(T) hat(vb(r)) ket(vb(r)) = vb(r) hat(T) ket(vb(r)) \
@@ -1334,6 +1411,30 @@ $
 $
 此式与$hat(T) hat(vb(r))^dagger hat(T) & = hat(vb(r)), hat(T) hat(vb(p))^dagger hat(T) & = - hat(vb(p))$一起给出了时间反演算符$vb(T)$的定义。$vb(T)$是反线性算符，不能通过作用于一组基矢的结果来给出它的定义。
 
+#proposition(subname: [时间反演算符的作用])[
+  时间反演算符$hat(T)$作用在坐标表象基矢上为
+  $
+    hat(T) ket(vb(r)) = ket(vb(r))
+  $
+  作用在动量表象基矢上为
+  $
+    hat(T) ket(vb(p)) = ket(- vb(p))
+  $
+  作用在坐标表象波函数上为
+  $
+    psi(vb(r)) -> psi'(vb(r)) = psi^*(vb(r))
+  $
+  作用在动量表象波函数上为
+  $
+    phi(vb(p)) -> phi'(vb(p)) = phi^*(- vb(p))
+  $
+  并且与轨道角动量算符$hat(vb(L))$和自旋角动量算符$hat(vb(S))$满足
+  $
+    hat(T) hat(vb(L)) hat(T)^dagger = - hat(vb(L)) , hat(T) hat(vb(S)) hat(T)^dagger = - hat(vb(S))
+  $
+]
+
+#newpara()
 接下来我们考虑有自旋的系统。首先证明一个定理：
 #theorem[
   一个反幺正算符总可以分解为一个幺正算符$hat(U)$和一个复共轭运算$hat(K)$的乘积，
@@ -1369,8 +1470,7 @@ $
 $
   hat(U) hat(K) hat(vb(sigma)) hat(K)^dagger hat(U)^dagger & = - hat(vb(sigma)) => hat(U) hat(vb(sigma))^* hat(U)^dagger = - hat(vb(sigma))
 $
-取$sigma_z$表象，则$sigma_x, sigma_z$的矩阵元为实数，$sigma_y$的矩阵元为纯虚数，这
-样就得到
+取$sigma_z$表象，则$sigma_x, sigma_z$的矩阵元为实数，$sigma_y$的矩阵元为纯虚数，这样就得到
 $
   hat(U) sigma_x hat(U)^dagger & = - sigma_x \
   hat(U) sigma_y hat(U)^dagger & = sigma_y \
@@ -1378,13 +1478,13 @@ $
 $
 即
 $
-  U sigma_x = - sigma_x U, U sigma_y = sigma_y U, U sigma_z = - sigma_z U
+  hat(U) sigma_x = - sigma_x hat(U), hat(U) sigma_y = sigma_y hat(U), hat(U) sigma_z = - sigma_z hat(U)
 $
-根据 Pauli 矩阵的性质，满足这个条件的$U$显然可以写为
+根据 Pauli 矩阵的性质，满足这个条件的$hat(U)$显然可以写为
 $
-  U = e^(i alpha) sigma_y
+  hat(U) = e^(i alpha) sigma_y
 $
-若取$e^(i alpha) = - i$，则$U$可以写为
+若取$e^(i alpha) = - i$，则$hat(U)$可以写为
 $
   hat(U) = e^(-i / hbar pi hat(S)_y)
 $
@@ -1412,12 +1512,15 @@ $
 
 #newpara()
 
-一般性地，可以证明：$hat(T)^2$的取值只能为$+1$或$-1$。
+一般性地，可以证明：
+#theorem[
+  $hat(T)^2$的取值只能为$+1$或$-1$。
+]
 
 #proof[
-  对于任意归一化态矢$ket(j)$，根据时间反演的物理意义，可知$hat(T)^2 ket(j)$和$ket(j)$实际上是同一个态，即
+  对于任意归一化态矢$ket(psi)$，根据时间反演的物理意义，可知$hat(T)^2 ket(psi)$和$ket(psi)$实际上是同一个态，即
   $
-    hat(T)^2 ket(j) = c ket(j)
+    hat(T)^2 ket(psi) = c ket(psi)
   $
   所以$hat(T)^2 = c$。利用
   $
@@ -1449,7 +1552,7 @@ $
     => hat(T)^2 = (-1)^N
   $
   #newpara()
-  一般性地，对于Bosen子系统，$hat(T)^2 = 1$；对于$N$个Fermion子系统，$hat(T)^2 = (-1)^N$。
+  一般性地，对于Bosen系统，$hat(T)^2 = 1$；对于$N$个Fermion系统，$hat(T)^2 = (-1)^N$。
 ]
 
 === 时间反演不变性
@@ -1626,21 +1729,24 @@ $
 $
 自旋1/2的角动量代数是$frak(s u)(2)$的一个二维不可约表示，而所有二维不可约表示的生成元都与 Pauli 矩阵完全等价。
 
-量子态的变换是线性酉表示：量子态不是点，而是“向量的方向”；变换必须是复数线性并保持内积 ，也就是必须是酉矩阵（U(n)）。$"SO"(3)$的双覆盖是$"SU"(2)$，$"SU"(2)$有$"SO"(3)$没有的表示（如2维表示）
+量子态的变换是线性酉表示：量子态不是点，而是“向量的方向”；变换必须是复数线性并保持内积 ，也就是必须是酉矩阵（$U(n)$）。$"SO"(3)$的双覆盖是$"SU"(2)$，$"SU"(2)$有$"SO"(3)$没有的表示（如2维表示）
 $
   "SU"(2)\/{plus.minus I} tilde.equiv "SO"(3)
 $
 自旋$1,2,3$都可以用$"SO"(3)$的表示来描述，而自旋$1/2, 3/2, 5/2$等则必须用$"SU"(2)$的表示来描述。
 
 $frak(s u)(2)$的不可约表示：由$s$唯一确定，维数为$2 s + 1$。对于$s = 1/2$，维数为2。
-#three-line-table[
-  | 自旋量子数   | 代数表示维度 | 物理对象       |
-  | ------- | ------ | ---------- |
-  | (s=0)   | 1      | 标量         |
-  | (s=1/2) | 2      | 电子自旋、费米子   |
-  | (s=1)   | 3      | 光子的偏振态（矢量） |
-  | (s=3/2) | 4      | Λ 粒子等      |
-]
+#figure(
+  three-line-table[
+    | 自旋量子数   | 代数表示维度 | 物理对象       |
+    | ------- | ------ | ---------- |
+    | (s=0)   | 1      | 标量         |
+    | (s=1/2) | 2      | 电子自旋、费米子   |
+    | (s=1)   | 3      | 光子的偏振态（矢量） |
+    | (s=3/2) | 4      | Λ 粒子等      |
+  ],
+  numbering: none,
+)
 自旋1/2是SU(2)的二维不可约表示。而任何满足$frak(s u)(2)$代数的二维不可约Hermitian生成元，都通过一个酉变换与Pauli矩阵成比。
 
 ==== Pauli 矩阵

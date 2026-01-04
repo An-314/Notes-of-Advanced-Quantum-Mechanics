@@ -6,6 +6,7 @@
 #note[
   本章节的内容颇具争议性，仅作为了解。
 ]
+#newpara()
 
 量子力学取得了巨大的成功，尤其是从Schrödinger方程和Born几率诠释演绎出的结果，经受了无数的实验检验。但是量子力学本身还存在一些尖锐的问题。
 
@@ -98,8 +99,7 @@ $
 $
 
 #example[
-  若$n_1 = 2， n_2 = 3$，那么在 KF 表象中量子态$ket(alpha) ⊗ ket(psi)$的矩阵形式为
-  形式为
+  若$n_1 = 2， n_2 = 3$，那么在 KF 表象中量子态$ket(alpha) ⊗ ket(psi)$的矩阵形式为形式为
   $
     ket(alpha) times.o ket(psi) = mat(alpha_1; alpha_2) times.o mat(psi_1; psi_2; psi_3) = mat(alpha_1 psi_1; alpha_1 psi_2; alpha_1 psi_3; alpha_2 psi_1; alpha_2 psi_2; alpha_2 psi_3)
   $

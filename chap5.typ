@@ -113,7 +113,9 @@ $
 $
   hat(D)(R) = lim_(N->oo) (1 - i /hbar phi / N hat(J)_n)^N = e^(- i /hbar phi hat(J)_n )
 $
-对于无自旋的系统，可以验证其正确性。在转动操作下，位矢$vb(r)$变为$vb(r) = R vb(r)$，则位置本征态的变化为
+对于无自旋的系统，可以验证其正确性。
+
+在转动操作下，位矢$vb(r)$变为$vb(r) = R vb(r)$，则位置本征态的变化为
 $
   ket(vb(r)) -> ket(vb(r)') = ket(R vb(r)) = hat(D)(R) ket(vb(r))
 $
@@ -145,7 +147,7 @@ $
 $
   hat(vb(L)) = - i hbar vb(r) times grad
 $
-就是轨道角动量算符在坐标表象的形式。
+就是*轨道角动量算符在坐标表象的形式*。
 
 现在，我们认为$hat(vb(J))$可以是任意的角动量。不论是轨道角动量还是自旋角动量，亦或是总角动量，都是三维Euclidean空间中的矢量。但由于$hat(vb(J))$是Hilbert空间中算符，所以我们要求$hat(vb(J))$*在平均值的意义上*满足与空间矢量同样的变换关系，即：对于任意态矢$ket(psi)$，对系统进行转动操作$R$后，有
 $
@@ -158,7 +160,7 @@ $
 $
   braket(psi', hat(vb(J)), psi') = R braket(psi, hat(vb(J)), psi)
 $
-从这样的假设出发，我们可以推导出角动量的对易关系
+从这样的假设出发，我们可以推导出*角动量的对易关系*
 $
   [hat(J)_i, hat(J)_j] = i hbar epsilon_(i j k) hat(J)_k
 $
@@ -194,7 +196,7 @@ $
 $
   [hat(J)_i, hat(J)_j] = i hbar epsilon_(i j k) hat(J)_k
 $
-可见，角动量的空间矢量属性决定了它的对易关系。我们可以反向检验一下。考虑沿$z$轴的转动，利用Baker-Hausdorff公式展开
+可见，*角动量的空间矢量属性决定了它的对易关系*。我们可以反向检验一下。考虑沿$z$轴的转动，利用Baker-Hausdorff公式展开
 $
   e^(i/hbar phi hat(J)_z) hat(J)_x e^(- i/hbar phi hat(J)_z ) = hat(J)_x + (i phi)/hbar [hat(J)_z, hat(J)_x] + 1/2! ((i phi) / hbar)^2 [hat(J)_z, [hat(J)_z, hat(J)_x]] + \ 1/3! ((i phi) / hbar)^3 [hat(J)_z, [hat(J)_z, [hat(J)_z, hat(J)_x]]] + ... \
 $
@@ -217,15 +219,22 @@ $
   braket(psi', hat(vb(J)), psi') = R_3(phi) braket(psi, hat(vb(J)), psi)
 $
 
+#proposition(subname: [角动量])[
+  角动量算符$hat(vb(J)) = (hat(J)_1, hat(J)_2, hat(J)_3)$满足对易关系
+  $
+    [hat(J)_i, hat(J)_j] = i hbar epsilon_(i j k) hat(J)_k
+  $
+]
+
 #newpara()
 
 顺着这个思路，我们可以很自然地将量子力学中的算符按照其在转动变换下的性质进行分类。
-- 标量算符：算符$hat(S)$的平均值在转动变换下与标量一致，即
+- *标量算符*：算符$hat(S)$的平均值在转动变换下与标量一致，即
   $
     braket(psi', hat(S), psi') = braket(psi, hat(S), psi)\
     => e^(i/hbar phi hat(J)_n) hat(S) e^(- i/hbar phi hat(J)_n) = hat(S) => [hat(J)_n, hat(S)] = 0
   $
-- 矢量算符：算符$hat(vb(V)) = (hat(V)_1, hat(V)_2, hat(V)_3)$的平均值在转动变换下与矢量一致，即
+- *矢量算符*：算符$hat(vb(V)) = (hat(V)_1, hat(V)_2, hat(V)_3)$的平均值在转动变换下与矢量一致，即
   $
     braket(psi', hat(V)_i, psi') = R_(i j) braket(psi, hat(V)_j, psi)\
     braket(psi', hat(vb(V)), psi') = R braket(psi, hat(vb(V)), psi)\
@@ -234,9 +243,9 @@ $
   $
   对应的对易关系为
   $
-    [hat(J)_i, hat(V)_j] = i hbar epsilon_(i j k) hat(V)_k
+    [hat(V)_i, hat(V)_j] = i hbar epsilon_(i j k) hat(V)_k
   $
-- 张量算符：算符$hat(T)_(i j)$的平均值在转动变换下与张量一致，即
+- *张量算符*：算符$hat(T)_(i j)$的平均值在转动变换下与张量一致，即
   $
     braket(psi', hat(T)_(i j), psi') = R_(i k) R_(j l) braket(psi, hat(T)_(k l), psi)\
     => e^(i/hbar phi hat(J)_n) hat(T)_(i j) e^(- i/hbar phi hat(J)_n) = R_(i k) R_(j l) hat(T)_(k l)
@@ -253,7 +262,7 @@ $
 - 封闭性：$R_a R_b = R_c => hat(D)(R_a) hat(D)(R_b) = hat(D)(R_c)$
 - 逆元素：$R R^(-1) = 1 => hat(D)(R) hat(D)(R^(-1)) = hat(D)(1) = 1 => hat(D)(R^(-1)) = hat(D)^(-1)(R)$
 - 结合律：显然满足。$(R_a R_b) R_c = R_a (R_b R_c) => (hat(D)(R_a) hat(D)(R_b)) hat(D)(R_c) = hat(D)(R_a) (hat(D)(R_b) hat(D)(R_c))$
-所有转动算符$hat(D)(R)$也构成群，与转动矩阵${R}$构成的群同态。因此，转动算符$hat(D)(R)$保持转动矩阵$R$之间的乘法关系。
+*所有转动算符$hat(D)(R)$也构成群，与转动矩阵${R}$构成的群同态。*因此，转动算符$hat(D)(R)$保持转动矩阵$R$之间的乘法关系。
 
 考虑无穷小转动，转动矩阵可以展开为
 $
@@ -322,7 +331,7 @@ $
   lambda = j(j+1), m = -j, -j+1, ..., j-1, j\
   m = -j, -j+1, ..., j-1, j
 $
-对于给定的$j$，$2j + 1$个简并的本征态$ket(j\, m)$就构成三维正当转动群$"SO"(3)$的$2j + 1$维表示空间。下面采用类似求解谐振子本征值问题的代数方法(*升降算符方法*)来求解。
+对于给定的$j$，$2j + 1$个简并的本征态$ket(j\, m)$就构成三维正当转动群$"SO"(3)$的$2j + 1$维表示空间。下面采用类似求解谐振子本征值问题的*代数方法(升降算符方法)*来求解。
 
 引入两个新的算符
 $
@@ -482,6 +491,23 @@ $
   & = 1/(2i) (sqrt((j - m)(j + m + 1)) hbar delta_(j' j) delta_(m' m + 1) - sqrt((j + m)(j - m + 1)) hbar delta_(j' j) delta_(m' m - 1))
 $
 可以看到，这些矩阵对于$j$量子数都是对角的，也就是说这些矩阵是*分块对角*矩阵，每个分块对应一个$2j + 1$维的*不变子空间*。
+
+#proposition(subname: [角动量的本征值问题])[
+  角动量算符$hat(vb(J))$的平方与$hat(J)_z$的共同本征态$ket(j\, m)$满足
+  $
+    hat(vb(J))^2 ket(j\, m) = j(j + 1) hbar^2 ket(j\, m)\
+    hat(J)_z ket(j\, m) = m hbar ket(j\, m)
+  $
+  其中$j = 0, 1/2, 1, 3/2, ...$，$m = -j, -j + 1, ..., j - 1, j$。升降算符
+  $
+    hat(J)_+ = hat(J)_x + i hat(J)_y, hat(J)_- = hat(J)_x - i hat(J)_y
+  $
+  的作用为
+  $
+    hat(J)_+ ket(j\, m) = sqrt((j - m)(j + m + 1)) hbar ket(j\, m + 1)\
+    hat(J)_- ket(j\, m) = sqrt((j + m)(j - m + 1)) hbar ket(j\, m - 1)
+  $
+]
 
 #example(subname: [$j = 1/2$ (例如电子自旋)])[
   由于$j = 1/2$，则$m$的取值为$1/2, -1/2$，这是一个二维Hilbert空间，基矢为$ket(1/2\, 1/2)$和$ket(1/2\, -1/2)$，即$ket(arrow.t)$和$ket(arrow.b)$。按此基矢排列顺序，利用前面的矩阵元公式，得到
