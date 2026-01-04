@@ -595,9 +595,9 @@ $
 在以上形式中，选取了特殊的$K$表象，其中$hat(V)$是对角的。一般表象下两体算符的形式，可以通过表象变换得到。考虑另一个表象，即$hat(G)$表象，利用表象变换可以计算
 $
   hat(cal(V)) & = 1/2 sum_(i j) V_(i j) hat(a)^dagger_i hat(a)^dagger_j hat(a)_j hat(a)_i \
-  & = 1/2 sum_(i j) V_(i j) sum_(m n p q) (S_(m i) hat(b)^dagger_m) (S_(n j) hat(b)^dagger_n) (S_(j p)^dagger hat(b)_p) (S_(i q)^dagger hat(b)_q) \
-  & = 1/2 sum_(i j) sum_(m n p q) V_(i j) braket(g_m, k_i) braket(g_n, k_j) braket(k_j, g_p) braket(k_i, g_q) hat(b)^dagger_m hat(b)^dagger_n hat(b)_p hat(b)_q \
-  & = 1/2 sum_(m n p q) braket(m n, hat(V), p q) hat(b)^dagger_m hat(b)^dagger_n hat(b)_p hat(b)_q\
+  & = 1/2 sum_(i j) V_(i j) sum_(m n p q) (S_(m i) hat(b)^dagger_m) (S_(n j) hat(b)^dagger_n) (S_(j q)^dagger hat(b)_q) (S_(i p)^dagger hat(b)_p) \
+  & = 1/2 sum_(i j) sum_(m n p q) V_(i j) braket(g_m, k_i) braket(g_n, k_j) braket(k_j, g_q) braket(k_i, g_p) hat(b)^dagger_m hat(b)^dagger_n hat(b)_q hat(b)_p \
+  & = 1/2 sum_(m n p q) braket(m n, hat(V), p q) hat(b)^dagger_m hat(b)^dagger_n hat(b)_q hat(b)_p\
 $
 其中
 $
