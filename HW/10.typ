@@ -122,11 +122,19 @@
   $
     pdv(Phi, vb(p)_n) = 0 => pdv(H, vb(p)_n) = (vb(x)_n - vb(x)_(n-1))/epsilon
   $
+  二阶涨落给出的预因子
+  $
+    Phi''_n (vb(p)) = - epsilon pdv(H, vb(p)_n, 2), pdv(H, vb(p)_n, 2) = pdv(H, p_i, p_j)
+  $
   在鞍点$vb(p)_n = vb(p)_n^*$
   $
     Phi(vb(p)_n) & = vb(p)_n^* dot (vb(x)_n - vb(x)_(n-1)) - epsilon H(vb(p)_n^*, vb(x)_(n-1)) = epsilon (vb(p)_n^* dot dot(vb(x)) - H(vb(p)_n^*, vb(x)_(n-1))) \
   $
-  这对应经典的Lagrangian$L = vb(p) dot dot(vb(x)) - H(vb(p), vb(x))$，因此鞍点近似后得到纯$vb(x)$的路径积分：
+  这对应经典的Lagrangian$L = vb(p) dot dot(vb(x)) - H(vb(p), vb(x))$
+  $
+    integral dd(vb(p)_n)/(2 pi hbar) exp((i)/hbar Phi(vb(p)_n)) & approx (1)/(2 pi hbar) ((2 pi hbar)/i)^(3/2) (det(epsilon pdv(H, vb(p)_n^*, 2)))^(-1/2) exp((i)/hbar epsilon (vb(p)_n^* dot dot(vb(x)) - H(vb(p)_n^*, vb(x)_(n-1)))) \
+  $
+  因此鞍点近似后得到纯$vb(x)$的路径积分：
   $
     K(vb(x)_B, t_B; vb(x)_A, t_A) & approx integral cal(D)(vb(x)) exp((i)/hbar integral_(t_A)^(t_B) dd(t) L(vb(x), dot(vb(x)))) \
   $
@@ -154,6 +162,6 @@
   $
   写出鞍点近似后的纯$dd(vb(x))$路径积分为
   $
-    K(vb(x)_B, t_B; vb(x)_A, t_A) & approx integral cal(D)(vb(x)) exp((i)/hbar integral_(t_A)^(t_B) dd(t) (- m c^2 sqrt(1 - (dot(vb(x))/c)^2))) \
+    K(vb(x)_B, t_B; vb(x)_A, t_A) & approx integral cal(D)(vb(x)) ("Hessian factor") exp((i)/hbar integral_(t_A)^(t_B) dd(t) (- m c^2 sqrt(1 - (dot(vb(x))/c)^2))) \
   $
 ]

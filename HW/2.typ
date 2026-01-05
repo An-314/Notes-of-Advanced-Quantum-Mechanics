@@ -28,9 +28,9 @@
   $
     D(i y) = exp(i y (a^dagger + a)) = exp(i sqrt(2) y x)
   $
-  相干态与基态的重叠由展开式给出
+  相干态与基态的内积为
   $
-    braket(0|alpha) = e^(- abs(alpha)^2/2)
+    braket(0, alpha) = e^(- abs(alpha)^2/2)
   $
   于是
   $
