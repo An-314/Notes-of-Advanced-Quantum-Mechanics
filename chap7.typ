@@ -62,9 +62,21 @@ $
   1/(i hbar) [hat(A), hat(B)] <-> {cal(A), cal(B)}
 $
 
+#proposition(subname: [正则量子化])[
+  正则量子化的步骤为：
+  - 将经典系统的正则坐标$q_i$和正则动量$p_i$替换为量子力学算符$hat(q)_i$和$hat(p)_i$，满足正则对易关系
+    $
+      [hat(q)_i, hat(q)_j] = 0, [hat(p)_i, hat(p)_j] = 0, [hat(q)_i, hat(p)_j] = i hbar delta_(i j)
+    $
+  - 将经典Hamilton量$cal(H)(q_i, p_i, t)$替换为量子力学Hamilton算符$hat(H)(hat(q)_i, hat(p)_i, t)$。
+  - 利用Heisenberg方程或者Schrödinger方程描述量子力学体系的动力学演化。
+]
+
 #newpara()
 
-用正则量子化方法来构建带电粒子在电磁场中的量子理论。我们需要量子化的是带电粒子的运动，电磁场还是经典的。在经典力学中，质量为$m$、电荷为$q$的带电粒子在电磁场中的运动方程为(采用国际单位制)
+下面我们*用正则量子化方法来构建带电粒子在电磁场中的量子理论。*
+
+我们需要量子化的是带电粒子的运动，电磁场还是经典的。在经典力学中，质量为$m$、电荷为$q$的带电粒子在电磁场中的运动方程为(采用国际单位制)
 $
   m dot.double(x) = q(vb(E) + dot(vb(x)) times vb(B))
 $
@@ -80,7 +92,7 @@ $
 $
   phi -> phi - pdv(Lambda, t), vb(A) -> vb(A) + grad Lambda
 $
-电场$vb(E)$和磁场$vb(B)$是不变的，此即规范变换。在此变换下，Lagrange量变为
+电场$vb(E)$和磁场$vb(B)$是不变的，此即*规范变换*。在此变换下，Lagrange量变为
 $
   L & -> L + q(dot(x) dot grad Lambda + pdv(Lambda, t)) \
     & = L + q (sum_i pdv(x_i, t) pdv(Lambda, x_i) + pdv(Lambda, t)) \
@@ -109,7 +121,7 @@ $
   (hat(vb(p)) - q vb(A))^2 & = (hat(vb(p)) - q vb(A)) dot (hat(vb(p)) - q vb(A)) \
                            & = hat(vb(p))^2 -q(hat(vb(p)) dot vb(A) + vb(A) dot hat(vb(p))) + q^2 vb(A)^2
 $
-此即*对称化排序方案*，它自动保证Hamilton量是厄米算符。
+此即*对称化排序方案*，它自动保证Hamilton量是Hermite算符。
 
 *Heisenberg绘景*：利用Heisenberg方程，可计算坐标的演化方程
 $
@@ -199,7 +211,7 @@ $
 - 若粒子在$t_1$时刻处于空间$vb(x)_1$处(位置本征态)，则传播子表示在以后任意$t_2$时刻($t_2 > t_1$)粒子处于空间点$vb(x)_2$处的*概率幅*。简而言之，粒子从时空点$(t_1, vb(x)_1)$传播到$(t_2, vb(x)_2)$的概率振幅。
 - 若粒子在$t_1$时刻并不处于位置本征态，则利用传播子和$t_1$时刻的波函数可以得到以后任意$t_2$时刻的波函数。这实际上就是*符合因果律的幺正时间演化在坐标表象的体现*。
 
-若Hamilton量$hat(H)$不显含时间，则可利用
+*若Hamilton量$hat(H)$不显含时间*，则可利用
 $
   hat(H) ket(n) = E_n ket(n), hat(U)(t_2, t_1) = exp(- i/hbar hat(H) (t_2 - t_1))
 $
@@ -225,7 +237,7 @@ $
 $
   lim_(t -> t_1) K(vb(x), t; vb(x)_1, t_1) = delta(vb(x) - vb(x)_1)
 $
-可以证明传播子满足如下微分方程
+*可以证明传播子满足如下微分方程*
 $
   (i hbar pdv(, t) + hbar^2/(2m) laplacian - V(vb(x))) K(vb(x), t; vb(x)_1, t_1) = i hbar delta(t - t_1) delta(vb(x) - vb(x)_1)
 $
@@ -246,8 +258,28 @@ $
 
 在理论物理中，*“传播子” (propagator)这个词通常与“Green函数”等价*，而且存在各种各样的传播子(Green函数)，推迟Green函数只是其中的一种。
 
+#proposition(subname: [传播子])[
+  传播子$K(vb(x)_2, t_2; vb(x)_1, t_1)$的定义为
+  $
+    K(vb(x)_2, t_2; vb(x)_1, t_1) = braket(vb(x)_2, hat(U)(t_2, t_1), vb(x)_1)
+  $
+  其中$hat(U)(t_2, t_1)$为时间演化算符。传播子的物理意义为：粒子从时空点$(t_1, vb(x)_1)$传播到$(t_2, vb(x)_2)$的概率振幅。
+
+  当Hamilton量$hat(H)$不显含时间时，传播子可以由Hamilton量的本征态展开表示为
+  $
+    K(vb(x)_2, t_2; vb(x)_1, t_1) = sum_n psi_n^*(vb(x)_1) psi_n (vb(x)_2) exp(- i/hbar E_n (t_2 - t_1))
+  $
+  #newpara()
+
+  传播子满足含源项的Schrödinger方程
+  $
+    (i hbar pdv(, t) + hbar^2/(2m) laplacian - V(vb(x))) K(vb(x), t; vb(x)_1, t_1) = i hbar delta(t - t_1) delta(vb(x) - vb(x)_1)
+  $
+  即传播子是含时Schrödinger方程的推迟Green函数。
+]
+
 #example(subname: [自由粒子])[
-  考虑一维自由粒子，Hamilton量为$hat(H) = p^2/2m$，其能量本征态可取为动量本征态。传播子计算如下：
+  考虑一维自由粒子，Hamilton量为$hat(H) = p^2/(2m)$，其能量本征态可取为动量本征态。传播子计算如下：
   $
     K(x_2, t_2; x_1, t_1) & = braket(x_2, exp(- i/hbar hat(H) (t_2 - t_1)), x_1) \
                           & = integral dd(p) braket(x_2, exp(- i/hbar hat(H) (t_2 - t_1)), p) braket(p, x_1) \
@@ -293,7 +325,7 @@ $
   $
   利用谐振子本征波函数的表达式
   $
-    psi_n(x) = 1/sqrt(2^n n!) ((m omega)/(pi hbar))^(1/4) H_n (xi) exp(- 1/2 xi^2), xi = sqrt((m omega)/hbar) x
+    psi_n (x) = 1/sqrt(2^n n!) ((m omega)/(pi hbar))^(1/4) H_n (xi) exp(- 1/2 xi^2), xi = sqrt((m omega)/hbar) x
   $
   代入得到
   $
@@ -377,7 +409,7 @@ $
 $
   K(vb(x)_3, t_3; vb(x)_1, t_1) = braket(vb(x)_3, hat(U)(t_3, t_1), vb(x)_1)
 $
-利用时间演化算符的合成性质
+利用*时间演化算符的合成性质*
 $
   hat(U)(t_3, t_1) = hat(U)(t_3, t_2) hat(U)(t_2, t_1)
 $
@@ -415,7 +447,19 @@ $
   K(vb(x)_N, t_N; vb(x)_1, t_1) & = integral dd(vb(x)_(N-1), 3) ... integral dd(vb(x)_2, 3) \
   & K(vb(x)_N, t_N; vb(x)_(N-1), t_(N-1)) K(vb(x)_(N-1), t_(N-1); vb(x)_(N-2), t_(N-2)) ... K(vb(x)_2, t_2; vb(x)_1, t_1) \
 $
-若$hat(H)$不含时，利用Heisenberg绘景中位置算符的本征态
+#proposition(subname: [传播子的合成性质])[
+  传播子满足如下合成性质：将时间间隔$[t_1, t_N]$等分为$N − 1$个小间隔，每个小间隔为
+  $
+    t_i - t_(i-1) = Delta t = (t_N - t_1)/(N - 1), i = 2, 3, ..., N
+  $
+  则有
+  $
+    K(vb(x)_N, t_N; vb(x)_1, t_1) & = integral dd(vb(x)_(N-1), 3) ... integral dd(vb(x)_2, 3) \
+    & K(vb(x)_N, t_N; vb(x)_(N-1), t_(N-1)) K(vb(x)_(N-1), t_(N-1); vb(x)_(N-2), t_(N-2)) ... K(vb(x)_2, t_2; vb(x)_1, t_1) \
+  $
+]
+#newpara()
+若$hat(H)$不含时，利用*Heisenberg绘景中位置算符的本征态*
 $
   ket(vb(x)\, t) = e^(i/hbar hat(H) t) ket(vb(x))
 $
@@ -456,7 +500,7 @@ Fermman通过对双缝干涉实验的思考，结合力学中的最小作用量�
 $
   K(vb(x)_B, t_B; vb(x)_A, t_A) = integral_((vb(x)_A, t_A))^((vb(x)_B, t_B)) cal(D)[vb(x)(t)] exp(i/hbar S[vb(x)(t)])
 $
-但是，常数$C$的取值或者说*积分测度*$D[vb(x)(t)]$的定义尚未明确。
+但是，常数$C$的取值或者说*积分测度*$cal(D)[vb(x)(t)]$的定义尚未明确。
 
 *推导路径积分*：考虑在势场$V(x)$中运动的粒子，Hamilton量为
 $
@@ -495,6 +539,12 @@ $
   &= (m/(2 pi hbar i epsilon))^(3/2) exp((i m (vb(x)_n - vb(x)_(n-1))^2)/(2 hbar epsilon)) exp(- (i epsilon)/hbar V(vb(x)_(n-1))) \
   &= (m/(2 pi hbar i epsilon))^(3/2) exp((i epsilon)/hbar (m/2 ((vb(x)_n - vb(x)_(n-1))/epsilon)^2 - V(vb(x)_(n-1))))
 $
+这里插入了动量的完备性关系和Gauss积分
+$
+  braket(vb(x)_n, exp(- (i epsilon)/hbar hat(vb(p))^2/(2m)), vb(x)_(n-1)) &= braket(vb(x)_n, vb(p)_n) braket(vb(p)_n, exp(- (i epsilon)/hbar hat(vb(p))^2/(2m)), vb(p)_n) braket(vb(p)_n, vb(x)_(n-1)) \
+  &= integral dd(vb(p)_n) 1/(2 pi hbar)^3 exp(i/hbar vb(p)_n (vb(x)_n - vb(x)_(n-1))) exp(- (i epsilon)/hbar vb(p)_n^2/(2m)) \
+  &= (m/(2 pi hbar i epsilon))^(3/2) exp((i m (vb(x)_n - vb(x)_(n-1))^2)/(2 hbar epsilon))
+$
 当$N -> oo, epsilon -> 0$时，高阶小量可忽略，得到
 $
   K(vb(x)_B, t_B; vb(x)_A, t_A) & = lim_(N -> oo) (m/(2 pi hbar i epsilon))^((3 N)/2) (product_(n=1)^(N-1) (m/(2 pi hbar i epsilon))^(3/2) dd(vb(x)_n))\ & exp((i epsilon)/hbar sum_(n=1)^N (m/2 ((vb(x)_n - vb(x)_(n-1))/epsilon)^2 - V(vb(x)_(n-1)))) \
@@ -523,6 +573,25 @@ $
   在计算物理可观测量时，这些常数往往会相互抵消，因此不必过分关注它们的具体数值；
 - 路径积分中不需要态和算符，只需要经典的Lagrange量和作用量。路径积分量子化与Schrödinger方程(正则量子化) 等价，实际上，上面已经从Schrödinger方程推导出了路径积分，反之亦然；
 - 路径积分形式优美简洁，但是却难于计算(无穷维积分)。只有当作用量为$vb(x)(t)$的二次型时(Gauss型)，路径积分才可以被精确计算。
+
+#proposition(subname: [路径积分量子化])[
+  粒子从时空点$(vb(x)_A, t_A)$传播到$(vb(x)_B, t_B)$的传播子可表示为路径积分形式
+  $
+    K(vb(x)_B, t_B; vb(x)_A, t_A) = integral_((vb(x)_A, t_A))^((vb(x)_B, t_B)) cal(D)[vb(x)(t)] exp((i)/hbar S[vb(x)(t)])
+  $
+  其中，作用量为
+  $
+    S[vb(x)(t)] = integral_(t_A)^(t_B) dd(t) L(vb(x), dot(vb(x)), t)
+  $
+  泛函积分测度定义为
+  $
+    cal(D)[vb(x)(t)] = lim_(N -> oo) (m/(2 pi hbar i epsilon))^(3/2) (product_(n=1)^(N-1) (m/(2 pi hbar i epsilon))^(3/2) dd(vb(x)_n))
+  $
+  其中$epsilon = (t_B - t_A)/N$，积分变量$vb(x)(t)$满足边界条件
+  $
+    vb(x)(t_A) = vb(x)_A, vb(x)(t_B) = vb(x)_B
+  $
+]
 
 === 经典极限
 
@@ -871,7 +940,7 @@ $
 
 因此，*只有在比较宏观的尺度上，才可能探测到重力的量子效应*，这个实验就是重力导致的量子干涉。其基本思想就是*让粒子分别通过重力场中的两个不同的路径，产生相位差，然后在汇合区域发生干涉*。如下图所示。
 
-实验中，在 A 处将中子分成两束，一束经 ACD 路径到达 D，另一束经 ABD 路径到达 D。
+实验中，在A处将中子分成两束，一束经ACD路径到达D，另一束经ABD路径到达D。
 
 #figure(
   image("pic/2026-01-01-21-03-55.png", width: 50%),
@@ -880,11 +949,11 @@ $
 
 如果平面 ABCD 平行于地面，则中子在两条路径上感受到的重力势相同，不会积累相位差，因此在 D 不会产生干涉。
 
-要产生相位差，可将平面 ABCD 以 AC 为轴向上翘起一个角度$δ$，则粒子在 BD 和 AC 路径上产生一个*常数势差*
+要产生相位差，可将平面ABCD以AC为轴向上翘起一个角度$δ$，则粒子在BD和AC路径上产生一个*常数势差*
 $
   Delta V = m g l_2 sin delta
 $
-很容易看到，路径 AB 和 CD 对相位差无贡献。设中子 (波包) 从 B 运动到 D(或从 A 运动到 C) 的时间是$∆ t$，则经过两条不同路径 ACD 和 ABD 的中子积累的相位差为
+很容易看到，路径AB和CD对相位差无贡献。设中子(波包)从B运动到D(或从A运动到C)的时间是$∆ t$，则经过两条不同路径ACD和ABD的中子积累的相位差为
 
 $
   Delta phi = - (Delta V)/hbar ∆ t = - (m g l_2 sin delta)/hbar ∆ t
@@ -902,7 +971,7 @@ $
 
 === Aharonov-Bohm 效应
 
-问题 1：考虑下图中的情形，若只在垂直于纸面的无限长螺线管内存在磁场$vb(B)$，其它区域磁场均为零。那么在经典力学中，由于粒子的运动方程
+*问题1*：考虑下图中的情形，若只在垂直于纸面的无限长螺线管内存在磁场$vb(B)$，其它区域磁场均为零。那么在经典力学中，由于粒子的运动方程
 $
   m dot.double(vb(x)) = q (vb(E) + dot(vb(x)) times vb(B))
 $
@@ -913,7 +982,7 @@ $
   numbering: none,
 )
 
-问题 2：圆柱壳层内的束缚态问题。
+*问题2*：圆柱壳层内的束缚态问题。
 $
   V(rho) = cases(
     oo \, & rho>rho_b,
@@ -932,7 +1001,7 @@ $
   numbering: none,
 )
 
-继续考虑第一个问题：粒子束从 A 点出发，经过两条不同的路径(不经过螺线管区域) 到达 B 点， 这两束粒子之间是否存在相位差？
+继续考虑第一个问题：粒子束从A点出发，经过两条不同的路径(不经过螺线管区域)到达B点，这两束粒子之间是否存在相位差？
 
 用路径积分形式考虑这个问题。尽管螺线管外磁场$vb(B) = curl vb(A)$为零，但是矢量势$vb(A)$可以不为零
 $
