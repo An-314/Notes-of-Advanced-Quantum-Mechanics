@@ -231,7 +231,7 @@ $
 $
   braket(vb(r), psi^(plus.minus)) & = braket(vb(r), vb(k)) + integral dd(vb(r)', 3) braket(vb(r), hat(G)_0^(plus.minus) (E_vb(k)), vb(r)') braket(vb(r)', hat(V), psi^(plus.minus)) \
 $
-计算自由格林算符的矩阵元(为方便乘以常数$hbar^2/(2m)$)
+计算自由Green算符的矩阵元(为方便乘以常数$hbar^2/(2m)$)
 $
   cal(G)_0^(plus.minus) (vb(r), vb(r)') & = hbar^2/(2m) braket(vb(r), hat(G)_0^(plus.minus) (E_vb(k)), vb(r)') \
   & = hbar^2/(2m) integral dd(vb(k)', 3) integral dd(vb(k)'', 3) braket(vb(r), vb(k)') braket(vb(k)', hat(G)_0^(plus.minus) (E_vb(k)), vb(k)'') braket(vb(k)'', vb(r)') \
@@ -294,7 +294,7 @@ $
 $
 得到
 $
-  braket(vb(r), hat(V), psi^(plus.minus)) = integral dd(vb(r)'', 3) braket(vb(r), ', hat(V), vb(r)'') braket(vb(r)'', psi^(plus.minus)) = V(vb(r)') braket(vb(r)', psi^(plus.minus))
+  braket(vb(r), hat(V), psi^(plus.minus)) = integral dd(vb(r)'', 3) braket(vb(r)', hat(V), vb(r)'') braket(vb(r)'', psi^(plus.minus)) = V(vb(r)') braket(vb(r)', psi^(plus.minus))
 $
 这样
 $
@@ -305,6 +305,14 @@ $
   braket(vb(r), psi^(plus.minus)) = psi^(plus.minus)(vb(r)) \
 $
 的*积分方程*。
+
+#proposition(subname: [散射态波函数的积分方程])[
+  散射态波函数$psi^(plus.minus)(vb(r))$满足Lippmann-Schwinger积分方程
+  $
+    psi^(plus.minus)(vb(r)) = braket(vb(r), vb(k)) - (2m)/(hbar^2) integral dd(vb(r)', 3) e^(plus.minus i k abs(vb(r) - vb(r)'))/(4 pi abs(vb(r) - vb(r)')) V(vb(r)') psi^(plus.minus)(vb(r)')
+  $
+]
+#newpara()
 
 对于在远处迅速趋于零的*短程势*，右边第二项对$r'$的积分只集中在有限区域(即边界C以内)。考虑$abs(vb(r)) -> oo$，可以认为
 $
@@ -324,7 +332,7 @@ $
 $
   braket(vb(r), psi^(plus.minus)) -> braket(vb(r), vb(k)) - 1/(4 pi) (2m)/(hbar^2) e^(plus.minus i k r)/(r) integral dd(vb(r)', 3) e^(minus.plus i vb(k)' dot vb(r)') V(vb(r)') braket(vb(r)', psi^(plus.minus)) \
 $
-显然，对于真实的散射问题，应取$ket(psi^(+))$，因为它对应的是入射波加上出射波的物理图像。所以，散射态波函数的渐进行为为
+显然，对于真实的散射问题，应取$ket(psi^(+))$，因为它对应的是入射波加上出射波的物理图像。所以，*散射态波函数的渐进行为*为
 $
   psi^(+)(vb(r)) &-> braket(vb(r), vb(k)) - 1/(4 pi) (2m)/(hbar^2) e^(i k r)/(r) integral dd(vb(r)', 3) e^(i vb(k)' dot vb(r)') V(vb(r)') braket(vb(r)', psi^+) \
   &= 1/(2 pi)^(3/2) (e^(i vb(k) dot vb(r)) + f(vb(k)', vb(k)) e^(i k r)/r) \
@@ -340,10 +348,21 @@ $
 可将*散射振幅*写为
 $
   f(vb(k)', vb(k)) &= - 1/(4pi) (2m)/(hbar^2) (2 pi)^(3/2) integral dd(vb(r)', 3) braket(vb(k)', vb(r)') V(vb(r)') braket(vb(r)', psi^+) \
-  &= - (4 pi^2 m)/(hbar^2) integral dd(vb(r)', 3) integral dd(vb(k)'', 3) braket(vb(k)', vb(r)') braket(vb(k)', V, vb(k)'') braket(vb(k)'', psi^+) \
-  &= - (4 pi^2 m)/(hbar^2) braket(vb(k)', V, psi^+)
+  &= - (4 pi^2 m)/(hbar^2) integral dd(vb(r)', 3) integral dd(vb(r)'', 3) braket(vb(k)', vb(r)') braket(vb(r)', hat(V), vb(r)'') braket(vb(r)'', psi^+) \
+  &= - (4 pi^2 m)/(hbar^2) braket(vb(k)', hat(V), psi^+)
 $
 利用此式计算散射振幅，需要知道波函数$psi^+(vb(r))$或本征态$ket(psi^+)$的解，*因此实际上只有形式上的意义*。
+
+#proposition(subname: [散射振幅的表达式])[
+  散射振幅$f(vb(k)', vb(k))$可表示为
+  $
+    f(vb(k)', vb(k)) = - (4 pi^2 m)/(hbar^2) braket(vb(k)', hat(V), psi^+)
+  $
+  其中$ket(psi^+)$为Lippmann-Schwinger方程的解。
+]
+#newpara()
+
+=== T算符与Born级数展开
 
 进一步把散射振幅写成某个算符的矩阵元。为此我们定义*T算符*
 $
@@ -368,6 +387,19 @@ $
   &= hat(V) sum_(n=0)^oo (hat(G)_0^+ (E_vb(k)) hat(V))^n \
 $
 此即*T算符的Born级数形式*。利用这个级数形式，可以将散射振幅按照$V$的强度进行逐级近似计算。
+
+#proposition(subname: [T算符的Born级数形式])[
+  T算符定义为
+  $
+    hat(T) ket(vb(k)) = hat(V) ket(psi^+) => hat(T) = hat(V) + hat(V) 1/(E_vb(k) - hat(H)_0 + i epsilon) hat(T)
+  $
+  T算符的Born级数形式为
+  $
+    hat(T) = hat(V) + hat(V) 1/(E_vb(k) - hat(H)_0 + i epsilon) hat(V) + hat(V) 1/(E_vb(k) - hat(H)_0 + i epsilon) hat(V) 1/(E_vb(k) - hat(H)_0 + i epsilon) hat(V) + ...\
+    = hat(V) sum_(n=0)^oo (hat(G)_0^+ (E_vb(k)) hat(V))^n
+  $
+]
+#newpara()
 
 一阶近似 (Born 近似) 的结果计算如下
 $
@@ -437,10 +469,12 @@ $
 
 === 光学定理
 
-总散射截面$sigma_t$与向前散射振幅的虚部存在如下关系
-$
-  sigma_t = (4 pi)/k Im f(vb(k), vb(k)) = (4 pi)/k Im f(0)
-$
+#theorem(subname: [光学定理])[
+  总散射截面$sigma_t$与向前散射振幅的虚部存在如下关系
+  $
+    sigma_t = (4 pi)/k Im f(vb(k), vb(k)) = (4 pi)/k Im f(0)
+  $
+]
 
 #proof[
   将 Lippmann-Schwinger 方程的共轭方程
