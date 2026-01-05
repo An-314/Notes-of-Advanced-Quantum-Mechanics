@@ -575,7 +575,7 @@ $
 $
   sum_(m'-j)^j ketbra(j\, m') = 1
 $
-叠加系数$cal(D)_(m' m)^((j)) (R)$(又称为 *Wigner 函数*) 构成的矩阵$cal(D)^((j))(R)$ 称为量子态的转动矩阵。以上讨论说明，研究量子态的转动，归结为计算转动矩阵$cal(D)^((j))(R)$。
+叠加系数$cal(D)_(m' m)^((j)) (R)$(又称为 *Wigner 函数*) 构成的矩阵$cal(D)^((j))(R)$ 称为量子态的转动矩阵。以上讨论说明，研究量子态的转动，归结为计算*转动矩阵*$cal(D)^((j))(R)$。
 
 所有三维正当转动$R$对应的转动算符${hat(D)(R)}$构成$"SU"(2)$群，即$R_1 R_2 -> hat(D)(R_1) hat(D)(R_2)$。容易证明
 $
@@ -631,7 +631,7 @@ $
 这样，利用Euler角，我们就把转动算符因子化为三个方向的转动算符的乘积，尤其是前后两个都是沿$z$方向。所以，转动矩阵的矩阵元可计算为
 $
   cal(D)_(m_1 m_2)^((j)) (alpha, beta, gamma) & = braket(j\, m_1, e^(- i/hbar alpha hat(J)_z) e^(- i/hbar beta hat(J)_y) e^(- i/hbar gamma hat(J)_z), j\, m_2) \
-  & = e^(- i/hbar alpha m_1 hbar + gamma m_2 hbar) braket(j\, m_1, e^(- i/hbar beta hat(J)_y), j\, m_2) e^(- i/hbar ) \
+  & = e^(- i (alpha m_1 + gamma m_2)) braket(j\, m_1, e^(- i/hbar beta hat(J)_y), j\, m_2)\
   & = e^(- i (alpha m_1 + gamma m_2)) d_(m_1 m_2)^((j)) (beta)
 $
 其中矩阵元
@@ -639,12 +639,23 @@ $
   d_(m_1 m_2)^((j)) (beta) = braket(j\, m_1, e^(- i/hbar beta hat(J)_y), j\, m_2)
 $
 
+#proposition(subname: [量子态转动矩阵])[
+  量子态的转动矩阵$cal(D)^((j))(R)$的矩阵元为
+  $
+    cal(D)_(m_1 m_2)^((j)) (alpha, beta, gamma) = e^(- i (alpha m_1 + gamma m_2)) d_(m_1 m_2)^((j)) (beta)
+  $
+  其中
+  $
+    d_(m_1 m_2)^((j)) (beta) = braket(j\, m_1, e^(- i/hbar beta hat(J)_y), j\, m_2)
+  $
+]
+
 #newpara()
 
 #example(subname: [$j=1/2$])[
   $j=1/2$，利用$hat(J)_y$的矩阵形式，得到
   $
-    hat(J)_y^2 = (1/4) hbar^2 mat(1, 0; 0, 1)
+    hat(J)_y^2 = 1/4 hbar^2 mat(1, 0; 0, 1)
   $
   利用Taylor展开，可以证明
   $
@@ -714,9 +725,9 @@ $
   e^(- i/hbar 2 pi hat(S)_z) ket(alpha) = - ket(alpha),\
   e^(- i/hbar 4 pi hat(S)_z) ket(alpha) = ket(alpha)
 $
-这说明自旋态转动$2π$不还原，而是产生一个负号，即与原状态相比有一个$π$的相位差，只有转动$4π$才还原。
+这说明*自旋态转动$2π$不还原，而是产生一个负号，即与原状态相比有一个$π$的相位差，只有转动$4π$才还原*。
 
-转动$2π$产生的负号能否被观测到？考虑电子自旋在磁场中的进动，系统Hamiltonian为
+转动$2π$产生的负号能否被观测到？考虑*电子自旋在磁场中的进动*，系统Hamiltonian为
 $
   hat(H) = - (e B)/(m c) hat(S)_z = omega hat(S)_z,\
   omega = (abs(e) B)/(m c)
@@ -729,18 +740,18 @@ $
 $
   hat(D)_z (omega t) = e^(- i/hbar omega t hat(S)_z) = hat(U)(t, 0)
 $
-即：时间演化算符等价于绕$z$轴转动$ϕ = omega t$对应的转动算符。假设初态为$ket(alpha)$，经过$t$时间后，体系的状态演化为
+即：*时间演化算符等价于绕$z$轴转动$ϕ = omega t$对应的转动算符*。假设初态为$ket(alpha)$，经过$t$时间后，*体系的状态演化*为
 $
   e^(- i /hbar hat(S)_z omega t) ket(alpha) = e^(- i/2 omega t) ket(arrow.t) braket(arrow.t, alpha) + e^( i/2 omega t) ket(arrow.b) braket(arrow.b, alpha)
 $
-自旋角动量的平均值演化为
+*自旋角动量的平均值演化*为
 $
   mat(expval(S_x)(t); expval(S_y)(t); expval(S_z)(t)) & = mat(cos omega t, -sin omega t, 0; sin omega t, cos omega t, 0; 0, 0, 1) mat(expval(S_x)(0); expval(S_y)(0); expval(S_z)(0)) \
 $
 因此，平均值变化的周期即自旋进动的周期与自旋态变化的周期不同，分别为
 $
-  T_"procession" = 2 pi/omega,\
-  T_"state" = 4 pi/omega
+  T_"procession" = (2 pi)/omega,\
+  T_"state" = (4 pi)/omega
 $
 #newpara()
 在电子的自旋进动中，无法观测到转动$2π$带来的负号，因为它是量子态的整体相位。要在实验上观测到这个负号，需要通过*量子干涉效应*。将几乎单色的中子束分为两束，分别通过路径$A$和$B$，最后在干涉区域汇合。在路径$B$上有部分区域存在恒定匀强磁场$B$。
@@ -799,15 +810,17 @@ $
   image("pic/2025-11-30-23-28-16.png", width: 80%),
   numbering: none,
 )
-证明：根据图中两次转动操作，转动后的自旋态为
-$
-  hat(D)_z (alpha) hat(D)_y (beta) ket(arrow.t) & = e^(- i/2 alpha hat(sigma)_z) e^(- i/2 beta hat(sigma)_y) ket(arrow.t) \
-  & = e^(- i/2 alpha hat(sigma)_z) (cos (beta/2) ket(arrow.t) - i sin (beta/2) hat(sigma)_y ket(arrow.t)) \
-  & = (cos alpha/2 - i hat(sigma)_z sin alpha/2) (cos beta/2 ket(arrow.t) + sin beta/2 ket(arrow.b)) \
-  & = cos beta/2 e^(- i/2 alpha) ket(arrow.t) + sin beta/2 e^( i/2 alpha) ket(arrow.b)\
-  & = mat(e^(- i/2 alpha) cos beta/2; e^( i/2 alpha) sin beta/2)
-$
-若两个转角$α$和$β$正好是$vu(n)$的方位角和极角，则此态正好是$hat(S)_n$的本征值为$+hbar/2$的本征态$ket(+\, n)$。
+#proof[
+  根据图中两次转动操作，转动后的自旋态为
+  $
+    hat(D)_z (alpha) hat(D)_y (beta) ket(arrow.t) & = e^(- i/2 alpha hat(sigma)_z) e^(- i/2 beta hat(sigma)_y) ket(arrow.t) \
+    & = e^(- i/2 alpha hat(sigma)_z) (cos (beta/2) ket(arrow.t) - i sin (beta/2) hat(sigma)_y ket(arrow.t)) \
+    & = (cos alpha/2 - i hat(sigma)_z sin alpha/2) (cos beta/2 ket(arrow.t) + sin beta/2 ket(arrow.b)) \
+    & = cos beta/2 e^(- i/2 alpha) ket(arrow.t) + sin beta/2 e^( i/2 alpha) ket(arrow.b)\
+    & = mat(e^(- i/2 alpha) cos beta/2; e^( i/2 alpha) sin beta/2)
+  $
+  若两个转角$α$和$β$正好是$vu(n)$的方位角和极角，则此态正好是$hat(S)_n$的本征值为$+hbar/2$的本征态$ket(+\, n)$。
+]
 
 == 角动量的合成
 
@@ -893,7 +906,30 @@ $
 $
 即为表象变换的矩阵元，称为*Clebsch-Gordan系数*(CG 系数)。
 
-问题：$j$和$m$的取值几何？即$j$和$m$取何值时CG系数不为零？
+#proposition(subname: [耦合表象与非耦合表象])[
+  耦合表象和非耦合表象分别由以下共同本征态构成：
+  - *非耦合表象*：$hat(vb(J))_1^2, hat(J)_(1z), hat(vb(J))_2^2, hat(J)_(2z)$的共同本征态为
+    $
+      ket(j_1 j_2 \; m_1 m_2) = ket(j_1\, m_1) times.o ket(j_2\, m_2)
+    $
+  - *耦合表象*：$hat(vb(J))_1^2, hat(vb(J))_2^2, hat(vb(J))^2, hat(J)_(z)$的共同本征态为
+    $
+      ket(j_1 j_2\; j m)
+    $
+  耦合表象与非耦合表象的基矢之间的变换关系为
+  $
+    ket(j_! j_2 \; j m) & = sum_(m_1, m_2) ket(j_1 j_2 \; m_1 m_2) braket(j_1 j_2 \; m_1 m_2, j_1 j_2 \; j m) \
+  $
+  其中叠加系数
+  $
+    braket(j_1 j_2 \; m_1 m_2, j_1 j_2 \; j m)
+  $
+  称为*Clebsch-Gordan系数*(CG 系数)。
+]
+
+#newpara()
+
+问题：*$j$和$m$的取值几何？即$j$和$m$取何值时CG系数不为零？*
 
 首先，$m$的取值为
 $
@@ -939,6 +975,18 @@ $
 $
   cal(D)^((j_1))(R) times.o cal(D)^((j_2))(R) = sum_(j=abs(j_1 - j_2))^(j_1 + j_2) plus.o cal(D)^((j))(R)
 $
+
+#proposition(subname: [CG系数])[
+  CG系数不为零时，有
+  - $m$的取值为
+    $
+      m = m_1 + m_2
+    $
+  - $j$的取值为
+    $
+      j = abs(j_1 - j_2), abs(j_1 - j_2) + 1, ..., (j_1 + j_2) - 1, j_1 + j_2
+    $
+]
 
 #example(subname: [两个$1/2$自旋角动量的合成])[
   *非耦合表象*：$hat(vb(S))_1^2, hat(S)_(1z), hat(vb(S))_2^2, hat(S)_(2z)$的共同本征态为

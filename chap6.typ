@@ -12,7 +12,7 @@
 
 最广义的散射现象是两个粒子发生碰撞的现象，两个粒子都可以具有内部结构和内部状态 (例如自旋)。由于两者之间的相互作用，它们的运动状态都要发生变化。
 - *弹性散射*：若碰撞前后两粒子的内部结构和内部状态均无变化，则称为弹性散射。
-- *非弹性散射*：若碰撞前后两粒子的内部状态发生变化，甚至内部结构发生了变化 (反应)，则称为非弹性散射。
+- *非弹性散射*：若碰撞前后两粒子的内部状态发生变化，甚至内部结构发生了变化(反应)，则称为非弹性散射。
 这里考虑最简单的弹性散射：两个粒子之间的相互作用可以用相互作用势$V(vb(r))$来描述，
 $
   V(vb(r)) = V(vb(r)_1 - vb(r)_2)
@@ -41,19 +41,19 @@ $
 
 实际上，在量子势散射理论中，对势场的性质还有更高的要求：
 1. 势场$V(vb(r))$应当足够光滑；
-2. $r -> oo$时势场趋于零，而且趋于零的速度要足够快，Coulomb势不满足这个条件，需要特殊考虑；
+2. $r -> oo$时势场趋于零，而且趋于零的速度要足够快，*Coulomb势不满足这个条件*，需要特殊考虑；
 3. $r -> 0$时势场的奇异性不能太大。
 具体细节由含时散射理论的*渐近条件*决定，此处暂时不做讨论。
 
 === 定态散射态的波函数与散射振幅
 
-在散射中心O附近取一个区域，其边界为C，在C之外$V(vb(r)) = 0$。由于势场趋于零的速度足够快，所以这是可以做到的。C通常在宏观上不大，但是在微观上足够大，以致于其边界处就可以认为对于O点是无穷远，在边界外面势场$V(vb(r))$不起作用。所以，在C之外(即 $r -> oo$)，定态方程成为
+在散射中心O附近取一个区域，其边界为C，在C之外$V(vb(r)) = 0$。由于势场趋于零的速度足够快，所以这是可以做到的。C通常在宏观上不大，但是在微观上足够大，以致于其边界处就可以认为对于O点是无穷远，在边界外面势场$V(vb(r))$不起作用。所以，在C之外(即$r -> oo$)，定态方程成为
 $
   - hbar^2/(2m) laplacian psi(vb(r)) = E psi(vb(r)), E = vb(p)^2/(2m)
 $
 令$vb(p) = hbar vb(k)$，则$r -> oo$处的定态方程为
 $
-  laplacian psi(vb(r)) + k^2 psi(vb(r)) = 0
+  laplacian psi(vb(r)) + vb(k)^2 psi(vb(r)) = 0
 $
 不失一般性，取粒子入射方向为$z$方向，则方程的一个解为
 $
@@ -76,7 +76,7 @@ $
   psi(vb(r)) & = A e^(i k z) + sum_(l m) c_(l m) e^(i k r)/r Y_(l m) (theta, phi) \
              & = A(e^(i k z) + f(theta, phi) e^(i k r)/r)
 $
-其中$A$为常数(与采用的归一化有关)，$f(theta, phi)$称为*散射振幅*，它是散射理论计算的目标。要计算散射振幅，通常需要求解边界C以内的定态方程，并利用边界条件。
+其中$A$为常数(与采用的归一化有关)，$f(theta, phi)$称为*散射振幅*，它是*散射理论计算的目标*。要计算散射振幅，通常需要求解边界C以内的定态方程，并利用边界条件。
 
 === 散射截面
 
@@ -132,6 +132,18 @@ $
 $
 对立体角积分可得到总散射截面$sigma$。
 
+#proposition(subname: [散射截面与散射振幅])[
+  在量子势散射理论中，散射振幅描述了入射粒子波函数被势场散射后的出射波函数的角分布特征
+  $
+    psi(vb(r)) = A(e^(i k z) + f(theta, phi) e^(i k r)/r)
+  $
+  散射振幅$f(theta, phi)$与微分散射截面$dv(sigma, Omega)$的关系为
+  $
+    dv(sigma, Omega) = abs(f(theta, phi))^2
+  $
+]
+#newpara()
+
 总结：与以往不同，在散射问题中，我们要与Hamilton量的连续谱即散射态打交道。在*定态散射理论*中，我们实际上是求解*以入射粒子能量为能量本征值*的能量本征态
 $
   (hat(vb(p))^2/(2m) + V(vb(r))) ket(psi) = E ket(psi), E = vb(p)^2/(2m) > 0
@@ -142,7 +154,7 @@ $
 
 === 定态散射理论
 
-考虑粒子在势场$V(vb(r))$中运动，Hamilton量为
+*考虑粒子在势场$V(vb(r))$中运动，Hamilton量为*
 $
   hat(H) = hat(H)_0 + hat(V)(vb(r)), hat(H)_0 = hat(vb(p))^2/(2m)
 $
@@ -154,7 +166,7 @@ $
 $
   hat(H)_0 ket(vb(k)) = (hbar^2 vb(k)^2)/(2m) ket(vb(k))
 $
-态矢$ket(vb(k))$可定义为(不唯一)
+*态矢$ket(vb(k))$可定义*为(不唯一)
 $
   ket(vb(k)) = hbar^(3/2) ket(vb(p)) \
 $
@@ -171,7 +183,7 @@ $
   integral dd(vb(p), 3) ketbra(vb(p)) = 1 => integral dd(vb(k), 3) ketbra(vb(k)) = 1
 $
 #newpara()
-我们要求解的定态方程为
+我们要求解的*定态方程*为
 $
   (hat(H)_0 + hat(V)(vb(r))) ket(psi) = E_vb(k) ket(psi), E_vb(k) = (hbar^2 vb(k)^2)/(2m)\
   => (E_vb(k) - hat(H)_0) ket(psi) = hat(V)(vb(r)) ket(psi) \
@@ -192,7 +204,22 @@ $
 $
   ket(psi^(plus.minus)) = ket(vb(k)) + 1/(E_vb(k) plus.minus i epsilon - hat(H)_0) hat(V) ket(psi^(plus.minus))
 $
-其中$epsilon$是一个无穷小正实数，其来源在含时散射理论中更清楚。这个方程就是*Lippmann-Schwinger方程*。定义算符
+其中$epsilon$是一个无穷小正实数，其来源在含时散射理论中更清楚。这个方程就是*Lippmann-Schwinger方程*。
+
+#theorem(subname: [Lippmann-Schwinger方程])[
+  散射态$ket(psi^(plus.minus))$满足Lippmann-Schwinger方程
+  $
+    ket(psi^(plus.minus)) = ket(vb(k)) + 1/(E_vb(k) plus.minus i epsilon - hat(H)_0) hat(V) ket(psi^(plus.minus))
+  $
+  其中$epsilon$是一个无穷小正实数
+  $
+    ket(vb(k)) = hbar^(3/2) ket(vb(p)), hat(H)_0 ket(vb(k)) = (hbar^2 vb(k)^2)/(2m) ket(vb(k))
+  $
+  是入射态，$E_vb(k) = (hbar^2 vb(k)^2)/(2m)$为入射能量
+]
+#newpara()
+
+定义算符
 $
   hat(G)_0^(plus.minus) (E) = 1/(E - hat(H)_0 plus.minus i epsilon)
 $
@@ -204,7 +231,7 @@ $
 $
   braket(vb(r), psi^(plus.minus)) & = braket(vb(r), vb(k)) + integral dd(vb(r)', 3) braket(vb(r), hat(G)_0^(plus.minus) (E_vb(k)), vb(r)') braket(vb(r)', hat(V), psi^(plus.minus)) \
 $
-计算自由格林算符的矩阵元(为方便乘以常数$hbar^2/(2m)$
+计算自由格林算符的矩阵元(为方便乘以常数$hbar^2/(2m)$)
 $
   cal(G)_0^(plus.minus) (vb(r), vb(r)') & = hbar^2/(2m) braket(vb(r), hat(G)_0^(plus.minus) (E_vb(k)), vb(r)') \
   & = hbar^2/(2m) integral dd(vb(k)', 3) integral dd(vb(k)'', 3) braket(vb(r), vb(k)') braket(vb(k)', hat(G)_0^(plus.minus) (E_vb(k)), vb(k)'') braket(vb(k)'', vb(r)') \
@@ -216,10 +243,9 @@ $
 $
 再将
 $
-  braket(vb(r), vb(k)') = 1/(2 pi)^(3/2) e^(i vb(k)' dot vb(r)), \
-  braket(vb(k)'', vb(r)') = 1/(2 pi)^(3/2) e^(- i vb(k)'' dot vb(r)')
+  braket(vb(r), vb(k)') = 1/(2 pi)^(3/2) e^(i vb(k)' dot vb(r)), braket(vb(k)'', vb(r)') = 1/(2 pi)^(3/2) e^(- i vb(k)'' dot vb(r)')
 $
-带入得到$eta = (2 m epsilon)/(hbar^2)$
+带入得到($eta = (2 m epsilon)/(hbar^2)$)
 $
   cal(G)_0^(plus.minus) (vb(r), vb(r)') & = hbar^2/(2m) integral dd(vb(k)', 3)/(2 pi)^3 e^(i vb(k)' dot (vb(r) - vb(r)'))/(E_vb(k) - E_(vb(k)') plus.minus i epsilon) \
   &= integral dd(vb(k)', 3)/(2 pi)^3 e^(i vb(k)' dot (vb(r) - vb(r)'))/(vb(k)^2 - vb(k)'^2 plus.minus i eta) \
